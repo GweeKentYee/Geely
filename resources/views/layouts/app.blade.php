@@ -71,7 +71,7 @@
 
                                     @else
 
-                                    <a class = "dropdown-item" href = "/home">Dashboard</a>
+                                    <a class = "dropdown-item" href = "/">Dashboard</a>
                                     <a class = "dropdown-item" href = "/catalogue">Catalogue</a>
                                     <a class = "dropdown-item" href = "/collection">Collection</a>
 
