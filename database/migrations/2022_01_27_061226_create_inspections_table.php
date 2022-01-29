@@ -15,7 +15,12 @@ class CreateInspectionsTable extends Migration
     {
         Schema::create('inspections', function (Blueprint $table) {
             $table->id();
+            $table->dateTime('inspection_date')->required();
+            $table->string('file')->required();
+            $table->unsignedBigInteger('used_car_id')->required();
             $table->timestamps();
+
+            $table->foreign('used_car_id')->references('id')->on('used_cars')->onDelete('cascade');
         });
     }
 

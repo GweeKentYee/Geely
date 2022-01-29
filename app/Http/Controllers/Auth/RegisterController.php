@@ -40,7 +40,7 @@ class RegisterController extends Controller
 
         } else {
 
-            return '/home';
+            return '/';
 
         }
 

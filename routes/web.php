@@ -14,14 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function(){
-    return redirect()->route('login');
-});
+// Route::get('/', function(){
+//     return redirect()->route('login');
+// });
 
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home','App\Http\Controllers\DashboardController@viewPage');
+Route::get('/','App\Http\Controllers\DashboardController@viewPage');
 Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage');
 Route::get('/collection','App\Http\Controllers\CollectionController@viewPage');
 
