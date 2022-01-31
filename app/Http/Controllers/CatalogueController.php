@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Catalogue;
+use App\Models\UsedCar;
+use App\Models\CarModel;
 use Illuminate\Http\Request;
 
 class CatalogueController extends Controller
@@ -9,8 +12,10 @@ class CatalogueController extends Controller
     //
     //
     public function viewPage(){
-
-        return view('Catalogue');
+        $car = Catalogue::all();
+        return view('Catalogue',
+        ['car' => $car,]
+    );
 
     }
 
