@@ -11,11 +11,22 @@
 <div Class = "container">
     <div>
         @foreach ( $car as  $cars )
-            <div class="card" style="width: 18rem; display: inline-block;">
-                <div class="card-title">{{$cars->usedcar->carmodel->car_model}}</div>
-                <div class="card-body">
-                    <div>{{$cars->min_price}}</div>
-                    <div>{{$cars->max_price}}</div>
+            <div class="card" style="width: 15rem; display: inline-block;">
+                <div style="display:flex; justify-content: center; margin:5px;">
+                    <div class="card-image" style="width: 12.5rem;justify-content:center;">   
+                        <img src="{{$cars->usedcar->file}}" alt={{$cars->usedcar->carmodel->car_model}}>
+                    </div>
+                </div>
+
+                <div class="card-title">CAR MODEL : </div>
+                <div class="card-subtitle">{{$cars->usedcar->carmodel->car_model}}</div>
+                <div class="card-title">PRICE : </div>
+                <div class="card-subtitle">RM {{$cars->min_price}} to RM {{$cars->max_price}}</div>
+
+                <div style="display:flex; justify-content: center; margin:5px;">
+                    <div class="card-button" style="width: 12.5rem;">
+                        <div class="card-button-content">ADD TO COLLECTION</div>
+                    </div>
                 </div>
             </div>
         @endforeach
