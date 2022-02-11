@@ -1,4 +1,4 @@
-.card {
+.cata-card {
     padding: 5px;
     margin: 5px;
     position: relative;
@@ -13,7 +13,7 @@
     box-shadow: 5px 5px 25px -5px rgba(50,121,175,0.25); 
   }
   
-  .card:hover{
+  .cata-card:hover{
     padding: 5px;
     margin: 5px;
     position: relative;
@@ -27,7 +27,7 @@
     box-shadow: 5px 5px 25px -5px rgba(50,121,175,1.0); 
   }
   
-  .card-image {
+  .cata-card-image {
     margin: 5px;
     position: relative;
     display: flex;
@@ -40,13 +40,13 @@
     box-shadow: 5px 5px 25px -5px rgba(0,0,0,0.5); 
   }
   
-  .card-title {
+  .cata-card-title {
     margin-bottom: 0;
     font-family: 'Roboto';
     font-weight: 700;
   }
   
-  .card-subtitle {
+  .cata-card-subtitle {
     font-family: 'Roboto';
     font-weight: 700;
     font-size: large;
@@ -54,7 +54,7 @@
     text-align: center;
   }
 
-  .card-button {
+  .cata-card-button {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -65,7 +65,7 @@
     border-radius: 0.25rem;
   }
   
-  .card-button:hover {
+  .cata-card-button:hover {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -76,7 +76,7 @@
     border-radius: 0.25rem;
   }
   
-  .card-button-content {
+  .cata-card-button-content {
     text-align: center;
     color: #ffffff;
     font-family: 'Roboto';

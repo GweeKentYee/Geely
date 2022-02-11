@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Catalogue;
+
 use App\Models\UsedCar;
 use App\Models\CarModel;
 use Illuminate\Http\Request;
@@ -23,6 +24,12 @@ class CatalogueController extends Controller
 
         return view('ManageCatalogue');
 
+    }
+
+    public function search(){
+        $query = $_GET['query'];
+        $car = Catalogue::where('id','LIKE','%'.$query.'%')->get();
+        return view('Catalogue',['car'=>$car,]);
     }
 
 }

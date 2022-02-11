@@ -23,6 +23,8 @@ Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/','App\Http\Controllers\DashboardController@viewPage');
 Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage');
+Route::get('/search','App\Http\Controllers\CatalogueController@search');
+
 Route::get('/collection','App\Http\Controllers\CollectionController@viewPage');
 
 Route::get('/admin/inspection','App\Http\Controllers\InspectionController@viewAdminPage');
