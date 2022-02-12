@@ -1,13 +1,10 @@
 .headline{
     color: #4285f4;
     padding-left: 1em;
+    font-family: 'geely';
   }
 
-.column-bar-container{
-    margin-top: 3rem;
-}
-
-.column-bar{
+.collection-container{
     margin: 3rem;
 
 }

@@ -14,21 +14,32 @@
             <button>Compare Selection</button>
         </div>
     </div>
-    <div class="row column-bar">
-        <div class="col-1">
-            <form action="/action_page.php">
-                <input type="checkbox" id="temp" name="temp" value="temp">
-            </form>
+    @foreach ($collections as $collection)
+        <div class="row collection-container">
+                <div class="col-1">
+                    <form action="/action_page.php">
+                        <input type="checkbox" id="temp" name="temp" value="temp">
+                    </form>
+                </div>
+                <div class="col-2">{{ $collection->id }}</div>
+                <div class="col-2">{{ $collection->id }}</div>
+                <div class="col-2">{{ $collection->id }}</div>
+                <div class="col-2">{{ $collection->id }}</div>
+                <div class="col-2">{{ $collection->id }}</div>
+                <div class="col-1">
+                    <form action="{{ route('collection.destroy', ['collection' => $collection->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" value="X">
+                    </form>
+                </div>
         </div>
-        <div class="col-2">Hello</div>
-        <div class="col-2">Hello</div>
-        <div class="col-2">Hello</div>
-        <div class="col-2">Hello</div>
-        <div class="col-2">Hello</div>
-        <div class="col-1">
-            <button>delete</button>
-        </div>
-    </div>
+    @endforeach
+    {{-- <div>
+        @foreach ($collections as $collection)
+            <div>{{ $collection->catalogue_id }}</div>
+        @endforeach
+    </div> --}}
 
 
 {{--  </div>  --}}
