@@ -6,7 +6,7 @@ use App\Models\Catalogue;
 
 use App\Models\UsedCar;
 use App\Models\CarModel;
-use Illuminate\Http\Request;
+use App\Models\CarVariant;
 
 class CatalogueController extends Controller
 {
@@ -28,8 +28,12 @@ class CatalogueController extends Controller
 
     public function search(){
         $query = $_GET['query'];
-        $car = Catalogue::where('id','LIKE','%'.$query.'%')->get();
+        $name = CarModel::where('car_model','LIKE', '%'.$query.'%')->first();
+        $carvar= CarVariant::where('car_model_id','=',$name->id)->first();
+        $usedcar = UsedCar::where('id','=',$carvar->id)->first();
+        $car = Catalogue::where('id','=',$usedcar->id)->get();
         return view('Catalogue',['car'=>$car,]);
+
     }
 
 }

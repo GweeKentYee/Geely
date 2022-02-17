@@ -9,7 +9,7 @@
     </div>
 </div>
 <div Class = "container">
-    <form type="get"  action="{{url('/search')}}">
+    <form type="get"  action="{{url('/catalogue/search')}}">
         <input type="search" name="query" placeholder="Search">
         <button type="submit">Search</button>
     </form>
