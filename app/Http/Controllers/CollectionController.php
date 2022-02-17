@@ -79,10 +79,13 @@ class CollectionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
+        // dd($id);
         $collection = Collection::findOrFail($id);
         $collection->delete();
 
         return redirect()->route('collection.index');
     }
+
+
 }

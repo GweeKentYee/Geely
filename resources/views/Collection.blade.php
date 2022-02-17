@@ -11,15 +11,16 @@
             <h3 class="headline">Collection</h3>
         </div>
         <div class="col-2">
-            <button>Compare Selection</button>
+            <form id="my_form" action="{{ route('collection.compare') }}" method="POST">
+                @csrf
+                <input type="submit" value="Compare Selection">
+            </form>
         </div>
     </div>
     @foreach ($collections as $collection)
         <div class="row collection-container">
                 <div class="col-1">
-                    <form action="/action_page.php">
-                        <input type="checkbox" id="temp" name="temp" value="temp">
-                    </form>
+                        <input type="checkbox" form="my_form" id={{ $collection->id }} name={{ $collection->id }} value={{ $collection->id }}>
                 </div>
                 <div class="col-2">{{ $collection->id }}</div>
                 <div class="col-2">{{ $collection->id }}</div>
@@ -35,13 +36,11 @@
                 </div>
         </div>
     @endforeach
-    {{-- <div>
-        @foreach ($collections as $collection)
-            <div>{{ $collection->catalogue_id }}</div>
-        @endforeach
-    </div> --}}
-
 
 {{--  </div>  --}}
+@endsection
+
+@section("footer-scripts")
+
 @endsection
 
