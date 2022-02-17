@@ -18,12 +18,12 @@
             <div class="cata-card" style="width: 15rem; display: inline-block;">
                 <div style="display:flex; justify-content: center; margin:5px;">
                     <div class="cata-card-image" style="width: 12.5rem;justify-content:center;">   
-                        <img src="{{$cars->usedcar->file}}" alt={{$cars->usedcar->carmodel->car_model}}>
+                        <img src="{{$cars->usedcar->file}}">
                     </div>
                 </div>
 
                 <div class="cata-card-title">CAR MODEL : </div>
-                <div class="cata-card-subtitle">{{$cars->usedcar->carmodel->car_model}}</div>
+                <div class="cata-card-subtitle">{{$cars->usedcar->carVariant->carModel->car_model}}</div>
                 <div class="cata-card-title">PRICE : </div>
                 <div class="cata-card-subtitle">RM {{$cars->min_price}} to RM {{$cars->max_price}}</div>
 
