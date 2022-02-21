@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CollectionController extends Controller
 {
@@ -14,7 +15,25 @@ class CollectionController extends Controller
      */
     public function index()
     {
-        return view('Collection', ['collections' => Collection::all()->where('user_id', '=', auth()->id())]);
+        // return view('Collection', ['collections' => Collection::all()->where('user_id', '=', auth()->id())]);
+
+        // $collections = DB::table('collections')
+        //         ->join('catalogues', 'collections.catalogue_id', '=', 'catalogues.id')
+        //         ->join('used_cars', 'catalogues.used_car_id', '=', 'used_cars.id')
+        //         ->join('car_variants', 'used_cars.car_variant_id', '=', 'car_variants.id')
+        //         ->join('car_models', 'car_variants.car_model_id', '=', 'car_models.id')
+        //         ->where('collections.user_id', '=', auth()->id())
+        //         ->get();
+
+        $collections = DB::table('car_models')
+                ->join('car_variants', 'car_variants.car_model_id', '=', 'car_models.id')
+                ->join('used_cars', 'used_cars.car_variant_id', '=', 'car_variants.id')
+                ->join('catalogues', 'catalogues.used_car_id', '=', 'used_cars.id')
+                ->join('collections', 'collections.catalogue_id', '=', 'catalogues.id')
+                ->where('collections.user_id', '=', auth()->id())
+                ->get();
+        // dd($collections);
+        return view('Collection', ['collections' => $collections]);
     }
 
     /**
