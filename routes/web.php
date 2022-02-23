@@ -29,4 +29,4 @@ Route::get('/admin/inspection','App\Http\Controllers\InspectionController@viewAd
 Route::get('/admin/catalogue','App\Http\Controllers\CatalogueController@viewAdminPage');
 Route::get('/admin/newsletter','App\Http\Controllers\NewsletterController@viewAdminPage');
 Route::get('/admin/carmodel','App\Http\Controllers\CarModelController@viewAdminPage');
-
+Route::get('/admin/carvariant','App\Http\Controllers\CarVariantController@viewAdminPage');
