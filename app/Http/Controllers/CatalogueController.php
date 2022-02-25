@@ -12,8 +12,6 @@ use function PHPUnit\Framework\isEmpty;
 
 class CatalogueController extends Controller
 {
-    //
-    //
     public function viewPage(){
         $usedcar = UsedCar::all()->where('status','show');
 
@@ -35,31 +33,35 @@ class CatalogueController extends Controller
 
     public function search(){
         $car=[];
-        $usedcar = [];
 
-        $name = CarModel::where('car_model','LIKE', '%'.request('query').'%')->get();
+        $carID = CarModel::select('id')->where('car_model','LIKE', '%'.request('query').'%')->get();
 
-        if($name->isEmpty()){
+        if($carID->isEmpty()){
             return view('Catalogue',['car'=>$car,]);
         }
 
-        foreach($name as $names){
-            $carvar = $names->carVariants;
+        foreach ($carID as $carID){
+
+            $collectID[] = $carID->id;
+
         }
 
-        foreach($carvar as $carvars){
-            $carvarID[] = $carvars->id;
+        $CarModel = CarModel::findMany($collectID);
 
+        foreach ($CarModel as $CarModel){
+            foreach ($CarModel->carVariants as $carVariants){
+                foreach($carVariants->usedCars as $usedCars){
+
+                    if($usedCars->status == "show") {
+
+                        $car[] = $usedCars->Catalogue;
+
+                    }
+                }
+            }
         }
         
-        $usedcar = UsedCar::findMany($carvarID)->where('status','show');
-
-        foreach($usedcar as $usedcars){
-
-            $car[] =  $usedcars->catalogue;
-
-        }
-
+    
         return view('Catalogue',['car'=>$car,]);
 
     }
