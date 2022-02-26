@@ -10,16 +10,24 @@
 </div>
 <div Class = "container">
     <form type="get"  action="{{url('/catalogue/search')}}" style="display: inline-block">
-        <input type="query" name="query" placeholder="Search">
+        <input type="query" name="query" placeholder="SEARCH">
         <button type="submit">Search</button>
     </form>
-    <button type ="popupbutton" id="popupbutton">FILTER</button>
+    <button type ="popupbutton" id="popupbutton">ADVANCED SEARCH</button>
     
     <!-- this is the popup, hidden by default -->
     <div id="popup" class="popup">
         <div class="popup-content">
             <span class="close">&times;</span>
-            <p>Some text in the Modal..</p>
+            <div>
+                <form type="get"  action="{{url('/catalogue/advanced')}}" style="display: inline-block">
+                    <input type="query" name="model" placeholder="Model">
+                    <input type="query" name="year" placeholder="Year">
+                    <input type="query" name="minPrice" placeholder="Minimum Price">
+                    <input type="query" name="maxPrice" placeholder="Maximum Price">
+                    <button type="submit">SEARCH</button>
+                </form>
+            </div>
         </div>
     </div>
 

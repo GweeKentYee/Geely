@@ -24,6 +24,7 @@ Auth::routes();
 Route::get('/','App\Http\Controllers\DashboardController@viewPage');
 Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage');
 Route::get('/catalogue/search','App\Http\Controllers\CatalogueController@search');
+Route::get('/catalogue/advanced','App\Http\Controllers\CatalogueController@advanced');
 
 Route::get('/collection','App\Http\Controllers\CollectionController@viewPage');
 

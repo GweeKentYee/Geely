@@ -54,8 +54,40 @@ class CatalogueController extends Controller
 
                     if($usedCars->status == "show") {
 
-                        $car[] = $usedCars->Catalogue;
+                        $car[] = $usedCars->catalogue;
 
+                    }
+                }
+            }
+        }
+        
+    
+        return view('Catalogue',['car'=>$car,]);
+
+    }
+
+    public function advanced(){
+        $car=[];
+
+        $carID = CarModel::select('id')->where('car_model','LIKE', '%'.request('model').'%')->get();
+
+        if($carID->isEmpty()){
+            return view('Catalogue',['car'=>$car,]);
+        }
+
+        foreach ($carID as $carID){
+
+            $collectID[] = $carID->id;
+
+        }
+
+        $CarModel = CarModel::findMany($collectID);
+
+        foreach ($CarModel as $CarModel){
+            foreach ($CarModel->carVariants->where('year','>=',request('year')) as $carVariants){
+                foreach($carVariants->usedCars->where('status','show') as $usedCars){
+                    if($usedCars->catalogue->min_price >= request('minPrice') || $usedCars->catalogue->max_price <= request('maxPrice')){
+                        $car[] = $usedCars->catalogue;
                     }
                 }
             }
