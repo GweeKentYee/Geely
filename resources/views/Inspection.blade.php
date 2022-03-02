@@ -6,7 +6,7 @@
         <h3><u>Inspection</u></h3>
         <div class="col-md-9">
             <div style = "text-align:right" class = "pb-1">
-                <button class = "btn btn-primary" data-toggle="modal" data-target="#newinspection">New Inspection</button>
+                <button class = "btn btn-primary" data-bs-toggle="modal" data-bs-target="#newinspection">New Inspection</button>
             </div>
             <table class = "table" id = "datatable">
                 <thead>
@@ -21,56 +21,55 @@
             </table>
         </div>
     </div>
-
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal fade" id="newinspection" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalCenterTitle">New Inspection</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                  </button>
-               </div>
-               <form action="#" method="post" enctype="multipart/form-data">
-                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title">New Inspection</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/admin/inspection/add" method="post" enctype="multipart/form-data">
+                    @csrf
                     <div class="modal-body">
-                        <div class="playerfile">
-                            <label>File ( JSON, XML, Txt, PNG, JPEG ):</label>
-                            <input type = "file" name = "json/txt" id = "playerjson" class = "form-control-file @error('json/txt') is-invalid @enderror" accept = "application/JSON,application/xml,text/plain,text/xml,image/png,image/jpeg">
-                                @error('json/txt')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                        <div class = "inspection">
+                            <label>Car Model:</label>
+                            <select id = "carModel" name = "car_model" class = "form-control @error('car_model') is-invalid @enderror">
+                                <option value="0" disabled selected>-- Please Select Car Model --</option>
+                                @foreach ($CarModel as $CarModel)
+                                    <option value="{{$CarModel->id}}">{{$CarModel->car_model}}</option>
+                                @endforeach
+                            </select>
+                                @error('car_model')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
-                                <br>
-                                <label>Type:</label>
-                                <input id="filetype" name = "file_type" type="text" class="form-control @error('file_type') is-invalid @enderror" value = "{{ old('file_type') }}" autocomplete="off" autofocus>
-                                @error('file_type')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                            <br>
+                            <label>Car Variant:</label>
+                            <select id = "carVariant" name = "car_variant" class = "form-control @error('car_variant') is-invalid @enderror" disabled>
+                            </select>
+                                @error('car_variant')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
-                                <br>
-                                <label>Permission:</label>
-                                <select id="filepermission" name = "permission" class = "form-control @error('permission') is-invalid @enderror">
-                                    <option value="0" disabled selected>-- Please Select Permission --</option>
-                                    <option value="private">Private</option>
-                                    <option value="global">Global</option>
-                                </select>
-                                    @error('permission')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
+                            <br>
+                            <label>File:</label>
+                            <input type = "file" name = "data_file" class = "form-control-file @error('data_file') is-invalid @enderror" accept = "application/JSON,application/xml,text/plain,text/xml,image/png,image/jpeg">
+                                @error('data_file')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-                        <input type="submit" class="btn btn-outline-success" id = "AddSubmit" value="Add">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-outline-primary" value = "Add"></button>
                     </div>
-               </form>
+                </form>
             </div>
-         </div>
+        </div>
     </div>
 </div>
 @endsection
@@ -78,33 +77,60 @@
 @section('footer-scripts')
 <script>
     $(document).ready(function () {
-            $('#datatable').DataTable({
-                "columnDefs": [{
-                    "defaultContent": "-",
-                    "targets": "_all"
-                }],
-                "processing": true,
-                "serverSide": true,
-                "ajax": "{{ route('api.inspection')}}",
-                "columns": [
-                    {"data": "id"},
-                    {"data": "inspection_date"},
-                    {"data": "file"},
-                    {"data": "used_car_id"},
-                    {"data": "Action", orderable: false, searchable: false}
-                ]
-            });
 
-            $('#datatable').on('click', '.delete', function () {
-
-                var confirmation = confirm('Delete the record?');
-
-                if (confirmation == false){
-                    return false;
-                }
-            });
-
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
+
+        $('#datatable').DataTable({
+            "columnDefs": [{
+                "defaultContent": "-",
+                "targets": "_all"
+            }],
+            "processing": true,
+            "serverSide": true,
+            "ajax": "{{ route('api.inspection')}}",
+            "columns": [
+                {"data": "id"},
+                {"data": "inspection_date"},
+                {"data": "file"},
+                {"data": "used_car_id"},
+                {"data": "Action", orderable: false, searchable: false}
+            ]
+        });
+
+        $('#datatable').on('click', '.delete', function () {
+
+            var confirmation = confirm('Delete the record?');
+
+            if (confirmation == false){
+                return false;
+            }
+        });
+
+        $('#carModel').on('change', function(e) {
+            var CarModel_id = e.target.value;
+            $.ajax({
+                url: "{{ route('subCarVariant') }}",
+                type: "POST",
+                data: {
+                    CarModel_id: CarModel_id
+                },
+                success: function(data) {
+                    if($('#carVariant').prop('disabled')){
+                        $("#carVariant").prop("disabled", false);
+                    }
+                    $('#carVariant').empty();
+                    $('#carVariant').append('<option value="0" disabled selected>-- Please Select Car Variant --</option>');
+                    $.each(data.CarVariants, function(index, CarVariant) {
+                        $('#carVariant').append('<option value="'+CarVariant.id+'">'+CarVariant.variant+'</option>');
+                    })
+                }
+            })
+        });
+    });
 
 </script>
 @endsection

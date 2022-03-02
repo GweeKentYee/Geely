@@ -26,7 +26,13 @@ Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage');
 Route::get('/collection','App\Http\Controllers\CollectionController@viewPage');
 
 Route::get('/admin/inspection','App\Http\Controllers\InspectionController@viewAdminPage');
+Route::post('/admin/inspection/carVariantDropBox','App\Http\Controllers\InspectionController@subCarVariant')->name('subCarVariant');
+Route::post('/admin/inspection/add','App\Http\Controllers\InspectionController@newInspection');
+Route::get('/admin/inspection/delete/{inspectionID}','App\Http\Controllers\InspectionController@delete');
+
 Route::get('/admin/catalogue','App\Http\Controllers\CatalogueController@viewAdminPage');
+
 Route::get('/admin/newsletter','App\Http\Controllers\NewsletterController@viewAdminPage');
+
 Route::get('/admin/carmodel','App\Http\Controllers\CarModelController@viewAdminPage');
 
