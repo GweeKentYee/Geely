@@ -94,7 +94,6 @@ class CatalogueController extends Controller
         
     
         return view('Catalogue',['car'=>$car,]);
-
     }
 
 }

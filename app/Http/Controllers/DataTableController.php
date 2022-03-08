@@ -40,7 +40,7 @@ class DataTableController extends Controller
                                     //'<a class = "btn btn-success btn-sm edit" href = "/allplayer/edit/'.$query->id.'">Edit</a>
                                     '<a class= "btn btn-primary btn-sm details" href= "#" >Details</a>
                                     <a class= "btn btn-success btn-sm upload" href= "#" >Upload</a>
-                                    <a class= "btn btn-danger btn-sm delete" href= "/admin/inspection/delete/'.$query->id.'">Delete</a>'
+                                    <a class= "btn btn-danger btn-sm delete" href= "/admin/catalogue/delete/'.$query->id.'">Delete</a>'
                                     ;
                     return $actionBtn;
 
