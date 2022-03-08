@@ -28,7 +28,6 @@ class CatalogueController extends Controller
     public function viewAdminPage(){
 
         return view('ManageCatalogue');
-
     }
 
     public function search(){
