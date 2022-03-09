@@ -26,26 +26,22 @@ Auth::routes();
 Route::get('/','App\Http\Controllers\DashboardController@viewPage');
 Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage');
 
-// Route::get('/collection','App\Http\Controllers\OldCollectionController@viewPage'); //delete later
+
 Route::get('/collection/compare', function(){
 
-    // dd(request());
+
     dd(request()->all());
-    // dd(request()->input('collectionID1'));
-    // dd(request()->input('collectionID2'));
     
 })->name('collection.compare');
 Route::post('/collection/compare', function(Request $request){
+
     $collectionSelected = $request->except('_token');
-    // dd($request->all());
-    // dd($data);
 
     $i  = 1;
     foreach ($collectionSelected as $key => $value) {
         
         ${'collectionID' . $i} = $value; 
         $i = $i + 1;
-        // echo "<script>console.log('$collectionID1'); </script>";
     }
 
     return redirect()->route('collection.compare', ['collectionID1' => $collectionID1, 'collectionID2' => $collectionID2]);

@@ -22,7 +22,7 @@ class CollectionController extends Controller
                 ->join('collections', 'collections.catalogue_id', '=', 'catalogues.id')
                 ->where('collections.user_id', '=', auth()->id())
                 ->get();
-        // dd($collections);
+       
         return view('Collection', ['collections' => $collections]);
     }
 
@@ -89,7 +89,6 @@ class CollectionController extends Controller
      */
     public function destroy($id)
     {   
-        // dd($id);
         $collection = Collection::findOrFail($id);
         $collection->delete();
 

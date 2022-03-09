@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-{{--  <div class="container">  --}}
     
     <div class="row">
         <div class="col-9">
@@ -43,6 +42,7 @@
                     <button type="button" class="btn btn-danger shadow" data-toggle="modal" data-target="#exampleModal{{ $collection->id }}">
                         X
                     </button>
+                    {{--  Pop up form when delete button is clicked  --}}
                     <div class="modal fade" id="exampleModal{{ $collection->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
@@ -76,7 +76,6 @@
      
     @endforeach
 
-{{--  </div>  --}}
 @endsection
 
 @section("footer-scripts")
@@ -85,7 +84,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script>
         
-            
             $(document).ready(function () {
                 $('input[type=checkbox]').on('change', function (e) {
                     if ($('input[type=checkbox]:checked').length > 2) {
@@ -94,6 +92,7 @@
                     }
                 });
             });
+
         </script>
 @endsection
 
