@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/carmodel','App\Http\Controllers\DataTableController@carmodel')->name('api.carmodel');
+
+Route::get('/usedcar','App\Http\Controllers\DataTableController@usedcar')->name('api.usedcar');
+
+
+

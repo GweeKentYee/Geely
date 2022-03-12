@@ -29,4 +29,19 @@ Route::get('/admin/inspection','App\Http\Controllers\InspectionController@viewAd
 Route::get('/admin/catalogue','App\Http\Controllers\CatalogueController@viewAdminPage');
 Route::get('/admin/newsletter','App\Http\Controllers\NewsletterController@viewAdminPage');
 Route::get('/admin/carmodel','App\Http\Controllers\CarModelController@viewAdminPage');
+Route::get('/admin/usedcar','App\Http\Controllers\UsedCarController@viewAdminPage');
+
+Route::get('/carmodel/delete/{id}','App\Http\Controllers\CarModelController@delete');
+Route::get('/admin/carmodel/add','App\Http\Controllers\CarModelController@create');
+
+Route::get('/carmodel/edit/{id}','App\Http\Controllers\CarModelController@edit');
+Route::put('/carmodel/update/{id}','App\Http\Controllers\CarModelController@update');
+Route::get('/carmodel/fetch/{id}','App\Http\Controllers\CarModelController@fetch');
+
+Route::get('/admin/usedcar/add','App\Http\Controllers\UsedCarController@create');
+Route::get('/usedcar/delete/{id}','App\Http\Controllers\UsedCarController@delete');
+Route::get('/usedcar/fetch/{id}','App\Http\Controllers\UsedCarController@fetch');
+Route::get('/usedcar/edit/{id}','App\Http\Controllers\UsedCarController@edit');
+Route::get('/usedcar/update/{id}','App\Http\Controllers\UsedCarController@update');
+
 
