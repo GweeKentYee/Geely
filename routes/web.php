@@ -25,8 +25,12 @@ Route::get('/','App\Http\Controllers\DashboardController@viewPage');
 Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage');
 Route::get('/collection','App\Http\Controllers\CollectionController@viewPage');
 
+Route::get('/catalogue/usedcardetails','App\Http\Controllers\UsedCarController@viewPage')->name('UsedCarDetails');
+Route::get('/collection/comparison','App\Http\Controllers\ComparisonController@viewPage')->name('Comparison');
+
 Route::get('/admin/inspection','App\Http\Controllers\InspectionController@viewAdminPage');
 Route::get('/admin/catalogue','App\Http\Controllers\CatalogueController@viewAdminPage');
 Route::get('/admin/newsletter','App\Http\Controllers\NewsletterController@viewAdminPage');
 Route::get('/admin/carmodel','App\Http\Controllers\CarModelController@viewAdminPage');
+
 
