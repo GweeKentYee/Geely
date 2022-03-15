@@ -18,7 +18,10 @@ class CarVariant extends Model
         'year',
         'variant',
         'type',
-        'file',
+        'transmission',
+        'fuel',
+        'specs_file',
+        'data_file',
         'car_model_id'
     ];
 

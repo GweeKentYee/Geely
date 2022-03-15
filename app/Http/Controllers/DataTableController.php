@@ -40,7 +40,8 @@ class DataTableController extends Controller
 
             ->addColumn('File', function($query){
 
-                $File = '<a href = "/admin/carvariant/file/view/'.$query->id.'">'.$query->file.'</a>';
+                $File = '<a href = "/admin/carvariant/file/viewspecs/'.$query->id.'">'.$query->specs_file.'</a><br>
+                <a href = "/admin/carvariant/file/viewdata/'.$query->id.'">'.$query->data_file.'</a>';
 
                 return $File;
 
@@ -54,16 +55,21 @@ class DataTableController extends Controller
 
             })
 
-            ->addColumn('Action', function($query){
+            ->addColumn('Edit', function($query){
 
-                $actionBtn = //'<a href = "/player/download/' .$query->JSON_file. '" class = "download btn btn-primary btn-sm">Download</a>
-                                //'<a class = "btn btn-success btn-sm edit" href = "/allplayer/edit/'.$query->id.'">Edit</a>
-                                '<a class= "btn btn-success btn-sm edit" href= "/admin/carvariant/edit/'.$query->id.'">Edit</a>
-                                <a class= "btn btn-danger btn-sm delete" href= "/admin/carvariant/delete/'.$query->id.'">Delete</a>'
-                                ;
-                return $actionBtn;
+                $actionButton = '<a class= "btn btn-success btn-sm edit" href= "/admin/carvariant/edit/'.$query->id.'">Edit</a>';
+                
+                return $actionButton;
 
-            })->rawColumns(['File', 'Action'])
+            })
+            
+            ->addColumn('Delete', function($query){
+
+                $actionButton = '<a class= "btn btn-danger btn-sm delete" href= "/admin/carvariant/delete/'.$query->id.'">Delete</a>';
+                
+                return $actionButton;
+
+            })->rawColumns(['File', 'Edit', 'Delete'])  // for columns which involve html codes
             ->make(true);
 
     }

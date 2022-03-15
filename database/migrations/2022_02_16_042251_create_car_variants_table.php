@@ -18,7 +18,10 @@ class CreateCarVariantsTable extends Migration
             $table->integer('year')->required();
             $table->string('variant')->required();
             $table->string('type')->required();
-            $table->string('file')->required();
+            $table->string('transmission')->required();
+            $table->string('fuel')->required();
+            $table->string('specs_file')->required();
+            $table->string('data_file')->required();
             $table->unsignedBigInteger('car_model_id');
             $table->timestamps();
 

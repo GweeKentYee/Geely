@@ -32,6 +32,7 @@ Route::get('/admin/carmodel','App\Http\Controllers\CarModelController@viewAdminP
 Route::get('/admin/carvariant','App\Http\Controllers\CarVariantController@viewAdminPage');
 Route::post('/admin/carvariant/add','App\Http\Controllers\CarVariantController@addCarVariant');
 Route::get('/admin/carvariant/delete/{carvariantID}','App\Http\Controllers\CarVariantController@delete');
-Route::get('/admin/carvariant/file/view/{carvariantID}','App\Http\Controllers\CarVariantController@viewCarVariantFile');
+Route::get('/admin/carvariant/file/viewspecs/{carvariantID}','App\Http\Controllers\CarVariantController@viewSpecsFile');
+Route::get('/admin/carvariant/file/viewdata/{carvariantID}','App\Http\Controllers\CarVariantController@viewDataFile');
 Route::get('/admin/carvariant/edit/{carvariantID}','App\Http\Controllers\CarVariantController@viewEditPage');
 Route::patch('/admin/carvariant/editfunction/{carvariantID}','App\Http\Controllers\CarVariantController@edit');
