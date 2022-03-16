@@ -26,7 +26,7 @@ Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage');
 Route::get('/collection','App\Http\Controllers\CollectionController@viewPage');
 
 Route::get('/admin/inspection','App\Http\Controllers\InspectionController@viewAdminPage');
-Route::post('/admin/inspection/carVariantDropBox','App\Http\Controllers\InspectionController@subCarVariant')->name('subCarVariant');
+Route::post('/admin/inspection/carModelDropBox','App\Http\Controllers\InspectionController@subOptions')->name('subOptions');
 Route::get('/admin/inspection/file/view/{inspectionID}','App\Http\Controllers\InspectionController@viewInspectionFile');
 Route::post('/admin/inspection/add','App\Http\Controllers\InspectionController@newInspection');
 Route::get('/admin/inspection/delete/{inspectionID}','App\Http\Controllers\InspectionController@delete');

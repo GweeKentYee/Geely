@@ -32,12 +32,21 @@
                     @csrf
                     <div class="modal-body">
                         <div class = "inspection">
-                            <label>Car Model:</label>
-                            <select id = "carModel" name = "car_model" class = "form-control @error('car_model') is-invalid @enderror">
-                                <option value="0" disabled selected>-- Please Select Car Model --</option>
-                                @foreach ($CarModel as $CarModel)
-                                    <option value="{{$CarModel->id}}">{{$CarModel->car_model}}</option>
+                            <label>Car Brand:</label>
+                            <select id = "carBrand" name = "car_brand" class = "form-control @error('car_brand') is-invalid @enderror">
+                                <option value="0" disabled selected>-- Please Select Car Brand --</option>
+                                @foreach ($CarBrand as $CarBrand)
+                                    <option value="{{$CarBrand->id}}">{{$CarBrand->brand}}</option>
                                 @endforeach
+                            </select>
+                                @error('car_brand')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            <br>
+                            <label>Car Model:</label>
+                            <select id = "carModel" name = "car_model" class = "form-control @error('car_model') is-invalid @enderror" disabled>
                             </select>
                                 @error('car_model')
                                     <span class="invalid-feedback" role="alert">
@@ -111,20 +120,30 @@
             }
         });
 
-        $('#carModel').on('change', function(e) {
-            var CarModel_id = e.target.value;
+        $('#carBrand').on('change', function(e) {
+            var CarBrand_id = e.target.value;
             $.ajax({
-                url: "{{ route('subCarVariant') }}",
+                url: "{{ route('subOptions') }}",
                 type: "POST",
                 data: {
-                    CarModel_id: CarModel_id
+                    CarBrand_id: CarBrand_id
                 },
                 success: function(data) {
+                    if($('#carModel').prop('disabled')){
+                        $("#carModel").prop("disabled", false);
+                    }
                     if($('#carVariant').prop('disabled')){
                         $("#carVariant").prop("disabled", false);
                     }
+                    $('#carModel').empty();
+                    $('#carModel').append('<option value="0" disabled selected>-- Please Select Car Model --</option>');
+
                     $('#carVariant').empty();
                     $('#carVariant').append('<option value="0" disabled selected>-- Please Select Car Variant --</option>');
+
+                    $.each(data.CarModels, function(index, CarModel) {
+                        $('#carModel').append('<option value="'+CarModel.id+'">'+CarModel.model+'</option>');
+                    })
                     $.each(data.CarVariants, function(index, CarVariant) {
                         $('#carVariant').append('<option value="'+CarVariant.id+'">'+CarVariant.variant+'</option>');
                     })

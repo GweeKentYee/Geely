@@ -17,7 +17,7 @@ class DataTableController extends Controller
 
             ->addColumn('File', function($query){
 
-                $File = '<a href = "/admin/inspection/file/view/'.$query->id.'">'.$query->file.'</a>';
+                $File = '<a href = "/admin/inspection/file/view/'.$query->id.'">'.$query->result_file.'</a>';
 
                 return $File;
 
@@ -25,7 +25,7 @@ class DataTableController extends Controller
 
             ->addColumn('Car_Model', function($query){
 
-                $CarModel = $query->usedCar->carVariant->carModel->car_model;
+                $CarModel = $query->usedCar->car->carModel->car_model;
 
                 return $CarModel;
 

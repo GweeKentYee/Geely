@@ -15,12 +15,18 @@ class CarModel extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'car_model'
+        'model',
+        'car_brand_id'
     ];
 
-    public function carVariants()
+    public function cars()
     {
-        return $this->hasMany(CarVariant::class);
+        return $this->hasMany(Car::class);
+    }
+
+    public function carBrand()
+    {
+        return $this->belongsTo('App\Models\CarBrand', 'car_brand_id');
     }
 
 }

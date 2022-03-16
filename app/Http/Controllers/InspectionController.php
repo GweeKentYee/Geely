@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CarBrand;
 use App\Models\CarModel;
 use App\Models\CarVariant;
 use App\Models\Catalogue;
@@ -20,19 +21,24 @@ class InspectionController extends Controller
 
     public function viewAdminPage(){
 
-        $CarModel = CarModel::all();
+        $CarBrand = CarBrand::all();
+
+        $CarVariant = CarVariant::all();
 
         return view('Inspection',[
-            'CarModel' => $CarModel
+            'CarBrand' => $CarBrand,
+            'CarVariant' => $CarVariant
         ]);
 
     }
 
-    public function subCarVariant(Request $request){
+    public function subOptions(Request $request){
 
-        $CarVariants = CarVariant::where('car_model_id',$request->CarModel_id)->get();
+        $CarModels = CarModel::where('car_brand_id',$request->CarBrand_id)->get();
+        $CarVariants = CarVariant::where('car_brand_id',$request->CarBrand_id)->get();
 
         return response()->json([
+            'CarModels' => $CarModels,
             'CarVariants' => $CarVariants
         ]);
 
@@ -64,12 +70,6 @@ class InspectionController extends Controller
         Inspection::create([
             'inspection_date' => now(),
             'file' => str_replace('\\','/',$InspectionFilePath),
-            'used_car_id' => $UsedCar->id
-        ]);
-
-        Catalogue::create([
-            'min_price' => 0,
-            'max_price' => 0,
             'used_car_id' => $UsedCar->id
         ]);
 
