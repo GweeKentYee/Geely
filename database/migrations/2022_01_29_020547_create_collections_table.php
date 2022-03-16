@@ -15,11 +15,11 @@ class CreateCollectionsTable extends Migration
     {
         Schema::create('collections', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('catalogue_id')->required();
+            $table->unsignedBigInteger('used_car_id')->required();
             $table->unsignedBigInteger('user_id')->required();
             $table->timestamps();
 
-            $table->foreign('catalogue_id')->references('id')->on('catalogues')->onDelete('cascade');
+            $table->foreign('used_car_id')->references('id')->on('used_cars')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
         });
