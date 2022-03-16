@@ -31,24 +31,25 @@
         </div>
     </div>
 
+    
     <div>
-        @if(count($car)<1)
+        @if(count($usedcar)<1)
             <div class="cata-card" style="width: 15rem; display: inline-block;">
                 <div>NO MATCHES IN OUR DATABASE</div>
             </div>
         @else
-            @foreach ( $car as  $cars )
+            @foreach ( $usedcar as  $usedcars )
                 <div class="cata-card" style="width: 15rem; display: inline-block;">
                     <div style="display:flex; justify-content: center; margin:5px;">
                         <div class="cata-card-image" style="width: 12.5rem;height: 12.5rem;justify-content:center;">   
-                            <img src="{{$cars->usedCar->file}}">
+                            <img src="">
+                            <img src="{{$usedcars->usedCarImages->get(0)->image}}">
                         </div>
                     </div>
-
                     <div class="cata-card-title">CAR MODEL : </div>
-                    <div class="cata-card-subtitle">{{$cars->usedcar->carVariant->carModel->car_model}}</div>
+                    <div class="cata-card-subtitle">{{$usedcars->car->carModel->model}}</div>
                     <div class="cata-card-title">PRICE : </div>
-                    <div class="cata-card-subtitle">RM {{$cars->min_price}} to RM {{$cars->max_price}}</div>
+                    <div class="cata-card-subtitle">RM {{$usedcars->min_price}} to RM {{$usedcars->max_price}}</div>
 
                     <div style="display:flex; justify-content: center; margin:5px;">
                         <div class="cata-card-button" style="width: 12.5rem;">
@@ -59,8 +60,10 @@
             @endforeach
         @endif
     </div>
+    
 </div>
 @endsection
+
 
 @section('footer-scripts')
 <script>

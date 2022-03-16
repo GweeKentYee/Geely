@@ -13,14 +13,10 @@ use function PHPUnit\Framework\isEmpty;
 class CatalogueController extends Controller
 {
     public function viewPage(){
-        $usedcar = UsedCar::all()->where('status','show');
+        $usedcar = UsedCar::all()->where('status','1');
 
-        foreach($usedcar as $usedcars){
-            $car[] = $usedcars->catalogue;
-        }
-        
         return view('Catalogue',
-        ['car' => $car,]
+        ['usedcar' => $usedcar,]
     );
 
     }
