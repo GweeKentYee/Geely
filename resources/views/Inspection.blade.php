@@ -8,13 +8,13 @@
             <div style = "text-align:right" class = "pb-1">
                 <button class = "btn btn-primary" data-bs-toggle="modal" data-bs-target="#newinspection">New Inspection</button>
             </div>
-            <table class = "table" id = "datatable">
+            <table class = "table" id = "datatable" style="width:100%">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Date</th>
                         <th>File</th>
-                        <th>Used_Car_ID</th>
+                        <th>Car_Model</th>
                         <th>Action</th>
                     </tr>
                 <thead>
@@ -26,7 +26,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">New Inspection</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <form action="/admin/inspection/add" method="post" enctype="multipart/form-data">
                     @csrf
@@ -55,7 +55,7 @@
                                 @enderror
                             <br>
                             <label>File:</label>
-                            <input type = "file" name = "data_file" class = "form-control-file @error('data_file') is-invalid @enderror" accept = "application/JSON,application/xml,text/plain,text/xml,image/png,image/jpeg">
+                            <input type = "file" name = "data_file" class = "form-control @error('data_file') is-invalid @enderror" accept = "application/JSON,application/xml,text/plain,text/xml,image/png,image/jpeg">
                                 @error('data_file')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -91,12 +91,13 @@
             }],
             "processing": true,
             "serverSide": true,
+            "scrollX": true,
             "ajax": "{{ route('api.inspection')}}",
             "columns": [
                 {"data": "id"},
                 {"data": "inspection_date"},
-                {"data": "file"},
-                {"data": "used_car_id"},
+                {"data": "File"},
+                {"data": "Car_Model"},
                 {"data": "Action", orderable: false, searchable: false}
             ]
         });
@@ -130,7 +131,12 @@
                 }
             })
         });
+
+        @if (Session::has('errors'))
+            $('#newinspection').modal("show");
+        @endif
     });
 
 </script>
+
 @endsection
