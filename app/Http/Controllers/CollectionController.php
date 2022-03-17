@@ -15,11 +15,19 @@ class CollectionController extends Controller
      */
     public function index()
     {
-        $collections = DB::table('car_models')
-                ->join('car_variants', 'car_variants.car_model_id', '=', 'car_models.id')
-                ->join('used_cars', 'used_cars.car_variant_id', '=', 'car_variants.id')
-                ->join('catalogues', 'catalogues.used_car_id', '=', 'used_cars.id')
-                ->join('collections', 'collections.catalogue_id', '=', 'catalogues.id')
+        // $collections = DB::table('car_models')
+        //         ->join('car_variants', 'car_variants.car_model_id', '=', 'car_models.id')
+        //         ->join('used_cars', 'used_cars.car_variant_id', '=', 'car_variants.id')
+        //         ->join('catalogues', 'catalogues.used_car_id', '=', 'used_cars.id')
+        //         ->join('collections', 'collections.catalogue_id', '=', 'catalogues.id')
+        //         ->where('collections.user_id', '=', auth()->id())
+        //         ->get();
+        
+        $collections = DB::table('used_cars')
+                ->join('cars', 'used_cars.car_id', '=', 'cars.id')
+                ->join('car_variants', 'cars.car_variant_id', '=', 'car_variants.id')
+                ->join('car_models', 'cars.car_model_id', '=', 'car_models.id')
+                ->join('collections', 'collections.used_car_id', '=', 'used_cars.id')  
                 ->where('collections.user_id', '=', auth()->id())
                 ->get();
        

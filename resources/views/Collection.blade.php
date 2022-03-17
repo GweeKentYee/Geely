@@ -34,7 +34,7 @@
                         <input class="check" type="checkbox" form="my_form" id={{ $collection->id }} name={{ $collection->id }} value={{ $collection->id }}>
                 </div>
                 <div class="col-2 m-auto"><img class="car-image shadow-lg" src="https://source.unsplash.com/random/150×150" alt="" width="150" height="150"></div>
-                <div class="col-2 m-auto">{{ $collection->car_model }}</div>
+                <div class="col-2 m-auto">{{ $collection->model }}</div>
                 <div class="col-2 m-auto">{{ $collection->year }}</div>
                 <div class="col-2 m-auto">RM{{ $collection->min_price }}-RM{{ $collection->max_price }}</div>
                 <div class="col-2 m-auto">{{ $collection->id }}</div>
