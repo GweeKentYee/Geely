@@ -42,7 +42,6 @@
                 <div class="cata-card" style="width: 15rem; display: inline-block;">
                     <div style="display:flex; justify-content: center; margin:5px;">
                         <div class="cata-card-image" style="width: 12.5rem;height: 12.5rem;justify-content:center;">   
-                            <img src="">
                             <img src="{{$usedcars->usedCarImages->get(0)->image}}">
                         </div>
                     </div>
