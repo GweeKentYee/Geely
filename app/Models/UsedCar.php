@@ -15,9 +15,13 @@ class UsedCar extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'file',
+        'min_price',
+        'max_price',
+        'registration',
+        'data_file',
+        'ownership_file',
         'status',
-        'car_variant_id'
+        'car_id'
     ];
 
     public function inspections()
@@ -25,14 +29,19 @@ class UsedCar extends Model
         return $this->hasMany(Inspection::class);
     }
 
-    public function catalogue()
+    public function usedCarImages()
     {
-        return $this->hasOne(Catalogue::class);
+        return $this->hasMany(UsedCarImage::class);
     }
 
-    public function carVariant()
+    public function collections()
     {
-        return $this->belongsTo('App\Models\CarVariant', 'car_variant_id');
+        return $this->hasMany(Collection::class);
+    }
+
+    public function car()
+    {
+        return $this->belongsTo('App\Models\Car', 'car_id');
     }
 
 }

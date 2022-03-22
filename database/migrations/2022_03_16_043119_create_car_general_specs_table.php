@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCarModelsTable extends Migration
+class CreateCarGeneralSpecsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateCarModelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('car_models', function (Blueprint $table) {
+        Schema::create('car_general_specs', function (Blueprint $table) {
             $table->id();
-            $table->string('model')->required();
-            $table->unsignedBigInteger('car_brand_id');
+            $table->string('fuel')->required();
+            $table->string('transmission')->required();
             $table->timestamps();
-
-            $table->foreign('car_brand_id')->references('id')->on('car_brands')->onDelete('cascade');
         });
     }
 
@@ -30,6 +28,6 @@ class CreateCarModelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('car_models');
+        Schema::dropIfExists('car_general_specs');
     }
 }

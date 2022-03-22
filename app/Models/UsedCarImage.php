@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Catalogue extends Model
+class UsedCarImage extends Model
 {
     use HasFactory;
 
@@ -15,15 +15,9 @@ class Catalogue extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'min_price',
-        'max_price',
+        'image',
         'used_car_id'
     ];
-
-    public function collections()
-    {
-        return $this->hasMany(Collection::class);
-    }
 
     public function usedCar()
     {

@@ -15,7 +15,6 @@ class CreateCarVariantsTable extends Migration
     {
         Schema::create('car_variants', function (Blueprint $table) {
             $table->id();
-            $table->integer('year')->required();
             $table->string('variant')->required();
             $table->string('type')->required();
             $table->string('transmission')->required();
@@ -25,7 +24,7 @@ class CreateCarVariantsTable extends Migration
             $table->unsignedBigInteger('car_model_id');
             $table->timestamps();
 
-            $table->foreign('car_model_id')->references('id')->on('car_models')->onDelete('cascade');
+            $table->foreign('car_brand_id')->references('id')->on('car_brands')->onDelete('cascade');
         });
     }
 

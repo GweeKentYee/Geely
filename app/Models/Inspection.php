@@ -16,7 +16,7 @@ class Inspection extends Model
      */
     protected $fillable = [
         'inspection_date',
-        'file',
+        'result_file',
         'used_car_id'
     ];
 
