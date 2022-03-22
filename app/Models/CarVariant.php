@@ -16,12 +16,7 @@ class CarVariant extends Model
      */
     protected $fillable = [
         'variant',
-        'type',
-        'transmission',
-        'fuel',
-        'specs_file',
-        'data_file',
-        'car_model_id'
+        'car_brand_id'
     ];
 
     public function cars()

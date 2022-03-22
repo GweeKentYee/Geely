@@ -16,12 +16,7 @@ class CreateCarVariantsTable extends Migration
         Schema::create('car_variants', function (Blueprint $table) {
             $table->id();
             $table->string('variant')->required();
-            $table->string('type')->required();
-            $table->string('transmission')->required();
-            $table->string('fuel')->required();
-            $table->string('specs_file')->required();
-            $table->string('data_file')->required();
-            $table->unsignedBigInteger('car_model_id');
+            $table->unsignedBigInteger('car_brand_id');
             $table->timestamps();
 
             $table->foreign('car_brand_id')->references('id')->on('car_brands')->onDelete('cascade');
