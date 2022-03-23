@@ -15,12 +15,16 @@ class CreateUsedCarsTable extends Migration
     {
         Schema::create('used_cars', function (Blueprint $table) {
             $table->id();
-            $table->string('file')->required();
-            $table->string('status')->required();
-            $table->unsignedBigInteger('car_variant_id');
+            $table->integer('min_price');
+            $table->integer('max_price');
+            $table->string('registration')->unique();
+            $table->string('data_file')->required();
+            $table->string('ownership_file')->required();
+            $table->integer('status')->required();
+            $table->unsignedBigInteger('car_id');
             $table->timestamps();
 
-            $table->foreign('car_variant_id')->references('id')->on('car_variants')->onDelete('cascade');
+            $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');
 
         });
     }

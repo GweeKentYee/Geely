@@ -29,8 +29,16 @@ Route::get('/catalogue/usedcardetails','App\Http\Controllers\UsedCarController@v
 Route::get('/collection/comparison','App\Http\Controllers\ComparisonController@viewPage')->name('Comparison');
 
 Route::get('/admin/inspection','App\Http\Controllers\InspectionController@viewAdminPage');
+Route::post('/admin/inspection/carModelDropBox','App\Http\Controllers\InspectionController@subOptions')->name('subOptions');
+Route::get('/admin/inspection/file/view/{inspectionID}','App\Http\Controllers\InspectionController@viewInspectionFile');
+Route::post('/admin/inspection/add','App\Http\Controllers\InspectionController@newInspection');
+Route::get('/admin/inspection/delete/{inspectionID}','App\Http\Controllers\InspectionController@delete');
+Route::get('/admin/inspection/details/{inspectionID}','App\Http\Controllers\InspectionController@viewDetailsPage');
+
 Route::get('/admin/catalogue','App\Http\Controllers\CatalogueController@viewAdminPage');
+
 Route::get('/admin/newsletter','App\Http\Controllers\NewsletterController@viewAdminPage');
+
 Route::get('/admin/carmodel','App\Http\Controllers\CarModelController@viewAdminPage');
 
 
