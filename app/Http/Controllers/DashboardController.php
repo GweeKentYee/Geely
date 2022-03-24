@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Catalogue;
+use App\Models\Newsletter;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -11,11 +12,10 @@ class DashboardController extends Controller
     //
     public function viewPage(){
 
-        // $catalogue= Catalogue::whereRelation('usedCar','status','retail')->get();
+        $Dash = Newsletter::all();
 
-        // dd($catalogue);
-
-        return view('Dashboard');
+        return view('Dashboard', 
+        ['Dash' => $Dash,]);
 
     }
 }
