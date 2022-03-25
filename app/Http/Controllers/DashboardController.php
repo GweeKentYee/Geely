@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Catalogue;
 use App\Models\Newsletter;
+use App\Models\UsedCar;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -14,8 +15,10 @@ class DashboardController extends Controller
 
         $Dash = Newsletter::all();
 
+        $usedcar = UsedCar::all()->where('status','1');
+
         return view('Dashboard', 
-        ['Dash' => $Dash,]);
+        ['Dash' => $Dash,],['usedcar' => $usedcar,]);
 
     }
 }

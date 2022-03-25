@@ -16,7 +16,6 @@ use function PHPUnit\Framework\isInfinite;
 class CatalogueController extends Controller
 {
     public function viewPage(){
-        //$usedcar = UsedCar::all()->where('status','1');
 
         $usedcar = UsedCar::all()->where('status','1');
 
@@ -40,36 +39,6 @@ class CatalogueController extends Controller
         ->where('car_models.model','LIKE', '%'.request('query').'%')
         ->where('status','1')
         ->get();
-
-        // $car=[];
-
-        // $carID = CarModel::select('id')->where('car_model','LIKE', '%'.request('query').'%')->get();
-
-        // if($carID->isEmpty()){
-        //     return view('Catalogue',['car'=>$car,]);
-        // }
-
-        // foreach ($carID as $carID){
-
-        //     $collectID[] = $carID->id;
-
-        // }
-
-        // $CarModel = CarModel::findMany($collectID);
-
-        // foreach ($CarModel as $CarModel){
-        //     foreach ($CarModel->carVariants as $carVariants){
-        //         foreach($carVariants->usedCars as $usedCars){
-
-        //             if($usedCars->status == "show") {
-
-        //                 $car[] = $usedCars->catalogue;
-
-        //             }
-        //         }
-        //     }
-        // }
-        
     
         return view('Catalogue',['usedcar'=>$usedcar,]);
 
@@ -102,44 +71,7 @@ class CatalogueController extends Controller
         ->where('used_cars.min_price','>=',$minPrice)
         ->where('used_cars.max_price','<=',$maxPrice)
         ->where('status','1')
-        ->get();
-
-        // $usedcar = UsedCar::
-        // join('cars','cars.id','=','used_cars.car_id')
-        // ->leftJoin('car_models','car_models.id','=','cars.car_model_id')
-        // ->where('car_models.model','like','%'.request('query').'%')
-        // ->where('cars.year','>=',request('year'))
-        // ->where('used_cars.min_price','>',request('minPrice'))
-        // ->where('used_cars.max_price','<',request('maxPrice'))
-        // ->where('used_cars.status','1')
-        // ->get();
-
-        // $car=[];
-
-        // $carID = CarModel::select('id')->where('car_model','LIKE', '%'.request('model').'%')->get();
-
-        // if($carID->isEmpty()){
-        //     return view('Catalogue',['car'=>$car,]);
-        // }
-
-        // foreach ($carID as $carID){
-
-        //     $collectID[] = $carID->id;
-
-        // }
-
-        // $CarModel = CarModel::findMany($collectID);
-
-        // foreach ($CarModel as $CarModel){
-        //     foreach ($CarModel->carVariants->where('year','>=',request('year')) as $carVariants){
-        //         foreach($carVariants->usedCars->where('status','show') as $usedCars){
-        //             if($usedCars->catalogue->min_price >= request('minPrice') || $usedCars->catalogue->max_price <= request('maxPrice')){
-        //                 $car[] = $usedCars->catalogue;
-        //             }
-        //         }
-        //     }
-        // }
-        
+        ->get(); 
     
         return view('Catalogue',['usedcar'=>$usedcar,]);
     }
