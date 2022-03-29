@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+<link href="{{ asset('css/catalogue.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -42,7 +46,8 @@
                 <div class="cata-card" style="width: 15rem; display: inline-block;">
                     <div style="display:flex; justify-content: center; margin:5px;">
                         <div class="cata-card-image" style="width: 12.5rem;height: 12.5rem;justify-content:center;">   
-                            <img src="{{$usedcars->usedCarImages->get(0)->image}}">
+                            {{-- <img src="{{$usedcars->usedCarImages->get(0)->image}}"> --}}
+                            <img src="https://source.unsplash.com/random/200×200" alt="" width="200" height="200" >
                         </div>
                     </div>
                     <div class="cata-card-title">CAR MODEL : </div>
@@ -51,9 +56,38 @@
                     <div class="cata-card-subtitle">RM {{$usedcars->min_price}} to RM {{$usedcars->max_price}}</div>
 
                     <div style="display:flex; justify-content: center; margin:5px;">
-                        <div class="cata-card-button" style="width: 12.5rem;">
+                        {{-- <div class="cata-card-button" style="width: 12.5rem;">
                             <div class="cata-card-button-content">ADD TO COLLECTION</div>
-                        </div>
+                        </div> --}}
+                        @php    
+                                $exist_in_collection = false;
+                                $used_car_id =  $usedcars->id ;
+                                $collection_id_remove = 0;
+
+                                foreach($collections as $collection){
+                                    if( $collection->used_car_id == $used_car_id){
+                                        $exist_in_collection = true;
+                                        $collection_id_remove = $collection->id;
+                                    }
+                                }
+                         @endphp
+                        
+                            
+
+                            
+
+                        @if ($exist_in_collection)
+                            <button class="btn-success cata-card-button-content" type="button" disabled>Added To Collection</button>         
+                                
+                        @else
+                            <form action="{{ route('collection.store') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="usedcar_id" value={{ $usedcars->id }} />
+                                <button class="cata-card-button cata-card-button-content" type="submit">Add To Collection</button>  
+                            </form>                     
+                        @endif
+                            
+                            
                     </div>
                 </div>
             @endforeach

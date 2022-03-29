@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Catalogue;
 
 use App\Models\UsedCar;
+use App\Models\Collection;
 use App\Models\Car;
 use App\Models\CarModel;
 use App\Models\CarVariant;
@@ -19,10 +20,12 @@ class CatalogueController extends Controller
         //$usedcar = UsedCar::all()->where('status','1');
 
         $usedcar = UsedCar::all()->where('status','1');
+        $collections = Collection::all()->where('user_id',auth()->id());
+
 
         return view('Catalogue',
-        ['usedcar' => $usedcar,]
-    );
+        ['usedcar' => $usedcar, 'collections'=> $collections]
+        );
 
     }
 

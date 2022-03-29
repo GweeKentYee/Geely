@@ -52,7 +52,12 @@ class CollectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $collection = new Collection();
+        $collection->used_car_id = $request->input("usedcar_id");
+        $collection->user_id = auth()->id();
+        $collection->save();
+
+        return redirect()->route('catalogue.viewpage');
     }
 
     /**

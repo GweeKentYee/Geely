@@ -22,11 +22,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-<<<<<<< HEAD
     @yield('css')
-=======
-    <link href="{{ asset('css/catalogue.css') }}" rel="stylesheet">
->>>>>>> Peter
     <link rel="stylesheet" type = "text/css" href = "//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 </head>
 <body>

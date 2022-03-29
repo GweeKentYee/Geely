@@ -24,9 +24,10 @@ Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/','App\Http\Controllers\DashboardController@viewPage');
-Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage');
-<<<<<<< HEAD
 
+Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage')->name('catalogue.viewpage');
+Route::get('/catalogue/search','App\Http\Controllers\CatalogueController@search');
+Route::get('/catalogue/advanced','App\Http\Controllers\CatalogueController@advanced');
 
 Route::get('/collection/compare', function(){
 
@@ -48,12 +49,7 @@ Route::post('/collection/compare', function(Request $request){
     return redirect()->route('collection.compare', ['collectionID1' => $collectionID1, 'collectionID2' => $collectionID2]);
 })->name('collection.compare');
 Route::resource('collection', CollectionController::class);
-=======
-Route::get('/catalogue/search','App\Http\Controllers\CatalogueController@search');
-Route::get('/catalogue/advanced','App\Http\Controllers\CatalogueController@advanced');
 
-Route::get('/collection','App\Http\Controllers\CollectionController@viewPage');
->>>>>>> Peter
 
 Route::get('/admin/inspection','App\Http\Controllers\InspectionController@viewAdminPage');
 Route::post('/admin/inspection/carModelDropBox','App\Http\Controllers\InspectionController@subOptions')->name('subOptions');
