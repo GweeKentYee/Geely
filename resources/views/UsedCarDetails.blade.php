@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+<link href="{{ asset('css/usedcardetails.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -8,45 +12,51 @@
               <div class="card">
                 <div class="card-body">
                   <div class="row">
-                  <h2 style="font-family:GEELY; color:rgb(21, 136, 172)"><b>{{ __('CAR DETAILS') }}</b></h2></div>
+                  <h2 class="headline"><u>Car Details</u></h2>
                   <div class="row">
                     <div class="col">
-                      <img src="" class="rounded mx-auto d-block" alt="...">
+                      {{-- <img src="" class="rounded mx-auto d-block" alt="..."> --}}
+                      <div class="centerBlock">
+                      <img src="https://source.unsplash.com/random/200×200" alt="Responsive image" width="200" height="200">
+                      </div>
                     </div>
                     <div class="col">
-                      <h3 style="font-family:Geely; color:black"><b>{{ __('MODEL:') }}</b></h3>
-                      --Geely<br>
-                      <h3 style="font-family:Geely; color:black"><b>{{ __('YEAR:') }}</b></h3>
-                      --2021<br>
+                      <div class="details-title">Model:</div>
+                      <div class="details-content">--Geely</div><br>
+                      <div class="details-title">Year:</div>
+                      <div class="details-content">--2021</div><br>
                     </div>
                     <div class="col">
-                      <h3 style="font-family:Geely; color:black"><b>{{ __('PRICE:') }}</b></h3>
-                      --12345 pricing<br>
-                      <h3 style="font-family:Geely; color:black"><b>{{ __('RATING:') }}</b></h3>
-                      --90%<br>
-                      <br>
+                      <div class="details-title">Price:</div>
+                      <div class="details-content">--12345 pricing</div><br>
+                      <div class="details-title">Rating:</div>
+                      <div class="details-content">--90%</div><br>
                     </div>
                   </div>
                     <div class="row">
                       <div class= "col">
                       </div>
                       <div class="col-8">
-                         <button type="button" class="btn btn-primary float-left" style="width: 70%" >ADD TO COLLECTION </button>
+                    
+                         {{-- <button class="cata-card-button cata-card-button-content" >ADD TO COLLECTION </button> --}}
+                         <button class="cata-card-button cata-card-button-content" type="submit">Add To Collection</button> 
                          <br><br>
                       </div>
                   </div>
 
                   <div class="row">
-                    <h2 style="font-family:GEELY; color:rgb(21, 136, 172)"><b>{{ __('INSPECTION DETAILS') }}</b></h2></div>
+                    <h2 class="headline"><u>Inspection Details</u></h2></div>
                   
                   <div class="row">
                       <div class="col">
-                        Image 1
-                        <img src="" class="img-fluid" alt="Responsive image">
-                        <br>
-                        <div class="row"> {{-- row 1 --}}
+                        <div class="centerBlock">
+                        <img src="https://source.unsplash.com/random/200×200"  alt="Responsive image" width="200" height="200">
+                        </div>
+                        <br><br>
+                        <div class="row details-title"> {{-- row 1 --}}
                           {{-- create a inner column to print progress bar and header --}}
-                          <div class="col"><h4 style="font-family:Geely; color:black"><b>{{ __('CHASIS') }}</b></h4>
+                          <div class="col">
+                            Chasis
                           </div>
                           <div class="col">
                             <div class="progress" style="height: 20px;">
@@ -54,9 +64,10 @@
                             </div>
                           </div>
                         </div> 
-                        <div class="row"> {{-- row 2 --}}
-                          {{-- create a inner column to print progress bar and header --}}
-                          <div class="col"><h4 style="font-family:Geely; color:black"><b>{{ __('WHEELS') }}</b></h4>
+
+                        <div class="row details-title"> {{-- row 2 --}}
+                          <div class="col">
+                            Wheels
                           </div>
                           <div class="col">
                             <div class="progress" style="height: 20px;">
@@ -64,9 +75,9 @@
                             </div>
                           </div>
                         </div> 
-                        <div class="row"> {{-- row 3 --}}
-                          {{-- create a inner column to print progress bar and header --}}
-                          <div class="col"><h4 style="font-family:Geely; color:black"><b>{{ __('BATTERY') }}</b></h4>
+
+                        <div class="row details-title"> {{-- row 3 --}}
+                          <div class="col">Battery
                           </div>
                           <div class="col">
                             <div class="progress" style="height: 20px;">
@@ -74,9 +85,9 @@
                             </div>
                           </div>
                         </div> 
-                        <div class="row"> {{-- row 4 --}}
-                          {{-- create a inner column to print progress bar and header --}}
-                          <div class="col"><h4 style="font-family:Geely; color:black"><b>{{ __('AIR CONDITIONING SYSTEM') }}</b></h4>
+
+                        <div class="row details-title"> {{-- row 4 --}}
+                          <div class="col">Air Conditioning System
                           </div>
                           <div class="col">
                             <div class="progress" style="height: 20px;">
@@ -87,47 +98,56 @@
                         
                       </div>
                       <div class="col">
-                        <img src="..." class="text-center" alt="..."> Image2
-                        <br>
-                        <div class="row"> {{-- row 1 --}}
-                          {{-- create a inner column to print progress bar and header --}}
-                          <div class="col"><h4 style="font-family:Geely; color:black"><b>{{ __('PAINTS') }}</b></h4>
+                        <div class="centerBlock">
+                          <img src="https://source.unsplash.com/random/200×200"  alt="Responsive image" width="200" height="200">
                           </div>
-                          <div class="col">
-                            <div class="progress" style="height: 20px;">
-                              <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+                          <br><br>
+
+                          <div class="row details-title"> {{-- row 1 --}}
+                            {{-- create a inner column to print progress bar and header --}}
+                            <div class="col">
+                              Paints
                             </div>
-                          </div>
-                        </div> 
-                        <div class="row"> {{-- row 2 --}}
-                          {{-- create a inner column to print progress bar and header --}}
-                          <div class="col"><h4 style="font-family:Geely; color:black"><b>{{ __('DOOR') }}</b></h4>
-                          </div>
-                          <div class="col">
-                            <div class="progress" style="height: 20px;">
-                              <div class="progress-bar bg-success" role="progressbar" style="width: 5%;" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100">5%</div>
+                            <div class="col">
+                              <div class="progress" style="height: 20px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+                              </div>
                             </div>
-                          </div>
-                        </div> 
-                        <div class="row"> {{-- row 3 --}}
-                          {{-- create a inner column to print progress bar and header --}}
-                          <div class="col"><h4 style="font-family:Geely; color:black"><b>{{ __('ETC') }}</b></h4>
-                          </div>
-                          <div class="col">
-                            <div class="progress" style="height: 20px;">
-                              <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+                          </div> 
+  
+                          <div class="row details-title"> {{-- row 2 --}}
+                            <div class="col">
+                              Door
                             </div>
-                          </div>
-                        </div> 
-                        <div class="row"> {{-- row 4 --}}
-                          {{-- create a inner column to print progress bar and header --}}
-                          <div class="col"><h4 style="font-family:Geely; color:black"><b>{{ __('ETC') }}</b></h4>
-                          </div>
-                          <div class="col">
-                            <div class="progress" style="height: 20px;">
-                              <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                            <div class="col">
+                              <div class="progress" style="height: 20px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 5%;" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100">5%</div>
+                              </div>
                             </div>
-                          </div>
+                          </div> 
+  
+                          <div class="row details-title"> {{-- row 3 --}}
+                            <div class="col">
+                              etc
+                            </div>
+                            <div class="col">
+                              <div class="progress" style="height: 20px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+                              </div>
+                            </div>
+                          </div> 
+  
+                          <div class="row details-title"> {{-- row 4 --}}
+                            <div class="col">
+                              etc
+                            </div>
+                            <div class="col">
+                              <div class="progress" style="height: 20px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                              </div>
+                            </div>
+                          </div> 
+                        
                       </div>
                   </div>
 
