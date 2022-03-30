@@ -9,13 +9,13 @@
                     <div class="carousel-inner">
                         @for ($i=0;$i<$Dash->count();$i++)
                             @if ($i==0)
-                                    <div class="carousel-item active">
+                                    <a class="carousel-item active" href="{{$Dash->get($i)->title}}" target="_blank">
                                         <img class="d-block w-100" src="{{$Dash->get($i)->image}}" alt="First slide">
-                                    </div>
+                                    </a>
                                 @else
-                                    <div class="carousel-item">
+                                    <a class="carousel-item" href="{{$Dash->get($i)->title}}" target="_blank">
                                         <img class="d-block w-100" src="{{$Dash->get($i)->image}}" alt="Second slide">
-                                    </div>
+                                    </a>
                             @endif
                         @endfor
                     </div>
