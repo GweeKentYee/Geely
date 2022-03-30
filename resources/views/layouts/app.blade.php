@@ -68,6 +68,10 @@
                                     <a class = "dropdown-item" href = "/admin/catalogue">Manage Catalogue</a>
                                     <a class = "dropdown-item" href = "/admin/newsletter">Manage Newsletter</a>
                                     <a class = "dropdown-item" href = "/admin/carmodel">Car Model</a>
+                                    <a class = "dropdown-item" href = "/admin/car">Car</a>
+                                    <a class = "dropdown-item" href = "/admin/brand_model_variant">Brand/Model/Variant</a>
+                                    <a class = "dropdown-item" href = "/admin/carbrand">Car Brand</a>
+                                    <a class = "dropdown-item" href = "/admin/carmodel">Car Model</a>
                                     <a class = "dropdown-item" href = "/admin/carvariant">Car Variant</a>
 
                                     @else

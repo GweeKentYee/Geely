@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inspection;
+use App\Models\Car;
+use App\Models\CarBrand;
+use App\Models\CarModel;
 use App\Models\CarVariant;
 use Illuminate\Http\Request;
 
@@ -45,17 +48,17 @@ class DataTableController extends Controller
             ->make(true);
     }
 
-    public function carvariant(){
+    public function car(){
 
-        $query = CarVariant::select('*');
+        $query = Car::select('*');
 
         return datatables($query)
             ->addIndexColumn()
 
             ->addColumn('File', function($query){
 
-                $File = '<a href = "/admin/carvariant/file/viewspecs/'.$query->id.'">'.$query->specs_file.'</a><br>
-                <a href = "/admin/carvariant/file/viewdata/'.$query->id.'">'.$query->data_file.'</a>';
+                $File = '<a href = "/admin/car/file/viewspec/'.$query->id.'">'.$query->spec_file.'</a><br>
+                <a href = "/admin/car/file/viewdata/'.$query->id.'">'.$query->data_file.'</a>';
 
                 return $File;
 
@@ -66,6 +69,97 @@ class DataTableController extends Controller
                 $CarModel = $query->carModel->car_model;
 
                 return $CarModel;
+
+            })
+
+            ->addColumn('Edit', function($query){
+
+                $actionButton = '<a class= "btn btn-success btn-sm edit" href= "/admin/car/edit/'.$query->id.'">Edit</a>';
+                
+                return $actionButton;
+
+            })
+            
+            ->addColumn('Delete', function($query){
+
+                $actionButton = '<a class= "btn btn-danger btn-sm delete" href= "/admin/car/delete/'.$query->id.'">Delete</a>';
+                
+                return $actionButton;
+
+            })->rawColumns(['File', 'Edit', 'Delete'])  // for columns which involve html codes
+            ->make(true);
+    }
+
+    public function carbrand(){
+
+        $query = CarBrand::select('*');
+
+        return datatables($query)
+            ->addIndexColumn()
+
+            ->addColumn('Edit', function($query){
+
+                $actionButton = '<a class= "btn btn-success btn-sm edit" href= "/admin/carbrand/edit/'.$query->id.'">Edit</a>';
+                
+                return $actionButton;
+
+            })
+            
+            ->addColumn('Delete', function($query){
+
+                $actionButton = '<a class= "btn btn-danger btn-sm delete" href= "/admin/carbrand/delete/'.$query->id.'">Delete</a>';
+                
+                return $actionButton;
+
+            })->rawColumns(['Edit', 'Delete'])  // for columns which involve html codes
+            ->make(true);
+    }
+
+    public function carmodel(){
+
+        $query = CarModel::select('*');
+
+        return datatables($query)
+            ->addIndexColumn()
+
+            ->addColumn('Car_Brand', function($query){
+
+                $CarBrand = $query->carBrand->brand;
+
+                return $CarBrand;
+
+            })
+
+            ->addColumn('Edit', function($query){
+
+                $actionButton = '<a class= "btn btn-success btn-sm edit" href= "/admin/carmodel/edit/'.$query->id.'">Edit</a>';
+                
+                return $actionButton;
+
+            })
+            
+            ->addColumn('Delete', function($query){
+
+                $actionButton = '<a class= "btn btn-danger btn-sm delete" href= "/admin/carmodel/delete/'.$query->id.'">Delete</a>';
+                
+                return $actionButton;
+
+            })->rawColumns(['Edit', 'Delete'])  // for columns which involve html codes
+            ->make(true);
+    }
+
+    public function carvariant(){
+
+        $query = CarVariant::select('*');
+
+        return datatables($query)
+            ->addIndexColumn()
+
+            ->addColumn('Car_Brand', function($query){
+
+                $CarBrand = $query->carBrand->brand;
+
+                return $CarBrand;
 
             })
 
@@ -83,8 +177,8 @@ class DataTableController extends Controller
                 
                 return $actionButton;
 
-            })->rawColumns(['File', 'Edit', 'Delete'])  // for columns which involve html codes
+            })->rawColumns(['Edit', 'Delete'])  // for columns which involve html codes
             ->make(true);
-
     }
+
 }

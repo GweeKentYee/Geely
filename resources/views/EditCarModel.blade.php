@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-9">
-            <h3><u>Edit Car Variant</u></h3>
-            <form action="/admin/carvariant/editfunction/{{ $CarVariant->id }}" method="post" enctype="multipart/form-data">
+            <h3><u>Edit Car Model</u></h3>
+            <form action="/admin/carmodel/editfunction/{{ $CarModel->id }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 @if (Session::has('field_empty'))
@@ -15,9 +15,9 @@
                 @endif
                 <div class="modal-body">
                     <label>ID</label>
-                    <input type="text" name="car_variant_id" class="form-control" value="{{ $CarVariant->id }}" readonly>
+                    <input type="text" name="car_model_id" class="form-control" value="{{ $CarModel->id }}" readonly>
                     <br>
-                    <label>Car Brand: {{ $CarVariant->carBrand->brand }}</label>
+                    <label>Car Brand: {{ $CarModel->carBrand->brand }}</label>
                     <select name = "car_brand_id" class = "form-control @error('car_brand_id') is-invalid @enderror">
                         <option value="0" disabled selected>-- Please Select Car Brand --</option>
                         @foreach ($CarBrand as $CarBrand)
@@ -30,16 +30,16 @@
                         </span>
                     @enderror
                 <br>
-                <label>Car Variant</label>
-                <input type="text" name="variant" class="form-control @error('variant') is-invalid @enderror" value="{{ old('variant') }}" placeholder="{{ $CarVariant->variant }}">
-                @error('variant')
+                <label>Car Model</label>
+                <input type="text" name="model" class="form-control @error('model') is-invalid @enderror" value="{{ old('model') }}" placeholder="{{ $CarModel->model }}">
+                @error('model')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-secondary" href="/admin/carvariant">Back</a>
+                    <a class="btn btn-secondary" href="/admin/carmodel">Back</a>
                     <button type="submit" class="btn btn-primary">Edit</button>
                 </div>
             </form>
