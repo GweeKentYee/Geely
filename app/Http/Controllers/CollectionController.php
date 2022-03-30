@@ -31,7 +31,7 @@ class CollectionController extends Controller
                 ->where('collections.user_id', '=', auth()->id())
                 ->get();
        
-        return view('Collection', ['collections' => $collections]);
+        return view('Collection2', ['collections' => $collections]);
     }
 
     /**
