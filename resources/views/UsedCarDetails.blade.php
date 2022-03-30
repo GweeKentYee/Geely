@@ -66,7 +66,7 @@
                         </div> 
                         <div class="row"> {{-- row 3 --}}
                           {{-- create a inner column to print progress bar and header --}}
-                          <div class="col"><h4 style="font-family:Geely; color:black"><b>{{ __('ETC') }}</b></h4>
+                          <div class="col"><h4 style="font-family:Geely; color:black"><b>{{ __('BATTERY') }}</b></h4>
                           </div>
                           <div class="col">
                             <div class="progress" style="height: 20px;">
@@ -76,7 +76,7 @@
                         </div> 
                         <div class="row"> {{-- row 4 --}}
                           {{-- create a inner column to print progress bar and header --}}
-                          <div class="col"><h4 style="font-family:Geely; color:black"><b>{{ __('ETC') }}</b></h4>
+                          <div class="col"><h4 style="font-family:Geely; color:black"><b>{{ __('AIR CONDITIONING SYSTEM') }}</b></h4>
                           </div>
                           <div class="col">
                             <div class="progress" style="height: 20px;">
