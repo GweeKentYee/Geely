@@ -1,0 +1,39 @@
+.headline{
+    color: #3279af;
+    padding-left: 2rem;
+    font-family: 'Roboto';
+    font-weight: 700;
+  }
+
+  .centerBlock{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 200px;
+    display: table;
+    margin: auto;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: 0.5rem;
+    box-shadow: 5px 5px 25px -5px rgba(0,0,0,0.5); 
+  }
+
+  .details-title {
+    margin: 5px;
+    text-align: center;
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: x-large;
+    color: #022a49;
+  }
+
+  .content-title {
+    margin: 0px;
+    text-align: center;
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: large;
+    color: #022a49;
+  }

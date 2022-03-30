@@ -15,7 +15,6 @@
                   <h2 class="headline"><u>Car Details</u></h2>
                   <div class="row">
                     <div class="col">
-                      {{-- <img src="" class="rounded mx-auto d-block" alt="..."> --}}
                       <div class="centerBlock">
                       <img src="https://source.unsplash.com/random/200×200" alt="Responsive image" width="200" height="200">
                       </div>

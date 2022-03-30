@@ -78,7 +78,7 @@
         <script>
         
             $(document).ready(function () {
-                document.getElementById('Com').disabled = true;
+                document.getElementById('CompareButton').disabled = true;
 
                 $('input[type=checkbox]').on('change', function (e) {
                     if ($('input[type=checkbox]:checked').length > 2) {

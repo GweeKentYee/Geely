@@ -29,12 +29,13 @@ Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage')->na
 Route::get('/catalogue/search','App\Http\Controllers\CatalogueController@search');
 Route::get('/catalogue/advanced','App\Http\Controllers\CatalogueController@advanced');
 
+Route::get('/collection/comparison','App\Http\Controllers\ComparisonController@viewPage');
 Route::get('/collection/compare', function(){
 
 
     dd(request()->all());
     
-})->name('collection.compare');
+})->name('collection.compare1');
 Route::post('/collection/compare', function(Request $request){
 
     $collectionSelected = $request->except('_token');
@@ -46,13 +47,13 @@ Route::post('/collection/compare', function(Request $request){
         $i = $i + 1;
     }
 
-    return redirect()->route('collection.compare', ['collectionID1' => $collectionID1, 'collectionID2' => $collectionID2]);
+    return redirect()->route('collection.compare1', ['collectionID1' => $collectionID1, 'collectionID2' => $collectionID2]);
 })->name('collection.compare');
 Route::resource('collection', CollectionController::class);
 
 
 Route::get('/catalogue/usedcardetails','App\Http\Controllers\UsedCarController@viewPage')->name('UsedCarDetails');
-Route::get('/collection/comparison','App\Http\Controllers\ComparisonController@viewPage')->name('Comparison');
+
 
 Route::get('/admin/inspection','App\Http\Controllers\InspectionController@viewAdminPage');
 Route::post('/admin/inspection/carModelDropBox','App\Http\Controllers\InspectionController@subOptions')->name('subOptions');
