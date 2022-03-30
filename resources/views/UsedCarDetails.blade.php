@@ -15,7 +15,7 @@
                     </div>
                     <div class="col">
                       <h3 style="font-family:Geely; color:black"><b>{{ __('MODEL:') }}</b></h3>
-                      --Geely model<br>
+                      {{$usedcars->car->carModel->model}}<br>
                       <h3 style="font-family:Geely; color:black"><b>{{ __('YEAR:') }}</b></h3>
                       --2021<br>
                     </div>
