@@ -44,6 +44,9 @@ class CatalogueController extends Controller
         ->where('status','1')
         ->get();
 
+        $collections = Collection::all()->where('user_id',auth()->id());
+
+
         // $car=[];
 
         // $carID = CarModel::select('id')->where('car_model','LIKE', '%'.request('query').'%')->get();
@@ -74,7 +77,9 @@ class CatalogueController extends Controller
         // }
         
     
-        return view('Catalogue',['usedcar'=>$usedcar,]);
+        return view('Catalogue',
+        ['usedcar' => $usedcar, 'collections'=> $collections]
+        );
 
     }
 
@@ -106,6 +111,9 @@ class CatalogueController extends Controller
         ->where('used_cars.max_price','<=',$maxPrice)
         ->where('status','1')
         ->get();
+
+        $collections = Collection::all()->where('user_id',auth()->id());
+
 
         // $usedcar = UsedCar::
         // join('cars','cars.id','=','used_cars.car_id')
@@ -144,7 +152,9 @@ class CatalogueController extends Controller
         // }
         
     
-        return view('Catalogue',['usedcar'=>$usedcar,]);
+        return view('Catalogue',
+        ['usedcar' => $usedcar, 'collections'=> $collections]
+        );
     }
     
 

@@ -13,7 +13,8 @@
         <div class="col-12">
             <form id="my_form" action="{{ route('collection.compare') }}" method="POST">
                 @csrf
-                <input class="btn btn-success compare-selection-btn" id="sendNewSms" type="submit" value="COMPARE SELECTION">
+                <input class="btn btn-success compare-selection-btn" id="CompareButton" type="submit" value="COMPARE SELECTION"><br>
+                <a class="btn btn-success compare-selection-btn" href="/collection/comparison">Temporary Button to comparison page</a>
             </form>
         </div>
     </div>
@@ -77,7 +78,7 @@
         <script>
         
             $(document).ready(function () {
-                document.getElementById('sendNewSms').disabled = true;
+                document.getElementById('Com').disabled = true;
 
                 $('input[type=checkbox]').on('change', function (e) {
                     if ($('input[type=checkbox]:checked').length > 2) {
@@ -86,11 +87,11 @@
                     }
 
                     if ($('input[type=checkbox]:checked').length == 2) {
-                        document.getElementById('sendNewSms').disabled = false;
+                        document.getElementById('CompareButton').disabled = false;
                     }
 
                     if ($('input[type=checkbox]:checked').length < 2) {
-                        document.getElementById('sendNewSms').disabled = true;
+                        document.getElementById('CompareButton').disabled = true;
                     }
                     
                 });
