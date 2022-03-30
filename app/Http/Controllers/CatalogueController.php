@@ -49,15 +49,15 @@ class CatalogueController extends Controller
         $minPrice = request('minPrice');
         $maxPrice = request('maxPrice');
 
-        if($year==null){
+        if($year==null || !is_numeric($year)){
             $year=0;
         }
 
-        if($minPrice==null){
+        if($minPrice==null || !is_numeric($minPrice)){
             $minPrice=0;
         }
 
-        if($maxPrice==null){
+        if($maxPrice==null || !is_numeric($maxPrice)){
             $maxPrice=UsedCar::max('max_price');
         }
         
