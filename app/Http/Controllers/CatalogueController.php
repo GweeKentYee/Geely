@@ -17,7 +17,7 @@ class CatalogueController extends Controller
 {
     public function viewPage(){
 
-        $usedcar = UsedCar::all()->where('status','1');
+        $usedcar = UsedCar::where('status','1')->paginate(20);
 
         return view('Catalogue',
         ['usedcar' => $usedcar,]
@@ -38,7 +38,7 @@ class CatalogueController extends Controller
         ->join('car_models','cars.car_model_id','=','car_models.id')
         ->where('car_models.model','LIKE', '%'.request('query').'%')
         ->where('status','1')
-        ->get();
+        ->paginate(20);
     
         return view('Catalogue',['usedcar'=>$usedcar,]);
 
@@ -71,7 +71,7 @@ class CatalogueController extends Controller
         ->where('used_cars.min_price','>=',$minPrice)
         ->where('used_cars.max_price','<=',$maxPrice)
         ->where('status','1')
-        ->get(); 
+        ->paginate(20); 
     
         return view('Catalogue',['usedcar'=>$usedcar,]);
     }
