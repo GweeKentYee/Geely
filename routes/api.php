@@ -19,3 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/inspection','App\Http\Controllers\DataTableController@inspection')->name('api.inspection');
+Route::get('/admin/catalogue','App\Http\Controllers\DataTableController@ManageCatalogue')->name('api.ManageCatalogue');

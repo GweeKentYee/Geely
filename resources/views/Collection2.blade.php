@@ -1,49 +1,41 @@
 @extends('layouts.app')
 
 @section('css')
-<link href="{{ asset('css/collection.css') }}" rel="stylesheet">
+<link href="{{ asset('css/collection2.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
-    
+
     <div class="row">
-        <div class="col-9">
+        <div class="col-12">
             <h3 class="headline">COLLECTION</h3>
         </div>
-        <div class="col-3">
+        <div class="col-12">
             <form id="my_form" action="{{ route('collection.compare') }}" method="POST">
                 @csrf
-                <input class="compare-selection-btn" type="submit" value="COMPARE SELECTION">
+                <input class="btn btn-success compare-selection-btn" id="sendNewSms" type="submit" value="COMPARE SELECTION">
             </form>
         </div>
     </div>
-    <div class="row title-bar">
-        <div class="col-1">       
-        </div>
-        <div class="col-2 title-bar-column title-bar-image-column">IMAGE</div>
-        <div class="col-2 title-bar-column">CAR MODEL</div>
-        <div class="col-2 title-bar-column">YEAR</div>
-        <div class="col-2 title-bar-column">PRICE</div>
-        <div class="col-2 title-bar-column title-bar-rating-column">RATING</div>
-        <div class="col-1">
-        </div>
-    </div>
-    @foreach ($collections as $collection)
-        <div class="row collection-container">
-                <div class="col-1 m-auto">
-                        <input class="check" type="checkbox" form="my_form" id={{ $collection->id }} name={{ $collection->id }} value={{ $collection->id }}>
-                </div>
-                <div class="col-2 m-auto"><img class="car-image shadow-lg" src="https://source.unsplash.com/random/150×150" alt="" width="150" height="150"></div>
-                <div class="col-2 m-auto">{{ $collection->model }}</div>
-                <div class="col-2 m-auto">{{ $collection->year }}</div>
-                <div class="col-2 m-auto">RM{{ $collection->min_price }}-RM{{ $collection->max_price }}</div>
-                <div class="col-2 m-auto">{{ $collection->id }}</div>
-                <div class="col-1 m-auto">
-                    <button type="button" class="btn btn-danger shadow" data-toggle="modal" data-target="#exampleModal{{ $collection->id }}">
-                        X
-                    </button>
-                    {{--  Pop up form when delete button is clicked  --}}
-                    <div class="modal fade" id="exampleModal{{ $collection->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    
+    <div class="row">
+        @foreach ($collections as $collection)
+        
+            <div class="col-lg-3 col-md-6 col-sm-12 mt-5" >
+                <input class="check" type="checkbox" form="my_form" id={{ $collection->id }} name={{ $collection->id }} value={{ $collection->id }}>
+                <div class="card m-auto" style="width: 18rem;">
+                    <img class="card-img" src="https://source.unsplash.com/random/200×200" alt="Card image cap" width="200" height="200">
+                    <div class="card-body">
+                      <p class="card-title">Car Model:</p>
+                      <h5 class="text-center card-subtitle ">{{ $collection->model }}</h5>
+                      <p class="card-title">Year:</p>
+                      <h5 class="text-center card-subtitle ">{{ $collection->year }}</h5>
+                      <p class="card-title">Price (RM):</p>
+                      <h5 class="text-center card-subtitle ">{{ $collection->min_price }} - {{ $collection->max_price }}</h5>
+                      <p class="card-title">Rating:</p>
+                      <h5 class="text-center card-subtitle ">{{ $collection->id }}%</h5>
+                      <button class="btn-danger btn mt-2 card-button" data-toggle="modal" data-target="#exampleModal{{ $collection->id }}" style="width: 16rem;">REMOVE</button>
+                      <div class="modal fade" id="exampleModal{{ $collection->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
                             <form action="{{ route('collection.destroy', ['collection' => $collection->id]) }}" method="POST">
@@ -66,15 +58,15 @@
                           </div>
                         </div>
                     </div>
-                </div>
-        </div>
-        <div class="row collection-container">
-            <div class="col-1"></div>
-            <div class="col-10"><hr></div>
-            <div class="col-1"> </div>
-        </div>
-     
-    @endforeach
+                    </div>           
+                  </div>
+                  
+            </div>
+        
+        
+        
+        @endforeach
+    </div>  
 
 @endsection
 
@@ -85,14 +77,24 @@
         <script>
         
             $(document).ready(function () {
+                document.getElementById('sendNewSms').disabled = true;
+
                 $('input[type=checkbox]').on('change', function (e) {
                     if ($('input[type=checkbox]:checked').length > 2) {
                         $(this).prop('checked', false);
                         alert("Can't compare more than 2 cars");
                     }
+
+                    if ($('input[type=checkbox]:checked').length == 2) {
+                        document.getElementById('sendNewSms').disabled = false;
+                    }
+
+                    if ($('input[type=checkbox]:checked').length < 2) {
+                        document.getElementById('sendNewSms').disabled = true;
+                    }
+                    
                 });
             });
 
         </script>
 @endsection
-

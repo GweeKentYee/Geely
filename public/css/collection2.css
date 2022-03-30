@@ -1,0 +1,61 @@
+.headline{
+  color: #3279af;
+  padding-left: 2rem;
+  font-family: 'Roboto';
+  font-weight: 700;
+}
+
+.compare-selection-btn{
+  background-color: rgb(119, 196, 4);
+  font-family: 'Roboto';
+  font-weight: 600;
+  font-size: medium;
+  margin-top: 1.5rem;
+  margin-left: 2rem;
+  border: 0px solid transparent;
+}
+
+.check{
+  margin-left: 2rem;
+  width: 1.2rem;
+  height: 1.5rem;
+}
+
+.card{
+  border-radius: 0.5rem;
+  box-shadow: 5px 5px 25px -5px rgba(50,121,175,0.25); 
+}
+
+.card:hover{
+  border-radius: 0.5rem;
+  box-shadow: 5px 5px 25px -5px rgba(50,121,175,1.0); 
+}
+
+.card-img{
+  display: block;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 15.6rem;
+}
+
+.card-title{
+  font-family: 'Roboto';
+  font-weight: 700;
+}
+
+.card-subtitle {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: large;
+  color: #3279af;
+  text-align: center;
+  margin-bottom: 0.6rem;
+}
+
+.card-button{
+  font-family: 'Roboto';
+  font-weight: 600;
+  font-size: medium;
+}

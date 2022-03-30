@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\CollectionController; //new added for resource controller
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request; 
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +24,32 @@ Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/','App\Http\Controllers\DashboardController@viewPage');
-Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage');
-Route::get('/collection','App\Http\Controllers\CollectionController@viewPage');
+
+Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage')->name('catalogue.viewpage');
+Route::get('/catalogue/search','App\Http\Controllers\CatalogueController@search');
+Route::get('/catalogue/advanced','App\Http\Controllers\CatalogueController@advanced');
+
+Route::get('/collection/compare', function(){
+
+
+    dd(request()->all());
+    
+})->name('collection.compare');
+Route::post('/collection/compare', function(Request $request){
+
+    $collectionSelected = $request->except('_token');
+
+    $i  = 1;
+    foreach ($collectionSelected as $key => $value) {
+        
+        ${'collectionID' . $i} = $value; 
+        $i = $i + 1;
+    }
+
+    return redirect()->route('collection.compare', ['collectionID1' => $collectionID1, 'collectionID2' => $collectionID2]);
+})->name('collection.compare');
+Route::resource('collection', CollectionController::class);
+
 
 Route::get('/catalogue/usedcardetails','App\Http\Controllers\UsedCarController@viewPage')->name('UsedCarDetails');
 Route::get('/collection/comparison','App\Http\Controllers\ComparisonController@viewPage')->name('Comparison');

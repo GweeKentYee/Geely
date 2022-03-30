@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inspection;
+use App\Models\Catalogue;
 use Illuminate\Http\Request;
 
 class DataTableController extends Controller
 {
     //
     public function inspection(){
-
         $query = Inspection::select('*');
-
+        
         return datatables($query)
             ->addIndexColumn()
 
