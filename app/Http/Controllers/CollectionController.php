@@ -12,4 +12,5 @@ class CollectionController extends Controller
         return view('Collection');
 
     }
+
 }

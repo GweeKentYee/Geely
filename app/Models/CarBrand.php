@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Collection extends Model
+class CarBrand extends Model
 {
     use HasFactory;
 
@@ -15,17 +15,16 @@ class Collection extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'used_car_id',
-        'user_id',
+        'brand'
     ];
 
-    public function usedCar()
+    public function carModels()
     {
-        return $this->belongsTo('App\Models\UsedCar', 'used_car_id');
+        return $this->hasMany(CarModel::class);
     }
 
-    public function user()
+    public function carVariants()
     {
-        return $this->belongsTo('App\Models\User', 'user_id');
+        return $this->hasMany(CarVariant::class);
     }
 }
