@@ -63,12 +63,52 @@ class DataTableController extends Controller
                 return $File;
 
             })
+
+            ->addColumn('Car_Brand', function($query){
+
+                $CarBrand = $query->carModel->carBrand->brand;
+
+                return $CarBrand;
+
+            })
             
             ->addColumn('Car_Model', function($query){
 
-                $CarModel = $query->carModel->car_model;
+                $CarModel = $query->carModel->model;
 
                 return $CarModel;
+
+            })
+
+            ->addColumn('Car_Variant', function($query){
+
+                $CarVariant = $query->carVariant->variant;
+
+                return $CarVariant;
+
+            })
+
+            ->addColumn('Body_Type', function($query){
+
+                $BodyType = $query->carBodyType->body_type;
+
+                return $BodyType;
+
+            })
+
+            ->addColumn('Transmission', function($query){
+
+                $Transmission = $query->carGeneralSpec->transmission;
+
+                return $Transmission;
+
+            })
+
+            ->addColumn('Fuel', function($query){
+
+                $Fuel = $query->carGeneralSpec->fuel;
+
+                return $Fuel;
 
             })
 

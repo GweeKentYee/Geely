@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <h3><u>Car Brand</u></h3>
         <div class="col-md-9">
-            <div style = "text-align:right" class = "pb-1">
-                <button class = "btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcarbrand">Add Car Brand</button>
+            <div style="text-align:right" class="pb-1">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcarbrand">Add Car Brand</button>
             </div>
-            <table class = "table" id = "datatable" style = "width: 100%">
+            <table class="table" id="datatable" style="width: 100%">
                 <thead>
                     <tr>
                         <th>ID</th>

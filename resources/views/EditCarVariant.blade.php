@@ -18,7 +18,7 @@
                     <input type="text" name="car_variant_id" class="form-control" value="{{ $CarVariant->id }}" readonly>
                     <br>
                     <label>Car Brand: {{ $CarVariant->carBrand->brand }}</label>
-                    <select name = "car_brand_id" class = "form-control @error('car_brand_id') is-invalid @enderror">
+                    <select name="car_brand_id" class="form-control @error('car_brand_id') is-invalid @enderror">
                         <option value="0" disabled selected>-- Please Select Car Brand --</option>
                         @foreach ($CarBrand as $CarBrand)
                             <option value="{{$CarBrand->id}}">{{$CarBrand->brand}}</option>
@@ -29,14 +29,14 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                <br>
-                <label>Car Variant</label>
-                <input type="text" name="variant" class="form-control @error('variant') is-invalid @enderror" value="{{ old('variant') }}" placeholder="{{ $CarVariant->variant }}">
-                @error('variant')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                    <br>
+                    <label>Car Variant</label>
+                    <input type="text" name="variant" class="form-control @error('variant') is-invalid @enderror" value="{{ old('variant') }}" placeholder="{{ $CarVariant->variant }}">
+                    @error('variant')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="modal-footer">
                     <a class="btn btn-secondary" href="/admin/carvariant">Back</a>

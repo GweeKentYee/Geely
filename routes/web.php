@@ -36,7 +36,6 @@ Route::get('/admin/catalogue','App\Http\Controllers\CatalogueController@viewAdmi
 
 Route::get('/admin/newsletter','App\Http\Controllers\NewsletterController@viewAdminPage');
 
-Route::get('/admin/carmodel','App\Http\Controllers\CarModelController@viewAdminPage');
 Route::get('/admin/car','App\Http\Controllers\CarController@viewAdminPage');
 Route::post('/admin/car/add','App\Http\Controllers\CarController@addCar');
 Route::get('/admin/car/delete/{carID}','App\Http\Controllers\CarController@delete');

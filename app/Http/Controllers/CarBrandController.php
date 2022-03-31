@@ -9,7 +9,11 @@ use Illuminate\Support\Facades\Session;
 
 class CarBrandController extends Controller
 {
-    //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function viewAdminPage(){
 
         return view('CarBrand');
