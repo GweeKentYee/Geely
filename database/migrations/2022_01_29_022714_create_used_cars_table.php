@@ -14,6 +14,7 @@ class CreateUsedCarsTable extends Migration
     public function up()
     {
         Schema::create('used_cars', function (Blueprint $table) {
+
             $table->id();
             $table->integer('min_price');
             $table->integer('max_price');
