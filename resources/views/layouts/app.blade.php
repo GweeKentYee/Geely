@@ -27,7 +27,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Geely') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -68,6 +68,11 @@
                                     <a class = "dropdown-item" href = "/admin/catalogue">Manage Catalogue</a>
                                     <a class = "dropdown-item" href = "/admin/newsletter">Manage Newsletter</a>
                                     <a class = "dropdown-item" href = "/admin/carmodel">Car Model</a>
+                                    <a class = "dropdown-item" href = "/admin/car">Car</a>
+                                    <a class = "dropdown-item" href = "/admin/brand_model_variant">Brand/Model/Variant</a>
+                                    <a class = "dropdown-item" href = "/admin/carbrand">Car Brand</a>
+                                    <a class = "dropdown-item" href = "/admin/carmodel">Car Model</a>
+                                    <a class = "dropdown-item" href = "/admin/carvariant">Car Variant</a>
 
                                     @else
 

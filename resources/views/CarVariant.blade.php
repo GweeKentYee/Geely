@@ -3,17 +3,17 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <h3><u>Car Model</u></h3>
+        <h3><u>Car Variant</u></h3>
         <div class="col-md-9">
             <div style="text-align:right" class="pb-1">
-                <button class = "btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcarmodel">Add Car Model</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcarvariant">Add Car Variant</button>
             </div>
             <table class="table" id="datatable" style="width: 100%">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Brand</th>
-                        <th>Model</th>
+                        <th>Variant</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -22,14 +22,14 @@
         </div>
     </div>
 
-    <div class="modal fade" id="newcarmodel" tabindex="-1">
+    <div class="modal fade" id="newcarvariant" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add Car Model</h5>
+                    <h5 class="modal-title">Add Car Variant</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <form action="/admin/carmodel/add" method="post" enctype="multipart/form-data">
+                <form action="/admin/carvariant/add" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <label>Car Brand</label>
@@ -45,9 +45,9 @@
                                 </span>
                             @enderror
                         <br>
-                        <label>Car Model</label>
-                        <input type="text" name="model" class="form-control @error('model') is-invalid @enderror" value="{{ old('model') }}" placeholder="">
-                        @error('model')
+                        <label>Car Variant</label>
+                        <input type="text" name="variant" class="form-control @error('variant') is-invalid @enderror" value="{{ old('variant') }}" placeholder="">
+                        @error('variant')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -75,11 +75,11 @@
             "processing": true,
             "serverSide": true,
             "scrollX": true,
-            "ajax": "{{ route('api.carmodel')}}",
+            "ajax": "{{ route('api.carvariant')}}",
             "columns": [
                 {"data": "id"},
                 {"data": "Car_Brand"},
-                {"data": "model"},
+                {"data": "variant"},
                 {"data": "Edit", orderable: false, searchable: false},
                 {"data": "Delete", orderable: false, searchable: false}
             ]
@@ -95,10 +95,9 @@
         });
 
         @if (Session::has('errors'))
-            $('#newcarmodel').modal("show");
+            $('#newcarvariant').modal("show");
         @endif
     });
 
 </script>
 @endsection
-
