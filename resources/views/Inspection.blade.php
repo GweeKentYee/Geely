@@ -14,7 +14,7 @@
                         <th>ID</th>
                         <th>Date</th>
                         <th>File</th>
-                        <th>Car_Model</th>
+                        <th>Registration_Number</th>
                         <th>Action</th>
                     </tr>
                 <thead>
@@ -45,27 +45,34 @@
                                     </span>
                                 @enderror
                             <br>
-                            <label>Car Model:</label>
-                            <select id = "carModel" name = "car_model" class = "form-control @error('car_model') is-invalid @enderror" disabled>
+                            <label>Car:</label>
+                            <select id = "Car" name = "car" class = "form-control @error('car') is-invalid @enderror" disabled>
                             </select>
-                                @error('car_model')
+                                @error('car')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             <br>
-                            <label>Car Variant:</label>
-                            <select id = "carVariant" name = "car_variant" class = "form-control @error('car_variant') is-invalid @enderror" disabled>
-                            </select>
-                                @error('car_variant')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                            <label>Registration Number:</label>
+                            <input type="text" name="reg_num" class="form-control @error('reg_num') is-invalid @enderror" value="{{ old('reg_num') }}" >
+                            @error('reg_num')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                             <br>
-                            <label>File:</label>
+                            <label>Data File:</label>
                             <input type = "file" name = "data_file" class = "form-control @error('data_file') is-invalid @enderror" accept = "application/JSON,application/xml,text/plain,text/xml,image/png,image/jpeg">
                                 @error('data_file')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            <br>
+                            <label>Ownership File:</label>
+                            <input type = "file" name = "ownership_file" class = "form-control @error('ownership_file') is-invalid @enderror" accept = "application/JSON,application/xml,text/plain,text/xml,image/png,image/jpeg">
+                                @error('ownership_file')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -106,7 +113,7 @@
                 {"data": "id"},
                 {"data": "inspection_date"},
                 {"data": "File"},
-                {"data": "Car_Model"},
+                {"data": "Reg_Num"},
                 {"data": "Action", orderable: false, searchable: false}
             ]
         });
@@ -129,23 +136,13 @@
                     CarBrand_id: CarBrand_id
                 },
                 success: function(data) {
-                    if($('#carModel').prop('disabled')){
-                        $("#carModel").prop("disabled", false);
+                    if($('#Car').prop('disabled')){
+                        $("#Car").prop("disabled", false);
                     }
-                    if($('#carVariant').prop('disabled')){
-                        $("#carVariant").prop("disabled", false);
-                    }
-                    $('#carModel').empty();
-                    $('#carModel').append('<option value="0" disabled selected>-- Please Select Car Model --</option>');
-
-                    $('#carVariant').empty();
-                    $('#carVariant').append('<option value="0" disabled selected>-- Please Select Car Variant --</option>');
-
-                    $.each(data.CarModels, function(index, CarModel) {
-                        $('#carModel').append('<option value="'+CarModel.id+'">'+CarModel.model+'</option>');
-                    })
-                    $.each(data.CarVariants, function(index, CarVariant) {
-                        $('#carVariant').append('<option value="'+CarVariant.id+'">'+CarVariant.variant+'</option>');
+                    $('#Car').empty();
+                    $('#Car').append('<option value="0" disabled selected>-- Please Select Available Car --</option>');
+                    $.each(data.Cars, function(index, Car) {
+                        $('#Car').append('<option value="'+Car.id+'">'+Car.car_model.model+' - '+Car.car_variant.variant+' - '+Car.year+' - '+Car.car_body_type.body_type+' - '+Car.car_general_spec.transmission+' - '+Car.car_general_spec.fuel+'</option>');
                     })
                 }
             })
