@@ -31,6 +31,8 @@ Route::get('/admin/newsletter','App\Http\Controllers\NewsletterController@viewAd
 Route::get('/admin/carmodel','App\Http\Controllers\CarModelController@viewAdminPage');
 Route::get('/admin/usedcar','App\Http\Controllers\UsedCarController@viewAdminPage');
 
+
+
 Route::get('/carmodel/delete/{id}','App\Http\Controllers\CarModelController@delete');
 Route::get('/admin/carmodel/add','App\Http\Controllers\CarModelController@create');
 
@@ -38,10 +40,13 @@ Route::get('/carmodel/edit/{id}','App\Http\Controllers\CarModelController@edit')
 Route::put('/carmodel/update/{id}','App\Http\Controllers\CarModelController@update');
 Route::get('/carmodel/fetch/{id}','App\Http\Controllers\CarModelController@fetch');
 
-Route::get('/admin/usedcar/add','App\Http\Controllers\UsedCarController@create');
-Route::get('/usedcar/delete/{id}','App\Http\Controllers\UsedCarController@delete');
-Route::get('/usedcar/fetch/{id}','App\Http\Controllers\UsedCarController@fetch');
-Route::get('/usedcar/edit/{id}','App\Http\Controllers\UsedCarController@edit');
-Route::get('/usedcar/update/{id}','App\Http\Controllers\UsedCarController@update');
+Route::get('/admin/usedcarimage/add','App\Http\Controllers\UsedCarImageController@create');
+Route::post('/admin/usedcarimage/store','App\Http\Controllers\UsedCarImageController@store');
+Route::get('/usedcarImage/delete/{id}','App\Http\Controllers\UsedCarImageController@delete');
+Route::get('/usedcarImage/edit/{id}','App\Http\Controllers\UsedCarImageController@edit');
+Route::put('/usedcarImage/update/{id}','App\Http\Controllers\UsedCarImageController@update');
+
+
+
 
 

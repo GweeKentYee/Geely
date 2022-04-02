@@ -13,41 +13,28 @@
                 </div>
                 <div class="card-body">
 
-                    <form action="{{ url('/usedcar/update/'.$UsedCar->id) }}" method="get">
+                    <form action="{{ url('/usedcarImage/update/'.$usedCarImage->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @method('get')
+                        @method('PUT')
 
                         <div class="form-group mb-3">
-                            <label for="">ID:</label>
-                            <input type="integer" name="usedcar-id" placeholder="{{$UsedCar->id}}" class="form-control"readonly>
+                            <label for="">Used Car ID:</label>
+                            <input type="integer" name="usedcarImage-id" value="{{$usedCarImage->id}}" placeholder="{{$usedCarImage->id}}" class="form-control"readonly>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="">File:</label>
-                            <input type="varchar" name="usedcar-file" placeholder="{{$UsedCar->file}}" class="form-control">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="">Status:</label>
-                            <input type="varchar" name="usedcar-status" placeholder="{{$UsedCar->status}}" class="form-control">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="">Car Variant ID:</label>
-                        <select type= "bigint" class="form-control" name="edit-car_variant_id" id="edit-car_variant_id" class="form-control">
-                            <option placeholder="{{$UsedCar->car_variant_id}}">{{$UsedCar->car_variant_id}}</option>
-                            @foreach($carvariantid as $carvariantid) 
-                              <option id="edit-car_variant_id" value="{{ $carvariantid->id }}">{{ $carvariantid->id }}  </option>
-                            @endforeach
-                        </select>
+                            <label for=""class="col-form-label">Used Car Image:</label>
+                            <input type="file" name="usedcarImage-image" class="form-control">
                         </div>
                         <div class="form-group mb-3">
                             <label for="">Updated At:</label>
-                            <input type="timestamp" name="usedcar-updatedat" placeholder="{{$UsedCar->updated_at}}" class="form-control"readonly>
+                            <input type="timestamp" name="usedcarImage-updatedat" placeholder="{{$usedCarImage->updated_at}}" class="form-control"readonly>
                         </div>
                         <div class="form-group mb-3">
                             <label for="">Created At:</label>
-                            <input type="timestamp" name="usedcar-createdat" placeholder="{{$UsedCar->created_at}}" class="form-control"readonly>
+                            <input type="timestamp" name="usedcarImage-createdat" placeholder="{{$usedCarImage->created_at}}" class="form-control"readonly>
                         </div>
                         <div class="form-group mb-3">
-                            <button type="submit" class="btn btn-primary">Update usedcar</button>
+                            <button type="submit" class="btn btn-primary">Update Used Car Image</button>
                         </div>
 
                     </form>
