@@ -28,5 +28,5 @@ class CarModel extends Model
     {
         return $this->belongsTo('App\Models\CarBrand', 'car_brand_id');
     }
-
+    
 }
