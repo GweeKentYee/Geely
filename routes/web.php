@@ -37,6 +37,8 @@ Route::get('/admin/catalogue','App\Http\Controllers\CatalogueController@viewAdmi
 Route::get('/admin/newsletter','App\Http\Controllers\NewsletterController@viewAdminPage');
 
 Route::get('/admin/car','App\Http\Controllers\CarController@viewAdminPage');
+Route::post('/admin/car/modelDropBox','App\Http\Controllers\CarController@subModels')->name('subModels');
+Route::post('/admin/car/variantDropBox','App\Http\Controllers\CarController@subVariants')->name('subVariants');
 Route::post('/admin/car/add','App\Http\Controllers\CarController@addCar');
 Route::get('/admin/car/delete/{carID}','App\Http\Controllers\CarController@delete');
 Route::get('/admin/car/file/viewspec/{carID}','App\Http\Controllers\CarController@viewSpecFile');
