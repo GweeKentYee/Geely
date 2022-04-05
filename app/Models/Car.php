@@ -44,4 +44,6 @@ class Car extends Model
         return $this->belongsTo('App\Models\CarGeneralSpec', 'car_general_spec_id');
     }
 
+    public $timestamps = false;
+
 }

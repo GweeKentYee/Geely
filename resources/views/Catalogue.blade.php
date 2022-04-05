@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <h3><u>Catalogue</u></h3>
+            <h3 class="headline"><u>Catalogue</u></h3>
         </div>
     </div>
 </div>
@@ -43,6 +43,8 @@
             </div>
         @else
             @foreach ( $usedcar as  $usedcars )
+                {{-- Replace line with specific used car details --}}
+                <a href='/catalogue/usedcardetails'> 
                 <div class="cata-card" style="width: 15rem; display: inline-block;">
                     <div style="display:flex; justify-content: center; margin:5px;">
                         <div class="cata-card-image" style="width: 12.5rem;height: 12.5rem;justify-content:center;">   
@@ -92,6 +94,7 @@
                 </div>
             @endforeach
         @endif
+        {{$usedcar->links()}}
     </div>
     
 </div>

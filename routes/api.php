@@ -19,4 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/inspection','App\Http\Controllers\DataTableController@inspection')->name('api.inspection');
-Route::get('/admin/catalogue','App\Http\Controllers\DataTableController@ManageCatalogue')->name('api.ManageCatalogue');
+Route::get('/car','App\Http\Controllers\DataTableController@car')->name('api.car');
+Route::get('/carbrand','App\Http\Controllers\DataTableController@carbrand')->name('api.carbrand');
+Route::get('/carmodel','App\Http\Controllers\DataTableController@carmodel')->name('api.carmodel');
+Route::get('/carvariant','App\Http\Controllers\DataTableController@carvariant')->name('api.carvariant');
+Route::get('/newsletter','App\Http\Controllers\DataTableController@newsletter')->name('api.newsletter');

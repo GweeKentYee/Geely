@@ -13,14 +13,15 @@
         <div class="col-12">
             <form id="my_form" action="{{ route('collection.compare') }}" method="POST">
                 @csrf
-                <input class="btn btn-success compare-selection-btn" id="compareButton" type="submit" value="COMPARE SELECTION">
+                <input class="btn btn-success compare-selection-btn" id="CompareButton" type="submit" value="COMPARE SELECTION"><br>
+                <a class="btn btn-success compare-selection-btn" href="/collection/comparison">Temporary Button to comparison page</a>
             </form>
         </div>
     </div>
-    
+
     <div class="row">
         @foreach ($collections as $collection)
-        
+
             <div class="col-lg-3 col-md-6 col-sm-12 mt-5" >
                 <input class="check" type="checkbox" form="my_form" id={{ $collection->id }} name={{ $collection->id }} value={{ $collection->id }}>
                 <div class="card m-auto" style="width: 18rem;">
@@ -43,14 +44,12 @@
                                 @method('DELETE')
                                 <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Remove collection</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                 Are you sure you want to remove this collection?
                                 </div>
-                                <div class="modal-footer">                                 
+                                <div class="modal-footer">
                                     <button type="submit" class="btn btn-success">Yes</button>
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                                 </div>
@@ -58,6 +57,7 @@
                           </div>
                         </div>
                     </div>
+<<<<<<< HEAD
                     </div>           
                   </div>
                   
@@ -67,6 +67,17 @@
         
         @endforeach
     </div>  
+=======
+                    </div>
+                  </div>
+
+            </div>
+
+
+
+        @endforeach
+    </div>
+>>>>>>> Kent
 
 @endsection
 
@@ -75,9 +86,13 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script>
-        
+
             $(document).ready(function () {
+<<<<<<< HEAD
                 document.getElementById('compareButton').disabled = true;
+=======
+                document.getElementById('CompareButton').disabled = true;
+>>>>>>> Kent
 
                 $('input[type=checkbox]').on('change', function (e) {
                     if ($('input[type=checkbox]:checked').length > 2) {
@@ -86,6 +101,7 @@
                     }
 
                     if ($('input[type=checkbox]:checked').length == 2) {
+<<<<<<< HEAD
                         document.getElementById('compareButton').disabled = false;
                     }
 
@@ -93,8 +109,21 @@
                         document.getElementById('compareButton').disabled = true;
                     }
                     
+=======
+                        document.getElementById('CompareButton').disabled = false;
+                    }
+
+                    if ($('input[type=checkbox]:checked').length < 2) {
+                        document.getElementById('CompareButton').disabled = true;
+                    }
+
+>>>>>>> Kent
                 });
             });
 
         </script>
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> Kent

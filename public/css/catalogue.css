@@ -1,3 +1,10 @@
+.headline{
+  color: #3279af;
+  padding-left: 2rem;
+  font-family: 'Roboto';
+  font-weight: 700;
+}
+
 .cata-card {
     padding: 5px;
     margin: 5px;
@@ -75,7 +82,6 @@
     background-clip: border-box;
     border-radius: 0.25rem;
   }
-
 
   
   .cata-card-button-content {
