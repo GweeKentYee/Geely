@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use App\Models\CarBrand;
 use App\Models\CarModel;
 use App\Models\CarVariant;
@@ -23,23 +24,19 @@ class InspectionController extends Controller
 
         $CarBrand = CarBrand::all();
 
-        $CarVariant = CarVariant::all();
-
         return view('Inspection',[
             'CarBrand' => $CarBrand,
-            'CarVariant' => $CarVariant
         ]);
-
     }
 
     public function subOptions(Request $request){
 
-        $CarModels = CarModel::where('car_brand_id',$request->CarBrand_id)->get();
-        $CarVariants = CarVariant::where('car_brand_id',$request->CarBrand_id)->get();
+        $CarModels = CarModel::select('id')->where('car_brand_id',$request->CarBrand_id)->get();
+
+        $Cars = Car::whereIn('car_model_id',$CarModels->pluck('id'))->with('carModel','carVariant','carBodyType','carGeneralSpec')->get();
 
         return response()->json([
-            'CarModels' => $CarModels,
-            'CarVariants' => $CarVariants
+            'Cars' => $Cars
         ]);
 
     }
@@ -47,19 +44,28 @@ class InspectionController extends Controller
     public function newInspection(Request $request){
 
         $data = $request->validate([
+            'car' => ['required', Rule::notIn('0')],
+            'reg_num' => ['required','unique:used_cars,registration'],
             'data_file' => ['required'],
-            'car_model' => ['required', Rule::notIn('0')],
-            'car_variant' => ['required']
+            'ownership_file' => ['required'],
         ]);
 
         $usedFileName = request()->file('data_file')->getClientOriginalName();
 
         $usedFilePath = $data['data_file']->move('storage/data/usedcar',$usedFileName);
 
+        $ownershipFileName = request()->file('ownership_file')->getClientOriginalName();
+
+        $ownershipFilePath = $data['ownership_file']->move('storage/data/usedcar',$ownershipFileName);
+
         $UsedCar = UsedCar::create([
-            'file' => str_replace('\\','/',$usedFilePath),
-            'status' => "hidden",
-            'car_variant_id' => $data['car_variant'],
+            'min_price' => 0,
+            'max_price' => 0,
+            'registration' => $data['reg_num'],
+            'data_file' => str_replace('\\','/',$usedFilePath),
+            'ownership_file' => str_replace('\\','/',$ownershipFilePath),
+            'status' => "1",
+            'car_id' => $data['car'],
         ]);
 
         //Inspection happen here
@@ -69,7 +75,7 @@ class InspectionController extends Controller
 
         Inspection::create([
             'inspection_date' => now(),
-            'file' => str_replace('\\','/',$InspectionFilePath),
+            'result_file' => str_replace('\\','/',$InspectionFilePath),
             'used_car_id' => $UsedCar->id
         ]);
 
@@ -81,11 +87,11 @@ class InspectionController extends Controller
 
         $Inspection = Inspection::find($inspectionID);
 
-        $filepath = str_replace('\\','/',public_path($Inspection->file));
+        $InspectionFilePath = str_replace('\\','/',public_path($Inspection->result_file));
 
-        if(file_exists($filepath)){
+        if(file_exists($InspectionFilePath)){
 
-            unlink($filepath);
+            unlink($InspectionFilePath);
 
         }
 
@@ -99,7 +105,7 @@ class InspectionController extends Controller
 
         $Inspection = Inspection::find($inspectionID);
 
-        $file = public_path($Inspection->file);
+        $file = public_path($Inspection->result_file);
 
         return response()->download($file,'',[],'inline');
 
