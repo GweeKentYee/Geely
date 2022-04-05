@@ -23,6 +23,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('css')
+    <link href="{{ asset('css/catalogue.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link rel="stylesheet" type = "text/css" href = "//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 </head>
 <body>
@@ -71,6 +73,11 @@
                                     <a class = "dropdown-item" href = "/admin/catalogue">Manage Catalogue</a>
                                     <a class = "dropdown-item" href = "/admin/newsletter">Manage Newsletter</a>
                                     <a class = "dropdown-item" href = "/admin/carmodel">Car Model</a>
+                                    <a class = "dropdown-item" href = "/admin/car">Car</a>
+                                    <a class = "dropdown-item" href = "/admin/brand_model_variant">Brand/Model/Variant</a>
+                                    <a class = "dropdown-item" href = "/admin/carbrand">Car Brand</a>
+                                    <a class = "dropdown-item" href = "/admin/carmodel">Car Model</a>
+                                    <a class = "dropdown-item" href = "/admin/carvariant">Car Variant</a>
 
                                     @else
 

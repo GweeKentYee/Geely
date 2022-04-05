@@ -19,8 +19,8 @@ class CreateCarsTable extends Migration
             $table->unsignedBigInteger('car_variant_id')->required();
             $table->unsignedBigInteger('car_body_type_id')->required();
             $table->unsignedBigInteger('car_general_spec_id')->required();
-            $table->integer('year')->required;
-            $table->string('spec_file');
+            $table->integer('year')->required();
+            $table->string('spec_file')->nullable();
             $table->string('data_file')->required();
 
             $table->foreign('car_model_id')->references('id')->on('car_models')->onDelete('cascade');

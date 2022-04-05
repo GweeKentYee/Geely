@@ -94,6 +94,7 @@
                 </div>
             @endforeach
         @endif
+        {{$usedcar->links()}}
     </div>
     
 </div>
