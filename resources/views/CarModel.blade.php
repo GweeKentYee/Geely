@@ -33,13 +33,13 @@
                     @csrf
                     <div class="modal-body">
                         <label>Car Brand</label>
-                        <select name = "car_brand_id" class = "form-control @error('car_brand_id') is-invalid @enderror">
+                        <select name = "car_brand" class = "form-control @error('car_brand') is-invalid @enderror">
                             <option value="0" disabled selected>-- Please Select Car Brand --</option>
                             @foreach ($CarBrand as $CarBrand)
                                 <option value="{{$CarBrand->id}}">{{$CarBrand->brand}}</option>
                             @endforeach
                         </select>
-                            @error('car_brand_id')
+                            @error('car_brand')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
