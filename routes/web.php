@@ -35,6 +35,11 @@ Route::get('/admin/inspection/details/{inspectionID}','App\Http\Controllers\Insp
 Route::get('/admin/catalogue','App\Http\Controllers\CatalogueController@viewAdminPage');
 
 Route::get('/admin/newsletter','App\Http\Controllers\NewsletterController@viewAdminPage');
+Route::get('/admin/newsletter/view/{newsletterID}','App\Http\Controllers\NewsletterController@viewImage');
+Route::post('/admin/newsletter/add','App\Http\Controllers\NewsletterController@add');
+Route::get('/admin/newsletter/edit/{newsletterID}','App\Http\Controllers\NewsletterController@viewEditPage');
+Route::patch('/admin/newsletter/editfunction/{newsletterID}','App\Http\Controllers\NewsletterController@edit');
+Route::get('/admin/newsletter/delete/{newsletterID}','App\Http\Controllers\NewsletterController@delete');
 
 Route::get('/admin/car','App\Http\Controllers\CarController@viewAdminPage');
 Route::post('/admin/car/modelDropBox','App\Http\Controllers\CarController@subModels')->name('subModels');
