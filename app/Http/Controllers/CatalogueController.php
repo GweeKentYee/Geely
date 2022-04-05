@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Catalogue;
 
 use App\Models\UsedCar;
+use App\Models\Collection;
 use App\Models\Car;
 use App\Models\CarModel;
 use App\Models\CarVariant;
@@ -18,10 +19,11 @@ class CatalogueController extends Controller
     public function viewPage(){
 
         $usedcar = UsedCar::where('status','1')->paginate(20);
+        $collections = Collection::all()->where('user_id',auth()->id());
 
         return view('Catalogue',
-        ['usedcar' => $usedcar,]
-    );
+        ['usedcar' => $usedcar, 'collections'=> $collections]
+        );
 
     }
 
@@ -39,8 +41,12 @@ class CatalogueController extends Controller
         ->where('car_models.model','LIKE', '%'.request('query').'%')
         ->where('status','1')
         ->paginate(20);
+
+        $collections = Collection::all()->where('user_id',auth()->id());
     
-        return view('Catalogue',['usedcar'=>$usedcar,]);
+        return view('Catalogue',
+          ['usedcar' => $usedcar, 'collections'=> $collections]
+        );
 
     }
 
@@ -72,8 +78,12 @@ class CatalogueController extends Controller
         ->where('used_cars.max_price','<=',$maxPrice)
         ->where('status','1')
         ->paginate(20); 
-    
-        return view('Catalogue',['usedcar'=>$usedcar,]);
+         
+        $collections = Collection::all()->where('user_id',auth()->id());
+
+        return view('Catalogue',
+        ['usedcar' => $usedcar, 'collections'=> $collections]
+        );
     }
     
 

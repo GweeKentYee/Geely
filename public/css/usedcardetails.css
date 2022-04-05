@@ -1,0 +1,70 @@
+.headline{
+    color: #3279af;
+    padding-left: 2rem;
+    font-family: 'Roboto';
+    font-weight: 700;
+  }
+
+  .details-title {
+    margin-left: 0px;
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: x-large;
+    color: #022a49;
+  }
+
+  .details-content {
+    margin-left: 0px;
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: large;
+    color: #3279af;
+  }
+
+  .cata-card-button {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    width: 70%;
+    word-wrap: break-word;
+    background-color: #3279af;
+    background-clip: border-box;
+    border-radius: 0.25rem;
+  }
+
+  .cata-card-button:hover {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    width: 70%;
+    word-wrap: break-word;
+    background-color: #96cae0;
+    background-clip: border-box;
+    border-radius: 0.25rem;
+  }
+
+  .cata-card-button-content { 
+    text-align: center;
+    color: #ffffff; 
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: large;
+  }
+
+  .centerBlock{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* min-width: 0; */
+    width: 200px;
+    height: 200px;
+    display: table;
+    margin: auto;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: 0.5rem;
+    box-shadow: 5px 5px 25px -5px rgba(0,0,0,0.5); 
+  }
