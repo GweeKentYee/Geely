@@ -64,7 +64,7 @@ class InspectionController extends Controller
             'registration' => $data['reg_num'],
             'data_file' => str_replace('\\','/',$usedFilePath),
             'ownership_file' => str_replace('\\','/',$ownershipFilePath),
-            'status' => "1",
+            'status' => "0",
             'car_id' => $data['car'],
         ]);
 
