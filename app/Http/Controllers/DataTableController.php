@@ -55,18 +55,25 @@ class DataTableController extends Controller
         return datatables($query)
             ->addIndexColumn()
 
-            ->addColumn('File', function($query){
+            ->addColumn('Spec_File', function($query){
 
-                $File = '<a href = "/admin/car/file/viewspec/'.$query->id.'">'.$query->spec_file.'</a><br>
-                <a href = "/admin/car/file/viewdata/'.$query->id.'">'.$query->data_file.'</a>';
+                $specFile = '<a href = "/admin/car/file/viewspec/'.$query->id.'">'.$query->spec_file.'</a>';
 
-                return $File;
+                return $specFile;
+
+            })
+
+            ->addColumn('Data_File', function($query){
+
+                $dataFile = '<a href = "/admin/car/file/viewdata/'.$query->id.'">'.$query->data_file.'</a>';
+
+                return $dataFile;
 
             })
 
             ->addColumn('Car_Brand', function($query){
 
-                $CarBrand = $query->carModel->carBrand->brand;
+                $CarBrand = $query->carVariant->carModel->carBrand->brand;
 
                 return $CarBrand;
 
@@ -74,7 +81,7 @@ class DataTableController extends Controller
             
             ->addColumn('Car_Model', function($query){
 
-                $CarModel = $query->carModel->model;
+                $CarModel = $query->carVariant->carModel->model;
 
                 return $CarModel;
 
@@ -126,7 +133,7 @@ class DataTableController extends Controller
                 
                 return $actionButton;
 
-            })->rawColumns(['File', 'Edit', 'Delete'])  // for columns which involve html codes
+            })->rawColumns(['Spec_File', 'Data_File', 'Edit', 'Delete'])  // for columns which involve html codes
             ->make(true);
     }
 
@@ -195,11 +202,11 @@ class DataTableController extends Controller
         return datatables($query)
             ->addIndexColumn()
 
-            ->addColumn('Car_Brand', function($query){
+            ->addColumn('Car_Model', function($query){
 
-                $CarBrand = $query->carBrand->brand;
+                $CarModel = $query->carModel->model;
 
-                return $CarBrand;
+                return $CarModel;
 
             })
 
