@@ -26,7 +26,7 @@ Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage');
 Route::get('/collection','App\Http\Controllers\CollectionController@viewPage');
 
 Route::get('/admin/inspection','App\Http\Controllers\InspectionController@viewAdminPage');
-Route::post('/admin/inspection/carModelDropBox','App\Http\Controllers\InspectionController@subOptions')->name('subOptions');
+Route::post('/admin/inspection/carDropBox','App\Http\Controllers\InspectionController@carOptions')->name('carOption');
 Route::get('/admin/inspection/file/view/{inspectionID}','App\Http\Controllers\InspectionController@viewInspectionFile');
 Route::post('/admin/inspection/add','App\Http\Controllers\InspectionController@newInspection');
 Route::get('/admin/inspection/delete/{inspectionID}','App\Http\Controllers\InspectionController@delete');
@@ -42,6 +42,7 @@ Route::patch('/admin/newsletter/editfunction/{newsletterID}','App\Http\Controlle
 Route::get('/admin/newsletter/delete/{newsletterID}','App\Http\Controllers\NewsletterController@delete');
 
 Route::get('/admin/car','App\Http\Controllers\CarController@viewAdminPage');
+Route::post('/admin/car/subDropBox','App\Http\Controllers\CarController@subOptions')->name('subOptions');
 Route::post('/admin/car/add','App\Http\Controllers\CarController@addCar');
 Route::get('/admin/car/delete/{carID}','App\Http\Controllers\CarController@delete');
 Route::get('/admin/car/file/viewspec/{carID}','App\Http\Controllers\CarController@viewSpecFile');

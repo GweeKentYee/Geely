@@ -130,7 +130,7 @@
         $('#carBrand').on('change', function(e) {
             var CarBrand_id = e.target.value;
             $.ajax({
-                url: "{{ route('subOptions') }}",
+                url: "{{ route('carOption') }}",
                 type: "POST",
                 data: {
                     CarBrand_id: CarBrand_id

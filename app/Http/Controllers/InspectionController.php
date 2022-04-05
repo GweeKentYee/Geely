@@ -29,7 +29,7 @@ class InspectionController extends Controller
         ]);
     }
 
-    public function subOptions(Request $request){
+    public function carOptions(Request $request){
 
         $CarModels = CarModel::select('id')->where('car_brand_id',$request->CarBrand_id)->get();
 
