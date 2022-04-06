@@ -6,7 +6,7 @@
         <h3><u>Car Model</u></h3>
         <div class="col-md-9">
             <div style="text-align:right" class="pb-1">
-                <button class = "btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcarmodel">Add Car Model</button>
+                <button class = "btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcarmodel"><i class="bi bi-plus-lg"></i> Add Car Model</button>
             </div>
             <table class="table" id="datatable" style="width: 100%">
                 <thead>
@@ -32,7 +32,8 @@
                 <form action="/admin/carmodel/add" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-                        <label>Car Brand</label>
+                        <p style="color:red">*Required</p>
+                        <label>Car Brand<span style="color:red"> *</span></label>
                         <select name = "car_brand" class = "form-control @error('car_brand') is-invalid @enderror">
                             <option value="0" disabled selected>-- Please Select Car Brand --</option>
                             @foreach ($CarBrand as $CarBrand)
@@ -45,7 +46,7 @@
                                 </span>
                             @enderror
                         <br>
-                        <label>Car Model</label>
+                        <label>Car Model<span style="color:red"> *</span></label>
                         <input type="text" name="model" class="form-control @error('model') is-invalid @enderror" value="{{ old('model') }}" placeholder="">
                         @error('model')
                             <span class="invalid-feedback" role="alert">
