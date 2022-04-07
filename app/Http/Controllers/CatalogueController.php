@@ -33,6 +33,8 @@ class CatalogueController extends Controller
     }
 
     public function search(){
+        $CarModels= CarModel::all();
+
         $usedcar = UsedCar::
         select('used_cars.*')
         ->join('cars','cars.id','=','used_cars.car_id')

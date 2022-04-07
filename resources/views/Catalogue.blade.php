@@ -14,27 +14,47 @@
 </div>
 <div Class = "container">
     <form type="get"  action="{{url('/catalogue/search')}}" style="display: inline-block">
-        <input type="query" name="query" placeholder="SEARCH">
-        <button type="submit">Search</button>
+        <div class="input-group rounded">
+            <input type="search" name="query" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+            <span class="input-group-text border-0" id="search-addon">
+                <i class="bi bi-search"></i>
+            </span>
+          </div>
     </form>
-    <button type ="popupbutton" id="popupbutton">ADVANCED SEARCH</button>
-    
-    <!-- this is the popup, hidden by default -->
-    <div id="popup" class="popup">
-        <div class="popup-content">
-            <span class="close">&times;</span>
-            <div>
-                <form type="get"  action="{{url('/catalogue/advanced')}}" style="display: inline-block">
-                    <input type="query" name="model" placeholder="Model">
-                    <input type="query" name="year" placeholder="Year">
-                    <input type="query" name="minPrice" placeholder="Minimum Price">
-                    <input type="query" name="maxPrice" placeholder="Maximum Price">
-                    <button type="submit">SEARCH</button>
-                </form>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#advancedSearch">Primary</button>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="advancedSearch" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Advanced Search</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{url('/catalogue/advanced')}}">
+                        <label>Model :</label>
+                        <input type="text" name="model" class="form-control" placeholder="Model">
+                        <label>Year :</label>
+                        <select name="year" class ="form-select" placeholder="Year">
+                            <option value="" disabled selected>Year</option>
+                            @for ($year=1920; $year<= now()->year; $year++)
+                                <option value="{{ $year }}">{{ $year }}</option>
+                            @endfor
+                        </select>
+                        <label>Minimum Price :</label>
+                        <input type="text" name="minPrice" class="form-control" placeholder="Minimum Price">
+                        <label>Maximum Price :</label>
+                        <input type="text" name="maxPrice" class="form-control" placeholder="Maximum Price">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-outline-primary" value = "Search"></button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-
     
     <div>
         @if(count($usedcar)<1)
@@ -48,8 +68,7 @@
                 <div class="cata-card" style="width: 15rem; display: inline-block;">
                     <div style="display:flex; justify-content: center; margin:5px;">
                         <div class="cata-card-image" style="width: 12.5rem;height: 12.5rem;justify-content:center;">   
-                            {{-- <img src="{{$usedcars->usedCarImages->get(0)->image}}"> --}}
-                            <img src="https://source.unsplash.com/random/200×200" alt="" width="200" height="200" >
+                            <img src="{{$usedcars->usedCarImages->get(0)->image}}" alt="" width="200" height="200">
                         </div>
                     </div>
                     <div class="cata-card-title">CAR MODEL : </div>

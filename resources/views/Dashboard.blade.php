@@ -1,34 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    @if($Dash->count()>0)
+        <div class="carousel-inner">
+            @for ($i=0;$i<$Dash->count();$i++)
+                @if ($i==0)
+                        <a class="carousel-item active" href="{{$Dash->get($i)->title}}" target="_blank">
+                            <img class="d-block w-100" src="{{$Dash->get($i)->image}}" alt="First slide">
+                        </a>
+                    @else
+                        <a class="carousel-item" href="{{$Dash->get($i)->title}}" target="_blank">
+                            <img class="d-block w-100" src="{{$Dash->get($i)->image}}" alt="Second slide">
+                        </a>
+                @endif
+            @endfor
+        </div>
+
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </a>
+    @endif
+</div>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                @if($Dash->count()>0)
-                    <div class="carousel-inner">
-                        @for ($i=0;$i<$Dash->count();$i++)
-                            @if ($i==0)
-                                    <a class="carousel-item active" href="{{$Dash->get($i)->title}}" target="_blank">
-                                        <img class="d-block w-100" src="{{$Dash->get($i)->image}}" alt="First slide">
-                                    </a>
-                                @else
-                                    <a class="carousel-item" href="{{$Dash->get($i)->title}}" target="_blank">
-                                        <img class="d-block w-100" src="{{$Dash->get($i)->image}}" alt="Second slide">
-                                    </a>
-                            @endif
-                        @endfor
-                    </div>
-
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </a>
-                @endif
-            </div>
-        </div>
         <div class="col-md-8">
             <h1>
                 Cars of the day
@@ -42,7 +40,7 @@
                 <a href="/catalogue" class="cata-card" style="width: 15rem; display: inline-block;">
                     <div style="display:flex; justify-content: center; margin:5px;">
                         <div class="cata-card-image" style="width: 12.5rem;height: 12.5rem;justify-content:center;">
-                            <img src="{{$usedcars->usedCarImages}}">
+                            <img src="{{$usedcars->usedCarImages->get(0)->image}}" alt="" width="200" height="200">
                         </div>
                     </div>
                     <div class="cata-card-title">CAR MODEL : </div>
