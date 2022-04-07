@@ -28,6 +28,9 @@
     <link rel="stylesheet" type = "text/css" href = "//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 </head>
 <body>
+    @if (session('status'))
+        <div style="background: red;color: white">{{ session('status') }}</div>
+    @endif
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
