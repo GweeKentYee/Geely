@@ -1,61 +1,93 @@
 <?php
-
 namespace App\Http\Controllers;
+
 use App\Models\UsedCar;
-use App\Models\UsedCarImage;
+use App\Models\Car;
 use Illuminate\Http\Request;
-use Yajra\DataTables\Html\Editor\Fields\Select;
+use Illuminate\Support\Facades\File;
 
 class UsedCarController extends Controller
 {
     //
     public function viewAdminPage(){
 
-       
-        $usedcarCombined = UsedCar::join('used_car_images', 'used_cars.id', '=', 'used_car_images.used_car_id')
-               ->get(['used_cars.min_price','used_cars.max_price','used_cars.registration','used_cars.data_file','used_cars.ownership_file','used_cars.status','used_cars.car_id','used_car_images.id', 'used_car_images.image']);
-        $usedcar = UsedCar::all();
-        return view('UsedCarDetails',compact('usedcarCombined'))->with('usedcar',$usedcar);
+        $car_id = Car::all();
+        return view('UsedCar')->with('car_id',$car_id);
 
     }
 
     public function delete($id){
-        usedcar::where('id',$id)->delete();
-        return redirect()->back()->with('status','usedcar Deleted Successfully');
-    }
-
-    public function create(){
-        $data = request()->validate([
-            'usedcar'=>['required','unique:car_models,car_model']
-        ]);
-        usedcar::create([
-            'car_model'=> $data['usedcar']
-        ]);
-        return redirect()->back()->with('status','usedcar Deleted Successfully');;
+  
+        $usedCar = UsedCar::findorfail($id);
+        $filename = $usedCar->data_file;
+        $path= public_path('uploads\data_files\\'.$filename);
+        File::delete($path);
+        $filename = $usedCar->ownership_file;
+        $path= public_path('uploads\ownership_files\\'.$filename);
+        File::delete($path);
+        $usedCar->delete();
+        return redirect()->back()->with('status','UsedCar Deleted Successfully');
     }
 
     public function fetch($id){
-    
-        return usedcar::findOrFail($id);
+
+        return UsedCar::findOrFail($id);
+
     }
 
     public function edit($id){
-    
-        $usedcar = usedcar::find($id);
-        return view('Editusedcar', compact('usedcar'));
-    
+        $car_id = Car::all();
+        $UsedCar = UsedCar::find($id);
+        return view('EditUsedCar', compact('UsedCar'))->with('car_id',$car_id);
+
     }
 
-    public function update($id){
+    public function update($id,Request $request){
+      $request->validate([
+        'minimum_price'=>['required','integer'],
+        'maximum_price'=>['required','integer'],
+        'registration'=>['required','string'],
+        'status'=>['required','numeric','between:1,3'],
+        'car_id'=>['required','integer'],
+        'data_file'=>['required','file'],
+        'ownership_file'=>['required','file']
 
-        $data = request()->validate([
-            'usedcar-usedcar'=>['required','unique:car_models,car_model']
-        ]);
-        $usedcar = usedcar::find($id);
-        $usedcar -> update([
-            'car_model'=> $data['usedcar-usedcar']
-        ]);
+      ]);
+        
+        $usedCar = UsedCar::find($id);
+        $usedCar->min_price = $request->input('minimum_price');
+        $usedCar->max_price = $request->input('maximum_price');
+        $usedCar->registration = $request->input('registration');
+        $usedCar->status = $request->input('status');
+        $usedCar->car_id = $request->input('car_id');
+    if($request->hasfile('data_file'))
+        {
+          $destination = 'uploads\data_files\\'.$usedCar->data_file;
+          if(File::exists($destination)){
+            File::delete($destination);
+          }
+            $file = $request->file('data_file');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('uploads\data_files',$filename);
+            $usedCar->data_file = $filename;
+            
+        }
+        if($request->hasfile('ownership_file'))
+        {
+          $destination = 'uploads\ownership_files\\'.$usedCar->data_file;
+          if(File::exists($destination)){
+            File::delete($destination);
+          }
+            $file = $request->file('ownership_file');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('uploads\ownership_files',$filename);
+            $usedCar->ownership_file = $filename;
+            
+        }
+        $usedCar->update();
 
-        return redirect("/admin/usedcar")->with('status','usedcar Updated Successfully');
+        return redirect("/admin/usedcar")->with('status','UsedCar Updated Successfully');
     }
 }
