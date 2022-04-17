@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Catalogue;
+use Illuminate\Http\Request;
 
 use App\Models\UsedCar;
 use App\Models\Collection;
 use App\Models\Car;
+use App\Models\CarBrand;
 use App\Models\CarModel;
 use App\Models\CarVariant;
 use Illuminate\Support\Facades\DB;
@@ -19,10 +21,12 @@ class CatalogueController extends Controller
     public function viewPage(){
 
         $usedcar = UsedCar::where('status','1')->paginate(20);
+        $carbrand = CarBrand::orderBy('brand','ASC')->get();
+        $carmodel = CarModel::orderBy('model','ASC')->get();
         $collections = Collection::all()->where('user_id',auth()->id());
 
         return view('Catalogue',
-        ['usedcar' => $usedcar, 'collections'=> $collections]
+        ['usedcar' => $usedcar,'carbrand'=>$carbrand,'carmodel'=>$carmodel,'collections'=> $collections]
         );
 
     }
@@ -40,14 +44,18 @@ class CatalogueController extends Controller
         ->join('cars','cars.id','=','used_cars.car_id')
         ->select('*','used_cars.id AS id')
         ->join('car_models','cars.car_model_id','=','car_models.id')
+        ->join('car_brands','car_models.car_brand_id','=','car_brands.id')
         ->where('car_models.model','LIKE', '%'.request('query').'%')
+        ->orwhere('car_brands.brand','LIKE', '%'.request('query').'%')
         ->where('status','1')
         ->paginate(20);
 
+        $carbrand = CarBrand::orderBy('brand','ASC')->get();
+        $carmodel = CarModel::orderBy('model','ASC')->get();
         $collections = Collection::all()->where('user_id',auth()->id());
-    
+
         return view('Catalogue',
-          ['usedcar' => $usedcar, 'collections'=> $collections]
+        ['usedcar' => $usedcar,'carbrand'=>$carbrand,'carmodel'=>$carmodel,'collections'=> $collections]
         );
 
     }
@@ -74,19 +82,44 @@ class CatalogueController extends Controller
         ->join('cars','cars.id','=','used_cars.car_id')
         ->select('*','used_cars.id AS id')
         ->join('car_models','cars.car_model_id','=','car_models.id')
-        ->where('car_models.model','LIKE', '%'.request('model').'%')
+        ->join('car_brands','car_models.car_brand_id','=','car_brands.id')
+        ->select('*','used_cars.id AS id')
+        ->where('car_models.id','LIKE', '%'.request('model').'%')
+        ->where('car_brands.id','LIKE', '%'.request('brand').'%')
         ->where('cars.year','>=',$year)
         ->where('used_cars.min_price','>=',$minPrice)
         ->where('used_cars.max_price','<=',$maxPrice)
         ->where('status','1')
         ->paginate(20); 
          
+        $carbrand = CarBrand::orderBy('brand','ASC')->get();
+        $carmodel = CarModel::orderBy('model','ASC')->get();
         $collections = Collection::all()->where('user_id',auth()->id());
 
         return view('Catalogue',
-        ['usedcar' => $usedcar, 'collections'=> $collections]
+        ['usedcar' => $usedcar,'carbrand'=>$carbrand,'carmodel'=>$carmodel,'collections'=> $collections]
         );
     }
     
+    public function modelOptions(Request $request){
+
+        $CarModels = CarModel::where('car_brand_id',$request->CarBrand_id)->get();
+
+        return response()->json([
+            'CarModels' => $CarModels
+        ]);
+
+    }
+
+    public function autocompleteSearch(Request $request)
+    {
+        
+        $query = $request->get('query');
+        $filterBrand = CarBrand::select('brand')->where('brand', 'LIKE', '%'.$query.'%')->get()->pluck('brand');
+        $filterModel = CarModel::select('model')->where('model','LIKE','%'.$query.'%')->get()->pluck("model");
+        $filter = $filterBrand->merge($filterModel);
+        
+        return response()->json($filter);
+    }
 
 }

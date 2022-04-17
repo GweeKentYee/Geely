@@ -14,6 +14,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" defer></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,6 +28,27 @@
     <link href="{{ asset('css/catalogue.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link rel="stylesheet" type = "text/css" href = "//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+
+    <style>
+        #Bonnet path{
+            fill:red;
+        }
+        #Trunk path{
+            fill:orange;
+        }
+        #Back_Bumper path{
+            fill: yellow;
+        }
+        #Front_Bumper path{
+            fill: green;
+        }
+        #Roof_Panel path{
+            fill: blue;
+        }
+        #Sill_Plate path{
+            fill: purple;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
