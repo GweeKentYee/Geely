@@ -52,8 +52,8 @@ Route::post('/collection/compare', function(Request $request){
 Route::resource('collection', CollectionController::class);
 
 
+// Route::get('/catalogue/usedcardetails/{used_car_id}','App\Http\Controllers\UsedCarController@viewPage')->name('UsedCarDetails');
 Route::get('/catalogue/usedcardetails','App\Http\Controllers\UsedCarController@viewPage')->name('UsedCarDetails');
-
 
 Route::get('/admin/inspection','App\Http\Controllers\InspectionController@viewAdminPage');
 Route::post('/admin/inspection/carDropBox','App\Http\Controllers\InspectionController@carOptions')->name('carOption');
