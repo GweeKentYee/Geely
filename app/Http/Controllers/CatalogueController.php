@@ -9,6 +9,7 @@ use App\Models\Collection;
 use App\Models\Car;
 use App\Models\CarModel;
 use App\Models\CarVariant;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\DB;
 
 use function PHPUnit\Framework\isEmpty;

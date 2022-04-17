@@ -29,6 +29,7 @@ Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage')->na
 Route::get('/catalogue/search','App\Http\Controllers\CatalogueController@search');
 Route::get('/catalogue/advanced','App\Http\Controllers\CatalogueController@advanced');
 
+
 Route::get('/collection/comparison','App\Http\Controllers\ComparisonController@viewPage');
 Route::get('/collection/compare', function(){
 
