@@ -17,6 +17,9 @@
                     <label>ID</label>
                     <input type="text" name="car_id" class="form-control" value="{{ $Car->id }}" readonly>
                     <br>
+                    <label>Car</label>
+                    <input type="text" name="car" class="form-control" value="{{ $Car->carVariant->carModel->carBrand->brand }} {{ $Car->carVariant->carModel->model }} {{ $Car->carVariant->variant }}" readonly>
+                    <br>
                     <label>Manufacture Year: {{ $Car->year }}</label>
                     <select id="year" name="year" class="form-control @error('year') is-invalid @enderror">
                         <option value="0" disabled selected>-- Please Select Year --</option>

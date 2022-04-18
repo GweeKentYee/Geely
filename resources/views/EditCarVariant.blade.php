@@ -17,14 +17,14 @@
                     <label>ID</label>
                     <input type="text" name="car_variant_id" class="form-control" value="{{ $CarVariant->id }}" readonly>
                     <br>
-                    <label>Car Brand: {{ $CarVariant->carBrand->brand }}</label>
-                    <select name="car_brand_id" class="form-control @error('car_brand_id') is-invalid @enderror">
-                        <option value="0" disabled selected>-- Please Select Car Brand --</option>
-                        @foreach ($CarBrand as $CarBrand)
-                            <option value="{{$CarBrand->id}}">{{$CarBrand->brand}}</option>
+                    <label>Car Model: {{ $CarVariant->carModel->model }}</label>
+                    <select name="car_model_id" class="form-control @error('car_model_id') is-invalid @enderror">
+                        <option value="0" disabled selected>-- Please Select Car Model --</option>
+                        @foreach ($CarModel as $CarModel)
+                            <option value="{{$CarModel->id}}">{{$CarModel->model}}</option>
                         @endforeach
                     </select>
-                    @error('car_brand_id')
+                    @error('car_model_id')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

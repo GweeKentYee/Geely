@@ -76,7 +76,8 @@ Route::patch('/admin/newsletter/editfunction/{newsletterID}','App\Http\Controlle
 Route::get('/admin/newsletter/delete/{newsletterID}','App\Http\Controllers\NewsletterController@delete');
 
 Route::get('/admin/car','App\Http\Controllers\CarController@viewAdminPage');
-Route::post('/admin/car/subDropBox','App\Http\Controllers\CarController@subOptions')->name('subOptions');
+Route::post('/admin/car/modelDropBox','App\Http\Controllers\CarController@subModels')->name('subModels');
+Route::post('/admin/car/variantDropBox','App\Http\Controllers\CarController@subVariants')->name('subVariants');
 Route::post('/admin/car/add','App\Http\Controllers\CarController@addCar');
 Route::get('/admin/car/delete/{carID}','App\Http\Controllers\CarController@delete');
 Route::get('/admin/car/file/viewspec/{carID}','App\Http\Controllers\CarController@viewSpecFile');

@@ -40,16 +40,16 @@ class CarModelController extends Controller
 
         // validate inputed records according to columns of the database table
         $data = $request->validate([
-            'car_brand_id' => ['required', Rule::notIn('0')],
+            'car_brand' => ['required', Rule::notIn('0')],
             'model' => ['required', 
             Rule::unique('car_models','model')->where(function ($query){
-                return $query->where('car_brand_id', request('car_brand_id'));
+                return $query->where('car_brand_id', request('car_brand'));
             })]
         ]);
 
         // create new records
         CarModel::create([
-            'car_brand_id' => $data['car_brand_id'],
+            'car_brand_id' => $data['car_brand'],
             'model' => $data['model']
         ]);
 
@@ -78,10 +78,17 @@ class CarModelController extends Controller
 
         // validate edited records according to columns of the database table
         $data = $request->validate([
-            'car_brand_id' => [Rule::notIn('0')],
+            'car_brand' => [Rule::notIn('0'),
+            Rule::unique('car_models','car_brand_id')->ignore($carmodelID)->when(request('model'), function ($query){
+                return $query->where('model', request('model'));
+            }, function ($query) use($CarModel){
+                return $query->where('model', $CarModel->model);
+            })],
             'model' => [ 
-            Rule::unique('car_models','model')->ignore($carmodelID)->where(function ($query){
-                return $query->where('car_brand_id', request('car_brand_id'));
+            Rule::unique('car_models','model')->ignore($carmodelID)->when(request('car_brand'), function ($query){
+                return $query->where('car_brand_id', request('car_brand'));
+            }, function ($query) use($CarModel){
+                return $query->where('car_brand_id', $CarModel->car_brand_id);
             })]
         ]);
 
@@ -89,7 +96,21 @@ class CarModelController extends Controller
 
         if(!empty($input)) {
 
-            $CarModel->update($input);
+            if(request('car_brand')){
+
+                $inputWithoutBrandID = collect($data)->except('car_brand')->filter()->all();
+
+                $updateData = array_merge($inputWithoutBrandID, [
+                    'car_brand_id' => $input['car_brand']
+                ]);
+    
+                $CarModel->update($updateData);
+
+            } else {
+
+                $CarModel->update($input);
+
+            }
 
             return redirect('admin/carmodel');
 
