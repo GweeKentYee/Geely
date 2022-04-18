@@ -29,31 +29,33 @@ Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage')->na
 Route::get('/catalogue/search','App\Http\Controllers\CatalogueController@search');
 Route::get('/catalogue/advanced','App\Http\Controllers\CatalogueController@advanced');
 
-Route::get('/collection/comparison','App\Http\Controllers\ComparisonController@viewPage');
-Route::get('/collection/compare', function(){
+Route::post('/collection/comparison','App\Http\Controllers\ComparisonController@viewPage');
+// Route::get('/collection/compare', function(){
 
 
-    dd(request()->all());
+//     //  dd(request()->all());
     
-})->name('collection.compare1');
-Route::post('/collection/compare', function(Request $request){
+// })->name('collection.compare1');
+// Route::post('/collection/compare', function(Request $request){
 
-    $collectionSelected = $request->except('_token');
+//     $collectionSelected = $request->except('_token');
 
-    $i  = 1;
-    foreach ($collectionSelected as $key => $value) {
+//     $i  = 1;
+//     foreach ($collectionSelected as $key => $value) {
         
-        ${'collectionID' . $i} = $value; 
-        $i = $i + 1;
-    }
+//         ${'collectionID' . $i} = $value; 
+//         $i = $i + 1;
+//     }
 
-    return redirect()->route('collection.compare1', ['collectionID1' => $collectionID1, 'collectionID2' => $collectionID2]);
-})->name('collection.compare');
+//     return redirect()->route('collection.compare1', ['collectionID1' => $collectionID1, 'collectionID2' => $collectionID2]);
+// })->name('collection.compare');
 Route::resource('collection', CollectionController::class);
 
+Route::get('/collection/usedcardetails/{used_car_id}','App\Http\Controllers\UsedCarController@viewdetailpage')->name('UsedCarDetails');
 
-// Route::get('/catalogue/usedcardetails/{used_car_id}','App\Http\Controllers\UsedCarController@viewPage')->name('UsedCarDetails');
-Route::get('/catalogue/usedcardetails','App\Http\Controllers\UsedCarController@viewPage')->name('UsedCarDetails');
+
+Route::get('/catalogue/usedcardetails/{used_car_id}','App\Http\Controllers\UsedCarController@viewdetailpage')->name('UsedCarDetails');
+// Route::get('/catalogue/usedcardetails','App\Http\Controllers\UsedCarController@viewPage')->name('UsedCarDetails');
 
 Route::get('/admin/inspection','App\Http\Controllers\InspectionController@viewAdminPage');
 Route::post('/admin/inspection/carDropBox','App\Http\Controllers\InspectionController@carOptions')->name('carOption');

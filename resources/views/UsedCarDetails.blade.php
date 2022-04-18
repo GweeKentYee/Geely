@@ -21,13 +21,13 @@
                     </div>
                     <div class="col">
                       <div class="details-title">Model:</div>
-                      <div class="details-content">--Geely</div><br>
+                      <div class="details-content">{{$usedcar->car->carModel->model}}</div><br>
                       <div class="details-title">Year:</div>
-                      <div class="details-content">--2021</div><br>
+                      <div class="details-content">{{$usedcar->car->year}}</div><br>
                     </div>
                     <div class="col">
                       <div class="details-title">Price:</div>
-                      <div class="details-content">--12345 pricing</div><br>
+                      <div class="details-content">RM {{$usedcar->min_price}} to RM {{$usedcar->max_price}}</div><br>
                       <div class="details-title">Rating:</div>
                       <div class="details-content">--90%</div><br>
                     </div>
@@ -38,7 +38,30 @@
                       <div class="col-8">
                     
                          {{-- <button class="cata-card-button cata-card-button-content" >ADD TO COLLECTION </button> --}}
-                         <button class="cata-card-button cata-card-button-content" type="submit">Add To Collection</button> 
+                         {{-- <button class="cata-card-button cata-card-button-content" type="submit">Add To Collection</button>  --}}
+                         @php    
+                                $exist_in_collection = false;
+                                $used_car_id =  $usedcar->id ;
+                                $collection_id_remove = 0;
+
+                                foreach($collections as $collection){
+                                    if( $collection->used_car_id == $used_car_id){
+                                        $exist_in_collection = true;
+                                        $collection_id_remove = $collection->id;
+                                    }
+                                }
+                         @endphp
+
+                        @if ($exist_in_collection)
+                            <button class="btn-success cata-card-button-content" type="button" disabled>Added To Collection</button>         
+                                
+                        @else
+                            <form action="{{ route('collection.store') }}" method="POST">
+                              @csrf
+                                <input type="hidden" name="usedcar_id" value={{ $usedcar->id }} />
+                                <button class="cata-card-button cata-card-button-content" type="submit">Add To Collection</button>  
+                            </form>                     
+                        @endif
                          <br><br>
                       </div>
                   </div>

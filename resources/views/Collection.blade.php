@@ -14,7 +14,7 @@
                 <h3 class="headline">COLLECTION</h3>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-12" style="padding-left: 0;">
-                <form id="my_form" action="{{ route('collection.compare') }}" method="POST">
+                <form id="my_form" action="/collection/comparison" method="POST">
                     @csrf
                     <input class="btn compare-selection-btn" id="CompareButton" type="submit" value="COMPARE SELECTION"><br>
                     {{-- <a class="btn btn-success compare-selection-btn" href="/collection/comparison">Temporary Button to comparison page</a> --}}
@@ -32,16 +32,16 @@
 
                 <div class="col-lg-4 col-md-6 col-sm-12 mt-5" >
                     {{-- <input class="check" type="checkbox" form="my_form" id={{ $collection->id }} name={{ $collection->id }} value={{ $collection->id }}> --}}
+                    <a href='/collection/usedcardetails/{{$collection->used_car_id}}'> 
                     <div id="card{{ $collection->id }}" class="card m-auto">
                         <div>   
                             <div class="checkbox-container">
-                                <span><input class="check" type="checkbox" form="my_form" id={{ $collection->id }} name={{ $collection->id }} value={{ $collection->id }}></span>
+                                <span><input class="check" type="checkbox" form="my_form" id={{ $collection->id }} name="checkedbox[]" value={{ $collection->id }}></span>
                                 <span style="margin-left: 0.4rem;">Compare</span>
                             </div>
                             <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200">
                         </div>
                         <div class="card-body">
-                        
                             <div class="row">
                                 <div class="card-title-year-brand col-10">{{ $collection->year }} {{ $collection->brand }}</div>
                                 <div class="card-title-model-variant col-10">{{ $collection->model }} {{ $collection->variant }} </div>

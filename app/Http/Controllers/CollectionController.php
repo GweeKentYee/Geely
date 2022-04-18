@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\UsedCar;
 
 class CollectionController extends Controller
 {
@@ -44,6 +45,17 @@ class CollectionController extends Controller
     public function create()
     {
         //
+    }
+
+    public function viewdetailpage($used_car_id){
+
+        $usedcar = UsedCar::find($used_car_id); 
+
+        $collections = Collection::all()->where('user_id',auth()->id());
+
+
+        return view('UsedCarDetails',
+        ['usedcar' => $usedcar,  'collections'=> $collections]);
     }
 
     /**

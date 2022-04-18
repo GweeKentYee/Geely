@@ -44,7 +44,7 @@
         @else
             @foreach ( $usedcar as  $usedcars )
                 {{-- Replace line with specific used car details --}}
-                <a href='/catalogue/usedcardetails'> 
+                <a href='/catalogue/usedcardetails/{{$usedcars->id}}'> 
                 <div class="cata-card" style="width: 15rem; display: inline-block;">
                     <div style="display:flex; justify-content: center; margin:5px;">
                         <div class="cata-card-image" style="width: 12.5rem;height: 12.5rem;justify-content:center;">   
@@ -58,9 +58,6 @@
                     <div class="cata-card-subtitle">RM {{$usedcars->min_price}} to RM {{$usedcars->max_price}}</div>
 
                     <div style="display:flex; justify-content: center; margin:5px;">
-                        {{-- <div class="cata-card-button" style="width: 12.5rem;">
-                            <div class="cata-card-button-content">ADD TO COLLECTION</div>
-                        </div> --}}
                         @php    
                                 $exist_in_collection = false;
                                 $used_car_id =  $usedcars->id ;
@@ -92,6 +89,7 @@
                             
                     </div>
                 </div>
+            
             @endforeach
         @endif
         {{$usedcar->links()}}
