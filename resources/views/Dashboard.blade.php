@@ -6,7 +6,7 @@
         <div class="carousel-inner">
             @for ($i=0;$i<$Dash->count();$i++)
                 @if ($i==0)
-                        <a class="carousel-item active" href="{{$Dash->get($i)->title}}" target="_blank">
+                        <a class="carousel-item active" href="{{$Dash->get($i)->link}}" target="_blank">
                             <img class="d-block w-100" src="{{$Dash->get($i)->image}}" alt="First slide">
                         </a>
                     @else

@@ -49,7 +49,7 @@
                         </select>
                         <br>
                         <label>Model :</label>
-                        <select id = "model" name = "model" class = "form-select" placeholder="Model">
+                        <select id = "model"  name = "model" class = "form-select" placeholder="Model">
                             <option value="" disabled selected hidden>Model</option>
                             @foreach($carmodel as $carmodels)
                                 <option value="{{ $carmodels->id }}">{{ $carmodels->model }}</option>
@@ -59,21 +59,21 @@
                         <label>Variant :</label>
                         <select id = "variant" name = "variant" class = "form-select" placeholder="Variant" disabled>
                             <option value="" disabled selected hidden>Variant</option>
-                            @foreach($carvariant as $carvariants)
+                            {{-- @foreach($carvariant as $carvariants)
                                 <option value="{{ $carvariants->id }}">{{ $carvariants->variant }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
                         <br>
                         <label>Body Type :</label>
                         <select id = "bodyType" name = "bodyType" class = "form-select" placeholder="Body Type">
-                            <option value="" disabled selected hidden>bodyType</option>
+                            <option value="" disabled selected hidden>Body Type</option>
                             @foreach($carbodytype as $carbodytypes)
                                 <option value="{{ $carbodytypes->id }}">{{ $carbodytypes->body_type }}</option>
                             @endforeach
                         </select>
                         <br>
                         <label>General Specifications :</label>
-                        <select id = "generalspec" name = "generalspec" class = "form-select" placeholder="General Specifications">
+                        <select id = "generalSpec" name = "generalSpec" class = "form-select" placeholder="General Specifications">
                             <option value="" disabled selected hidden>General Specifications</option>
                             @foreach($generalspec as $generalspecs)
                                 <option value="{{ $generalspecs->id }}">{{ $generalspecs->fuel}} {{$generalspecs->transmission}}</option>
@@ -184,6 +184,10 @@
 
         $('#brand').on('change', function(e) {
             var CarBrand_id = e.target.value;
+            const variantdropbox = document.getElementById('variant');
+            variantdropbox.disabled =true;
+            variantdropbox.value="";
+
             $.ajax({
                 url: "{{ route('modelOption') }}",
                 type: "POST",
@@ -192,9 +196,9 @@
                 },
                 success: function(data) {
                     $('#model').empty();
-                    $('#model').append('<option value="0" disabled selected hidden>Model</option>');
+                    $('#model').append('<option value="" disabled selected hidden>Model</option>');
                     if(data.CarModels.length==0){
-                        $('#model').append('<option value="0" disabled>No Models available</option>');
+                        $('#model').append('<option value="" disabled>No Models Available</option>');
                     }
                     $.each(data.CarModels, function(index, CarModels) {
                         $('#model').append('<option value="'+CarModels.id+'">'+CarModels.model+'</option>');
@@ -213,16 +217,17 @@
                     url: "{{ route('variantOption') }}",
                     type: "POST",
                     data: {
-                        CarBrand_id: CarBrand_id
+                        CarModel_id: CarModel_id
                     },
                     success: function(data) {
-                        $('#model').empty();
-                        $('#model').append('<option value="0" disabled selected hidden>Model</option>');
-                        if(data.CarModels.length==0){
-                            $('#model').append('<option value="0" disabled>No Models available</option>');
+                        $('#variant').empty();
+                        $('#variant').append('<option value="" disabled selected hidden>Variant</option>');
+
+                        if(data.CarVariants.length==0){
+                            $('#variant').append('<option value="" disabled>No Variants Available</option>');
                         }
-                        $.each(data.CarModels, function(index, CarModels) {
-                            $('#model').append('<option value="'+CarModels.id+'">'+CarModels.model+'</option>');
+                        $.each(data.CarVariants, function(index, CarVariants) {
+                            $('#variant').append('<option value="'+CarVariants.id+'">'+CarVariants.variant+'</option>');
                         })
                     }
                 })
