@@ -11,7 +11,6 @@ use App\Models\Car;
 use App\Models\CarBrand;
 use App\Models\CarModel;
 use App\Models\CarVariant;
-use GuzzleHttp\Psr7\Request;
 use App\Models\CarBodyType;
 use App\Models\CarGeneralSpec;
 use Illuminate\Support\Facades\DB;
