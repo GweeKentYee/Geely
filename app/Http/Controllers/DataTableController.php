@@ -8,6 +8,7 @@ use App\Models\CarBrand;
 use App\Models\CarModel;
 use App\Models\CarVariant;
 use App\Models\Newsletter;
+
 use Illuminate\Http\Request;
 
 class DataTableController extends Controller

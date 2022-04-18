@@ -19,7 +19,7 @@ class CarController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function viewAdminPage(){
 
         $CarBrand = CarBrand::all();
@@ -41,7 +41,7 @@ class CarController extends Controller
         $Car = Car::find($carID);
 
         if ($Car->spec_file == null) {
-            
+
             unlink($Car->data_file);
 
         } else {
@@ -90,7 +90,7 @@ class CarController extends Controller
             Rule::unique('cars','car_variant_id')->where(function ($query){
                 return $query->where('year', request('year'))->where('car_model_id', request('car_model'))->where('car_body_type_id', request('car_body_type'))->where('car_general_spec_id', request('car_general_spec'));
             })],
-            'year' => ['required', Rule::notIn('0'), 
+            'year' => ['required', Rule::notIn('0'),
             Rule::unique('cars','year')->where(function ($query){
                 return $query->where('car_variant_id', request('car_variant'))->where('car_body_type_id', request('car_body_type'))->where('car_model_id', request('car_model'))->where('car_general_spec_id', request('car_general_spec'));
             })],
@@ -261,15 +261,15 @@ class CarController extends Controller
                 $inputWithoutFile = collect($data)->except(['spec_file','data_file'])->filter()->all();
 
                 if ($Car->spec_file == null) {
-            
+
                     unlink($Car->data_file);
-        
+
                 } else {
-        
+
                     unlink($Car->spec_file);
-        
+
                     unlink($Car->data_file);
-        
+
                 }
 
                 $specFileExtension = request()->file('spec_file')->getClientOriginalExtension();
@@ -298,9 +298,9 @@ class CarController extends Controller
                 $inputWithoutFile = collect($data)->except('spec_file')->filter()->all();
 
                 if ($Car->spec_file != null) {
-        
+
                     unlink($Car->spec_file);
-        
+
                 }
 
                 $specFileExtension = request()->file('spec_file')->getClientOriginalExtension();
@@ -318,7 +318,7 @@ class CarController extends Controller
                 return redirect('admin/car');
 
             } else if(request('data_file')) {
-                
+
                 $inputWithoutFile = collect($data)->except('data_file')->filter()->all();
 
                 unlink($Car->data_file); // call database column name
