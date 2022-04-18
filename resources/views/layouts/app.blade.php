@@ -33,10 +33,34 @@
         #Bonnet path{
             fill:red;
         }
+        #Front_Right_Door path{
+            fill:aquamarine;
+        }
+        #Rear_Right_Door path{
+            fill:blanchedalmond;
+        }
         #Trunk path{
             fill:orange;
         }
-        #Back_Bumper path{
+        #Front_Right_Wheel_Arc path{
+            fill:cornflowerblue;
+        }
+        #Rear_Right_Wheel_Arc path{
+            fill:cyan;
+        }
+        #Front_Left_Wheel_Arc path{
+            fill:darkseagreen;
+        }
+        #Rear_Left_Wheel_Arc path{
+            fill:darkgoldenrod;
+        }
+        #Right_Center_Pillar path{
+            fill:blueviolet;
+        }
+        #Left_Center_Pillar path{
+            fill:rgb(110, 226, 43);
+        }
+        #Rear_Bumper path{
             fill: yellow;
         }
         #Front_Bumper path{
@@ -45,8 +69,23 @@
         #Roof_Panel path{
             fill: blue;
         }
-        #Sill_Plate path{
+        #Right_Sill_Plate path{
             fill: purple;
+        }
+        #Left_Sill_Plate path{
+            fill:darkgreen;
+        }
+        #Front_Left_Door path{
+            fill:moccasin;
+        }
+        #Rear_Left_Door path{
+            fill:rebeccapurple;
+        }
+        #Rear_Quarter_Pillar path{
+            fill:darkred;
+        }
+        #Screen_Pillar path{
+            fill:fuchsia;
         }
     </style>
 </head>

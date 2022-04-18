@@ -11,6 +11,8 @@ use App\Models\Car;
 use App\Models\CarBrand;
 use App\Models\CarModel;
 use App\Models\CarVariant;
+use App\Models\CarBodyType;
+use App\Models\CarGeneralSpec;
 use Illuminate\Support\Facades\DB;
 
 use function PHPUnit\Framework\isEmpty;
@@ -23,10 +25,14 @@ class CatalogueController extends Controller
         $usedcar = UsedCar::where('status','1')->paginate(20);
         $carbrand = CarBrand::orderBy('brand','ASC')->get();
         $carmodel = CarModel::orderBy('model','ASC')->get();
+        $carvariant= CarVariant::orderBy('variant','ASC')->get();
+        $carbodytype= CarBodyType::orderBy('body_type','ASC')->get();
+        $generalspec= CarGeneralSpec::all();
         $collections = Collection::all()->where('user_id',auth()->id());
+        
 
         return view('Catalogue',
-        ['usedcar' => $usedcar,'carbrand'=>$carbrand,'carmodel'=>$carmodel,'collections'=> $collections]
+        ['usedcar' => $usedcar,'carbrand'=>$carbrand,'carmodel'=>$carmodel,'carvariant'=>$carvariant,'carbodytype'=>$carbodytype,'generalspec'=>$generalspec,'collections'=> $collections]
         );
 
     }
@@ -52,15 +58,17 @@ class CatalogueController extends Controller
 
         $carbrand = CarBrand::orderBy('brand','ASC')->get();
         $carmodel = CarModel::orderBy('model','ASC')->get();
+        $carvariant= CarVariant::orderBy('variant','ASC')->get();
         $collections = Collection::all()->where('user_id',auth()->id());
 
         return view('Catalogue',
-        ['usedcar' => $usedcar,'carbrand'=>$carbrand,'carmodel'=>$carmodel,'collections'=> $collections]
+        ['usedcar' => $usedcar,'carbrand'=>$carbrand,'carmodel'=>$carmodel,'carvariant'=>$carvariant,'collections'=> $collections]
         );
 
     }
 
     public function advanced(){
+        $brand = request('brand');
         $year = request('year');
         $minPrice = request('minPrice');
         $maxPrice = request('maxPrice');
@@ -75,6 +83,12 @@ class CatalogueController extends Controller
 
         if($maxPrice==null || !is_numeric($maxPrice)){
             $maxPrice=UsedCar::max('max_price');
+        }
+
+        if($maxPrice>$minPrice){
+            $temp = $minPrice;
+            $minPrice = $maxPrice;
+            $maxPrice = $temp;
         }
         
         $usedcar = UsedCar::
@@ -103,10 +117,25 @@ class CatalogueController extends Controller
     
     public function modelOptions(Request $request){
 
-        $CarModels = CarModel::where('car_brand_id',$request->CarBrand_id)->get();
+        if($request->CarBrand_id==0){
+            $CarModels = CarModel::all();
+        }else{
+            $CarModels = CarModel::where('car_brand_id',$request->CarBrand_id)->get();
+        }
 
         return response()->json([
             'CarModels' => $CarModels
+        ]);
+
+    }
+
+    public function variantOptions(Request $request){
+        
+        $CarVariants = CarVariant::where('car_brand_id',$request->CarBrand_id)->get();
+        
+
+        return response()->json([
+            'CarVariants' => $CarVariants
         ]);
 
     }

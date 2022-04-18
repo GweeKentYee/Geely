@@ -56,6 +56,30 @@
                             @endforeach
                         </select>
                         <br>
+                        <label>Variant :</label>
+                        <select id = "variant" name = "variant" class = "form-select" placeholder="Variant" disabled>
+                            <option value="" disabled selected hidden>Variant</option>
+                            @foreach($carvariant as $carvariants)
+                                <option value="{{ $carvariants->id }}">{{ $carvariants->variant }}</option>
+                            @endforeach
+                        </select>
+                        <br>
+                        <label>Body Type :</label>
+                        <select id = "bodyType" name = "bodyType" class = "form-select" placeholder="Body Type">
+                            <option value="" disabled selected hidden>bodyType</option>
+                            @foreach($carbodytype as $carbodytypes)
+                                <option value="{{ $carbodytypes->id }}">{{ $carbodytypes->body_type }}</option>
+                            @endforeach
+                        </select>
+                        <br>
+                        <label>General Specifications :</label>
+                        <select id = "generalspec" name = "generalspec" class = "form-select" placeholder="General Specifications">
+                            <option value="" disabled selected hidden>General Specifications</option>
+                            @foreach($generalspec as $generalspecs)
+                                <option value="{{ $generalspecs->id }}">{{ $generalspecs->fuel}} {{$generalspecs->transmission}}</option>
+                            @endforeach
+                        </select>
+                        <br>
                         <label>Year :</label>
                         <select name="year" class ="form-select" placeholder="Year">
                             <option value="" hidden disabled selected>Year</option>
@@ -65,10 +89,10 @@
                         </select>
                         <br>
                         <label>Minimum Price :</label>
-                        <input type="text" name="minPrice" class="form-control" placeholder="Minimum Price" autocomplete="off">
+                        <input type="number" name="minPrice" class="form-control" placeholder="Minimum Price" autocomplete="off" min="0"  step="10000">
                         <br>
                         <label>Maximum Price :</label>
-                        <input type="text" name="maxPrice" class="form-control" placeholder="Maximum Price" autocomplete="off">
+                        <input type="number" name="maxPrice" class="form-control" placeholder="Maximum Price" autocomplete="off" step="10000">
                         <br>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -178,6 +202,33 @@
                 }
             })
         });
+
+        $('#model').on('change', function(e) {
+            var CarModel_id = e.target.value;
+            const variantdropbox = document.getElementById('variant');
+
+            if(CarModel_id!=""){
+                variantdropbox.disabled =false;
+                $.ajax({
+                    url: "{{ route('variantOption') }}",
+                    type: "POST",
+                    data: {
+                        CarBrand_id: CarBrand_id
+                    },
+                    success: function(data) {
+                        $('#model').empty();
+                        $('#model').append('<option value="0" disabled selected hidden>Model</option>');
+                        if(data.CarModels.length==0){
+                            $('#model').append('<option value="0" disabled>No Models available</option>');
+                        }
+                        $.each(data.CarModels, function(index, CarModels) {
+                            $('#model').append('<option value="'+CarModels.id+'">'+CarModels.model+'</option>');
+                        })
+                    }
+                })
+            }
+        });
+
         var route = "{{ url('autocompleteSearch') }}";
         $('#search').typeahead({
             source: function (query, process) {
