@@ -24,14 +24,14 @@ class Car extends Model
         'data_file'
     ];
 
-    public function carModel()
-    {
-        return $this->belongsTo('App\Models\CarModel', 'car_model_id');
-    }
-
     public function carVariant()
     {
         return $this->belongsTo('App\Models\CarVariant', 'car_variant_id');
+    }
+
+    public function carModel()
+    {
+        return $this->belongsTo('App\Models\CarModel', 'car_model_id');
     }
 
     public function carBodyType()

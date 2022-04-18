@@ -11,6 +11,7 @@ use App\Models\CarGeneralSpec;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
+use Carbon\Carbon;
 
 class CarController extends Controller
 {
@@ -57,13 +58,21 @@ class CarController extends Controller
 
     }
 
-    public function subOptions(Request $request){
+    public function subModels(Request $request){
 
         $CarModels = CarModel::where('car_brand_id', $request->CarBrand_id)->get();
-        $CarVariants = CarVariant::where('car_brand_id', $request->CarBrand_id)->get();
 
         return response()->json([
-            'CarModels' => $CarModels,
+            'CarModels' => $CarModels
+        ]);
+
+    }
+
+    public function subVariants(Request $request){
+
+        $CarVariants = CarVariant::where('car_model_id', $request->CarModel_id)->get();
+
+        return response()->json([
             'CarVariants' => $CarVariants
         ]);
 
@@ -72,76 +81,73 @@ class CarController extends Controller
     public function addCar(Request $request){
 
         $data = $request->validate([
-            'car_brand_id' => ['required', Rule::notIn('0')],
-            'car_model_id' => ['required', Rule::notIn('0'),
+            'car_brand' => ['required', Rule::notIn('0')],
+            'car_model' => ['required', Rule::notIn('0'),
             Rule::unique('cars','car_model_id')->where(function ($query){
-                return $query->where('car_variant_id', request('car_variant_id'))->where('year', request('year'))->where('car_body_type_id', request('car_body_type_id'))->where('car_general_spec_id', request('car_general_spec_id'));
+                return $query->where('car_variant_id', request('car_variant'))->where('year', request('year'))->where('car_body_type_id', request('car_body_type'))->where('car_general_spec_id', request('car_general_spec'));
             })],
-            'car_variant_id' => ['required', Rule::notIn('0'),
+            'car_variant' => ['required', Rule::notIn('0'),
             Rule::unique('cars','car_variant_id')->where(function ($query){
-                return $query->where('year', request('year'))->where('car_model_id', request('car_model_id'))->where('car_body_type_id', request('car_body_type_id'))->where('car_general_spec_id', request('car_general_spec_id'));
+                return $query->where('year', request('year'))->where('car_model_id', request('car_model'))->where('car_body_type_id', request('car_body_type'))->where('car_general_spec_id', request('car_general_spec'));
             })],
             'year' => ['required', Rule::notIn('0'),
             Rule::unique('cars','year')->where(function ($query){
-                return $query->where('car_variant_id', request('car_variant_id'))->where('car_body_type_id', request('car_body_type_id'))->where('car_model_id', request('car_model_id'))->where('car_general_spec_id', request('car_general_spec_id'));
+                return $query->where('car_variant_id', request('car_variant'))->where('car_body_type_id', request('car_body_type'))->where('car_model_id', request('car_model'))->where('car_general_spec_id', request('car_general_spec'));
             })],
-            'car_body_type_id' => ['required', Rule::notIn('0'),
+            'car_body_type' => ['required', Rule::notIn('0'),
             Rule::unique('cars','car_body_type_id')->where(function ($query){
-                return $query->where('car_variant_id', request('car_variant_id'))->where('year', request('year'))->where('car_general_spec_id', request('car_general_spec_id'))->where('car_model_id', request('car_model_id'));
+                return $query->where('car_variant_id', request('car_variant'))->where('year', request('year'))->where('car_general_spec_id', request('car_general_spec'))->where('car_model_id', request('car_model'));
             })],
-            'car_general_spec_id' => ['required', Rule::notIn('0'),
+            'car_general_spec' => ['required', Rule::notIn('0'),
             Rule::unique('cars','car_general_spec_id')->where(function ($query){
-                return $query->where('car_variant_id', request('car_variant_id'))->where('car_body_type_id', request('car_body_type_id'))->where('year', request('year'))->where('car_model_id', request('car_model_id'));
+                return $query->where('car_variant_id', request('car_variant'))->where('car_body_type_id', request('car_body_type'))->where('year', request('year'))->where('car_model_id', request('car_model'));
             })],
             'spec_file' => ['mimes:json,txt,xml,xls,xlsx'],
             'data_file' => ['required', 'mimes:json,txt,xml,xls,xlsx']
         ]);
 
-        // dd(request('car_variant_id'));
-        // $JoinCars = CarModel::
-        // select('car_models.*')
-        // ->join('car_brands','car_brands.id','=','car_models.car_brand_id')
-        // ->select('car_models.*')
-        // ->join('car_variants','car_variants.car_brand_id','=','car_brands.id')
-        // ->where('car_models.id',request('car_model_id'))
-        // ->where('car_brands.id',request('car_brand_id'))
-        // ->where('car_variants.id',request('car_variant_id'))->get();
+        $Car = Car::create([
+            'car_model_id' => $data['car_model'],
+            'car_variant_id' => $data['car_variant'],
+            'year' => $data['year'],
+            'car_body_type_id' => $data['car_body_type'],
+            'car_general_spec_id' => $data['car_general_spec'],
+            'data_file' => 'temp'
+        ]);
 
-        // dd($JoinCars[0]->carBrand->carVariants);
-
-        $dataFileName = request()->file('data_file')->getClientOriginalName();
-
-        // $dataFilePath = $data['data_file']->move('storage/data/car/'.$data['car_brand'].'', $dataFileName);
-        $dataFilePath = $data['data_file']->move('storage/data/car', $dataFileName);
+        $current_timestamp = Carbon::now()->timestamp;
 
         if (request('spec_file')){
 
-            $specFileName = request()->file('spec_file')->getClientOriginalName();
+            $specFileExtension = request()->file('spec_file')->getClientOriginalExtension();
 
-            // $specFilePath = $data['spec_file']->move('storage/data/car/'.$data['car_brand'].'', $specFileName);
-            $specFilePath = $data['spec_file']->move('storage/data/car', $specFileName);
+            $specFileName = $current_timestamp.'_'.$Car->year.'_'.$Car->carVariant->variant.'_'.$Car->carBodyType->body_type.'_'.$Car->carGeneralSpec->transmission.'_'.$Car->carGeneralSpec->fuel.'_spec.'.$specFileExtension;
 
-            Car::create([
-                'car_model_id' => $data['car_model_id'],
-                'car_variant_id' => $data['car_variant_id'],
-                'year' => $data['year'],
-                'car_body_type_id' => $data['car_body_type_id'],
-                'car_general_spec_id' => $data['car_general_spec_id'],
+            $specFilePath = $data['spec_file']->move('storage/data/car/'.$Car->carVariant->carModel->carBrand->brand.'/'.$Car->carVariant->carModel->model.'', $specFileName);
+
+            $dataFileExtension = request()->file('data_file')->getClientOriginalExtension();
+
+            $dataFileName = $current_timestamp.'_'.$Car->year.'_'.$Car->carVariant->variant.'_'.$Car->carBodyType->body_type.'_'.$Car->carGeneralSpec->transmission.'_'.$Car->carGeneralSpec->fuel.'_data.'.$dataFileExtension;
+
+            $dataFilePath = $data['data_file']->move('storage/data/car/'.$Car->carVariant->carModel->carBrand->brand.'/'.$Car->carVariant->carModel->model.'', $dataFileName);
+
+            $Car->update([
                 'spec_file' => str_replace('\\', '/', $specFilePath),
                 'data_file' => str_replace('\\', '/', $dataFilePath)
             ]);
 
         } else {
 
-            Car::create([
-                'car_model_id' => $data['car_model_id'],
-                'car_variant_id' => $data['car_variant_id'],
-                'year' => $data['year'],
-                'car_body_type_id' => $data['car_body_type_id'],
-                'car_general_spec_id' => $data['car_general_spec_id'],
+            $dataFileExtension = request()->file('data_file')->getClientOriginalExtension();
+
+            $dataFileName = $current_timestamp.'_'.$Car->year.'_'.$Car->carVariant->variant.'_'.$Car->carBodyType->body_type.'_'.$Car->carGeneralSpec->transmission.'_'.$Car->carGeneralSpec->fuel.'_data.'.$dataFileExtension;
+
+            $dataFilePath = $data['data_file']->move('storage/data/car/'.$Car->carVariant->carModel->carBrand->brand.'/'.$Car->carVariant->carModel->model.'', $dataFileName);
+
+            $Car->update([
                 'data_file' => str_replace('\\', '/', $dataFilePath)
             ]);
-
+            
         }
 
         return redirect('admin/car');
@@ -189,20 +195,56 @@ class CarController extends Controller
 
     public function edit($carID, Request $request){
 
+        //dd(request()->except(['_token','_method','car_id','car']));
         $Car = Car::find($carID);
 
+        // $data = $request->validate([
+        //     'year' => [Rule::notIn('0'), 
+        //     Rule::unique('cars','year')->ignore($carID)->where(function ($query){
+        //         return $query->where('car_body_type_id', request('car_body_type_id'))->where('car_general_spec_id', request('car_general_spec_id'));
+        //     })],
+        //     'car_body_type_id' => [Rule::notIn('0'),
+        //     Rule::unique('cars','car_body_type_id')->ignore($carID)->where(function ($query){
+        //         return $query->where('year', request('year'))->where('car_general_spec_id', request('car_general_spec_id'));
+        //     })],
+        //     'car_general_spec_id' => [Rule::notIn('0'),
+        //     Rule::unique('cars','car_general_spec_id')->ignore($carID)->where(function ($query){
+        //         return $query->where('car_body_type_id', request('car_body_type_id'))->where('year', request('year'));
+        //     })],
+        //     'spec_file' => ['mimes:json,txt,xml,xls,xlsx'],
+        //     'data_file' => ['mimes:json,txt,xml,xls,xlsx']
+        // ]);
+
         $data = $request->validate([
-            'year' => [Rule::notIn('0'),
-            Rule::unique('cars','year')->ignore($carID)->where(function ($query){
-                return $query->where('car_body_type_id', request('car_body_type_id'))->where('car_general_spec_id', request('car_general_spec_id'));
+            'year' => [Rule::notIn('0'), 
+            Rule::unique('cars','year')->ignore($carID)->when((request('car_body_type_id') and request('car_general_spec_id')), function ($query) use($Car){
+                return $query->where('car_body_type_id', request('car_body_type_id'))->where('car_general_spec_id', request('car_general_spec_id'))->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
+            })->when(request('car_body_type_id'), function ($query) use($Car){
+                return $query->where('car_body_type_id', request('car_body_type_id'))->where('car_general_spec_id', $Car->car_general_spec_id)->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
+            })->when(request('car_general_spec_id'), function ($query) use($Car){
+                return $query->where('car_general_spec_id', request('car_general_spec_id'))->where('car_body_type_id', $Car->car_body_type_id)->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
+            })->when(empty(request()->except(['_token','_method','car_id','car']) == true), function ($query) use($Car){
+                return $query->where('car_body_type_id', $Car->car_body_type_id)->where('car_general_spec_id', $Car->car_general_spec_id)->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
             })],
             'car_body_type_id' => [Rule::notIn('0'),
-            Rule::unique('cars','car_body_type_id')->ignore($carID)->where(function ($query){
-                return $query->where('year', request('year'))->where('car_general_spec_id', request('car_general_spec_id'));
+            Rule::unique('cars','car_body_type_id')->ignore($carID)->when(request('year'), request('car_general_spec_id'), function ($query) use($Car){
+                return $query->where('year', request('year'))->where('car_general_spec_id', request('car_general_spec_id'))->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
+            })->when(request('year'), function ($query) use($Car){
+                return $query->where('year', request('year'))->where('car_general_spec_id', $Car->car_general_spec_id)->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
+            })->when(request('car_general_spec_id'), function ($query) use($Car){
+                return $query->where('car_general_spec_id', request('car_general_spec_id'))->where('year', $Car->year)->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
+            })->when(empty(request()->except(['_token','_method','car_id','car'])), function ($query) use($Car){
+                return $query->where('year', $Car->year)->where('car_general_spec_id', $Car->car_general_spec_id)->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
             })],
             'car_general_spec_id' => [Rule::notIn('0'),
-            Rule::unique('cars','car_general_spec_id')->ignore($carID)->where(function ($query){
-                return $query->where('car_body_type_id', request('car_body_type_id'))->where('year', request('year'));
+            Rule::unique('cars','car_general_spec_id')->ignore($carID)->when(request('year'), request('car_body_type_id'), function ($query) use($Car){
+                return $query->where('year', request('year'))->where('car_body_type_id', request('car_body_type_id'))->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
+            })->when(request('year'), function ($query) use($Car){
+                return $query->where('year', request('year'))->where('car_body_type_id', $Car->car_body_type_id)->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
+            })->when(request('car_body_type_id'), function ($query) use($Car){
+                return $query->where('car_body_type_id', request('car_body_type_id'))->where('year', $Car->year)->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
+            })->when(empty(request()->except(['_token','_method','car_id','car'])), function ($query) use($Car){
+                return $query->where('year', $Car->year)->where('car_body_type_id', $Car->car_body_type_id)->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
             })],
             'spec_file' => ['mimes:json,txt,xml,xls,xlsx'],
             'data_file' => ['mimes:json,txt,xml,xls,xlsx']
@@ -211,6 +253,8 @@ class CarController extends Controller
         $input = collect($data)->whereNotNull()->all();
 
         if(!empty($input)) {
+
+            $current_timestamp = Carbon::now()->timestamp;
 
             if(request('spec_file') and request('data_file')) {
 
@@ -228,13 +272,17 @@ class CarController extends Controller
 
                 }
 
-                $specFileName = request()->file('spec_file')->getClientOriginalName();
+                $specFileExtension = request()->file('spec_file')->getClientOriginalExtension();
 
-                $specFilePath = $data['spec_file']->move('storage/data/car', $specFileName);
+                $specFileName = $current_timestamp.'_'.$Car->year.'_'.$Car->carVariant->variant.'_'.$Car->carBodyType->body_type.'_'.$Car->carGeneralSpec->transmission.'_'.$Car->carGeneralSpec->fuel.'_spec.'.$specFileExtension;
 
-                $dataFileName = request()->file('data_file')->getClientOriginalName();
+                $specFilePath = $data['spec_file']->move('storage/data/car/'.$Car->carVariant->carModel->carBrand->brand.'/'.$Car->carVariant->carModel->model.'', $specFileName);
 
-                $dataFilePath = $data['data_file']->move('storage/data/car', $dataFileName);
+                $dataFileExtension = request()->file('data_file')->getClientOriginalExtension();
+
+                $dataFileName = $current_timestamp.'_'.$Car->year.'_'.$Car->carVariant->variant.'_'.$Car->carBodyType->body_type.'_'.$Car->carGeneralSpec->transmission.'_'.$Car->carGeneralSpec->fuel.'_data.'.$dataFileExtension;
+
+                $dataFilePath = $data['data_file']->move('storage/data/car/'.$Car->carVariant->carModel->carBrand->brand.'/'.$Car->carVariant->carModel->model.'', $dataFileName);
 
                 $updateData = array_merge($inputWithoutFile, [
                     'spec_file' => str_replace('\\','/',$specFilePath),
@@ -255,13 +303,14 @@ class CarController extends Controller
 
                 }
 
-                $fileName = request()->file('spec_file')->getClientOriginalName();
+                $specFileExtension = request()->file('spec_file')->getClientOriginalExtension();
 
-                // $filePath = $data['spec_file']->move('storage/data/car/'.$data['car_brand'].'',$fileName);
-                $filePath = $data['spec_file']->move('storage/data/car',$fileName);
+                $specFileName = $current_timestamp.'_'.$Car->year.'_'.$Car->carVariant->variant.'_'.$Car->carBodyType->body_type.'_'.$Car->carGeneralSpec->transmission.'_'.$Car->carGeneralSpec->fuel.'_spec.'.$specFileExtension;
+
+                $specFilePath = $data['spec_file']->move('storage/data/car/'.$Car->carVariant->carModel->carBrand->brand.'/'.$Car->carVariant->carModel->model.'', $specFileName);
 
                 $updateData = array_merge($inputWithoutFile, [
-                    'spec_file' => str_replace('\\','/',$filePath)
+                    'spec_file' => str_replace('\\','/',$specFilePath)
                 ]);
 
                 $Car->update($updateData);
@@ -274,12 +323,14 @@ class CarController extends Controller
 
                 unlink($Car->data_file); // call database column name
 
-                $fileName = request()->file('data_file')->getClientOriginalName();
+                $dataFileExtension = request()->file('data_file')->getClientOriginalExtension();
 
-                $filePath = $data['data_file']->move('storage/data/car',$fileName);
+                $dataFileName = $current_timestamp.'_'.$Car->year.'_'.$Car->carVariant->variant.'_'.$Car->carBodyType->body_type.'_'.$Car->carGeneralSpec->transmission.'_'.$Car->carGeneralSpec->fuel.'_data.'.$dataFileExtension;
+
+                $dataFilePath = $data['data_file']->move('storage/data/car/'.$Car->carVariant->carModel->carBrand->brand.'/'.$Car->carVariant->carModel->model.'', $dataFileName);
 
                 $updateData = array_merge($inputWithoutFile, [
-                    'data_file' => str_replace('\\','/',$filePath)
+                    'data_file' => str_replace('\\','/',$dataFilePath)
                 ]);
 
                 $Car->update($updateData);

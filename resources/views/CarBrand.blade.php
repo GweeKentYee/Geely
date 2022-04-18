@@ -6,7 +6,7 @@
         <h3><u>Car Brand</u></h3>
         <div class="col-md-9">
             <div style="text-align:right" class="pb-1">
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcarbrand">Add Car Brand</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcarbrand"><i class="bi bi-plus-lg"></i> Add Car Brand</button>
             </div>
             <table class="table" id="datatable" style="width: 100%">
                 <thead>
@@ -31,7 +31,8 @@
                 <form action="/admin/carbrand/add" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-                        <label>Car Brand</label>
+                        <p style="color:red">*Required</p>
+                        <label >Car Brand<span style="color:red"> *</span></label>
                         <input type="text" name="brand" class="form-control @error('brand') is-invalid @enderror" value="{{ old('brand') }}" placeholder="">
                         @error('brand')
                             <span class="invalid-feedback" role="alert">

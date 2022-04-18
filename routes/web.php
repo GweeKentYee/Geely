@@ -28,6 +28,9 @@ Route::get('/','App\Http\Controllers\DashboardController@viewPage');
 Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage')->name('catalogue.viewpage');
 Route::get('/catalogue/search','App\Http\Controllers\CatalogueController@search');
 Route::get('/catalogue/advanced','App\Http\Controllers\CatalogueController@advanced');
+Route::post('/catalogue/advanced/modelDropBox','App\Http\Controllers\CatalogueController@modelOptions')->name('modelOption');
+Route::post('/catalogue/advanced/variantDropBox','App\Http\Controllers\CatalogueController@variantOptions')->name('variantOption');
+Route::get('autocompleteSearch','App\Http\Controllers\CatalogueController@autocompleteSearch')->name('autocompleteSearch');
 
 
 Route::get('/collection/comparison','App\Http\Controllers\ComparisonController@viewPage');
@@ -65,6 +68,7 @@ Route::get('/admin/inspection/details/{inspectionID}','App\Http\Controllers\Insp
 
 Route::get('/admin/catalogue','App\Http\Controllers\CatalogueController@viewAdminPage');
 
+
 Route::get('/admin/newsletter','App\Http\Controllers\NewsletterController@viewAdminPage');
 Route::get('/admin/newsletter/view/{newsletterID}','App\Http\Controllers\NewsletterController@viewImage');
 Route::post('/admin/newsletter/add','App\Http\Controllers\NewsletterController@add');
@@ -73,7 +77,8 @@ Route::patch('/admin/newsletter/editfunction/{newsletterID}','App\Http\Controlle
 Route::get('/admin/newsletter/delete/{newsletterID}','App\Http\Controllers\NewsletterController@delete');
 
 Route::get('/admin/car','App\Http\Controllers\CarController@viewAdminPage');
-Route::post('/admin/car/subDropBox','App\Http\Controllers\CarController@subOptions')->name('subOptions');
+Route::post('/admin/car/modelDropBox','App\Http\Controllers\CarController@subModels')->name('subModels');
+Route::post('/admin/car/variantDropBox','App\Http\Controllers\CarController@subVariants')->name('subVariants');
 Route::post('/admin/car/add','App\Http\Controllers\CarController@addCar');
 Route::get('/admin/car/delete/{carID}','App\Http\Controllers\CarController@delete');
 Route::get('/admin/car/file/viewspec/{carID}','App\Http\Controllers\CarController@viewSpecFile');

@@ -23,8 +23,4 @@ class CarBrand extends Model
         return $this->hasMany(CarModel::class);
     }
 
-    public function carVariants()
-    {
-        return $this->hasMany(CarVariant::class);
-    }
 }
