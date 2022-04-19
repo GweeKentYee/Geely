@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-
+<main class="py-4">
     <div class="row">
         <div class="col-12">
             <h3 class="headline">COLLECTION</h3>
@@ -66,7 +66,7 @@
 
         @endforeach
     </div>
-
+</main>
 @endsection
 
 @section("footer-scripts")
