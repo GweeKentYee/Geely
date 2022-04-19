@@ -120,7 +120,7 @@
                         @enderror
                         <br>
                         <label>Data File<span style="color:red"> *</span></label>
-                        <input type="file" name="data_file" class="form-control @error('data_file') is-invalid @enderror" accept="application/JSON,application/xml,text/plain,text/xml,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                        <input type="file" name="data_file" class="form-control @error('data_file') is-invalid @enderror" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                         @error('data_file')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

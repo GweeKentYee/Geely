@@ -23,7 +23,7 @@ class DataTableController extends Controller
 
             ->addColumn('File', function($query){
 
-                $File = '<a href = "/admin/inspection/file/view/'.$query->id.'" style="color: black"><i class="bi bi-download"></i></a>';
+                $File = '<a href = "/admin/inspection/file/view/'.$query->id.'" style="color: blue; font-size: 18px"><i class="bi bi-download"></i></a>';
 
                 return $File;
 
@@ -66,11 +66,11 @@ class DataTableController extends Controller
 
                 if ($query->spec_file == null){
 
-                    $specFile = '<i class="bi bi-eye-slash"></i>';
+                    $specFile = '<span style="font-size: 16px"><i class="bi bi-eye-slash"></i></span>';
 
                 } else {
 
-                    $specFile = '<a href = "/admin/car/file/viewspec/'.$query->id.'" style="color: black"><i class="bi bi-eye-fill"></i></a>';
+                    $specFile = '<a href = "/admin/car/file/viewspec/'.$query->id.'" style="color: black; font-size: 16px"><i class="bi bi-eye-fill"></i></a>';
                 }
                 
                 return $specFile;
@@ -79,7 +79,7 @@ class DataTableController extends Controller
 
             ->addColumn('Data_File', function($query){
 
-                $dataFile = '<a href = "/admin/car/file/viewdata/'.$query->id.'" style="color: black"><i class="bi bi-download"></i></a>';
+                $dataFile = '<a href = "/admin/car/file/viewdata/'.$query->id.'" style="color: blue; font-size: 18px"><i class="bi bi-download"></i></a>';
 
                 return $dataFile;
 
@@ -135,7 +135,7 @@ class DataTableController extends Controller
 
             ->addColumn('Edit', function($query){
 
-                $actionButton = '<a href= "/admin/car/edit/'.$query->id.'" style="color: blue"><i class="bi bi-pencil-square"></i></a>';
+                $actionButton = '<a href= "/admin/car/edit/'.$query->id.'" style="color: blue; font-size: 16px"><i class="bi bi-pencil-square"></i></a>';
                 
                 return $actionButton;
 
@@ -160,7 +160,7 @@ class DataTableController extends Controller
 
             ->addColumn('Edit', function($query){
 
-                $actionButton = '<a href= "/admin/carbrand/edit/'.$query->id.'" style="color: blue"><i class="bi bi-pencil-square"></i></a>';
+                $actionButton = '<a href= "/admin/carbrand/edit/'.$query->id.'" style="color: blue; font-size: 16px"><i class="bi bi-pencil-square"></i></a>';
                 
                 return $actionButton;
 
@@ -193,7 +193,7 @@ class DataTableController extends Controller
 
             ->addColumn('Edit', function($query){
 
-                $actionButton = '<a href= "/admin/carmodel/edit/'.$query->id.'" style="color: blue"><i class="bi bi-pencil-square"></i></a>';
+                $actionButton = '<a href= "/admin/carmodel/edit/'.$query->id.'" style="color: blue; font-size: 16px"><i class="bi bi-pencil-square"></i></a>';
                 
                 return $actionButton;
 
@@ -226,7 +226,7 @@ class DataTableController extends Controller
 
             ->addColumn('Edit', function($query){
 
-                $actionButton = '<a href= "/admin/carvariant/edit/'.$query->id.'" style="color: blue"><i class="bi bi-pencil-square"></i></a>';
+                $actionButton = '<a href= "/admin/carvariant/edit/'.$query->id.'" style="color: blue; font-size: 16px"><i class="bi bi-pencil-square"></i></a>';
                 
                 return $actionButton;
 

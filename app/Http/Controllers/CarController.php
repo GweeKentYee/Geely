@@ -213,34 +213,34 @@ class CarController extends Controller
 
         $data = $request->validate([
             'year' => [Rule::notIn('0'), 
-            Rule::unique('cars','year')->ignore($carID)->when((request('car_body_type_id') and request('car_general_spec_id')), function ($query) use($Car){
-                return $query->where('car_body_type_id', request('car_body_type_id'))->where('car_general_spec_id', request('car_general_spec_id'))->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
-            })->when(request('car_body_type_id'), function ($query) use($Car){
-                return $query->where('car_body_type_id', request('car_body_type_id'))->where('car_general_spec_id', $Car->car_general_spec_id)->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
-            })->when(request('car_general_spec_id'), function ($query) use($Car){
-                return $query->where('car_general_spec_id', request('car_general_spec_id'))->where('car_body_type_id', $Car->car_body_type_id)->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
+            Rule::unique('cars','year')->ignore($carID)->when($request->has('car_body_type_id') and $request->has('car_general_spec_id'), function ($query) use($Car){
+                return $query->where('car_body_type_id', request('car_body_type_id'))->where('car_general_spec_id', request('car_general_spec_id'))->where('car_variant_id', $Car->car_variant_id);
+            })->when($request->has('car_body_type_id'), function ($query) use($Car){
+                return $query->where('car_body_type_id', request('car_body_type_id'))->where('car_general_spec_id', $Car->car_general_spec_id)->where('car_variant_id', $Car->car_variant_id);
+            })->when($request->has('car_general_spec_id'), function ($query) use($Car){
+                return $query->where('car_general_spec_id', request('car_general_spec_id'))->where('car_body_type_id', $Car->car_body_type_id)->where('car_variant_id', $Car->car_variant_id);
             })->when(empty(request()->except(['_token','_method','car_id','car']) == true), function ($query) use($Car){
-                return $query->where('car_body_type_id', $Car->car_body_type_id)->where('car_general_spec_id', $Car->car_general_spec_id)->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
+                return $query->where('car_body_type_id', $Car->car_body_type_id)->where('car_general_spec_id', $Car->car_general_spec_id)->where('car_variant_id', $Car->car_variant_id);
             })],
             'car_body_type_id' => [Rule::notIn('0'),
-            Rule::unique('cars','car_body_type_id')->ignore($carID)->when(request('year'), request('car_general_spec_id'), function ($query) use($Car){
-                return $query->where('year', request('year'))->where('car_general_spec_id', request('car_general_spec_id'))->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
-            })->when(request('year'), function ($query) use($Car){
-                return $query->where('year', request('year'))->where('car_general_spec_id', $Car->car_general_spec_id)->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
-            })->when(request('car_general_spec_id'), function ($query) use($Car){
-                return $query->where('car_general_spec_id', request('car_general_spec_id'))->where('year', $Car->year)->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
+            Rule::unique('cars','car_body_type_id')->ignore($carID)->when($request->has('year') and $request->has('car_general_spec_id'), function ($query) use($Car){
+                return $query->where('year', request('year'))->where('car_general_spec_id', request('car_general_spec_id'))->where('car_variant_id', $Car->car_variant_id);
+            })->when($request->has('year'), function ($query) use($Car){
+                return $query->where('year', request('year'))->where('car_general_spec_id', $Car->car_general_spec_id)->where('car_variant_id', $Car->car_variant_id);
+            })->when($request->has('car_general_spec_id'), function ($query) use($Car){
+                return $query->where('car_general_spec_id', request('car_general_spec_id'))->where('year', $Car->year)->where('car_variant_id', $Car->car_variant_id);
             })->when(empty(request()->except(['_token','_method','car_id','car'])), function ($query) use($Car){
-                return $query->where('year', $Car->year)->where('car_general_spec_id', $Car->car_general_spec_id)->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
+                return $query->where('year', $Car->year)->where('car_general_spec_id', $Car->car_general_spec_id)->where('car_variant_id', $Car->car_variant_id);
             })],
             'car_general_spec_id' => [Rule::notIn('0'),
-            Rule::unique('cars','car_general_spec_id')->ignore($carID)->when(request('year'), request('car_body_type_id'), function ($query) use($Car){
-                return $query->where('year', request('year'))->where('car_body_type_id', request('car_body_type_id'))->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
-            })->when(request('year'), function ($query) use($Car){
-                return $query->where('year', request('year'))->where('car_body_type_id', $Car->car_body_type_id)->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
-            })->when(request('car_body_type_id'), function ($query) use($Car){
-                return $query->where('car_body_type_id', request('car_body_type_id'))->where('year', $Car->year)->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
+            Rule::unique('cars','car_general_spec_id')->ignore($carID)->when($request->has('year') and $request->has('car_body_type_id'), function ($query) use($Car){
+                return $query->where('year', request('year'))->where('car_body_type_id', request('car_body_type_id'))->where('car_variant_id', $Car->car_variant_id);
+            })->when($request->has('year'), function ($query) use($Car){
+                return $query->where('year', request('year'))->where('car_body_type_id', $Car->car_body_type_id)->where('car_variant_id', $Car->car_variant_id);
+            })->when($request->has('car_body_type_id'), function ($query) use($Car){
+                return $query->where('car_body_type_id', request('car_body_type_id'))->where('year', $Car->year)->where('car_variant_id', $Car->car_variant_id);
             })->when(empty(request()->except(['_token','_method','car_id','car'])), function ($query) use($Car){
-                return $query->where('year', $Car->year)->where('car_body_type_id', $Car->car_body_type_id)->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
+                return $query->where('year', $Car->year)->where('car_body_type_id', $Car->car_body_type_id)->where('car_variant_id', $Car->car_variant_id);
             })],
             'spec_file' => ['mimes:json,txt,xml,xls,xlsx'],
             'data_file' => ['mimes:xls,xlsx']
