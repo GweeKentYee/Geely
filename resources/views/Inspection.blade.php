@@ -15,7 +15,8 @@
                         <th>Date</th>
                         <th>File</th>
                         <th>Registration_Number</th>
-                        <th>Action</th>
+                        <th>Details</th>
+                        <th>Delete</th>
                     </tr>
                 <thead>
             </table>
@@ -112,9 +113,10 @@
             "columns": [
                 {"data": "id"},
                 {"data": "inspection_date"},
-                {"data": "File"},
+                {"data": "File", className: "text-center"},
                 {"data": "Reg_Num"},
-                {"data": "Action", orderable: false, searchable: false}
+                {"data": "Details", orderable: false, searchable: false},
+                {"data": "Delete", orderable: false, searchable: false}
             ]
         });
 

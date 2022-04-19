@@ -23,7 +23,7 @@ class DataTableController extends Controller
 
             ->addColumn('File', function($query){
 
-                $File = '<a href = "/admin/inspection/file/view/'.$query->id.'">'.$query->result_file.'</a>';
+                $File = '<a href = "/admin/inspection/file/view/'.$query->id.'" style="color: black"><i class="bi bi-download"></i></a>';
 
                 return $File;
 
@@ -37,16 +37,21 @@ class DataTableController extends Controller
 
             })
 
-            ->addColumn('Action', function($query){
+            ->addColumn('Details', function($query){
 
-                $actionBtn = //'<a href = "/player/download/' .$query->JSON_file. '" class = "download btn btn-primary btn-sm">Download</a>
-                                //'<a class = "btn btn-success btn-sm edit" href = "/allplayer/edit/'.$query->id.'">Edit</a>
-                                '<a class= "btn btn-primary btn-sm details" href= "/admin/inspection/details/'.$query->id.'" >Details</a>
-                                <a class= "btn btn-danger btn-sm delete" href= "/admin/inspection/delete/'.$query->id.'">Delete</a>'
-                                ;
+                $actionBtn = '<a class= "btn btn-primary btn-sm details" href= "/admin/inspection/details/'.$query->id.'"><i class="bi bi-info-circle"></i> Details</a>';
+                                
                 return $actionBtn;
 
-            })->rawColumns(['File','Action'])
+            })
+
+            ->addColumn('Delete', function($query){
+
+                $actionBtn = '<a class= "btn btn-danger btn-sm delete" href= "/admin/inspection/delete/'.$query->id.'"><i class="bi bi-trash"></i> Delete</a>';
+                                         
+                return $actionBtn;
+
+            })->rawColumns(['File','Details','Delete'])
             ->make(true);
     }
 
@@ -74,7 +79,7 @@ class DataTableController extends Controller
 
             ->addColumn('Data_File', function($query){
 
-                $dataFile = '<a href = "/admin/car/file/viewdata/'.$query->id.'" style="color: black"><i class="bi bi-eye-fill"></i></a>';
+                $dataFile = '<a href = "/admin/car/file/viewdata/'.$query->id.'" style="color: black"><i class="bi bi-download"></i></a>';
 
                 return $dataFile;
 

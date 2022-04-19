@@ -82,32 +82,28 @@ class CarController extends Controller
 
         $data = $request->validate([
             'car_brand' => ['required', Rule::notIn('0')],
-            'car_model' => ['required', Rule::notIn('0'),
-            Rule::unique('cars','car_model_id')->where(function ($query){
-                return $query->where('car_variant_id', request('car_variant'))->where('year', request('year'))->where('car_body_type_id', request('car_body_type'))->where('car_general_spec_id', request('car_general_spec'));
-            })],
+            'car_model' => ['required', Rule::notIn('0')],
             'car_variant' => ['required', Rule::notIn('0'),
             Rule::unique('cars','car_variant_id')->where(function ($query){
-                return $query->where('year', request('year'))->where('car_model_id', request('car_model'))->where('car_body_type_id', request('car_body_type'))->where('car_general_spec_id', request('car_general_spec'));
+                return $query->where('year', request('year'))->where('car_body_type_id', request('car_body_type'))->where('car_general_spec_id', request('car_general_spec'));
             })],
             'year' => ['required', Rule::notIn('0'),
             Rule::unique('cars','year')->where(function ($query){
-                return $query->where('car_variant_id', request('car_variant'))->where('car_body_type_id', request('car_body_type'))->where('car_model_id', request('car_model'))->where('car_general_spec_id', request('car_general_spec'));
+                return $query->where('car_variant_id', request('car_variant'))->where('car_body_type_id', request('car_body_type'))->where('car_general_spec_id', request('car_general_spec'));
             })],
             'car_body_type' => ['required', Rule::notIn('0'),
             Rule::unique('cars','car_body_type_id')->where(function ($query){
-                return $query->where('car_variant_id', request('car_variant'))->where('year', request('year'))->where('car_general_spec_id', request('car_general_spec'))->where('car_model_id', request('car_model'));
+                return $query->where('car_variant_id', request('car_variant'))->where('year', request('year'))->where('car_general_spec_id', request('car_general_spec'));
             })],
             'car_general_spec' => ['required', Rule::notIn('0'),
             Rule::unique('cars','car_general_spec_id')->where(function ($query){
-                return $query->where('car_variant_id', request('car_variant'))->where('car_body_type_id', request('car_body_type'))->where('year', request('year'))->where('car_model_id', request('car_model'));
+                return $query->where('car_variant_id', request('car_variant'))->where('car_body_type_id', request('car_body_type'))->where('year', request('year'));
             })],
             'spec_file' => ['mimes:json,txt,xml,xls,xlsx'],
-            'data_file' => ['required', 'mimes:json,txt,xml,xls,xlsx']
+            'data_file' => ['required', 'mimes:xls,xlsx']
         ]);
 
         $Car = Car::create([
-            'car_model_id' => $data['car_model'],
             'car_variant_id' => $data['car_variant'],
             'year' => $data['year'],
             'car_body_type_id' => $data['car_body_type'],
@@ -247,7 +243,7 @@ class CarController extends Controller
                 return $query->where('year', $Car->year)->where('car_body_type_id', $Car->car_body_type_id)->where('car_model_id', $Car->car_model_id)->where('car_variant_id', $Car->car_variant_id);
             })],
             'spec_file' => ['mimes:json,txt,xml,xls,xlsx'],
-            'data_file' => ['mimes:json,txt,xml,xls,xlsx']
+            'data_file' => ['mimes:xls,xlsx']
         ]);
 
         $input = collect($data)->whereNotNull()->all();
