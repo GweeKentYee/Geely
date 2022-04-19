@@ -252,6 +252,14 @@ class DataTableController extends Controller
 
             })
 
+            ->addColumn('Remark', function($query){
+
+                $Remark = '<p>temp</p>';
+                
+                return $Remark;
+
+            })
+
             ->addColumn('Sequence', function($query){
                 if($query->sequence==0){
                     $Sequence = 'Do Not Display';
@@ -288,7 +296,7 @@ class DataTableController extends Controller
 
             })
             
-            ->rawColumns(['Image','Link','Edit','Delete'])
+            ->rawColumns(['Remark','Image','Link','Edit','Delete'])
             ->make(true);
 
     }

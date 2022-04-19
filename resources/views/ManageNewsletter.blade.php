@@ -12,6 +12,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Remark</th>
                         <th>Link</th>
                         <th>Image</th>
                         <th>Sequence</th>
@@ -92,6 +93,7 @@
             "ajax": "{{ route('api.newsletter')}}",
             "columns": [
                 {"data": "id"},
+                {"data": "Remark"},
                 {"data": "Link"},
                 {"data": "Image"},
                 {"data": "Sequence"},
