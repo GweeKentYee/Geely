@@ -6,7 +6,7 @@
         <h3><u>Inspection</u></h3>
         <div class="col-md-9">
             <div style = "text-align:right" class = "pb-1">
-                <button class = "btn btn-primary" data-bs-toggle="modal" data-bs-target="#newinspection">New Inspection</button>
+                <button class = "btn btn-primary" data-bs-toggle="modal" data-bs-target="#newinspection"><i class="bi bi-plus-lg"></i> New Inspection</button>
             </div>
             <table class = "table" id = "datatable" style="width:100%">
                 <thead>
