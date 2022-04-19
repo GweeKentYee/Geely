@@ -29,7 +29,20 @@
                     @enderror
                     <br>
                     <label>Sequence:</label>
-                    <input type="number" name="sequence" class="form-control @error('sequence') is-invalid @enderror" value="{{ old('sequence') }}" min = "0" max = "" placeholder="{{$newsletter->sequence}}">
+                    <select id = "sequence" name = "sequence" class = "form-select" placeholder="Sequence" @error('sequence') is-invalid @enderror>
+                        @if ($newsletter->sequence==0)
+                                <option value={{$newsletter->sequence}} selected hidden>Do Not Display</option>
+                            @else
+                                <option value={{$newsletter->sequence}} selected hidden>{{$newsletter->sequence}}</option>
+                            @endif
+                        @for($i=0;$i<=5;$i++)
+                            @if ($i==0)
+                                <option value={{$i}}>Do Not Display</option>
+                            @else
+                                <option value={{$i}}>{{$i}}</option>
+                            @endif
+                        @endfor
+                    </select>
                     @error('sequence')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -47,6 +60,16 @@
 @endsection
 
 @section('footer-scripts')
+<script>
+    $(document).ready(function () {
+        $('#sequence').on('change', function (e) {
+            $value = e.target.value;
 
+            if($value==0){
+                $('#sequence').value='Do Not Display';
+            }
+        });
+    });
+</script>
 
 @endsection

@@ -6,7 +6,7 @@
         <h3><u>Manage Newsletter</u></h3>
         <div class="col-md-9">
             <div style = "text-align:right" class = "pb-1">
-                <button class = "btn btn-primary" data-bs-toggle="modal" data-bs-target="#newnewsletter">New Newsletter</button>
+                <button class = "btn btn-primary" data-bs-toggle="modal" data-bs-target="#newnewsletter"><i class="bi bi-plus-lg"></i> New Newsletter</button>
             </div>
             <table class = "table" id = "datatable" style="width:100%">
                 <thead>
@@ -15,7 +15,8 @@
                         <th>Link</th>
                         <th>Image</th>
                         <th>Sequence</th>
-                        <th>Action</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                 <thead>
             </table>
@@ -42,7 +43,13 @@
                             @enderror
                             <br>
                             <label>Sequence:</label>
-                            <input type="number" value="0" name="sequence" class="form-control @error('sequence') is-invalid @enderror" value="{{ old('sequence') }}" min = "0" max = "">
+                            <select id = "sequence" name = "sequence" class = "form-select" placeholder="Sequence" @error('sequence') is-invalid @enderror>
+                                <option value="0" selected >Do Not Display</option>
+                                @for($i=1;$i<=5;$i++)
+                                    <option value={{$i}}>{{$i}}</option>
+                                @endfor
+                            </select>
+                            {{-- <input type="number" value="0" name="sequence" class="form-control " value="{{ old('sequence') }}" min = "0" max = "5"> --}}
                             @error('sequence')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -87,8 +94,9 @@
                 {"data": "id"},
                 {"data": "Link"},
                 {"data": "Image"},
-                {"data": "sequence"},
-                {"data": "Action", orderable: false, searchable: false}
+                {"data": "Sequence"},
+                {"data": "Edit", orderable: false, searchable: false},
+                {"data": "Delete", orderable: false, searchable: false}
             ]
         });
 

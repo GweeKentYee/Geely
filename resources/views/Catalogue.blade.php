@@ -59,9 +59,6 @@
                         <label>Variant :</label>
                         <select id = "variant" name = "variant" class = "form-select" placeholder="Variant" disabled>
                             <option value="" disabled selected hidden>Variant</option>
-                            {{-- @foreach($carvariant as $carvariants)
-                                <option value="{{ $carvariants->id }}">{{ $carvariants->variant }}</option>
-                            @endforeach --}}
                         </select>
                         <br>
                         <label>Body Type :</label>
@@ -72,9 +69,9 @@
                             @endforeach
                         </select>
                         <br>
-                        <label>General Specifications :</label>
-                        <select id = "generalSpec" name = "generalSpec" class = "form-select" placeholder="General Specifications">
-                            <option value="" disabled selected hidden>General Specifications</option>
+                        <label>Fuel - Transmission :</label>
+                        <select id = "generalSpec" name = "generalSpec" class = "form-select" placeholder="Fuel - Transmission">
+                            <option value="" disabled selected hidden>Fuel - Transmission</option>
                             @foreach($generalspec as $generalspecs)
                                 <option value="{{ $generalspecs->id }}">{{ $generalspecs->fuel}} {{$generalspecs->transmission}}</option>
                             @endforeach

@@ -10,7 +10,7 @@
                             <img class="d-block w-100" src="{{$Dash->get($i)->image}}" alt="First slide">
                         </a>
                     @else
-                        <a class="carousel-item" href="{{$Dash->get($i)->title}}" target="_blank">
+                        <a class="carousel-item" href="{{$Dash->get($i)->link}}" target="_blank">
                             <img class="d-block w-100" src="{{$Dash->get($i)->image}}" alt="Second slide">
                         </a>
                 @endif
