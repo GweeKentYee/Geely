@@ -29,7 +29,6 @@ class CatalogueController extends Controller
         $carbodytype= CarBodyType::orderBy('body_type','ASC')->get();
         $generalspec= CarGeneralSpec::all();
         $collections = Collection::all()->where('user_id',auth()->id());
-        
 
         return view('Catalogue',
         ['usedcar' => $usedcar,'carbrand'=>$carbrand,'carmodel'=>$carmodel,'carvariant'=>$carvariant,'carbodytype'=>$carbodytype,'generalspec'=>$generalspec,'collections'=> $collections]
