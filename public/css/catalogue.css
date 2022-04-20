@@ -5,16 +5,14 @@ font-family: 'Roboto';
 font-weight: 700;
 }
 
-.card{
+
+.cat-card{
+box-shadow: 5px 5px 25px -5px rgba(50,121,175,0.25);
 width:100%;
 border-radius: 0.5rem;
 }
 
-.cat-card{
-box-shadow: 5px 5px 25px -5px rgba(50,121,175,0.25);
-}
-
-.card:hover{
+.cat-card:hover{
 width: 102%;
 }
 
@@ -81,6 +79,18 @@ color: #00468e;
 
 }
 
+@media (max-width: 500px) {
+    .card-car-price{
+        margin-top: 1rem;
+        font-size: 0.8rem;
+        color: black;
+        font-family: 'Roboto';
+        color: #00468e; 
+        
+        }
+    
+  }
+
 .card-subtitle {
 font-family: 'Roboto';
 font-weight: 700;
@@ -126,3 +136,4 @@ color: #000;
 text-decoration: none;
 cursor: pointer;
 }
+

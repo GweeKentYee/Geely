@@ -13,7 +13,6 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" defer></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Fonts -->
@@ -26,7 +25,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app2.css') }}" rel="stylesheet">
     @yield('css')
-    <link href="{{ asset('css/catalogue.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link rel="stylesheet" type = "text/css" href = "//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 
@@ -183,84 +181,44 @@
                     <ul class="list-unstyled components">
                         @guest
                             <li>
-                                <a href="/">Dashboard</a>
+                                <a class="sidebar-link" href="/">Dashboard</a>
                             </li>
                             <li>
-                                <a href="/catalogue">Catalogue</a>
+                                <a class="sidebar-link" href="/catalogue">Catalogue</a>
                             </li>         
-                            @if (Route::has('login'))
-                                <li>
-                                    <a href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li>
-                                    <a href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
                         @else
                             @if (Auth::user()->status == 'Admin')
                                 <li>
-                                    <a href = "/admin/inspection">Inspection</a>
+                                    <a class="sidebar-link" href = "/admin/inspection">Inspection</a>
                                 </li>
                                 <li>
-                                    <a href = "/admin/catalogue">Manage Catalogue</a>
+                                    <a class="sidebar-link" href = "/admin/newsletter">Manage Newsletter</a>
                                 </li>
                                 <li>
-                                    <a href = "/admin/newsletter">Manage Newsletter</a>
+                                    <a class="sidebar-link" href = "/admin/carmodel">Car Model</a>
                                 </li>
                                 <li>
-                                    <a href = "/admin/carmodel">Car Model</a>
+                                    <a class="sidebar-link" href = "/admin/car">Car</a>
                                 </li>
                                 <li>
-                                    <a href = "/admin/car">Car</a>
+                                    <a class="sidebar-link" href = "/admin/carbrand">Car Brand</a>
                                 </li>
                                 <li>
-                                    <a href = "/admin/brand_model_variant">Brand/Model/Variant</a>
-                                </li>
-                                <li>
-                                    <a href = "/admin/carbrand">Car Brand</a>
-                                </li>
-                                <li>
-                                    <a href = "/admin/carmodel">Car Model</a>
-                                </li>
-                                <li>
-                                    <a href = "/admin/carvariant">Car Variant</a>
+                                    <a class="sidebar-link" href = "/admin/carvariant">Car Variant</a>
                                 </li>  
-                                <li>
-                                    <a href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </li>                          
                                 
                             @else
                                 <li>
-                                    <a href="/">Dashboard</a>
+                                    <a class="sidebar-link" href="/">Dashboard</a>
                                 </li>
                                 <li>
-                                    <a href="/catalogue">Catalogue</a>
+                                    <a class="sidebar-link" href="/catalogue">Catalogue</a>
                                 </li> 
                                 <li>
-                                    <a href="/collection">Collection</a>
+                                    <a class="sidebar-link" href="/collection">Collection</a>
                                 </li> 
-                                <li>
-                                    <a href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </li>
                             @endif
                             
                         @endguest
@@ -280,34 +238,42 @@
                             <button class="btn d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
+                            
+                            
+                            <ul id="login-register-ul" class="navbar-nav ms-auto d-lg-none d-xl-none">
+                                @guest
+                                    @if (Route::has('login'))
+                                        <li class="nav-item" id="login">
+                                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                        </li>
+                                    @endif
+        
+                                    @if (Route::has('register'))
+                                        <li class="nav-item" id="register">
+                                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                        </li>
+                                    @endif
+                                @else
+                                    <li class="nav-item" id="register">
+                                        {{ Auth::user()->name }}
+                                    </li>
+                                @endguest
+                            </ul>
+
         
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="nav navbar-nav ml-auto d-lg-none d-xl-none">
                                     @guest
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="/">Dashboard</a>
+                                            <a class="nav-link dashboard" href="/">Dashboard</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="/catalogue">Catalogue</a>
                                         </li>
-                                        @if (Route::has('login'))
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                            </li>
-                                        @endif
-
-                                        @if (Route::has('register'))
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                            </li>
-                                        @endif
                                     @else
                                         @if (Auth::user()->status == 'Admin')
                                             <li class="nav-item active">
                                                 <a class="nav-link" href = "/admin/inspection">Inspection</a>
-                                            </li>
-                                            <li class="nav-item active">
-                                                <a class="nav-link" href = "/admin/catalogue">Manage Catalogue</a>
                                             </li>
                                             <li class="nav-item active">
                                                 <a class="nav-link" href = "/admin/newsletter">Manage Newsletter</a>
@@ -319,13 +285,7 @@
                                                 <a class="nav-link" href = "/admin/car">Car</a>
                                             </li>
                                             <li class="nav-item active">
-                                                <a class="nav-link" href = "/admin/brand_model_variant">Brand/Model/Variant</a>
-                                            </li>
-                                            <li class="nav-item active">
                                                 <a class="nav-link" href = "/admin/carbrand">Car Brand</a>
-                                            </li>
-                                            <li class="nav-item active">
-                                                <a class="nav-link" href = "/admin/carmodel">Car Model</a>
                                             </li>
                                             <li class="nav-item active">
                                                 <a class="nav-link" href = "/admin/carvariant">Car Variant</a>
@@ -365,13 +325,54 @@
                                         @endif
                                                                             
                                     @endguest
-                                    
-                                    
-                                </ul>
+                                                 
+                                </ul>   
+                                                
                                 
                             </div>
                             
+                         
                         </div>
+                        
+                        <ul id="login-register-ul" class="navbar-nav ms-auto">
+                            @guest
+                                @if (Route::has('login'))
+                                    <li class="nav-item  d-none d-lg-block d-xl-block" id="login">
+                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    </li>
+                                @endif
+    
+                                @if (Route::has('register'))
+                                    <li class="nav-item  d-none d-lg-block d-xl-block" id="register">
+                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    </li>
+                                @endif
+                            @else
+                                {{-- <li class="nav-item d-none d-lg-block d-xl-block" id="user-name">
+                                    {{ Auth::user()->name }}
+                                </li> --}}
+                                <li class="nav-item dropdown d-none d-lg-block d-xl-block">
+                                    <a id="navbarDropdown" class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }}
+                                    </a>
+    
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+    
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+    
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                                
+                            @endguest
+                        </ul>
+                       
                     </nav>
         
                     @yield('content')
@@ -379,10 +380,6 @@
     
             
         </div>
-
-
-
-
 
 
 
@@ -397,8 +394,8 @@
     </div>
 </body>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> --}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script>
 

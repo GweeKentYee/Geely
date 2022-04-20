@@ -16,13 +16,14 @@ p {
     color: #999;
 }
 
-a,
-a:hover,
-a:focus {
-    color: inherit;
+.sidebar-link,
+.sidebar-link:hover,
+.sidebar-link:focus {
+    color: white;
     text-decoration: none;
     transition: all 0.3s;
 }
+
 
 .navbar {
     padding: 15px 10px;
@@ -167,3 +168,17 @@ a.article:hover {
         display: none;
     }
 }
+
+/* Self added css */
+#login-register-ul{
+    flex-direction: row;
+}
+
+#login{
+    margin-right: 1rem;
+}
+
+#user-name{
+    margin-right: 1rem;
+}
+
