@@ -92,7 +92,7 @@ class DataTableController extends Controller
                 return $CarBrand;
 
             })
-            
+
             ->addColumn('Car_Model', function($query){
 
                 $CarModel = $query->carVariant->carModel->model;
@@ -140,8 +140,9 @@ class DataTableController extends Controller
                 return $actionButton;
 
             })
-            
+
             ->addColumn('Delete', function($query){
+
 
                 $actionButton = '<a class= "btn btn-danger btn-sm delete" href= "/admin/car/delete/'.$query->id.'"><i class="bi bi-trash"></i> Delete</a>';
                 
@@ -165,7 +166,7 @@ class DataTableController extends Controller
                 return $actionButton;
 
             })
-            
+
             ->addColumn('Delete', function($query){
 
                 $actionButton = '<a class= "btn btn-danger btn-sm delete" href= "/admin/carbrand/delete/'.$query->id.'"><i class="bi bi-trash"></i> Delete</a>';
@@ -198,7 +199,7 @@ class DataTableController extends Controller
                 return $actionButton;
 
             })
-            
+
             ->addColumn('Delete', function($query){
 
                 $actionButton = '<a class= "btn btn-danger btn-sm delete" href= "/admin/carmodel/delete/'.$query->id.'"><i class="bi bi-trash"></i> Delete</a>';
@@ -231,7 +232,7 @@ class DataTableController extends Controller
                 return $actionButton;
 
             })
-            
+
             ->addColumn('Delete', function($query){
 
                 $actionButton = '<a class= "btn btn-danger btn-sm delete" href= "/admin/carvariant/delete/'.$query->id.'"><i class="bi bi-trash"></i> Delete</a>';
@@ -241,11 +242,11 @@ class DataTableController extends Controller
             })->rawColumns(['Edit', 'Delete'])  // for columns which involve html codes
             ->make(true);
     }
-  
+
     public function newsletter(){
 
             $query = Newsletter::select('*');
-              
+
              return datatables($query)
             ->addIndexColumn()
 
