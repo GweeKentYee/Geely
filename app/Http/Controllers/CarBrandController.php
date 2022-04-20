@@ -13,7 +13,7 @@ class CarBrandController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function viewAdminPage(){
 
         return view('CarBrand');
@@ -31,7 +31,7 @@ class CarBrandController extends Controller
     public function addCarBrand(Request $request){
 
         $data = $request->validate([
-            'brand' => ['required', 
+            'brand' => ['required',
             Rule::unique('car_brands','brand')->where(function ($query){
                 return $query;
             })]
@@ -75,7 +75,7 @@ class CarBrandController extends Controller
             return redirect('admin/carbrand');
 
         } else {
-            
+
             Session::flash('field_empty', 'Please fill in the field.');
 
             return redirect('admin/carbrand/edit/'.$carbrandID);

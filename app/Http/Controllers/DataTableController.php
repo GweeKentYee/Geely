@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inspection;
+use App\Models\UsedCar;
 use App\Models\Car;
 use App\Models\CarBrand;
 use App\Models\CarModel;
@@ -40,7 +41,7 @@ class DataTableController extends Controller
             ->addColumn('Details', function($query){
 
                 $actionBtn = '<a class= "btn btn-primary btn-sm details" href= "/admin/inspection/details/'.$query->id.'"><i class="bi bi-info-circle"></i> Details</a>';
-                                
+
                 return $actionBtn;
 
             })
@@ -48,7 +49,7 @@ class DataTableController extends Controller
             ->addColumn('Delete', function($query){
 
                 $actionBtn = '<a class= "btn btn-danger btn-sm delete" href= "/admin/inspection/delete/'.$query->id.'"><i class="bi bi-trash"></i> Delete</a>';
-                                         
+
                 return $actionBtn;
 
             })->rawColumns(['File','Details','Delete'])
@@ -72,7 +73,7 @@ class DataTableController extends Controller
 
                     $specFile = '<a href = "/admin/car/file/viewspec/'.$query->id.'" style="color: black; font-size: 16px"><i class="bi bi-eye-fill"></i></a>';
                 }
-                
+
                 return $specFile;
 
             })
@@ -136,7 +137,7 @@ class DataTableController extends Controller
             ->addColumn('Edit', function($query){
 
                 $actionButton = '<a href= "/admin/car/edit/'.$query->id.'" style="color: blue; font-size: 16px"><i class="bi bi-pencil-square"></i></a>';
-                
+
                 return $actionButton;
 
             })
@@ -145,7 +146,7 @@ class DataTableController extends Controller
 
 
                 $actionButton = '<a class= "btn btn-danger btn-sm delete" href= "/admin/car/delete/'.$query->id.'"><i class="bi bi-trash"></i> Delete</a>';
-                
+
                 return $actionButton;
 
             })->rawColumns(['Spec_File', 'Data_File', 'Edit', 'Delete'])  // for columns which involve html codes
@@ -162,7 +163,7 @@ class DataTableController extends Controller
             ->addColumn('Edit', function($query){
 
                 $actionButton = '<a href= "/admin/carbrand/edit/'.$query->id.'" style="color: blue; font-size: 16px"><i class="bi bi-pencil-square"></i></a>';
-                
+
                 return $actionButton;
 
             })
@@ -170,7 +171,7 @@ class DataTableController extends Controller
             ->addColumn('Delete', function($query){
 
                 $actionButton = '<a class= "btn btn-danger btn-sm delete" href= "/admin/carbrand/delete/'.$query->id.'"><i class="bi bi-trash"></i> Delete</a>';
-                
+
                 return $actionButton;
 
             })->rawColumns(['Edit', 'Delete'])  // for columns which involve html codes
@@ -195,7 +196,7 @@ class DataTableController extends Controller
             ->addColumn('Edit', function($query){
 
                 $actionButton = '<a href= "/admin/carmodel/edit/'.$query->id.'" style="color: blue; font-size: 16px"><i class="bi bi-pencil-square"></i></a>';
-                
+
                 return $actionButton;
 
             })
@@ -203,7 +204,7 @@ class DataTableController extends Controller
             ->addColumn('Delete', function($query){
 
                 $actionButton = '<a class= "btn btn-danger btn-sm delete" href= "/admin/carmodel/delete/'.$query->id.'"><i class="bi bi-trash"></i> Delete</a>';
-                
+
                 return $actionButton;
 
             })->rawColumns(['Edit', 'Delete'])  // for columns which involve html codes
@@ -228,7 +229,7 @@ class DataTableController extends Controller
             ->addColumn('Edit', function($query){
 
                 $actionButton = '<a href= "/admin/carvariant/edit/'.$query->id.'" style="color: blue; font-size: 16px"><i class="bi bi-pencil-square"></i></a>';
-                
+
                 return $actionButton;
 
             })
@@ -236,7 +237,7 @@ class DataTableController extends Controller
             ->addColumn('Delete', function($query){
 
                 $actionButton = '<a class= "btn btn-danger btn-sm delete" href= "/admin/carvariant/delete/'.$query->id.'"><i class="bi bi-trash"></i> Delete</a>';
-                
+
                 return $actionButton;
 
             })->rawColumns(['Edit', 'Delete'])  // for columns which involve html codes
@@ -261,7 +262,7 @@ class DataTableController extends Controller
             ->addColumn('Remark', function($query){
 
                 $Remark = '<p>temp</p>';
-                
+
                 return $Remark;
 
             })
@@ -289,7 +290,7 @@ class DataTableController extends Controller
             ->addColumn('Edit', function($query){
 
                 $actionBtn = '<a href= "/admin/newsletter/edit/'.$query->id.'" style="color: blue"><i class="bi bi-pencil-square"></i></a>';
-                                
+
                 return $actionBtn;
 
             })
@@ -297,13 +298,33 @@ class DataTableController extends Controller
             ->addColumn('Delete', function($query){
 
                 $actionBtn = '<a class= "btn btn-danger btn-sm delete" href= "/admin/newsletter/delete/'.$query->id.'"><i class="bi bi-trash"></i> Delete</a>';
-                                
+
                 return $actionBtn;
 
             })
-            
+
             ->rawColumns(['Remark','Image','Link','Edit','Delete'])
             ->make(true);
 
     }
+
+    public function usedcar(){
+
+        $query = usedcar::select('*');
+
+        return datatables($query)
+            ->addIndexColumn()
+                ->addColumn('Action', function($query){
+
+                    $actionBtn = '<a class = "btn btn-primary btn-sm detail" href = "/usedcar/details/'.$query->id.'" ">Image</a>
+                                    <a class = "btn btn-success btn-sm edit" href = "/usedcar/edit/'.$query->id.'" >Edit</a>
+                                    <a class= "btn btn-danger btn-sm delete" href = "/usedcar/delete/'.$query->id.' ">Delete</a>'
+                                    ;
+                    return $actionBtn;
+
+                })->rawColumns(['Action'])
+                ->make(true);
+
+    }
+
 }

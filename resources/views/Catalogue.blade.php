@@ -2,6 +2,9 @@
 
 @section('css')
 <link href="{{ asset('css/catalogue.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 @endsection
 
 @section('content')
@@ -31,14 +34,14 @@
                     </div>
                 </form>
             </div>
-            
+
             <div class="d-flex justify-content-center">
                 <div class="col-md-2">
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#advancedSearch" class="row">Advanced Search</button>
-                </div> 
+                </div>
             </div>
         </div>
-        
+
 
         <!-- Modal for advanced search -->
         <div class="modal fade" id="advancedSearch" tabindex="-1">
@@ -115,76 +118,79 @@
                 </div>
             </div>
         </div>
-        
-        <div>
-            {{-- displays a "NO MATCHES IN OUR DATABASE" if there are no cars to display --}}
-            @if(count($usedcar)<1)
-                <div class="cata-card" style="width: 15rem; display: inline-block;">
-                    <div>NO MATCHES IN OUR DATABASE</div>
-                </div>
-            @else
-                {{-- displays the individual cards for each used car --}}
-                @foreach ( $usedcar as  $usedcars )
-                    <a href='/catalogue/usedcardetails'> 
-                        <div class="cata-card" style="width: 15rem; display: inline-block;">
-                            <div style="display:flex; justify-content: center; margin:5px;">
-                                <div class="cata-card-image" style="width: 12.5rem;height: 12.5rem;justify-content:center;">  
-                                    @if (!empty($usedcars->usedCarImages->get(0)->image))
-                                        <img src="{{$usedcars->usedCarImages->get(0)->image}}" alt="" width="200" height="200">
-                                    @else
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="black" class="bi bi-images" viewBox="0 0 16 16">
-                                            <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
-                                            <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z"/>
-                                        </svg>
-                                    @endif  
+
+    <div>
+        {{-- displays a "NO MATCHES IN OUR DATABASE" if there are no cars to display --}}
+        @if(count($usedcar)<1)
+            <div class="cata-card" style="width: 15rem; display: inline-block;">
+                <div>NO MATCHES IN OUR DATABASE</div>
+            </div>
+        @else
+
+            <div class="row" style="margin-left:0.7rem ">
+                <div class="col-1"></div>
+                    <div class="col-10 row cards-container">
+                        @foreach ( $usedcar as  $usedcars )
+                            <div class="col-lg-4 col-md-6 col-sm-12 mt-5" >
+                                <div class="card cat-card m-auto">
+                                    <div>
+                                        <a href='/catalogue/usedcardetails/{{$usedcars->id}}'>
+                                            <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200">
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="card-title-year-brand col-10">{{$usedcars->car->year}} {{$usedcars->car->carModel->carBrand->brand}}</div>
+                                            <div class="card-title-model-variant col-10">{{$usedcars->car->carModel->model}} {{$usedcars->car->carVariant->variant}} </div>
+                                            <div class="col-2">
+                                                @php
+                                                    $exist_in_collection = false;
+                                                    $used_car_id =  $usedcars->id ;
+                                                    $collection_id_remove = 0;
+
+                                                    foreach($collections as $collection){
+                                                        if( $collection->used_car_id == $used_car_id){
+                                                            $exist_in_collection = true;
+                                                            $collection_id_remove = $collection->id;
+                                                        }
+                                                    }
+                                                @endphp
+
+                                                @if ($exist_in_collection)
+                                                <button disabled class="card-add-collection-btn"><i class="bi bi-star-fill" style="font-size:20px;margin-left:0.2rem;"></i></button>
+
+                                                @else
+                                                    <form action="{{ route('collection.store') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="usedcar_id" value={{ $usedcars->id }} />
+                                                        <button type="submit" class="card-add-collection-btn"><i class="bi bi-star" style="font-size:20px;margin-left:0.2rem;"></i></button>
+                                                    </form>
+                                                @endif
+
+                                            </div>
+                                        </div>
+
+                                        <div class="card-car-details">
+                                            <span>{{$usedcars->car->carGeneralSpec->fuel}} | {{$usedcars->car->carGeneralSpec->transmission}} | {{$usedcars->car->carBodyType->body_type}} </span>
+                                        </div>
+                                        <div class="card-car-price">
+                                            <span style="font-size: 12px">min:</span>
+                                            <strong>RM{{ $usedcars->min_price }}</strong>
+                                            <span>       </span>
+                                            <span style="font-size: 12px">max:</span>
+                                            <strong>RM{{ $usedcars->max_price }}</strong>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
-                            <div class="cata-card-title">CAR MODEL : </div>
-                            <div class="cata-card-subtitle">{{$usedcars->car->carModel->model}}</div>
-                            <div class="cata-card-title">PRICE : </div>
-                            <div class="cata-card-subtitle">RM {{$usedcars->min_price}} to RM {{$usedcars->max_price}}</div>
-
-                            <div style="display:flex; justify-content: center; margin:5px;">
-                                {{-- <div class="cata-card-button" style="width: 12.5rem;">
-                                    <div class="cata-card-button-content">ADD TO COLLECTION</div>
-                                </div> --}}
-                                @php    
-                                        $exist_in_collection = false;
-                                        $used_car_id =  $usedcars->id ;
-                                        $collection_id_remove = 0;
-
-                                        foreach($collections as $collection){
-                                            if( $collection->used_car_id == $used_car_id){
-                                                $exist_in_collection = true;
-                                                $collection_id_remove = $collection->id;
-                                            }
-                                        }
-                                @endphp
-                                
-                                @if ($exist_in_collection)
-                                    <button class="btn-success cata-card-button-content" type="button" disabled>Added To Collection</button>         
-                                        
-                                @else
-                                    <form action="{{ route('collection.store') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="usedcar_id" value={{ $usedcars->id }} />
-                                        <button class="cata-card-button cata-card-button-content" type="submit">Add To Collection</button>  
-                                    </form>                     
-                                @endif
-                                    
-                                    
-                            </div>
-                        </div>
-                    </a>
-                @endforeach
-            @endif
-
-            <div class="d-flex justify-content-center">
-                {{$usedcar->links()}}
+                        @endforeach
+                    </div>
+                <div class="col-1"></div>
             </div>
-            
-        </div>
-        
+        @endif
+        {{$usedcar->links()}}
     </div>
 </main>
 @endsection

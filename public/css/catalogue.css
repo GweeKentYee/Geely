@@ -1,129 +1,128 @@
 .headline{
-  color: #3279af;
-  padding-left: 2rem;
-  font-family: 'Roboto';
-  font-weight: 700;
+color: #3279af;
+padding-left: 2rem;
+font-family: 'Roboto';
+font-weight: 700;
 }
 
-.cata-card {
-    padding: 5px;
-    margin: 5px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius: 0.5rem;
-    box-shadow: 5px 5px 25px -5px rgba(50,121,175,0.25); 
-  }
-  
-  .cata-card:hover{
-    padding: 5px;
-    margin: 5px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border-radius: 0.5rem;
-    box-shadow: 5px 5px 25px -5px rgba(50,121,175,1.0); 
-  }
-  
-  .cata-card-image {
-    margin: 5px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border-radius: 0.5rem;
-    box-shadow: 5px 5px 25px -5px rgba(0,0,0,0.5); 
-  }
-  
-  .cata-card-title {
-    margin-bottom: 0;
-    font-family: 'Roboto';
-    font-weight: 700;
-  }
-  
-  .cata-card-subtitle {
-    font-family: 'Roboto';
-    font-weight: 700;
-    font-size: large;
-    color: #3279af;
-    text-align: center;
-  }
+.card{
+width:100%;
+border-radius: 0.5rem;
+}
 
-  .cata-card-button {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #3279af;
-    background-clip: border-box;
-    border-radius: 0.25rem;
-  }
+.cat-card{
+box-shadow: 5px 5px 25px -5px rgba(50,121,175,0.25);
+}
 
-  .cata-card-button:hover {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #96cae0;
-    background-clip: border-box;
-    border-radius: 0.25rem;
-  }
+.card:hover{
+width: 102%;
+}
 
-  
-  .cata-card-button-content {
-    text-align: center;
-    color: #ffffff;
-    font-family: 'Roboto';
-    font-weight: 700;
-    font-size: large;
-  }
+.card-img{
+display: block;
+margin-bottom: 0.5rem;
+margin-left: auto;
+margin-right: auto;
+width: 100%;
+height: 100%;
+border-bottom-right-radius: 0;
+border-bottom-left-radius: 0;
+}
 
-  .popup{
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
-    padding-top: 100px; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
-  }
-  
-  .popup-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-  }
-  
-  .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
+.card-body{
+padding: 0 1rem 1rem 1rem;
+}
+
+.card-title{
+font-family: 'Roboto';
+font-weight: 700;
+}
+
+.card-title-year-brand{
+font-family: 'Roboto';
+font-weight: 500;
+font-size: 16px;
+}
+
+.card-title-model-variant{
+font-family: 'Roboto';
+font-weight: 500;
+font-size: 16px;
+}
+
+.card-add-collection-btn{
+color: rgb(250, 86, 86);
+padding: 0;
+border: none;
+background: none;
+}
+
+.card-add-collection-btn:hover{
+color: red;
+font-weight: 500;
+padding: 0;
+border: none;
+background: none;
+}
+
+
+.card-car-details{
+margin-top: 1rem;
+font-size: 12px;
+color: #3279af;
+}
+
+.card-car-price{
+margin-top: 1rem;
+font-size: 1.1rem;
+color: black;
+font-family: 'Roboto';
+color: #00468e; 
+
+}
+
+.card-subtitle {
+font-family: 'Roboto';
+font-weight: 700;
+font-size: large;
+color: #3279af;
+text-align: center;
+margin-bottom: 0.6rem;
+}
+
+
+.popup{
+display: none; 
+position: fixed; 
+z-index: 1; 
+padding-top: 100px; 
+left: 0;
+top: 0;
+width: 100%; 
+height: 100%; 
+overflow: auto; 
+background-color: rgb(0,0,0); 
+background-color: rgba(0,0,0,0.4); 
+}
+
+.popup-content {
+background-color: #fefefe;
+margin: auto;
+padding: 20px;
+border: 1px solid #888;
+width: 80%;
+}
+
+.close {
+color: #aaaaaa;
+float: right;
+font-size: 28px;
+font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+color: #000;
+text-decoration: none;
+cursor: pointer;
+}
