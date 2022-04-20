@@ -133,7 +133,7 @@
 
                     @foreach ( $usedcar as  $usedcars )               
                         <div class="col-lg-4 col-md-6 col-sm-12 mt-5" >
-                            
+                            <a href='/catalogue/usedcardetails/{{$usedcars->id}}'> 
                             <div class="card cat-card m-auto">
                                 <div>   
                                     <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200">
@@ -191,7 +191,6 @@
                 </div>
                 <div class="col-1"></div>
             </div>
-
         @endif
         {{$usedcar->links()}}
     </div>
