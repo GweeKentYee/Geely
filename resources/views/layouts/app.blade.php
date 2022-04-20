@@ -24,8 +24,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app2.css') }}" rel="stylesheet">
-    @yield('css')
-    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    @yield('css')  
     <link rel="stylesheet" type = "text/css" href = "//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 
     <style>
@@ -175,7 +174,7 @@
                 <nav id="sidebar" class="d-none d-lg-block d-xl-block">
                     
                     <div class="sidebar-header">
-                        <h3>Geely</h3>
+                        <h3><a class="sidebar-link" href="/">Geely</a></h3>
                     </div>
         
                     <ul class="list-unstyled components">
