@@ -68,12 +68,10 @@
 .card{
   width:100%;
   border-radius: 0.5rem;
-  box-shadow: 5px 5px 25px -5px rgba(50,121,175,0.25); 
 }
 
 .card:hover{
-  width: 101%;
-  height: 101%;
+  width: 102%;
   /* box-shadow: 5px 5px 25px -5px rgba(50,121,175,1.0);   */
 }
 
@@ -137,7 +135,7 @@
 
 .card-car-price{
   margin-top: 1rem;
-  font-size: 20px;
+  font-size: 1.1rem;
   color: black;
   font-family: 'Roboto';
   color: #00468e; 

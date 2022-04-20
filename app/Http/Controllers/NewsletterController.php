@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Newsletter;
+use Hamcrest\Collection\IsEmptyTraversable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+
+use function PHPUnit\Framework\isEmpty;
 
 class NewsletterController extends Controller
 {
@@ -29,7 +32,7 @@ class NewsletterController extends Controller
 
         $data = $request->validate([
             'link' => ['required', 'url'],
-            'sequence' => ['required','unique:newsletters,sequence'],
+            'sequence' => ['required'],
             'image' => ['required', 'mimes:jpg,bmp,png,tiff']
         ]);
 
@@ -37,11 +40,25 @@ class NewsletterController extends Controller
 
         $ImagePath = $data['image']->move('storage/image/newsletter',$ImageName);
 
-        Newsletter::create([
-            'link' => $data['link'],
-            'image' => str_replace('\\','/',$ImagePath),
-            'sequence' => $data['sequence'],
-        ]);
+        $exist = Newsletter::where('sequence',$data['sequence'])->get();
+
+        if($exist->count() == 0 || $data['sequence'] == 0){
+            
+            Newsletter::create([
+                'link' => $data['link'],
+                'image' => str_replace('\\','/',$ImagePath),
+                'sequence' => $data['sequence'],
+            ]);
+        }else{
+            Newsletter::where('sequence','>=',$data['sequence'])->increment('sequence',1);
+            Newsletter::where('sequence','>',5)->update(['sequence'=>0]);
+            
+            Newsletter::create([
+                'link' => $data['link'],
+                'image' => str_replace('\\','/',$ImagePath),
+                'sequence' => $data['sequence'],
+            ]);
+        }
 
         return redirect('admin/newsletter');
 
@@ -63,26 +80,28 @@ class NewsletterController extends Controller
 
         $data = $request->validate([
             'link' => ['nullable','url'],
-            'sequence' => ['unique:newsletters,sequence,'.$newsletterID],
+            'sequence' => ['nullable'],
         ]);
 
         $input = collect($data)->whereNotNull()->all();
 
+        $exist = Newsletter::where('sequence',$data['sequence'])->get();
         if(!empty($input)) {
-
-            $Newsletter->update($input);
+            if($exist->count() == 0 || $data['sequence'] == 0){
+                $Newsletter->update($input);
+            }else{
+                Newsletter::where('sequence','>=',$data['sequence'])->increment('sequence',1);
+                Newsletter::where('sequence','>',5)->update(['sequence'=>0]);
+                $Newsletter->update($input);
+            }
 
             return redirect('admin/newsletter');
 
         } else {
 
-            Session::flash('field_empty', 'Please fill in the field.');
-
-            return redirect('admin/newsletter/edit/'.$newsletterID);
+            return redirect('admin/newsletter');
 
         }
-
-
 
     }
 
@@ -98,7 +117,15 @@ class NewsletterController extends Controller
 
         }
 
-        Newsletter::where('id',$newsletterID)->delete();
+        if($newsletterID==0){
+            Newsletter::where('id',$newsletterID)->delete();
+        }else{
+            $sequence = Newsletter::find($newsletterID);
+            Newsletter::where('sequence','>',$sequence->sequence)->decrement('sequence',1);
+            Newsletter::where('id',$newsletterID)->delete();
+            
+        }
+        
 
         return redirect('admin/newsletter');
 

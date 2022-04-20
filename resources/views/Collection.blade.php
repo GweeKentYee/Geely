@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    
+  
     <div class="row" >
         <div class="col-1"></div>
         <div class="row col-10">
@@ -108,8 +108,6 @@
           </div>
         </div>
       </div>
-
-    
 
 @endsection
 
