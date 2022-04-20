@@ -43,36 +43,19 @@ class UsedCarController extends Controller
     }
 
     public function update($id,Request $request){
-      $request->validate([
-        'minimum_price'=>['required','integer'],
-        'maximum_price'=>['required','integer'],
-        'registration'=>['required','string'],
-        'status'=>['required','numeric','between:1,3'],
-        'car_id'=>['required','integer'],
-        'data_file'=>['required','file'],
-        'ownership_file'=>['required','file']
+      $data =request()->validate([
+        'minimum_price'=>['numeric','lt:maximum_price'],
+        'maximum_price'=>['numeric','gt:minimum_price'],
+        'status_'=>['numeric','between:1,3'],
+        'ownership_file'=>['file']
 
       ]);
         
         $usedCar = UsedCar::find($id);
-        $usedCar->min_price = $request->input('minimum_price');
-        $usedCar->max_price = $request->input('maximum_price');
-        $usedCar->registration = $request->input('registration');
-        $usedCar->status = $request->input('status');
-        $usedCar->car_id = $request->input('car_id');
-    if($request->hasfile('data_file'))
-        {
-          $destination = 'uploads\data_files\\'.$usedCar->data_file;
-          if(File::exists($destination)){
-            File::delete($destination);
-          }
-            $file = $request->file('data_file');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
-            $file->move('uploads\data_files',$filename);
-            $usedCar->data_file = $filename;
-            
-        }
+        
+          $usedCar->min_price = $data['minimum_price'];
+          $usedCar->max_price = $data['maximum_price'];
+          $usedCar->status = $data['status_'];
         if($request->hasfile('ownership_file'))
         {
           $destination = 'uploads\ownership_files\\'.$usedCar->data_file;

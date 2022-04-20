@@ -47,7 +47,7 @@ Route::get('/usedcar/details/{id}','App\Http\Controllers\UsedCarImageController@
 
 Route::post('/admin/usedcarImage/store','App\Http\Controllers\UsedCarImageController@store');
 Route::get('/usedcarImage/delete/{id}','App\Http\Controllers\UsedCarImageController@delete');
-Route::get('/usedcarImage/edit/{id}','App\Http\Controllers\UsedCarImageController@edit');
+Route::get('/usedCarImage/delete/selected','App\Http\Controllers\UsedCarImageController@deleteSelected');
 Route::put('/usedcarImage/update/{id}','App\Http\Controllers\UsedCarImageController@update');
 
 

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <h3><u>Used Car Details</u></h3>
+            <h3><u>Used Car</u></h3>
             <div class="col-md-9">
 
              @if (session('status'))

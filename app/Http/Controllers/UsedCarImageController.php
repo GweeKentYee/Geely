@@ -11,10 +11,9 @@ class UsedCarImageController extends Controller
 {
   public function viewAdminPage($id){
 
-    $usedcarCombined = UsedCar::join('used_car_images', 'used_cars.id', '=', 'used_car_images.used_car_id')
-           ->where(['used_cars.id' => $id])
-           ->get(['used_cars.min_price','used_cars.max_price','used_cars.registration','used_cars.data_file','used_cars.ownership_file','used_cars.status','used_cars.car_id','used_car_images.id', 'used_car_images.image','used_car_images.used_car_id']);
-    return view('UsedCarDetails',compact('usedcarCombined'));
+    $usedCarImage = UsedCarImage::where('used_car_id',$id)->simplePaginate(9);
+    $usedCar = UsedCar::find($id);
+    return view('UsedCarImages',compact('usedCarImage','usedCar'));
 
 }
 
@@ -22,25 +21,26 @@ class UsedCarImageController extends Controller
     {
       
          $request->validate([
-           'Used_Car_Image'=>['required','file']
+           'Used_Car_Image'=>['required']
 
            ]);
-         
-        $usedCarImage = new UsedCarImage;
-        $usedCarImage->used_car_id = $request->input('add-usedcarid');
-        if($request->hasfile('Used_Car_Image'))
-        {
-            $file = $request->file('Used_Car_Image');
-            $extension = $file->getClientOriginalExtension();
+
+            $files = $request->Used_Car_Image;
+            foreach($files as $file){
+            $extension = $file->getClientOriginalName();
             $filename = time().'.'.$extension;
             $file->move('uploads\usedcarimage',$filename);
+            $usedCarImage = new UsedCarImage;
+            $usedCarImage->used_car_id = $request->input('add-usedcarid');
             $usedCarImage->image = $filename;
-        }
-        $usedCarImage->save();
+            $usedCarImage->save();
+            }
+        
+        
         return redirect()->back()->with('status','Used Car Image Added Succesfully');
 
     }
-
+    
     public function delete($id){
       $usedCar = UsedCarImage::findorfail($id);
       $filename = $usedCar->image;
@@ -49,35 +49,17 @@ class UsedCarImageController extends Controller
       $usedCar->delete();
       return redirect()->back()->with('status','Used Car Image Deleted Successfully');
   }
-  public function edit($id){
-    
-    $usedCarImage = UsedCarImage::find($id);
-    return view('EditUsedCarDetails',compact('usedCarImage'));
 
-}
-public function update(Request $request,$id){
-
-  $request->validate([
-    'Used_Car_Image'=>['required','file']
-
-  ]);
-  $usedCarImagerecord = UsedCarImage::find($id);
-  if($request->hasfile('Used_Car_Image'))
-        {
-          $destination = 'uploads\usedcarimage\\'.$usedCarImagerecord->image;
-          if(File::exists($destination)){
-            File::delete($destination);
-          }
-            $file = $request->file('Used_Car_Image');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
-            $file->move('uploads\usedcarimage',$filename);
-            $usedCarImagerecord->image = $filename;
-            
-        }
-        $usedCarImagerecord->update();
-
-
-  return redirect("/admin/usedcar")->with('status','Used Car Image Updated Successfully');
+    public function deleteSelected(Request $request){
+     
+      $ids = $request->selected;
+      foreach ($ids as $id) {  
+        $usedCar = UsedCarImage::findorfail($id);     
+        $filename = $usedCar->image;
+        $userPhoto = public_path('uploads\usedcarimage\\'.$filename);
+        File::delete($userPhoto);
+        $usedCar->delete();  
+     }
+      return redirect()->back()->with('status','Used Car Image Deleted Successfully');
   }
     }
