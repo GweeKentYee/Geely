@@ -1,54 +1,56 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <h3><u>Car Brand</u></h3>
-        <div class="col-md-9">
-            <div style="text-align:right" class="pb-1">
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcarbrand"><i class="bi bi-plus-lg"></i> Add Car Brand</button>
-            </div>
-            <table class="table" id="datatable" style="width: 100%">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Brand</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                <thead>
-            </table>
-        </div>
-    </div>
-
-    <div class="modal fade" id="newcarbrand" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add Car Brand</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+<main class="py-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <h3><u>Car Brand</u></h3>
+            <div class="col-md-9">
+                <div style="text-align:right" class="pb-1">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcarbrand"><i class="bi bi-plus-lg"></i> Add Car Brand</button>
                 </div>
-                <form action="/admin/carbrand/add" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                        <p style="color:red">*Required</p>
-                        <label >Car Brand<span style="color:red"> *</span></label>
-                        <input type="text" name="brand" class="form-control @error('brand') is-invalid @enderror" value="{{ old('brand') }}" placeholder="">
-                        @error('brand')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                <table class="table" id="datatable" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Brand</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    <thead>
+                </table>
+            </div>
+        </div>
+
+        <div class="modal fade" id="newcarbrand" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Car Brand</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add</button>
-                    </div>
-                </form>
+                    <form action="/admin/carbrand/add" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                            <p style="color:red">*Required</p>
+                            <label >Car Brand<span style="color:red"> *</span></label>
+                            <input type="text" name="brand" class="form-control @error('brand') is-invalid @enderror" value="{{ old('brand') }}" placeholder="">
+                            @error('brand')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</main>
 @endsection
 
 @section('footer-scripts')

@@ -28,6 +28,9 @@ Route::get('/','App\Http\Controllers\DashboardController@viewPage');
 Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage')->name('catalogue.viewpage');
 Route::get('/catalogue/search','App\Http\Controllers\CatalogueController@search');
 Route::get('/catalogue/advanced','App\Http\Controllers\CatalogueController@advanced');
+Route::post('/catalogue/advanced/modelDropBox','App\Http\Controllers\CatalogueController@modelOptions')->name('modelOption');
+Route::post('/catalogue/advanced/variantDropBox','App\Http\Controllers\CatalogueController@variantOptions')->name('variantOption');
+Route::get('autocompleteSearch','App\Http\Controllers\CatalogueController@autocompleteSearch')->name('autocompleteSearch');
 
 Route::get('/collection/comparison','App\Http\Controllers\ComparisonController@viewPage');
 Route::get('/collection/compare', function(){
@@ -63,6 +66,7 @@ Route::get('/admin/inspection/delete/{inspectionID}','App\Http\Controllers\Inspe
 Route::get('/admin/inspection/details/{inspectionID}','App\Http\Controllers\InspectionController@viewDetailsPage');
 
 Route::get('/admin/catalogue','App\Http\Controllers\CatalogueController@viewAdminPage');
+
 
 Route::get('/admin/newsletter','App\Http\Controllers\NewsletterController@viewAdminPage');
 Route::get('/admin/newsletter/view/{newsletterID}','App\Http\Controllers\NewsletterController@viewImage');

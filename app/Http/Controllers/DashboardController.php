@@ -13,7 +13,7 @@ class DashboardController extends Controller
     //
     public function viewPage(){
 
-        $Dash = Newsletter::orderby('sequence','ASC')->get();
+        $Dash = Newsletter::orderby('ID','DESC')->get();
 
         $usedcar = UsedCar::all()->where('status','1');
 
