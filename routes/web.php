@@ -100,6 +100,7 @@ Route::get('/admin/carmodel/edit/{carmodelID}','App\Http\Controllers\CarModelCon
 Route::patch('/admin/carmodel/editfunction/{carmodelID}','App\Http\Controllers\CarModelController@edit');
 
 Route::get('/admin/carvariant','App\Http\Controllers\CarVariantController@viewAdminPage');
+Route::post('/admin/carvariant/optionDropBox','App\Http\Controllers\CarVariantController@subOptions')->name('subOptions');
 Route::post('/admin/carvariant/add','App\Http\Controllers\CarVariantController@addCarVariant');
 Route::get('/admin/carvariant/delete/{carvariantID}','App\Http\Controllers\CarVariantController@delete');
 Route::get('/admin/carvariant/edit/{carvariantID}','App\Http\Controllers\CarVariantController@viewEditPage');

@@ -2,25 +2,25 @@
 
 @section('content')
 <main class="py-4">
-    <div class="container">
-        <div class="row justify-content-center">
-            <h3><u>Inspection</u></h3>
-            <div class="col-md-9">
-                <div style = "text-align:right" class = "pb-1">
-                    <button class = "btn btn-primary" data-bs-toggle="modal" data-bs-target="#newinspection">New Inspection</button>
-                </div>
-                <table class = "table" id = "datatable" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Date</th>
-                            <th>File</th>
-                            <th>Registration_Number</th>
-                            <th>Action</th>
-                        </tr>
-                    <thead>
-                </table>
+<div class="container">
+    <div class="row justify-content-center">
+        <h3><u>Inspection</u></h3>
+        <div class="col-md-9">
+            <div style = "text-align:right" class = "pb-1">
+                <button class = "btn btn-primary" data-bs-toggle="modal" data-bs-target="#newinspection"><i class="bi bi-plus-lg"></i> New Inspection</button>
             </div>
+            <table class = "table" id = "datatable" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>File</th>
+                        <th>Registration_Number</th>
+                        <th>Details</th>
+                        <th>Delete</th>
+                    </tr>
+                <thead>
+            </table>
         </div>
         <div class="modal fade" id="newinspection" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
@@ -114,9 +114,10 @@
             "columns": [
                 {"data": "id"},
                 {"data": "inspection_date"},
-                {"data": "File"},
+                {"data": "File", className: "text-center"},
                 {"data": "Reg_Num"},
-                {"data": "Action", orderable: false, searchable: false}
+                {"data": "Details", orderable: false, searchable: false},
+                {"data": "Delete", orderable: false, searchable: false}
             ]
         });
 

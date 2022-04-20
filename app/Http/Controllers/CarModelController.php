@@ -78,16 +78,8 @@ class CarModelController extends Controller
 
         // validate edited records according to columns of the database table
         $data = $request->validate([
-            'car_brand' => [Rule::notIn('0'),
-            Rule::unique('car_models','car_brand_id')->ignore($carmodelID)->when(request('model'), function ($query){
-                return $query->where('model', request('model'));
-            }, function ($query) use($CarModel){
-                return $query->where('model', $CarModel->model);
-            })],
             'model' => [ 
-            Rule::unique('car_models','model')->ignore($carmodelID)->when(request('car_brand'), function ($query){
-                return $query->where('car_brand_id', request('car_brand'));
-            }, function ($query) use($CarModel){
+            Rule::unique('car_models','model')->ignore($carmodelID)->where(function ($query) use($CarModel){
                 return $query->where('car_brand_id', $CarModel->car_brand_id);
             })]
         ]);
@@ -96,21 +88,7 @@ class CarModelController extends Controller
 
         if(!empty($input)) {
 
-            if(request('car_brand')){
-
-                $inputWithoutBrandID = collect($data)->except('car_brand')->filter()->all();
-
-                $updateData = array_merge($inputWithoutBrandID, [
-                    'car_brand_id' => $input['car_brand']
-                ]);
-    
-                $CarModel->update($updateData);
-
-            } else {
-
-                $CarModel->update($input);
-
-            }
+            $CarModel->update($input);
 
             return redirect('admin/carmodel');
 
