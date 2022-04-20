@@ -252,31 +252,57 @@ class DataTableController extends Controller
 
             ->addColumn('Link', function($query){
 
-                $Link = '<a href = '.$query->link.'>'.$query->link.'</a>';
+                $Link = '<a href = '.$query->link.' style="color: black" target="_blank"><i class="bi bi-eye-fill"></i></a>';
 
                 return $Link;
 
             })
 
+            ->addColumn('Remark', function($query){
+
+                $Remark = '<p>temp</p>';
+                
+                return $Remark;
+
+            })
+
+            ->addColumn('Sequence', function($query){
+                if($query->sequence==0){
+                    $Sequence = 'Do Not Display';
+                }else{
+                    $Sequence = $query->sequence;
+                }
+
+                return $Sequence;
+
+            })
+
             ->addColumn('Image', function($query){
 
-                $Image = '<a href = "/admin/newsletter/view/'.$query->id.'">'.$query->image.'</a>';
+                $Image = '<a href = "/admin/newsletter/view/'.$query->id.'" style="color: black" target="_blank"><i class="bi bi-eye-fill"></i></a>';
 
                 return $Image;
 
             })
 
 
-            ->addColumn('Action', function($query){
+            ->addColumn('Edit', function($query){
 
-                $actionBtn = //'<a href = "/player/download/' .$query->JSON_file. '" class = "download btn btn-primary btn-sm">Download</a>
-                                //'<a class = "btn btn-success btn-sm edit" href = "/allplayer/edit/'.$query->id.'">Edit</a>
-                                '<a class= "btn btn-primary btn-sm details" href= "/admin/newsletter/edit/'.$query->id.'" >Edit</a>
-                                <a class= "btn btn-danger btn-sm delete" href= "/admin/newsletter/delete/'.$query->id.'">Delete</a>'
-                                ;
+                $actionBtn = '<a href= "/admin/newsletter/edit/'.$query->id.'" style="color: blue"><i class="bi bi-pencil-square"></i></a>';
+                                
                 return $actionBtn;
 
-            })->rawColumns(['Image','Link','Action'])
+            })
+
+            ->addColumn('Delete', function($query){
+
+                $actionBtn = '<a class= "btn btn-danger btn-sm delete" href= "/admin/newsletter/delete/'.$query->id.'"><i class="bi bi-trash"></i> Delete</a>';
+                                
+                return $actionBtn;
+
+            })
+            
+            ->rawColumns(['Remark','Image','Link','Edit','Delete'])
             ->make(true);
 
     }

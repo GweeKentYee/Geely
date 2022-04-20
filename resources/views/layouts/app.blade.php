@@ -14,6 +14,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" defer></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,8 +26,67 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('css')
     <link href="{{ asset('css/catalogue.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link rel="stylesheet" type = "text/css" href = "//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+
+    <style>
+        #Bonnet path{
+            fill:red;
+        }
+        #Front_Right_Door path{
+            fill:aquamarine;
+        }
+        #Rear_Right_Door path{
+            fill:blanchedalmond;
+        }
+        #Trunk path{
+            fill:orange;
+        }
+        #Front_Right_Wheel_Arc path{
+            fill:cornflowerblue;
+        }
+        #Rear_Right_Wheel_Arc path{
+            fill:cyan;
+        }
+        #Front_Left_Wheel_Arc path{
+            fill:darkseagreen;
+        }
+        #Rear_Left_Wheel_Arc path{
+            fill:darkgoldenrod;
+        }
+        #Right_Center_Pillar path{
+            fill:blueviolet;
+        }
+        #Left_Center_Pillar path{
+            fill:rgb(110, 226, 43);
+        }
+        #Rear_Bumper path{
+            fill: yellow;
+        }
+        #Front_Bumper path{
+            fill: green;
+        }
+        #Roof_Panel path{
+            fill: blue;
+        }
+        #Right_Sill_Plate path{
+            fill: purple;
+        }
+        #Left_Sill_Plate path{
+            fill:darkgreen;
+        }
+        #Front_Left_Door path{
+            fill:moccasin;
+        }
+        #Rear_Left_Door path{
+            fill:rebeccapurple;
+        }
+        #Rear_Quarter_Pillar path{
+            fill:darkred;
+        }
+        #Screen_Pillar path{
+            fill:fuchsia;
+        }
+    </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     @livewireStyles
 </head>
@@ -106,9 +167,8 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+        @yield('content')
+        
     </div>
     @livewireScripts
 </body>
