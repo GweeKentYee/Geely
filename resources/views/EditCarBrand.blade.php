@@ -1,11 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+
 <main class="py-4">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-9">
-                <h3><u>Edit Car Brand</u></h3>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">
+                    <span style="font-size: 20px"><a href="/admin/carbrand">Car Brand</a> / {{ $CarBrand->brand }}</span>
+                </div>
+                <div class="card-body">
                 <form action="/admin/carbrand/editfunction/{{ $CarBrand->id }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')

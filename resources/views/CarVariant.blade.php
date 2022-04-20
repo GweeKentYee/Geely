@@ -23,44 +23,52 @@
             </div>
         </div>
 
-        <div class="modal fade" id="newcarvariant" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Add Car Variant</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <form action="/admin/carvariant/add" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="modal-body">
-                            <p style="color:red">*Required</p>
-                            <label>Car Model<span style="color:red"> *</span></label>
-                            <select name = "car_model" class = "form-control @error('car_model') is-invalid @enderror">
-                                <option value="0" disabled selected>-- Please Select Car Model --</option>
-                                @foreach ($CarModel as $CarModel)
-                                    <option value="{{$CarModel->id}}">{{$CarModel->model}}</option>
-                                @endforeach
-                            </select>
-                                @error('car_model')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            <br>
-                            <label>Car Variant<span style="color:red"> *</span></label>
-                            <input type="text" name="variant" class="form-control @error('variant') is-invalid @enderror" value="{{ old('variant') }}" placeholder="">
-                            @error('variant')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Add</button>
-                        </div>
-                    </form>
+    <div class="modal fade" id="newcarvariant" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Car Variant</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
+                <form action="/admin/carvariant/add" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <p style="color:red">*Required</p>
+                        <label>Car Brand<span style="color:red"> *</span></label>
+                        <select id="carBrand" name="car_brand" class="form-control @error('car_brand') is-invalid @enderror">
+                            <option value="0" disabled selected>-- Please Select Car Brand --</option>
+                            @foreach ($CarBrand as $CarBrand)
+                                <option value="{{$CarBrand->id}}">{{$CarBrand->brand}}</option>
+                            @endforeach
+                        </select>
+                        @error('car_brand')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <br>
+                        <label>Car Model<span style="color:red"> *</span></label>
+                        <select id="carModel" name="car_model" class="form-control @error('car_model') is-invalid @enderror" disabled>
+                        </select>
+                        @error('car_model')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <br>
+                        <label>Car Variant<span style="color:red"> *</span></label>
+                        <input type="text" name="variant" class="form-control @error('variant') is-invalid @enderror" value="{{ old('variant') }}" placeholder="">
+                        @error('variant')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -70,6 +78,12 @@
 @section('footer-scripts')
 <script>
     $(document).ready(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         $('#datatable').DataTable({
             "columnDefs": [{
                 "defaultContent": "-",
@@ -95,6 +109,30 @@
             if (confirmation == false){
                 return false;
             }
+        });
+
+        $('#carBrand').on('change', function(e) {
+            var CarBrand_id = e.target.value;
+            $.ajax({
+                url: "{{ route('subModels') }}",
+                type: "POST",
+                data: {
+                    CarBrand_id: CarBrand_id
+                },
+                success: function(data) {
+                    if($('#carModel').prop('disabled')){
+                        $("#carModel").prop("disabled", false);
+                    }
+
+                    $('#carModel').empty();
+                    $('#carModel').append('<option value="0" disabled selected>-- Please Select Car Model --</option>');
+
+                    $.each(data.CarModels, function(index, CarModel) {
+                        $('#carModel').append('<option value="'+CarModel.id+'">'+CarModel.model+'</option>');
+                    })
+                    
+                }
+            })
         });
 
         @if (Session::has('errors'))
