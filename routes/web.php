@@ -32,6 +32,7 @@ Route::post('/catalogue/advanced/modelDropBox','App\Http\Controllers\CatalogueCo
 Route::post('/catalogue/advanced/variantDropBox','App\Http\Controllers\CatalogueController@variantOptions')->name('variantOption');
 Route::get('autocompleteSearch','App\Http\Controllers\CatalogueController@autocompleteSearch')->name('autocompleteSearch');
 
+
 Route::get('/collection/comparison','App\Http\Controllers\ComparisonController@viewPage');
 Route::get('/collection/compare', function(){
 
