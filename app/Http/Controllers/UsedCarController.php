@@ -58,15 +58,11 @@ class UsedCarController extends Controller
           $usedCar->status = $data['status_'];
         if($request->hasfile('ownership_file'))
         {
-          $destination = 'uploads\ownership_files\\'.$usedCar->data_file;
-          if(File::exists($destination)){
-            File::delete($destination);
-          }
-            $file = $request->file('ownership_file');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
-            $file->move('uploads\ownership_files',$filename);
-            $usedCar->ownership_file = $filename;
+          $file = $request->file('ownership_file');
+          $extension = $file->getClientOriginalExtension();
+          $filename = time().'_ownership.'.$extension;
+          $file->move('storage/data/used_car/'.$usedCar->registration.'/',$filename);
+          $usedCar->ownership_file = $filename;
             
         }
         $usedCar->update();

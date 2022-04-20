@@ -23,7 +23,7 @@
             <div class="col-xl-4 col-lg-4 col-md-6 col-xs-12">
                 <input type="checkbox" name="selected[]" value="{{ $usedCarImages->id }}">
                 <div class ="card-m-auto">
-                    <img src="{{asset('uploads/usedcarImage/'.$usedCarImages->image)}}" class="card-img-top" alt="Broken" height="300" width="100"/>
+                    <img src="{{asset('storage/image/used_car/'.$usedCar->registration.'/'.$usedCarImages->image)}}" class="card-img-top" alt="Broken" height="300" width="100"/>
                     <div class="card-body">
                         <form style="padding-left:3%" >
                             <a href = "/usedcarImage/delete/{{$usedCarImages->id}}" class= "btn btn-danger btn-sm delete" style="width:9cm">Delete</a>

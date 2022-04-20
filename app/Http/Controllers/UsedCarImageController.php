@@ -24,12 +24,13 @@ class UsedCarImageController extends Controller
            'Used_Car_Image'=>['required']
 
            ]);
-
+           $usedCarId = $request->input('add-usedcarid');
+           $usedCar = UsedCar::find($usedCarId);
             $files = $request->Used_Car_Image;
             foreach($files as $file){
             $extension = $file->getClientOriginalName();
             $filename = time().'.'.$extension;
-            $file->move('uploads\usedcarimage',$filename);
+            $file->move('storage/image/used_car/'.$usedCar->registration,$filename);
             $usedCarImage = new UsedCarImage;
             $usedCarImage->used_car_id = $request->input('add-usedcarid');
             $usedCarImage->image = $filename;
@@ -42,11 +43,12 @@ class UsedCarImageController extends Controller
     }
     
     public function delete($id){
-      $usedCar = UsedCarImage::findorfail($id);
-      $filename = $usedCar->image;
-      $path= public_path('uploads\usedcarimage\\'.$filename);
+      $usedCarImage = UsedCarImage::findorfail($id);
+      $usedCar = UsedCar::find($usedCarImage->used_car_id);
+      $filename = $usedCarImage->image;
+      $path= public_path('storage/image/used_car/'.$usedCar->registration.'/'.$filename);
       File::delete($path);
-      $usedCar->delete();
+      $usedCarImage->delete();
       return redirect()->back()->with('status','Used Car Image Deleted Successfully');
   }
 
@@ -54,11 +56,12 @@ class UsedCarImageController extends Controller
      
       $ids = $request->selected;
       foreach ($ids as $id) {  
-        $usedCar = UsedCarImage::findorfail($id);     
-        $filename = $usedCar->image;
-        $userPhoto = public_path('uploads\usedcarimage\\'.$filename);
+        $usedCarImage = UsedCarImage::findorfail($id);
+        $usedCar = UsedCar::find($usedCarImage->used_car_id);     
+        $filename = $usedCarImage->image;
+        $userPhoto = public_path('storage/image/used_car/'.$usedCar->registration.'/'.$filename);
         File::delete($userPhoto);
-        $usedCar->delete();  
+        $usedCarImage->delete();  
      }
       return redirect()->back()->with('status','Used Car Image Deleted Successfully');
   }
