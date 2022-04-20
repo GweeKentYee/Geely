@@ -15,7 +15,7 @@ class CarVariantController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function viewAdminPage(){
 
         $CarBrand = CarBrand::all();
@@ -49,7 +49,7 @@ class CarVariantController extends Controller
         $data = $request->validate([
             'car_brand' => ['required', Rule::notIn('0')],
             'car_model' => ['required', Rule::notIn('0')],
-            'variant' => ['required', 
+            'variant' => ['required',
             Rule::unique('car_variants','variant')->where(function ($query){
                 return $query->where('car_model_id', request('car_model'));
             })]
@@ -82,7 +82,7 @@ class CarVariantController extends Controller
         $CarVariant = CarVariant::find($carvariantID);
 
         $data = $request->validate([
-            'variant' => [ 
+            'variant' => [
             Rule::unique('car_variants','variant')->ignore($carvariantID)->where(function ($query) use($CarVariant){
                 return $query->where('car_model_id', $CarVariant->car_model_id);
             })]
@@ -97,7 +97,7 @@ class CarVariantController extends Controller
             return redirect('admin/carvariant');
 
         } else {
-            
+
             Session::flash('field_empty', 'Please fill in at least one field.');
 
             return redirect('admin/carvariant/edit/'.$carvariantID);

@@ -143,7 +143,7 @@ class CarController extends Controller
             $Car->update([
                 'data_file' => str_replace('\\', '/', $dataFilePath)
             ]);
-            
+
         }
 
         return redirect('admin/car');
@@ -195,7 +195,7 @@ class CarController extends Controller
         $Car = Car::find($carID);
 
         // $data = $request->validate([
-        //     'year' => [Rule::notIn('0'), 
+        //     'year' => [Rule::notIn('0'),
         //     Rule::unique('cars','year')->ignore($carID)->where(function ($query){
         //         return $query->where('car_body_type_id', request('car_body_type_id'))->where('car_general_spec_id', request('car_general_spec_id'));
         //     })],
@@ -212,7 +212,7 @@ class CarController extends Controller
         // ]);
 
         $data = $request->validate([
-            'year' => [Rule::notIn('0'), 
+            'year' => [Rule::notIn('0'),
             Rule::unique('cars','year')->ignore($carID)->when($request->has('car_body_type_id') and $request->has('car_general_spec_id'), function ($query) use($Car){
                 return $query->where('car_body_type_id', request('car_body_type_id'))->where('car_general_spec_id', request('car_general_spec_id'))->where('car_variant_id', $Car->car_variant_id);
             })->when($request->has('car_body_type_id'), function ($query) use($Car){
