@@ -73,38 +73,6 @@
                       </div>
                   </div>
 
-                  <div class="row">
-                    <h2 class="headline"><u>Inspection Details</u></h2></div>
-                  
-                  <div class="row">
-                      <div class="col">
-                        <div class="centerBlock">
-                        <img src="https://source.unsplash.com/random/200×200" alt="Responsive image" width="200" height="200">
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="details-title">Model:</div>
-                        <div class="details-content">--Geely</div><br>
-                        <div class="details-title">Year:</div>
-                        <div class="details-content">--2021</div><br>
-                      </div>
-                      <div class="col">
-                        <div class="details-title">Price:</div>
-                        <div class="details-content">--12345 pricing</div><br>
-                        <div class="details-title">Rating:</div>
-                        <div class="details-content">--90%</div><br>
-                      </div>
-                    </div>
-                      <div class="row">
-                        <div class= "col">
-                        </div>
-                        <div class="col-8">
-                      
-                          {{-- <button class="cata-card-button cata-card-button-content" >ADD TO COLLECTION </button> --}}
-                          <button class="cata-card-button cata-card-button-content" type="submit">Add To Collection</button> 
-                          <br><br>
-                        </div>
-                    </div>
 
                     <div class="row">
                       <h2 class="headline"><u>Inspection Details</u></h2></div>
