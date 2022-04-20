@@ -60,7 +60,7 @@ p {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
+    background: #3279af;
     color: #fff;
     transition: all 0.3s;
 }
@@ -71,12 +71,12 @@ p {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: #1e669c;
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    border-bottom: 1px solid #f9fbfb;
 }
 
 #sidebar ul p {
