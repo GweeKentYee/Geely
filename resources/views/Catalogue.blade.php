@@ -34,14 +34,14 @@
                     </div>
                 </form>
             </div>
-            
+
             <div class="d-flex justify-content-center">
                 <div class="col-md-2">
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#advancedSearch" class="row">Advanced Search</button>
-                </div> 
+                </div>
             </div>
         </div>
-        
+
 
         <!-- Modal for advanced search -->
         <div class="modal fade" id="advancedSearch" tabindex="-1">
@@ -118,7 +118,7 @@
                 </div>
             </div>
         </div>
-    
+
     <div>
         {{-- displays a "NO MATCHES IN OUR DATABASE" if there are no cars to display --}}
         @if(count($usedcar)<1)
@@ -126,40 +126,40 @@
                 <div>NO MATCHES IN OUR DATABASE</div>
             </div>
         @else
-            
+
             <div class="row" style="margin-left:0.7rem ">
                 <div class="col-1"></div>
-                <div class="col-10 row cards-container">
+                    <div class="col-10 row cards-container">
+                        @foreach ( $usedcar as  $usedcars )
+                            <div class="col-lg-4 col-md-6 col-sm-12 mt-5" >
+                                <div class="card cat-card m-auto">
+                                    <div>
+                                        <a href='/catalogue/usedcardetails/{{$usedcars->id}}'>
+                                            <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200">
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
 
-                    @foreach ( $usedcar as  $usedcars )               
-                        <div class="col-lg-4 col-md-6 col-sm-12 mt-5" >
-                            
-                            <div class="card cat-card m-auto">
-                                <div>   
-                                    <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200">
-                                </div>
-                                <div class="card-body">
-                                
-                                    <div class="row">
-                                        <div class="card-title-year-brand col-10">{{$usedcars->car->year}} {{$usedcars->car->carModel->carBrand->brand}}</div>
-                                        <div class="card-title-model-variant col-10">{{$usedcars->car->carModel->model}} {{$usedcars->car->carVariant->variant}} </div>
-                                        <div class="col-2">
-                                            @php    
-                                                $exist_in_collection = false;
-                                                $used_car_id =  $usedcars->id ;
-                                                $collection_id_remove = 0;
+                                        <div class="row">
+                                            <div class="card-title-year-brand col-10">{{$usedcars->car->year}} {{$usedcars->car->carModel->carBrand->brand}}</div>
+                                            <div class="card-title-model-variant col-10">{{$usedcars->car->carModel->model}} {{$usedcars->car->carVariant->variant}} </div>
+                                            <div class="col-2">
+                                                @php
+                                                    $exist_in_collection = false;
+                                                    $used_car_id =  $usedcars->id ;
+                                                    $collection_id_remove = 0;
 
-                                                foreach($collections as $collection){
-                                                    if( $collection->used_car_id == $used_car_id){
-                                                        $exist_in_collection = true;
-                                                        $collection_id_remove = $collection->id;
+                                                    foreach($collections as $collection){
+                                                        if( $collection->used_car_id == $used_car_id){
+                                                            $exist_in_collection = true;
+                                                            $collection_id_remove = $collection->id;
+                                                        }
                                                     }
-                                                }
-                                            @endphp
-
+                                                @endphp
 
                                                 @if ($exist_in_collection)
-                                                    <button disabled class="card-add-collection-btn"><i class="bi bi-star-fill" style="font-size:20px;margin-left:0.2rem;"></i></button>                  
+                                                <button disabled class="card-add-collection-btn"><i class="bi bi-star-fill" style="font-size:20px;margin-left:0.2rem;"></i></button>
+
                                                 @else
                                                     <form action="{{ route('collection.store') }}" method="POST">
                                                         @csrf
@@ -170,30 +170,27 @@
 
                                             
 
+                                            </div>
                                         </div>
-                                    </div> 
-                                    
-                                    <div class="card-car-details">
-                                        <span>{{$usedcars->car->carGeneralSpec->fuel}} | {{$usedcars->car->carGeneralSpec->transmission}} | {{$usedcars->car->carBodyType->body_type}} </span>
+
+                                        <div class="card-car-details">
+                                            <span>{{$usedcars->car->carGeneralSpec->fuel}} | {{$usedcars->car->carGeneralSpec->transmission}} | {{$usedcars->car->carBodyType->body_type}} </span>
+                                        </div>
+                                        <div class="card-car-price">
+                                            <span style="font-size: 12px">min:</span>
+                                            <strong>RM{{ $usedcars->min_price }}</strong>
+                                            <span>       </span>
+                                            <span style="font-size: 12px">max:</span>
+                                            <strong>RM{{ $usedcars->max_price }}</strong>
+                                        </div>
+
                                     </div>
-                                    <div class="card-car-price">
-                                        <span style="font-size: 12px">min:</span>
-                                        <strong>RM{{ $usedcars->min_price }}</strong>
-                                        <span>       </span>
-                                        <span style="font-size: 12px">max:</span>
-                                        <strong>RM{{ $usedcars->max_price }}</strong>
-                                    </div>
-                                   
                                 </div>
-                              </div>
-                        </div>
-
-                    @endforeach
-
-                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 <div class="col-1"></div>
             </div>
-
         @endif
         {{$usedcar->links()}}
     </div>

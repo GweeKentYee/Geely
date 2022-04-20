@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-  
+
     <div class="row" >
         <div class="col-1"></div>
         <div class="row col-10">
@@ -14,7 +14,7 @@
                 <h3 class="headline">COLLECTION</h3>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-12" style="padding-left: 0;">
-                <form id="my_form" action="{{ route('collection.compare') }}" method="POST">
+                <form id="my_form" action="/collection/comparison" method="POST">
                     @csrf
                     <input class="btn compare-selection-btn" id="CompareButton" type="submit" value="COMPARE SELECTION"><br>
                     {{-- <a class="btn btn-success compare-selection-btn" href="/collection/comparison">Temporary Button to comparison page</a> --}}
@@ -23,7 +23,7 @@
         </div>
         <div class="col-1"></div>
     </div>
-    
+
 
     <div class="row" style="margin-left:0.7rem ">
         <div class="col-1"></div>
@@ -33,21 +33,23 @@
                 <div class="col-lg-4 col-md-6 col-sm-12 mt-5" >
                     {{-- <input class="check" type="checkbox" form="my_form" id={{ $collection->id }} name={{ $collection->id }} value={{ $collection->id }}> --}}
                     <div id="card{{ $collection->id }}" class="card m-auto">
-                        <div>   
+                        <div>
                             <div class="checkbox-container">
-                                <span><input class="check" type="checkbox" form="my_form" id={{ $collection->id }} name={{ $collection->id }} value={{ $collection->id }}></span>
+                                <span><input class="check" type="checkbox" form="my_form" id={{ $collection->id }} name="checkedbox[]" value={{ $collection->id }}></span>
                                 <span style="margin-left: 0.4rem;">Compare</span>
                             </div>
-                            <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200">
+                            <a href='/collection/usedcardetails/{{$collection->used_car_id}}'>
+                                {{-- <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200"> --}}
+                                <img class="card-img" src="{{ $collection->image }}" alt="Card image cap" width="200" height="200">
+                            </a>
                         </div>
                         <div class="card-body">
-                        
                             <div class="row">
                                 <div class="card-title-year-brand col-10">{{ $collection->year }} {{ $collection->brand }}</div>
                                 <div class="card-title-model-variant col-10">{{ $collection->model }} {{ $collection->variant }} </div>
                                 <div class="col-2"><button class="card-delete-button" data-toggle="modal" data-target="#exampleModal{{ $collection->id }}"><i class="fa fa-trash-o" style="font-size:20px;margin-left:0.2rem;"></i></button></div>
-                            </div> 
-                            
+                            </div>
+
                             <div class="card-car-details">
                                 <span>{{ $collection->fuel }} | {{ $collection->transmission }} | {{ $collection->body_type }} </span>
                             </div>
@@ -80,17 +82,14 @@
                                 </div>
                             </div>
                         </div>
-                      </div>
-    
+                    </div>
                 </div>
-    
-    
-    
+
             @endforeach
         </div>
         <div class="col-1"></div>
-        
-        
+
+
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -112,21 +111,18 @@
 @endsection
 
 @section("footer-scripts")
-        {{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> --}}
         <script>
 
             $(document).ready(function () {
 
                 document.getElementById('CompareButton').disabled = true;
 
-                $('input[type=checkbox]').on('change', function (e) 
+                $('input[type=checkbox]').on('change', function (e)
                 {
                     if ($('input[type=checkbox]:checked').length > 2) {
 
                         $(this).prop('checked', false);
-                        $('#exampleModal').modal('show')    
+                        $('#exampleModal').modal('show')
                     }
 
                     if ($('input[type=checkbox]:checked').length == 2) {
@@ -137,18 +133,18 @@
 
                         var menus = document.getElementsByClassName("check");
                         for (var i = menus.length - 1; i >= 0; i--)
-                        {   
-                        
+                        {
+
                             if (menus[i].checked == true){
                                 continue;
                             }else{
                                 var value = menus[i].value;
                                 document.getElementById('card'+value).style.opacity ="0.5";
                             }
-                            
+
                         }
 
-                    
+
                     }
 
                     if ($('input[type=checkbox]:checked').length < 2) {
@@ -160,22 +156,22 @@
 
                         var menus = document.getElementsByClassName("check");
                         for (var i = menus.length - 1; i >= 0; i--)
-                        {   
-                        
+                        {
+
                                 console.log(menus[i].value);
                                 var value = menus[i].value;
                                 document.getElementById('card'+value).style.opacity ="1";
-                            
+
                         }
                     }
 
                     if($(this).is(":checked")){
-                        $(this).parent().parent().parent().parent().addClass("card-checked"); 
+                        $(this).parent().parent().parent().parent().addClass("card-checked");
                     }else{
-                        $(this).parent().parent().parent().parent().removeClass("card-checked");   
+                        $(this).parent().parent().parent().parent().removeClass("card-checked");
                     }
 
-                    
+
 
                 });
             });

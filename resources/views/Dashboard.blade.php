@@ -50,7 +50,7 @@
                         <div class="dash-card-body">
                         
                             <div class="row">
-                                <div class="card-title-year-brand col-10">{{$usedcars->car->year}} {{$usedcars->car->carModel->carBrand->brand}}</div>
+                                <div class="card-title-year-brand col-10">{{$usedcars->car->year}} {{$usedcars->car->carModel->brand}}</div>
                                 <div class="card-title-model-variant col-10">{{$usedcars->car->carModel->model}} {{$usedcars->car->carVariant->variant}} </div>
                                 
                             </div> 

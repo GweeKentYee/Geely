@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inspection;
+use App\Models\UsedCar;
 use App\Models\Car;
 use App\Models\CarBrand;
 use App\Models\CarModel;
@@ -261,7 +262,7 @@ class DataTableController extends Controller
             ->addColumn('Remark', function($query){
 
                 $Remark = '<p>temp</p>';
-                
+
                 return $Remark;
 
             })
@@ -289,7 +290,7 @@ class DataTableController extends Controller
             ->addColumn('Edit', function($query){
 
                 $actionBtn = '<a href= "/admin/newsletter/edit/'.$query->id.'" style="color: blue"><i class="bi bi-pencil-square"></i></a>';
-                                
+
                 return $actionBtn;
 
             })
@@ -297,13 +298,33 @@ class DataTableController extends Controller
             ->addColumn('Delete', function($query){
 
                 $actionBtn = '<a class= "btn btn-danger btn-sm delete" href= "/admin/newsletter/delete/'.$query->id.'"><i class="bi bi-trash"></i> Delete</a>';
-                                
+
                 return $actionBtn;
 
             })
-            
+
             ->rawColumns(['Remark','Image','Link','Edit','Delete'])
             ->make(true);
 
     }
+
+    public function usedcar(){
+
+        $query = usedcar::select('*');
+
+        return datatables($query)
+            ->addIndexColumn()
+                ->addColumn('Action', function($query){
+
+                    $actionBtn = '<a class = "btn btn-primary btn-sm detail" href = "/usedcar/details/'.$query->id.'" ">Image</a>
+                                    <a class = "btn btn-success btn-sm edit" href = "/usedcar/edit/'.$query->id.'" >Edit</a>
+                                    <a class= "btn btn-danger btn-sm delete" href = "/usedcar/delete/'.$query->id.' ">Delete</a>'
+                                    ;
+                    return $actionBtn;
+
+                })->rawColumns(['Action'])
+                ->make(true);
+
+    }
+
 }
