@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CarBrand;
+use App\Models\CarModel;
 use App\Models\CarVariant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -33,18 +34,29 @@ class CarVariantController extends Controller
 
     }
 
+    public function subOptions(Request $request){
+
+        $CarModels = CarModel::where('car_brand_id', $request->CarBrand_id)->get();
+
+        return response()->json([
+            'CarModels' => $CarModels
+        ]);
+
+    }
+
     public function addCarVariant(Request $request){
 
         $data = $request->validate([
-            'car_brand_id' => ['required', Rule::notIn('0')],
+            'car_brand' => ['required', Rule::notIn('0')],
+            'car_model' => ['required', Rule::notIn('0')],
             'variant' => ['required', 
             Rule::unique('car_variants','variant')->where(function ($query){
-                return $query->where('car_brand_id', request('car_brand_id'));
+                return $query->where('car_model_id', request('car_model'));
             })]
         ]);
 
         Carvariant::create([
-            'car_brand_id' => $data['car_brand_id'],
+            'car_model_id' => $data['car_model'],
             'variant' => $data['variant']
         ]);
 
@@ -56,11 +68,11 @@ class CarVariantController extends Controller
 
         $CarVariant = CarVariant::find($carvariantID);
 
-        $CarBrand = CarBrand::all();
+        $CarModel = CarModel::all();
 
         return view('EditCarVariant', [
             'CarVariant' => $CarVariant,
-            'CarBrand' => $CarBrand
+            'CarModel' => $CarModel
         ]);
 
     }
@@ -70,10 +82,9 @@ class CarVariantController extends Controller
         $CarVariant = CarVariant::find($carvariantID);
 
         $data = $request->validate([
-            'car_brand_id' => [Rule::notIn('0')],
             'variant' => [ 
-            Rule::unique('car_variants','variant')->ignore($carvariantID)->where(function ($query){
-                return $query->where('car_brand_id', request('car_brand_id'));
+            Rule::unique('car_variants','variant')->ignore($carvariantID)->where(function ($query) use($CarVariant){
+                return $query->where('car_model_id', $CarVariant->car_model_id);
             })]
         ]);
 

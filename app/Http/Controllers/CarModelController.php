@@ -40,16 +40,16 @@ class CarModelController extends Controller
 
         // validate inputed records according to columns of the database table
         $data = $request->validate([
-            'car_brand_id' => ['required', Rule::notIn('0')],
+            'car_brand' => ['required', Rule::notIn('0')],
             'model' => ['required', 
             Rule::unique('car_models','model')->where(function ($query){
-                return $query->where('car_brand_id', request('car_brand_id'));
+                return $query->where('car_brand_id', request('car_brand'));
             })]
         ]);
 
         // create new records
         CarModel::create([
-            'car_brand_id' => $data['car_brand_id'],
+            'car_brand_id' => $data['car_brand'],
             'model' => $data['model']
         ]);
 
@@ -78,10 +78,9 @@ class CarModelController extends Controller
 
         // validate edited records according to columns of the database table
         $data = $request->validate([
-            'car_brand_id' => [Rule::notIn('0')],
             'model' => [ 
-            Rule::unique('car_models','model')->ignore($carmodelID)->where(function ($query){
-                return $query->where('car_brand_id', request('car_brand_id'));
+            Rule::unique('car_models','model')->ignore($carmodelID)->where(function ($query) use($CarModel){
+                return $query->where('car_brand_id', $CarModel->car_brand_id);
             })]
         ]);
 

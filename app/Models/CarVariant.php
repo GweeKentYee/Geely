@@ -16,7 +16,7 @@ class CarVariant extends Model
      */
     protected $fillable = [
         'variant',
-        'car_brand_id'
+        'car_model_id'
     ];
 
     public function cars()
@@ -24,9 +24,9 @@ class CarVariant extends Model
         return $this->hasMany(Car::class);
     }
 
-    public function carBrand()
+    public function carModel()
     {
-        return $this->belongsTo('App\Models\CarBrand', 'car_brand_id');
+        return $this->belongsTo('App\Models\CarModel', 'car_model_id');
     }
 
 }
