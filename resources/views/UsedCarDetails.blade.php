@@ -6,15 +6,71 @@
 
 @section('content')
 <main class="py-4">
-  <div class="container">
-      <div class="row justify-content-center">
-          <div class="col-md-12">
-              <h3><u></u></h3>
-                <div class="card">
-                  <div class="card-body">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <h3><u></u></h3>
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                  <h2 class="headline"><u>Car Details</u></h2>
+                  <div class="row">
+                    <div class="col">
+                      <div class="centerBlock">
+                      <img src="https://source.unsplash.com/random/200×200" alt="Responsive image" width="200" height="200">
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="details-title">Model:</div>
+                      <div class="details-content">{{$usedcar->car->carModel->model}}</div><br>
+                      <div class="details-title">Year:</div>
+                      <div class="details-content">{{$usedcar->car->year}}</div><br>
+                    </div>
+                    <div class="col">
+                      <div class="details-title">Price:</div>
+                      <div class="details-content">RM {{$usedcar->min_price}} to RM {{$usedcar->max_price}}</div><br>
+                      <div class="details-title">Rating:</div>
+                      <div class="details-content">--90%</div><br>
+                    </div>
+                  </div>
                     <div class="row">
-                    <h2 class="headline"><u>Car Details</u></h2>
-                    <div class="row">
+                      <div class= "col">
+                      </div>
+                      <div class="col-8">
+                    
+                         {{-- <button class="cata-card-button cata-card-button-content" >ADD TO COLLECTION </button> --}}
+                         {{-- <button class="cata-card-button cata-card-button-content" type="submit">Add To Collection</button>  --}}
+                         @php    
+                                $exist_in_collection = false;
+                                $used_car_id =  $usedcar->id ;
+                                $collection_id_remove = 0;
+
+                                foreach($collections as $collection){
+                                    if( $collection->used_car_id == $used_car_id){
+                                        $exist_in_collection = true;
+                                        $collection_id_remove = $collection->id;
+                                    }
+                                }
+                         @endphp
+
+                        @if ($exist_in_collection)
+                            <button class="btn-success cata-card-button-content" type="button" disabled>Added To Collection</button>         
+                                
+                        @else
+                            <form action="{{ route('collection.store') }}" method="POST">
+                              @csrf
+                                <input type="hidden" name="usedcar_id" value={{ $usedcar->id }} />
+                                <button class="cata-card-button cata-card-button-content" type="submit">Add To Collection</button>  
+                            </form>                     
+                        @endif
+                         <br><br>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                    <h2 class="headline"><u>Inspection Details</u></h2></div>
+                  
+                  <div class="row">
                       <div class="col">
                         <div class="centerBlock">
                         <img src="https://source.unsplash.com/random/200×200" alt="Responsive image" width="200" height="200">
