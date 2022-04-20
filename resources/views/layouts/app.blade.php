@@ -27,6 +27,7 @@
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link rel="stylesheet" type = "text/css" href = "//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 </head>
+
 <body>
     @if (session('status'))
         <div style="background: red;color: white">{{ session('status') }}</div>
