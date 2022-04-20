@@ -15,7 +15,6 @@ class Car extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'car_model_id',
         'car_variant_id',
         'car_body_type_id',
         'car_general_spec_id',
@@ -23,11 +22,6 @@ class Car extends Model
         'spec_file',
         'data_file'
     ];
-
-    public function carModel()
-    {
-        return $this->belongsTo('App\Models\CarModel', 'car_model_id');
-    }
 
     public function carVariant()
     {

@@ -6,7 +6,7 @@
         <h3><u>Inspection</u></h3>
         <div class="col-md-9">
             <div style = "text-align:right" class = "pb-1">
-                <button class = "btn btn-primary" data-bs-toggle="modal" data-bs-target="#newinspection">New Inspection</button>
+                <button class = "btn btn-primary" data-bs-toggle="modal" data-bs-target="#newinspection"><i class="bi bi-plus-lg"></i> New Inspection</button>
             </div>
             <table class = "table" id = "datatable" style="width:100%">
                 <thead>
@@ -15,7 +15,8 @@
                         <th>Date</th>
                         <th>File</th>
                         <th>Registration_Number</th>
-                        <th>Action</th>
+                        <th>Details</th>
+                        <th>Delete</th>
                     </tr>
                 <thead>
             </table>
@@ -112,9 +113,10 @@
             "columns": [
                 {"data": "id"},
                 {"data": "inspection_date"},
-                {"data": "File"},
+                {"data": "File", className: "text-center"},
                 {"data": "Reg_Num"},
-                {"data": "Action", orderable: false, searchable: false}
+                {"data": "Details", orderable: false, searchable: false},
+                {"data": "Delete", orderable: false, searchable: false}
             ]
         });
 
