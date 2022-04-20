@@ -41,26 +41,16 @@
                     <div class="modal-body">
                         <p style="color:red">*Required</p>
                         <label>Car Brand<span style="color:red"> *</span></label>
-                        <select id="carBrand" name="car_brand" class="form-control @error('car_brand') is-invalid @enderror">
+                        <select id="carBrand" name="car_brand" class="form-control">
                             <option value="0" disabled selected>-- Please Select Car Brand --</option>
                             @foreach ($CarBrand as $CarBrand)
                                 <option value="{{$CarBrand->id}}">{{$CarBrand->brand}}</option>
                             @endforeach
                         </select>
-                        @error('car_brand')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                         <br>
                         <label>Car Model<span style="color:red"> *</span></label>
-                        <select id="carModel" name="car_model" class="form-control @error('car_model') is-invalid @enderror" disabled>
+                        <select id="carModel" name="car_model" class="form-control" disabled>
                         </select>
-                        @error('car_model')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                         <br>
                         <label>Car Variant<span style="color:red"> *</span></label>
                         <select id="carVariant" name="car_variant" class="form-control @error('car_variant') is-invalid @enderror" disabled>

@@ -6,7 +6,7 @@
         <div class="col-md-9">
             <div class="card">
                 <div class="card-header">
-                    <span style="font-size: 20px"><a href="/admin/carbrand">Car Brand</a> / {{ $CarBrand->brand }}</span>
+                    <span style="font-size: 20px"><a href="/admin/brand_model_variant">Car Brand</a> / {{ $CarBrand->brand }}</span>
                 </div>
                 <div class="card-body">
                 <form action="/admin/carbrand/editfunction/{{ $CarBrand->id }}" method="post" enctype="multipart/form-data">
@@ -30,7 +30,7 @@
                         @enderror
                     </div>
                     <div class="modal-footer">
-                        <a class="btn btn-secondary" href="/admin/carbrand">Back</a>
+                        <a class="btn btn-secondary" href="/admin/brand_model_variant">Back</a>
                         <button type="submit" class="btn btn-primary">Edit</button>
                     </div>
                 </form>

@@ -216,6 +216,14 @@ class DataTableController extends Controller
         return datatables($query)
             ->addIndexColumn()
 
+            ->addColumn('Car_Brand', function($query){
+
+                $CarBrand = $query->carModel->carBrand->brand;
+
+                return $CarBrand;
+
+            })
+
             ->addColumn('Car_Model', function($query){
 
                 $CarModel = $query->carModel->model;

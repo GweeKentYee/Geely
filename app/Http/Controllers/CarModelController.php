@@ -7,6 +7,7 @@ use App\Models\CarModel;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CarModelController extends Controller
 {
@@ -31,7 +32,7 @@ class CarModelController extends Controller
 
         CarModel::where('id', $carmodelID)->delete();
 
-        return redirect('admin/carmodel');
+        return redirect('admin/brand_model_variant')->withInput(['tab'=>'carmodeltab']);
 
     }
 
@@ -39,21 +40,30 @@ class CarModelController extends Controller
     public function addCarModel(Request $request){
 
         // validate inputed records according to columns of the database table
-        $data = $request->validate([
+        $validator = Validator::make($request->all(), [
             'car_brand' => ['required', Rule::notIn('0')],
             'model' => ['required', 
             Rule::unique('car_models','model')->where(function ($query){
                 return $query->where('car_brand_id', request('car_brand'));
             })]
         ]);
+ 
+        if ($validator->fails()) {
+            return redirect('admin/brand_model_variant')
+                        ->withErrors($validator)
+                        ->withInput(['tab'=>'carmodeltab'])
+                        ->with('error_code', 2);
+        }
 
+        $data = $validator->validated();
+        
         // create new records
         CarModel::create([
             'car_brand_id' => $data['car_brand'],
             'model' => $data['model']
         ]);
 
-        return redirect('admin/carmodel');
+        return redirect('admin/brand_model_variant')->withInput(['tab'=>'carmodeltab']);
 
     }
 
@@ -90,7 +100,7 @@ class CarModelController extends Controller
 
             $CarModel->update($input);
 
-            return redirect('admin/carmodel');
+            return redirect('admin/brand_model_variant')->withInput(['tab'=>'carmodeltab']);
 
         } else {
             

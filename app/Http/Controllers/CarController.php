@@ -81,8 +81,6 @@ class CarController extends Controller
     public function addCar(Request $request){
 
         $data = $request->validate([
-            'car_brand' => ['required', Rule::notIn('0')],
-            'car_model' => ['required', Rule::notIn('0')],
             'car_variant' => ['required', Rule::notIn('0'),
             Rule::unique('cars','car_variant_id')->where(function ($query){
                 return $query->where('year', request('year'))->where('car_body_type_id', request('car_body_type'))->where('car_general_spec_id', request('car_general_spec'));
