@@ -73,7 +73,7 @@ class DataTableController extends Controller
                 return $CarBrand;
 
             })
-            
+
             ->addColumn('Car_Model', function($query){
 
                 $CarModel = $query->carModel->model;
@@ -117,15 +117,15 @@ class DataTableController extends Controller
             ->addColumn('Edit', function($query){
 
                 $actionButton = '<a class= "btn btn-success btn-sm edit" href= "/admin/car/edit/'.$query->id.'">Edit</a>';
-                
+
                 return $actionButton;
 
             })
-            
+
             ->addColumn('Delete', function($query){
 
                 $actionButton = '<a class= "btn btn-danger btn-sm delete" href= "/admin/car/delete/'.$query->id.'">Delete</a>';
-                
+
                 return $actionButton;
 
             })->rawColumns(['File', 'Edit', 'Delete'])  // for columns which involve html codes
@@ -142,15 +142,15 @@ class DataTableController extends Controller
             ->addColumn('Edit', function($query){
 
                 $actionButton = '<a class= "btn btn-success btn-sm edit" href= "/admin/carbrand/edit/'.$query->id.'">Edit</a>';
-                
+
                 return $actionButton;
 
             })
-            
+
             ->addColumn('Delete', function($query){
 
                 $actionButton = '<a class= "btn btn-danger btn-sm delete" href= "/admin/carbrand/delete/'.$query->id.'">Delete</a>';
-                
+
                 return $actionButton;
 
             })->rawColumns(['Edit', 'Delete'])  // for columns which involve html codes
@@ -175,15 +175,15 @@ class DataTableController extends Controller
             ->addColumn('Edit', function($query){
 
                 $actionButton = '<a class= "btn btn-success btn-sm edit" href= "/admin/carmodel/edit/'.$query->id.'">Edit</a>';
-                
+
                 return $actionButton;
 
             })
-            
+
             ->addColumn('Delete', function($query){
 
                 $actionButton = '<a class= "btn btn-danger btn-sm delete" href= "/admin/carmodel/delete/'.$query->id.'">Delete</a>';
-                
+
                 return $actionButton;
 
             })->rawColumns(['Edit', 'Delete'])  // for columns which involve html codes
@@ -208,25 +208,25 @@ class DataTableController extends Controller
             ->addColumn('Edit', function($query){
 
                 $actionButton = '<a class= "btn btn-success btn-sm edit" href= "/admin/carvariant/edit/'.$query->id.'">Edit</a>';
-                
+
                 return $actionButton;
 
             })
-            
+
             ->addColumn('Delete', function($query){
 
                 $actionButton = '<a class= "btn btn-danger btn-sm delete" href= "/admin/carvariant/delete/'.$query->id.'">Delete</a>';
-                
+
                 return $actionButton;
 
             })->rawColumns(['Edit', 'Delete'])  // for columns which involve html codes
             ->make(true);
     }
-  
+
     public function newsletter(){
 
             $query = Newsletter::select('*');
-              
+
              return datatables($query)
             ->addIndexColumn()
 
