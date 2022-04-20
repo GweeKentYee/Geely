@@ -27,6 +27,7 @@
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link rel="stylesheet" type = "text/css" href = "//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    @livewireStyles
 </head>
 <body>
     <div id="app">
@@ -109,6 +110,7 @@
             @yield('content')
         </main>
     </div>
+    @livewireScripts
 </body>
 @yield('footer-scripts')
 </html>
