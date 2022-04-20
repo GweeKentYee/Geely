@@ -135,14 +135,14 @@
                                 <div class="card cat-card m-auto">
                                     <div>
                                         <a href='/catalogue/usedcardetails/{{$usedcars->id}}'>
-                                            <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200">
+                                            <img class="card-img" src="{{$usedcars->usedCarImages->get(0)->image}}" alt="Card image cap" width="200" height="200">
                                         </a>
                                     </div>
                                     <div class="card-body">
 
                                         <div class="row">
-                                            <div class="card-title-year-brand col-10">{{$usedcars->car->year}} {{$usedcars->car->carModel->carBrand->brand}}</div>
-                                            <div class="card-title-model-variant col-10">{{$usedcars->car->carModel->model}} {{$usedcars->car->carVariant->variant}} </div>
+                                            <div class="card-title-year-brand col-10">{{$usedcars->car->year}} {{$usedcars->car->carVariant->carModel->carBrand->brand}}</div>
+                                            <div class="card-title-model-variant col-10">{{$usedcars->car->carVariant->carModel->model}} {{$usedcars->car->carVariant->variant}} </div>
                                             <div class="col-2">
                                                 @php
                                                     $exist_in_collection = false;

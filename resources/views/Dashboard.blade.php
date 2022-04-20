@@ -7,11 +7,11 @@
             <div class="carousel-inner">
                 @for ($i=0;$i<$Dash->count();$i++)
                     @if ($i==0)
-                            <a class="carousel-item active" href="{{$Dash->get($i)->link}}" target="_blank">
+                            <a class="carousel-item active" height="1080p" href="{{$Dash->get($i)->link}}" target="_blank">
                                 <img class="d-block w-100" src="{{$Dash->get($i)->image}}" alt="First slide">
                             </a>
                         @else
-                            <a class="carousel-item" href="{{$Dash->get($i)->link}}" target="_blank">
+                            <a class="carousel-item" height="1080p" href="{{$Dash->get($i)->link}}" target="_blank">
                                 <img class="d-block w-100" src="{{$Dash->get($i)->image}}" alt="Second slide">
                             </a>
                     @endif
@@ -53,7 +53,7 @@
                             </div>
                         </div>
                         <div class="cata-card-title">CAR MODEL : </div>
-                        <div class="cata-card-subtitle">{{$usedcars->car->carModel->model}}</div>
+                        <div class="cata-card-subtitle">{{$usedcars->car->carVariant->carModel->model}}</div>
                         <div class="cata-card-title">PRICE : </div>
                         <div class="cata-card-subtitle">RM {{$usedcars->min_price}} to RM {{$usedcars->max_price}}</div>
                     </a>
@@ -69,7 +69,7 @@
                     About our system
                 </h1>
                 <p>
-                    
+                    The Geely car scanner is an advanced car scanning system developed by our client Geely Global. It is fast , efficient and reliable. The scanner is capable of scanning 19 different points on the car and produce accurate quality ratings.
                 </p>
             </div>
 
