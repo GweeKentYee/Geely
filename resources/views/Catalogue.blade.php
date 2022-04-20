@@ -23,7 +23,7 @@
         {{-- search bar --}}
         <div class="container">
             <div class="d-flex justify-content-center">
-                <form type="get"  action="{{url('/catalogue/search')}}" style="display:block" class="col-lg-6">
+                <form type="get"  action="{{url('/catalogue/search')}}" class="col-lg-6">
                     <div class="input-group rounded">
                         <input type="search" id="search" name="query" class="typeahead form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" autocomplete="off" />
                         <button type="submit" class="btn btn-primary">
@@ -33,10 +33,7 @@
                         </button>
                     </div>
                 </form>
-            </div>
-
-            <div class="d-flex justify-content-center">
-                <div class="col-md-2">
+                <div class="col-md-2 mx-2">
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#advancedSearch" class="row">Advanced Search</button>
                 </div>
             </div>
