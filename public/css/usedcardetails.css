@@ -1,3 +1,4 @@
+
 .headline{
     color: #3279af;
     padding-left: 2rem;
@@ -31,7 +32,6 @@
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
     }
-
   .card-add-collection-btn{
     color: rgb(250, 86, 86);
     padding: 0;
@@ -55,7 +55,6 @@
   .cat-card{
       box-shadow: 5px 5px 25px -5px rgba(50,121,175,0.25);
       }
-    
 
   .list-group-item{
     margin-left: 20px;
@@ -63,8 +62,9 @@
   }
 
   #mypopup {
-    width: 400px;
+    width: 200px;
     padding: 20px;
+    height :auto;
     font-family: Arial, sans-serif;
     font-size: 10pt;
     background-color: white;
@@ -73,121 +73,18 @@
     display: none;
     color: #21669e;
     border-radius: 5px;
-    box-shadow: 0 0 0 1px #eee;
+    box-shadow: 0 0 0 1px #eee; 
   }
   
-  #mypopup::before {
-    content: "";
-    width: 512px;
-    height: 12px;
-    transform: rotate(45deg);
-    background-color: white;
-    position: absolute;
-    left: -6px;
-    top: 68px;
-  }
 
-  /* example */
-  /* svg{
-  max-width: 100%!important;
-  height: auto;
-  display: block;}
+.heyo:hover path{
+  fill: #043557;
+  transition: 0.3s
+} 
+    /* +transition(0.3s);     */
 
-.heyo:hover{
-  fill: #CC2929;
-  /* +transition(0.3s); */
-/* }
-.enabled{
-  fill: #21669E;
+.enabled path{
+  fill: #a5b6c4;
   cursor: pointer;
-}
-.description{
-  pointer-events: none;
-  position: absolute;
-  font-size: 18px;
-  text-align: center;
-  background: white;
-  padding: 10px 15px;
-  z-index: 5;
-  height: 30px;
-  line-height: 30px;
-  margin: 0 auto;
-  color: #21669e;
-  border-radius: 5px;
-  box-shadow: 0 0 0 1px #eee;
-  /* +transform(translateX(-50%)); */
-  /* display: none;}
-  .active{
-    display: block;}
-  :after{
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 100%;
-    width: 0;
-    height: 0;
-    margin-left: -10px;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid white; 
-  }  */
+} 
 
-/* Styling for SVG */
-#Bonnet:hover path{ 
-    fill:red;
-}
-
-#Front_Right_Door:hover path{
-    fill:aquamarine;
-}
-#Rear_Right_Door:hover path{
-    fill:blanchedalmond;
-}
-#Trunk:hover path{
-    fill:orange;
-}
-#Front_Right_Wheel_Arc:hover path{
-    fill:cornflowerblue;
-}
-#Rear_Right_Wheel_Arc:hover path{
-    fill:cyan;
-}
-#Front_Left_Wheel_Arc:hover path{
-    fill:darkseagreen;
-}
-#Rear_Left_Wheel_Arc:hover path{
-    fill:darkgoldenrod;
-}
-#Right_Center_Pillar:hover path{
-    fill:blueviolet;
-}
-#Left_Center_Pillar:hover path{
-    fill:rgb(110, 226, 43);
-}
-#Rear_Bumper:hover path{
-    fill: yellow;
-}
-#Front_Bumper:hover path{
-    fill: green;
-}
-#Roof_Panel:hover path{
-    fill: blue;
-}
-#Right_Sill_Plate:hover path{
-    fill: purple;
-}
-#Left_Sill_Plate:hover path{
-    fill:darkgreen;
-}
-#Front_Left_Door:hover path{
-    fill:moccasin;
-}
-#Rear_Left_Door:hover path{
-    fill:rebeccapurple;
-}
-#Rear_Quarter_Pillar:hover path{
-    fill:darkred;
-}
-#Screen_Pillar:hover path{
-    fill:fuchsia;
-}

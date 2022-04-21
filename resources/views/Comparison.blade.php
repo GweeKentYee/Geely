@@ -22,7 +22,7 @@
         <thead>
           <tr>
             <th scope="col">
-              
+              {{-- {{$usedcar1->usedCarImages->get(0)->image}} --}}
               <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200"><br>
               
               <div class="details-title">
@@ -38,8 +38,9 @@
               </th>
             <th></th>
             <th scope="col">
-              
-              <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200"><br>
+              {{-- https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format --}}
+              {{-- {{$usedcar2->usedCarImages->get(0)->image} --}}
+              <img class="card-img" src=" https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format " alt="Card image cap" width="200" height="200"><br>
                
                 <div class="details-title">
                     <div class="card-header">

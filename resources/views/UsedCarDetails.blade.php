@@ -14,7 +14,7 @@
             <div class="card-body">
                   <br>
                   <div class="row">
-                    <div class="col">
+                    <div class="col-4">
                         @php    
                                 $exist_in_collection = false;
                                 $used_car_id =  $usedcar->id ;
@@ -38,61 +38,92 @@
                                 <button type="submit" class="card-add-collection-btn"><i class="bi bi-star" style="font-size:20px;margin-right:0.2rem;"></i></button> 
                             </form>                     
                         @endif
-                        <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200">
-                    </div>
-
-
-                    <div class="col-8">
-                        <div class="card cat-card m-auto">
-                            <div class="row" style="margin:10px">
-                            <div class="col">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"> 
-                                    <div class="details-title">Model:</div>
-                                    <div class="details-content">{{$usedcar->car->carModel->model}}</div></li>
-                                <li class="list-group-item">
-                                    <div class="details-title">Body Type:</div>
-                                    <div class="details-content">{{$usedcar->car->carBodyType->body_type}}</div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="details-title">Variant:</div>
-                                    <div class="details-content">{{$usedcar->car->carVariant->variant}}</div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="details-title">Fuel:</div>
-                                    <div class="details-content">{{$usedcar->car->carGeneralSpec->fuel}}</div>
-                                </li>
-                              </ul>
+                        {{-- <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200"><br> --}}
+                        
+                        {{-- Carousel slides --}}
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <img class="d-block w-100" src="https://prod-carsome-my.imgix.net/B2C/de811766-1e0a-4dc7-88dc-930e2afd4106.jpeg?q=30&w=3200&auto=format" alt="First slide">
+                              {{-- {{$usedcar->usedCarImages->get(0)->image}} {{$usedcar->usedCarImages->get(1)->image}}  --}}
+                                </div>
+                              <div class="carousel-item">
+                                <img class="d-block w-100" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Second slide">
+                              </div>
+                              <div class="carousel-item">
+                                <img class="d-block w-100" src="https://prod-carsome-my.imgix.net/B2C/de811766-1e0a-4dc7-88dc-930e2afd4106.jpeg?q=30&w=3200&auto=format" alt="Third slide">
+                              </div>
                             </div>
-                            <div class="col">
+
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                        
+                        {{-- end of carousel slides--}}
+
+                        </div>
+                        <div class="col-8">
+                            <div class="card cat-card m-auto">
+                                <div class="row" style="margin:10px">
+                                <div class="col">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item"> 
-                                        <div class="details-title">Price:</div>
-                                        <div class="details-content">RM {{$usedcar->min_price}} to RM {{$usedcar->max_price}}</div></li>
+                                        <div class="details-title">Model:</div>
+                                        <div class="details-content">{{$usedcar->car->carModel->model}}</div></li>
                                     <li class="list-group-item">
-                                        <div class="details-title">Year</div>
-                                        <div class="details-content">{{$usedcar->car->year}}</div>
+                                        <div class="details-title">Body Type:</div>
+                                        <div class="details-content">{{$usedcar->car->carBodyType->body_type}}</div>
                                     </li>
                                     <li class="list-group-item">
-                                        <div class="details-title">Transmission:</div>
-                                        <div class="details-content">{{$usedcar->car->carGeneralSpec->transmission}}</div>
+                                        <div class="details-title">Variant:</div>
+                                        <div class="details-content">{{$usedcar->car->carVariant->variant}}</div>
                                     </li>
                                     <li class="list-group-item">
-                                        <div class="details-title">Rating:</div>
-                                        <div class="details-content">{{$Data[1][19]}}</div>
+                                        <div class="details-title">Fuel:</div>
+                                        <div class="details-content">{{$usedcar->car->carGeneralSpec->fuel}}</div>
                                     </li>
-                                  </ul>
+                                </ul>
                                 </div>
+                                <div class="col">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"> 
+                                            <div class="details-title">Price:</div>
+                                            <div class="details-content">RM {{$usedcar->min_price}} to RM {{$usedcar->max_price}}</div></li>
+                                        <li class="list-group-item">
+                                            <div class="details-title">Year</div>
+                                            <div class="details-content">{{$usedcar->car->year}}</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="details-title">Transmission:</div>
+                                            <div class="details-content">{{$usedcar->car->carGeneralSpec->transmission}}</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="details-title">Rating:</div>
+                                            <div class="details-content">{{$Data[1][19]}}</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        </div>
+
                     </div>
                   </div>
                 <br><br>
 
             
-
                   {{-- SVG Codes --}}
-                  <div class="col-md-8" style="margin:10px 150px 50px">
+                  <div class="col-md-8" style="margin-left:30px width: 60%">
                     <svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px" viewBox="0 0 800 600" overflow="visible" xml:space="preserve">
                     <g id="Layer_2_1_">
@@ -707,8 +738,8 @@
                                s-1.8-4.2-4.1-4.2s-4.1,1.9-4.1,4.2S643.5,345,645.8,345z"/>
                        </g>
                    </g>
-                        <g id="segmented">
-                            <g id="Bonnet">
+                        <g id="segmented" pointer-events="all">
+                            <g id="6" name="Bonnet" class="enabled">
                            <path fill="#FFFFFF" stroke="#000000" stroke-width="0.6782" stroke-linejoin="round" d="M292.9,370.5c-0.3,0-0.6-0.1-0.9-0.1
                                c-15.3-1.8-32.9-4.9-50.8-9.2c-17-4-33-9.1-46.9-13.9c0,0,0-0.1-0.1-0.1c0,0,0,0,0,0v-0.1c-0.5-1.1-0.9-2.2-1.3-3.4
                                c-0.2-0.4-0.3-0.8-0.4-1.2c-0.3-1-0.7-2-1-3c-0.6-1.8-1.1-3.7-1.6-5.6c-3.4-13.4-3.5-24.6-3.4-34.1c-0.1-9.5-0.1-20.7,3.4-34.1
@@ -749,7 +780,7 @@
                                c0.1,0,0.1,0.1,0.1,0.1c13.9,4.8,29.9,9.9,46.9,13.9c18,4.3,35.5,7.4,50.8,9.2l7.6,11.4C289.2,379.7,277.3,377.2,266.3,374.5z"/>
                             
                         </g>
-                            <g id="Roof_Panel">
+                            <g id="9" name="Roof Panel" class="enabled">
                                 <path fill="#FFFFFF" stroke="#000000" stroke-width="0.6782" stroke-linejoin="round" d="M555.7,300l-0.1,51.5v1.4
                                     c-14.6-0.3-29.7-0.4-45.2-0.2c-18.4,0.2-37.3,0.8-56.8,1.7c-26.4,1.4-51.6,3.4-75.7,5.9c-0.5-6.6-0.9-13.3-1.2-20.2
                                     c-0.7-13.8-0.9-27.2-0.9-40.1c-0.1-12.9,0.2-26.3,0.9-40.4c0.3-6.8,0.7-13.6,1.2-20.2c24.1,2.6,49.3,4.8,75.7,6.1
@@ -765,7 +796,7 @@
                                     c-0.2-5.1-1.4-10.1-3.4-14.7c2.1,0,4.8-0.2,7.5-0.8c1.7-0.4,3.3-0.8,4.6-1.2c0.3,0.9,0.5,1.8,0.6,2.7c0.3,2,0.5,3.9,0.8,5.9
                                     C779.8,270.4,780.7,285.8,780.8,299.9z"/>
                             </g>
-                            <g id="Trunk">
+                            <g id="5" name="Car Boot" class="enabled">
                                 <path fill="#FFFFFF" stroke="#000000" stroke-width="0.6782" stroke-linejoin="round" d="M738.9,352.6c-3.4-5-5.3-10.9-5.3-17.2
                                     v-70.8c0-12.4,7.4-23.5,18.9-28.2c-0.3-1.1-0.7-2.6-1.2-3.5c-1-1.7-2.8-3.5-4-4.8c-4.2,0.1-9.7,0.7-16,2.5
                                     c-8.4,2.4-14.7,6.2-18.7,9.1c0-0.2,0.1-0.5,0.1-0.7c-2.7,2-6,5-8.5,7.1c-2,1.6-3.8,3.2-5.7,4.7c-0.6,0.4-1.6,1.2-2.4,2.7
@@ -773,7 +804,7 @@
                                     c0-0.2-0.1-0.4-0.1-0.6c4,2.9,10.3,6.7,18.7,9.1c6.2,1.8,11.7,2.4,16,2.5c1.2-1.2,3.1-2.9,4-4.6c0.4-0.7,0.9-2.2,1.4-3.6
                                     C747,361.4,742.2,357.5,738.9,352.6z M716,341l-8.5-5.5c-3.5-2.3-5.7-6.2-5.7-10.4v-50.3c0-4.2,2.1-8.1,5.7-10.4l8.5-5.5V341z"/>
                             </g>
-                            <g id="Screen_Pillar">
+                            <g id="18" name="Screen Pillar" class="enabled">
                                 <path fill="#FFFFFF" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" d="M377.9,360.3v8.8
                                     c-28.2,3.4-54.1,8-77.6,12.9c-0.1,0-0.2,0-0.4,0.1l-0.2-0.3l-7.6-11.4l-0.1-0.1l0-0.1c0.3,0.1,0.7,0.2,1,0.2
                                     c0.3,0.1,0.6,0.1,0.9,0.2c2.2,0.4,4.4,0.4,6.6,0.1C326.2,367.3,352.1,363.8,377.9,360.3z"/>
@@ -793,7 +824,7 @@
                                     c0,0.2,0,0.3,0,0.5c-0.1,0-0.3,0.1-0.4,0.1c-6,1.2-12.6,2.8-19.5,5c-5.8,1.8-11.1,3.8-15.9,5.8l0.8-6.1c7.3-2.9,15.2-5.3,23.7-8
                                     c7.6-2.5,14.9-4.4,21.9-6.1L69.8,225.8z"/>
                             </g>
-                            <g id="Rear_Quarter_Pillar">
+                            <g id="19" name="Rear Quarter Pillar" class="enabled">
                                 <path fill="#FFFFFF" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" d="M578.4,212.3c-0.1,0-0.1-0.1-0.1-0.1
                                     c-4.9-2-13-4.6-36.9-4.8c-4.9-0.1-10.5,0-16.8,0.3c1.8,1.1,4.2,2.6,7.2,4.3c3.7,2.1,4.6,2.4,5,3.6c0.7,2.1-1.5,4.6-6.5,10
                                     c-1.5,1.6-5.5,5.8-10.4,11.2l-0.2,0.2l-9.9,10.3c15.6,0.2,30.8,0.1,45.5-0.2c0.2-2,0.9-5,1.7-7.4c1-2.9,2.3-5.2,3.5-6.8
@@ -828,18 +859,18 @@
                                     c9.5,1.1,20.8,2.6,33.3,4.8c0.8,2.8,1.9,5.9,3.4,9.2c2.5,5.5,5.6,9.8,8.2,13L577,461.1z"/>
                             </g>
                             <g id="Sill_Plate">
-                                <g id="Left_Sill_Plate">
+                                <g id="18" name="Left Sill Plate" class="enabled">
                                     <path fill="#FFFFFF" stroke="#000000" stroke-width="0.6782" stroke-linejoin="round" d="M185.5,540.8c19.7,4,39.3,8,59,12
                                         l325.7-2.4c10.3-4.9,20.7-9.8,31-14.8c-3.7-24.1-22-42.6-43.8-45.6c-26.5-3.7-54,16.2-58.9,46.5c-62.7,0.8-125.4,1.7-188.1,2.5
                                         c2-26.3-19.4-48.5-44.5-48.1c-25,0.4-45.5,23-43.1,49C210.5,540.2,198,540.5,185.5,540.8z"/>
                                 </g>
-                                <g id="Right_Sill_Plate">
+                                <g id="17" name="Right Sill Plate" class="enabled">
                                     <path fill="#FFFFFF" stroke="#000000" stroke-width="0.6782" stroke-linejoin="round" d="M185.5,59.2c19.7-4,39.3-8,59-12
                                         l325.7,2.4c10.3,4.9,20.7,9.8,31,14.8c-3.7,24.1-22,42.6-43.8,45.6c-26.5,3.7-54-16.2-58.9-46.5c-62.7-0.8-125.4-1.7-188.1-2.5
                                         c2,26.3-19.4,48.5-44.5,48.1c-25-0.4-45.5-23-43.1-49C210.5,59.8,198,59.5,185.5,59.2z"/>
                                 </g>
                             </g>
-                            <g id="Rear_Bumper">
+                            <g id="8"name ="Rear Bumper" class="enabled">
                                 <path fill="#FFFFFF" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" d="M681.8,371.8V228.3
                                     c-1.3-7.4,2.8-14.8,9.9-17.7c-3.4-1.7-6.8-2.8-9.3-3.6c-2.2,0.4-4.9,1-8.9,2c-5.2,1.1-9.4,2.1-12.2,2.8c-2.3-0.1-6,0.1-10.2,1.8
                                     l-1.5,0.6c-3.2,1.5-5.2,4.8-5.2,8.3v8.8l4.7,4c5.8,5.2,9.1,12.5,9.1,20.3v88.8c0,7.8-3.3,15.2-9.1,20.3l-4.7,4.2v8.4
@@ -855,7 +886,7 @@
                                     c0.1,0.1,0.2,0.1,0.2,0.2c12.5,11.3,27.4,11.7,31.3,11.8c0.8,1.1,1.5,2.3,1.8,3.7c0.5,2.1,1,4.6,1.2,7.2
                                     C625,508.2,625,510.7,625.2,512.9z"/>
                             </g>
-                            <g id="Front_Bumper">
+                            <g id="7" name="Front Bumper" class="enabled">
                                 <path fill="#FFFFFF" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" d="M140,221.5l4-1.4c2.9-1.1,5.9,1.1,5.8,4.2
                                     l-0.7,18.1c-0.1,1.5-0.9,2.8-2.2,3.6l-0.2,0.1c-2.6,1.5-5.9,0-6.3-2.9l-3.2-16.8C136.8,224.3,138,222.2,140,221.5z M125.8,340.6
                                     c-0.4,2.1-0.9,4.1-1.4,6c-0.7,2.5-3.3,3.5-5.2,2c-1.4-1.2-2.9-2.7-4.5-4.4l-0.1-0.1c-4.5-5.1-7.1-12.2-7.3-19.5V323
@@ -893,7 +924,7 @@
                                     l0.1,0.1c3.6,5,13.8,17.3,31.8,23c0.3,0.1,0.6,0.2,1,0.3C232.6,377.1,235.6,377.7,238.4,378.2z"/>
                             </g>
                             <g id="Wheels">
-                                <g id="Rear_Left_Wheel">
+                                <g id="Rear Left Wheel" class="enabled">
                                     
                                         <ellipse fill="#A5A4A4" stroke="#000000" stroke-width="1.2" stroke-linejoin="round" cx="544.5" cy="533.5" rx="34.2" ry="33.4"/>
                                     
@@ -916,8 +947,8 @@
                                         c0.2,0.3,0.3,0.7,0.5,1c0.2,0.4,0.6,0.7,1,0.8l2.2,0.8c0.8,0.3,1.8,0,2.2-0.7l4.4-6.7c0.7-1,0.2-2.4-0.9-2.8l-7.5-2.8
                                         c-0.8-0.3-1.8,0-2.2,0.7l-1.3,1.9c-0.2,0.4-0.3,0.8-0.3,1.2c0,0.3,0.1,0.7,0.1,1.1C522.1,538.8,522.3,539.7,522.6,540.5z"/>
                                 </g>
-                                <g id="Front_Left_Wheel">
-                                    
+                                <g id="Front Left Wheel" class="enabled">
+                                
                                         <ellipse fill="#A5A4A4" stroke="#000000" stroke-width="1.2" stroke-linejoin="round" cx="267.9" cy="533.3" rx="34.2" ry="33.4"/>
                                     
                                         <ellipse fill="#FFFFFF" stroke="#000000" stroke-width="0.6782" stroke-linejoin="round" cx="267.9" cy="533.3" rx="26" ry="25.3"/>
@@ -939,7 +970,7 @@
                                         c0.2,0.3,0.4,0.7,0.5,1c0.2,0.4,0.6,0.7,1,0.8l2.1,0.8c0.8,0.3,1.8,0,2.2-0.7l4.4-6.7c0.7-1,0.2-2.4-0.9-2.8l-7.5-2.8
                                         c-0.8-0.3-1.8,0-2.2,0.7l-1.3,1.9c-0.2,0.4-0.4,0.8-0.3,1.2c0,0.3,0.1,0.7,0.1,1.1C245.4,538.7,245.7,539.6,246,540.4z"/>
                                 </g>
-                                <g id="Rear_Right_Wheel">
+                                <g id="Rear Right Wheel" class="enabled">
                                     
                                         <ellipse fill="#A5A4A4" stroke="#000000" stroke-width="1.2" stroke-linejoin="round" cx="544.5" cy="66.6" rx="34.2" ry="33.4"/>
                                     
@@ -962,7 +993,7 @@
                                         c0.2-0.3,0.3-0.7,0.5-1c0.2-0.4,0.6-0.7,1-0.8l2.2-0.8c0.8-0.3,1.8,0,2.2,0.7l4.4,6.7c0.7,1,0.2,2.4-0.9,2.8l-7.5,2.8
                                         c-0.8,0.3-1.8,0-2.2-0.7l-1.3-1.9c-0.2-0.4-0.3-0.8-0.3-1.2c0-0.3,0.1-0.7,0.1-1.1C522.1,61.2,522.3,60.3,522.6,59.5z"/>
                                 </g>
-                                <g id="Front_Right_Wheel">
+                                <g id="Front Right Wheel" class="enabled">
                                     
                                         <ellipse fill="#A5A4A4" stroke="#000000" stroke-width="1.2" stroke-linejoin="round" cx="267.9" cy="66.7" rx="34.2" ry="33.4"/>
                                     
@@ -987,7 +1018,7 @@
                                 </g>
                             </g>
                             <g id="Doors">
-                                <g id="Rear_Left_Door">
+                                <g id="3" name="Rear Left Door" class="enabled">
                                     <path fill="#FFFFFF" stroke="#000000" stroke-width="0.6782" stroke-linejoin="round" d="M515.3,468.4
                                         c-6.7,0.4-12.1-0.1-12.2-1.2s5.3-2.4,11.9-2.9c6.7-0.4,12.1,0.1,12.2,1.2C527.3,466.6,522,467.9,515.3,468.4z M434,469.9
                                         c-0.4,0-0.8,0.1-1.2,0.1c-2,24-1.4,45.6,0.2,64c18.2-0.3,41.4-0.6,56.7-1c33.2-38,44.4-58.5,47.4-69.8c0-0.1,0-0.1,0.1-0.2
@@ -1000,7 +1031,7 @@
                                         c9,1,17.3,1.5,24.7,1.8c1.8-1.2,4.2-3.1,7-4.6c3.7-2.1,4.6-2.4,5-3.6C537,383.5,536.9,382.8,536.5,381.9z M514.3,389.8
                                         c-6.7,0.1-12.1-0.8-12-1.9s5.6-2.1,12.3-2.2c6.7,0,12.1,0.8,12,1.9C526.5,388.7,521,389.7,514.3,389.8z"/>
                                 </g>
-                                <g id="Front_Left_Door">
+                                <g id= "1" name="Front Left Door" class="enabled">
                                     <path fill="#FFFFFF" stroke="#000000" stroke-width="0.6782" stroke-linejoin="round" d="M406.4,476.9
                                         c-6.7,0.4-12.1-0.1-12.2-1.2s5.3-2.4,11.9-2.9c6.7-0.4,12.1,0.1,12.2,1.2S413.1,476.5,406.4,476.9z M432.8,470
                                         c-38.3,3.3-80,7.1-117.7,11.5c-1.7,21,0.8,39.6,4.4,54.7c37.9-0.7,75.7-1.4,113.5-2.1V534C431.4,515.6,430.8,494,432.8,470z"/>
@@ -1012,7 +1043,7 @@
                                         c-33.8,0.7-66,0.3-96.5-1c-0.9,2.5-2,5.5-3.1,8c1.1-0.2,2.2-0.2,3.3-0.2c35.5,0.8,71.8,1.2,108.9,1c2.3,0,4.5,0,6.8,0l1.8-8.4
                                         L423.8,383.6z"/>
                                 </g>
-                                <g id="Rear_Right_Door">
+                                <g id="4" name="Rear Right Door" class="enabled">
                                     <path fill="#FFFFFF" stroke="#000000" stroke-width="0.6782" stroke-linejoin="round" d="M515,135.7c-6.6-0.5-12-1.8-11.9-2.9
                                         c0.1-1.1,5.5-1.6,12.2-1.2c6.7,0.5,12,1.8,11.9,2.9C527.1,135.6,521.7,136.1,515,135.7z M489.7,67c-17.1-0.4-38.7-0.7-56.7-1.1
                                         c-1.6,18.4-2.2,40-0.2,64v0.1l0,0c0.4,0,0.8,0.1,1.2,0.1c35.3,3.1,69.5,5.3,102.5,6.9c0.2,0,0.4,0,0.7,0
@@ -1026,7 +1057,7 @@
                                         l-0.1,0.1l3.8,0.2C535.9,219.3,537.4,217.2,536.8,215.4z M514.6,214.3c-6.7-0.1-12.2-1.1-12.3-2.2c-0.1-1.1,5.3-2,12-1.9
                                         s12.2,1.1,12.3,2.2C526.7,213.5,521.3,214.3,514.6,214.3z"/>
                                 </g>
-                                <g id="Front_Right_Door">
+                                <g id="2" name="Front Right Door" class="enabled">
                                     <path fill="#FFFFFF" stroke="#000000" stroke-width="0.6782" stroke-linejoin="round" d="M434.3,144.3c-3-0.3-5.9-0.5-8.9-0.8
                                         h-0.1c-36-3.1-72.1-6.3-108.2-9.5l0,0c-0.8-4.3-1.4-8.8-1.8-13.5c-0.1-0.7-0.1-1.3-0.2-2v-0.1c37.7,4.5,79.4,8.2,117.7,11.5l0,0
                                         v0.1c0.2,3,0.5,5.9,0.9,9C433.9,140.9,434.1,142.6,434.3,144.3z"/>
@@ -1040,7 +1071,7 @@
                                 </g>
                             </g>
                             <g id="Center_Pillar">
-                                <g id="Left_Center_Pillar">
+                                <g id="10" name="Left Center Pillar" class="enabled">
                                     <path fill="#FFFFFF" stroke="#000000" stroke-width="0.6782" stroke-linejoin="round" d="M441.8,413.7
                                         c-3,12.6-5.6,26.6-7.5,41.9c-2.8,0.2-5.6,0.5-8.4,0.7V453l0,0l7-34.7l1.5-4C437,414.1,439.4,413.9,441.8,413.7z"/>
                                     <path fill="#FFFFFF" stroke="#000000" stroke-width="0.6782" stroke-linejoin="round" d="M449.2,413.3l-0.2,3.4h-0.1l-3.5,34.6
@@ -1051,7 +1082,7 @@
                                         433.7,383.2 				"/>
                                     <line fill="none" stroke="#000000" stroke-width="0.6782" stroke-linejoin="round" x1="432" y1="391.7" x2="431.9" y2="392"/>
                                 </g>
-                                <g id="Right_Center_Pillar">
+                                <g id = "11" name="Right Center Pillar" class="enabled">
                                     <path fill="#FFFFFF" stroke="#000000" stroke-width="0.6782" stroke-linejoin="round" d="M449,186.7c-2.4-0.1-4.8-0.3-7.2-0.4
                                         c-3-12.6-5.6-26.6-7.5-41.9c3.5,0.3,7.1,0.6,10.6,0.9l0.5,3.4h-0.2l3.5,34.6h0.1L449,186.7z"/>
                                     <path fill="#FFFFFF" stroke="#000000" stroke-width="0.6782" stroke-linejoin="round" d="M441.8,186.3c-2.7-0.2-5.4-0.4-8.2-0.7
@@ -1064,14 +1095,14 @@
                                 </g>
                             </g>
                             <g id="Wheel_Arc">
-                                <g id="Rear_Left_Wheel_Arc" data-toggle="tooltip">
+                                <g id="14" class="enabled" name="Rear Left Wheel Arc">
                                <path fill="#FFFFFF" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" d="M590.2,482.6l-0.2,0.2l-0.3,0.2
                                    l-24.5,18.4c-6-3.9-13.2-6-21.2-5.8c-24.7,0.6-43.1,23.2-38.7,50.4h-71.6l-0.7-12c18.2-0.3,41.4-0.6,56.7-1
                                    c0.5-0.6,1-1.2,1.5-1.8c32-36.9,42.9-56.9,45.9-68c6.8-0.3,13.7-0.8,20.5-1.2c6.6-0.4,13.1-0.8,19.4-1h0.1
                                    c0,0.1,0.1,0.2,0.1,0.3c0.8,2.7,2.5,7.3,5.6,12.2c0.3,0.5,0.7,1,1,1.5C585.6,477.6,587.7,480.2,590.2,482.6z"/>
                            </g>
-                                <g id="Front_Left_Wheel_Arc">
-                               <path fill="#FFFFFF" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" d="M306.4,546c3.5-28-15.1-50.2-39.9-49.6
+                                <g id="12" class="enabled" name="Front Left Wheel Arc">
+                               <path id="Front_Left_Wheel_Arc"  fill="#FFFFFF" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" d="M306.4,546c3.5-28-15.1-50.2-39.9-49.6
                                    c-5.6,0.1-10.8,1.4-15.4,3.8l-17.4-16.8c4.2-1.3,8.2-2.8,12-4.2c1-0.4,0.8-1.9-0.2-2c-6.7-0.9-13.4-1.7-20.2-2.5
                                    c6.1-1.2,15.6-3,25-4.1c6.5-0.8,10.6-1.2,14.8-1.6c8.5-0.9,20.8-2.4,36.1-5.2c0.2,1.8,1.7,3.5,3.9,3.3c4-0.4,8-0.8,12-1.1
                                    c-0.8,4.3-1.4,8.8-1.8,13.5c-0.1,0.7-0.2,1.4-0.2,2.1c-1.7,21,0.8,39.6,4.4,54.7c37.9-0.7,75.7-1.4,113.5-2.1V534l0,0l0.7,12
@@ -1081,13 +1112,13 @@
                                    l-12.1-12.9l-0.1-0.1c6.8,0.9,12.6,0.5,16.6-0.1c0,0,0.1,0,0.1,0c-5.2-3.5-10.3-7-15.4-10.4c8.5,2.4,17.5,4.8,26.6,6.9
                                    c11,2.7,22.9,5.2,33.4,7.3c0.2,0,0.5,0.1,0.7,0.1c-0.1,0-0.3,0.1-0.5,0.1l0.4,0C305.4,382.4,310.7,382.7,316.1,382.9z"/>
                            </g>
-                                <g id="Rear_Right_Wheel_Arc">
+                                <g id="15" class="enabled" name="Rear Right Wheel Arc">
                                <path fill="#FFFFFF" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" d="M590.1,117.4c-0.5,0.5-1,1-1.5,1.5
                                    c-0.5,0.5-1,1-1.4,1.5c0,0,0,0,0,0c-6.2,7-8.8,14.4-9.9,18.2c0,0.1,0,0.1,0,0.2c0,0-0.1,0-0.2,0c-12.7-0.4-26.6-1.2-39.7-1.8
                                    c0,0-0.1,0-0.1,0c0,0,0-0.1,0-0.1c-3-11.2-14.2-31.8-47.5-69.9c-17.1-0.4-38.7-0.7-56.7-1.1l0.8-11.9h71.5
                                    c-4.4,27.2,14,49.8,38.7,50.4c7.9,0.2,15.1-1.9,21.1-5.8l24.6,18.4l0.3,0.2L590.1,117.4z"/>
                            </g>
-                                <g id="Front_Right_Wheel_Arc" >
+                                <g id="13" class="enabled" name="Front Right Wheel Arc" >
                                
                                <path fill="#FFFFFF" stroke="#000000" stroke-width="0.75" stroke-linejoin="round" d="M433.8,54L433,65.9
                                    c-1.8,0-3.5-0.1-5.2-0.1c-0.1,0-0.2,0-0.2,0c-36-0.7-72-1.3-108.1-2c-3.6,15.1-6,33.7-4.4,54.7l0,0c0.1,0.7,0.1,1.3,0.2,2
@@ -1105,40 +1136,23 @@
                </g>
                </svg>
                <div class="details-title" style="text-align:center">SVG Diagram</div>
-            </div>
-                  {{-- End of SVG Codes --}}
+            </div>           
+            {{-- End of SVG Codes --}}
 
-            <div class="col-md-12">
-                <h3 class="headline">Inspection Details</h3>
-            </div>     
+                <div class="col-md-12">
+                    <h3 class="headline">   Inspection Details</h3>
+                </div>     
 
-                {{-- <g:each in="{{$id}}" var="author" status="i"> 
-                    <a type="link" class="link popovers" title="Books"
-                        data-container="body" data-toggle="popover" data-placement="left"
-                        data-contentId="popover_content_wrapper_${i}"
-                        data-content="to be overwritten">Author's Books
-                <div id="popover_content_wrapper_${i}" style="display: none">
-                    <div>
-                        {{-- <g:render template="bookList" model="[data : author.bookList]"/> --}}
-                    {{-- </div>
-                </div> --}}
-                {{-- </g:each> --}} 
-
-                  {{-- Popupcodes --}}
-                  {{-- @for({{$id}}); --}}
-                  <div id="mypopup">
-                        <h3>6</h3>
-                        <p>Bonnet</p>
-                  </div>
-                 
+                <div id="mypopup">
+                </div>
 
                   @for($j = 0; $j <=18 ;$j++)
-                    <li class="list-group-item" style="margin:auto">
+                    <li class="list-group-item" style="width: 80%">
                       <div class="ms-2 me-auto">
                         <span class="badge bg-primary rounded-pill">{{$j+1}}</span>
                           <div class="details-content">{{$Data[0][$j]}}</div>
                         <div class="progress" >
-                          <div class="progress-bar" role="progressbar" style="width: {{$Data[1][$j]}};" aria-valuenow="{{$Data[1][$j]}}" aria-valuemin="0" aria-valuemax="100">{{$Data[1][$j]}}</div>
+                          <div class="progress-bar" role="progressbar" style="width: {{$Data[1][$j]}}" aria-valuenow="{{$Data[1][$j]}}" aria-valuemin="0" aria-valuemax="100">{{$Data[1][$j]}}</div>
                         </div>
                       </div>
                       
@@ -1146,10 +1160,9 @@
                   @endfor
 
               </div>
-        </div>
     </div>
-</div>
-</div>
+    </div>
+    </div>
 </div>
 
 @endsection
@@ -1158,59 +1171,36 @@
     <script type="text/javascript">
 
     $(function() {
-    var myicon = document.getElementById("id");
-    var mypopup = document.getElementById(popup("mypopup"));
-    <p>myicon</p>
-
-    myicon.addEventListener("mouseover", showPopup);
-    myicon.addEventListener("mouseout", hidePopup);
-
-    function popup(myicon){
-        if(myicon != null){
+        $('.enabled').hover(function() {
+            $(this).attr("class", "enabled heyo")
+            var id =  $(this).attr('id');
+            var name = $(this).attr('name');
             
-        <div id="mypopup">
-                    <h3>6</h3>
-                    <p>myicon</p>
-        </div>
-        }
+            $('#mypopup').text(id).css("font-size", "60px");
+            $('#mypopup').append('<p>'+ name +'</p>').css("font-size", "15px"); 
 
-        return id;
-    }   
-    
+            var myicon = document.getElementById(id);
+            
+            var mypopup = document.getElementById("mypopup");
 
-    function showPopup(evt) {
-        var iconPos = myicon.getBoundingClientRect();
-        mypopup.style.left = (iconPos.right + 20) + "px";
-        mypopup.style.top = (window.scrollY + iconPos.top - 60) + "px";
-        mypopup.style.display = "block";
+            myicon.addEventListener("mouseover", showPopup);
+            myicon.addEventListener("mouseout", hidePopup);
 
-        // var CTM = myicon.getScreenCTM();
-	    // var mouseX = (evt.clientX - CTM.e) / CTM.a;
-	    // var mouseY = (evt.clientY - CTM.f) / CTM.d;
-	    // mypopup.setAttributeNS(null, "x", mouseX + 6 / CTM.a);
-	    // mypopup.setAttributeNS(null, "y", mouseY + 20 / CTM.d);
-        // mypopup.setAttributeNS(null, "visibility", "visible");
-    }
+            function showPopup(evt) {
+            var iconPos = myicon.getBoundingClientRect();
+            mypopup.style.left = (iconPos.right) + "py";
+            mypopup.style.top = (window.scrollY + iconPos.top ) + "px";
+            mypopup.style.display = "block";
+            }
 
-        function hidePopup(evt) {
+            function hidePopup(evt) {
             mypopup.style.display = "none";
-        }
-     });
+            }
+        });
 
-//      $(function (){     
-//         $("[data-toggle='popover']").each(function( index ) {
-//             var contentId = $( this ).data('contentId');
-//             var contentElement = $("#" + contentId);
+    
+    });
 
-//             $(this).popover ({html:true,
-//                  trigger: 'click',
-//                  content : function() {
-//                      return contentElement.html();
-//                 })
-//             });
-
-// });
-
-</script>
+    </script>
 @endsection
 
