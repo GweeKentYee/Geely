@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
+@section('css')
+<link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <h3><u>Brand/Model/Variant</u></h3>
+        <h3 class="pagename">Brand/Model/Variant</h3>
     </div>
     <br>
     <br>
@@ -23,7 +27,7 @@
             <div class="tab-pane fade show active" id="carbrandtab">
                 <br>
                 <div class="row justify-content-center">
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                         <div style="text-align:right" class="pb-1">
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcarbrand"><i class="bi bi-plus-lg"></i> Add Car Brand</button>
                         </div>
@@ -49,8 +53,8 @@
                             <form action="/admin/carbrand/add" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="modal-body">
-                                    <p style="color:red">*Required</p>
-                                    <label >Car Brand<span style="color:red"> *</span></label>
+                                    <p class="required">*Required</p>
+                                    <label >Car Brand<span class="required"> *</span></label>
                                     <input type="text" name="brand" class="form-control @error('brand') is-invalid @enderror" value="{{ old('brand') }}" placeholder="">
                                     @error('brand')
                                         <span class="invalid-feedback" role="alert">
@@ -70,7 +74,7 @@
             <div class="tab-pane fade" id="carmodeltab">
                 <br>
                 <div class="row justify-content-center">
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                         <div style="text-align:right" class="pb-1">
                             <button class = "btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcarmodel"><i class="bi bi-plus-lg"></i> Add Car Model</button>
                         </div>
@@ -98,8 +102,8 @@
                             <form action="/admin/carmodel/add" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="modal-body">
-                                    <p style="color:red">*Required</p>
-                                    <label>Car Brand<span style="color:red"> *</span></label>
+                                    <p class="required">*Required</p>
+                                    <label>Car Brand<span class="required"> *</span></label>
                                     <select name = "car_brand" class = "form-control @error('car_brand') is-invalid @enderror">
                                         <option value="0" disabled selected>-- Please Select Car Brand --</option>
                                         @foreach ($CarBrand as $CarBrand)
@@ -112,7 +116,7 @@
                                             </span>
                                         @enderror
                                     <br>
-                                    <label>Car Model<span style="color:red"> *</span></label>
+                                    <label>Car Model<span class="required"> *</span></label>
                                     <input type="text" name="model" class="form-control @error('model') is-invalid @enderror" value="{{ old('model') }}" placeholder="">
                                     @error('model')
                                         <span class="invalid-feedback" role="alert">
@@ -132,7 +136,7 @@
             <div class="tab-pane fade" id="carvarianttab">
                 <br>
                 <div class="row justify-content-center">
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                         <div style="text-align:right" class="pb-1">
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcarvariant"><i class="bi bi-plus-lg"></i> Add Car Variant</button>
                         </div>
@@ -161,8 +165,8 @@
                             <form action="/admin/carvariant/add" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="modal-body">
-                                    <p style="color:red">*Required</p>
-                                    <label>Car Brand<span style="color:red"> *</span></label>
+                                    <p class="required">*Required</p>
+                                    <label>Car Brand<span class="required"> *</span></label>
                                     <select id="carBrand" name="car_brand" class="form-control">
                                         <option value="0" disabled selected>-- Please Select Car Brand --</option>
                                         @foreach ($CarBrand2 as $CarBrand)
@@ -170,7 +174,7 @@
                                         @endforeach
                                     </select>
                                     <br>
-                                    <label>Car Model<span style="color:red"> *</span></label>
+                                    <label>Car Model<span class="required"> *</span></label>
                                     <select id="carModel" name="car_model" class="form-control @error('car_model') is-invalid @enderror" disabled>
                                     </select>
                                     @error('car_model')
@@ -179,7 +183,7 @@
                                         </span>
                                     @enderror
                                     <br>
-                                    <label>Car Variant<span style="color:red"> *</span></label>
+                                    <label>Car Variant<span class="required"> *</span></label>
                                     <input type="text" name="variant" class="form-control @error('variant') is-invalid @enderror" value="{{ old('variant') }}" placeholder="">
                                     @error('variant')
                                         <span class="invalid-feedback" role="alert">

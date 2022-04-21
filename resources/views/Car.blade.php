@@ -1,10 +1,14 @@
 @extends('layouts.app')
 
+@section('css')
+<link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <h3><u>Car</u></h3>
         <div class="col-md-12">
+            <h3 class="pagename">Car</h3>
             <div style="text-align:right" class="pb-1">
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcar"><i class="bi bi-plus-lg"></i> Add Car</button>
             </div>
@@ -39,8 +43,8 @@
                 <form action="/admin/car/add" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-                        <p style="color:red">*Required</p>
-                        <label>Car Brand<span style="color:red"> *</span></label>
+                        <p class="required">*Required</p>
+                        <label>Car Brand<span class="required"> *</span></label>
                         <select id="carBrand" name="car_brand" class="form-control">
                             <option value="0" disabled selected>-- Please Select Car Brand --</option>
                             @foreach ($CarBrand as $CarBrand)
@@ -48,11 +52,11 @@
                             @endforeach
                         </select>
                         <br>
-                        <label>Car Model<span style="color:red"> *</span></label>
+                        <label>Car Model<span class="required"> *</span></label>
                         <select id="carModel" name="car_model" class="form-control" disabled>
                         </select>
                         <br>
-                        <label>Car Variant<span style="color:red"> *</span></label>
+                        <label>Car Variant<span class="required"> *</span></label>
                         <select id="carVariant" name="car_variant" class="form-control @error('car_variant') is-invalid @enderror" disabled>
                         </select>
                         @error('car_variant')
@@ -61,7 +65,7 @@
                             </span>
                         @enderror
                         <br>
-                        <label>Manufacture Year<span style="color:red"> *</span></label>
+                        <label>Manufacture Year<span class="required"> *</span></label>
                         <select name="year" class="form-control @error('year') is-invalid @enderror">
                             <option value="0" disabled selected>-- Please Select Year --</option>
                             @for ($year=1920; $year<=2022; $year++)
@@ -74,7 +78,7 @@
                             </span>
                         @enderror
                         <br>
-                        <label>Body Type<span style="color:red"> *</span></label>
+                        <label>Body Type<span class="required"> *</span></label>
                         <select name="car_body_type" class="form-control @error('car_body_type') is-invalid @enderror">
                             <option value="0" disabled selected>-- Please Select Car Body Type --</option>
                             @foreach ($CarBodyType as $CarBodyType)
@@ -87,7 +91,7 @@
                             </span>
                         @enderror
                         <br>
-                        <label>General Spec<span style="color:red"> *</span></label>
+                        <label>General Spec<span class="required"> *</span></label>
                         <select name="car_general_spec" class="form-control @error('car_general_spec') is-invalid @enderror">
                             <option value="0" disabled selected>-- Please Select Transmission-Fuel --</option>
                             @foreach ($CarGeneralSpec as $CarGeneralSpec)
@@ -109,7 +113,7 @@
                             </span>
                         @enderror
                         <br>
-                        <label>Data File<span style="color:red"> *</span></label>
+                        <label>Data File<span class="required"> *</span></label>
                         <input type="file" name="data_file" class="form-control @error('data_file') is-invalid @enderror" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                         @error('data_file')
                             <span class="invalid-feedback" role="alert">

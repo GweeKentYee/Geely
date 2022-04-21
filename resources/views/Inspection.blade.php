@@ -1,10 +1,14 @@
 @extends('layouts.app')
 
+@section('css')
+<link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <h3><u>Inspection</u></h3>
-        <div class="col-md-9">
+        <div class="col-md-12">
+            <h3 class="pagename">Inspection</h3>
             <div style = "text-align:right" class = "pb-1">
                 <button class = "btn btn-primary" data-bs-toggle="modal" data-bs-target="#newinspection"><i class="bi bi-plus-lg"></i> New Inspection</button>
             </div>
@@ -33,7 +37,8 @@
                     @csrf
                     <div class="modal-body">
                         <div class = "inspection">
-                            <label>Car Brand:</label>
+                            <p class="required">*Required</p>
+                            <label>Car Brand<span class="required"> *</span></label>
                             <select id = "carBrand" name = "car_brand" class = "form-control @error('car_brand') is-invalid @enderror">
                                 <option value="0" disabled selected>-- Please Select Car Brand --</option>
                                 @foreach ($CarBrand as $CarBrand)
@@ -46,7 +51,7 @@
                                     </span>
                                 @enderror
                             <br>
-                            <label>Car:</label>
+                            <label>Car<span class="required"> *</span></label>
                             <select id = "Car" name = "car" class = "form-control @error('car') is-invalid @enderror" disabled>
                             </select>
                                 @error('car')
@@ -55,7 +60,7 @@
                                     </span>
                                 @enderror
                             <br>
-                            <label>Registration Number:</label>
+                            <label>Registration Number<span class="required"> *</span></label>
                             <input type="text" name="reg_num" class="form-control @error('reg_num') is-invalid @enderror" value="{{ old('reg_num') }}" >
                             @error('reg_num')
                                 <span class="invalid-feedback" role="alert">
@@ -63,7 +68,7 @@
                                 </span>
                             @enderror
                             <br>
-                            <label>Data File:</label>
+                            <label>Data File<span class="required"> *</span></label>
                             <input type = "file" name = "data_file" class = "form-control @error('data_file') is-invalid @enderror" accept = "application/JSON,application/xml,text/plain,text/xml,image/png,image/jpeg">
                                 @error('data_file')
                                     <span class="invalid-feedback" role="alert">
@@ -71,7 +76,7 @@
                                     </span>
                                 @enderror
                             <br>
-                            <label>Ownership File:</label>
+                            <label>Ownership File<span class="required"> *</span></label>
                             <input type = "file" name = "ownership_file" class = "form-control @error('ownership_file') is-invalid @enderror" accept = "application/JSON,application/xml,text/plain,text/xml,image/png,image/jpeg">
                                 @error('ownership_file')
                                     <span class="invalid-feedback" role="alert">
@@ -81,8 +86,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-outline-primary" value = "Add"></button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value = "Add"></button>
                     </div>
                 </form>
             </div>

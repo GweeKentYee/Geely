@@ -5573,6 +5573,7 @@ textarea.form-control-lg {
 .modal-title {
   margin-bottom: 0;
   line-height: 1.6;
+  font-weight: bold;
 }
 
 .modal-body {
