@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-
+<main class="py-4">
     <div class="row" >
         <div class="col-1"></div>
         <div class="row col-10">
@@ -110,7 +110,7 @@
           </div>
         </div>
       </div>
-
+</main>
 @endsection
 
 @section("footer-scripts")

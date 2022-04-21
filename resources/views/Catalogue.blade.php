@@ -10,12 +10,14 @@
 @section('content')
 <main class="py-4">
     {{-- display the headline of the page --}}
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <h3 class="headline"><u>Catalogue</u></h3>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="row col-10">
+            <div class="col-lg-10 col-md-9 col-sm-12" style="padding-left: 0;">
+                <h3 class="headline">CATALOGUE</h3>
             </div>
         </div>
+        <div class="col-1"></div>
     </div>
 
     {{-- content of the page --}}
@@ -23,7 +25,7 @@
         {{-- search bar --}}
         <div class="container">
             <div class="d-flex justify-content-center">
-                <form type="get"  action="{{url('/catalogue/search')}}" style="display:block" class="col-lg-6">
+                <form type="get"  action="{{url('/catalogue/search')}}" class="col-lg-6">
                     <div class="input-group rounded">
                         <input type="search" id="search" name="query" class="typeahead form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" autocomplete="off" />
                         <button type="submit" class="btn btn-primary">
@@ -33,11 +35,8 @@
                         </button>
                     </div>
                 </form>
-            </div>
-
-            <div class="d-flex justify-content-center">
-                <div class="col-md-2">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#advancedSearch" class="row">Advanced Search</button>
+                <div class="col-md-2 mx-2">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#advancedSearch" style="white-space: nowrap; overflow: hidden;">Advanced Search</button>
                 </div>
             </div>
         </div>
@@ -122,8 +121,10 @@
     <div>
         {{-- displays a "NO MATCHES IN OUR DATABASE" if there are no cars to display --}}
         @if(count($usedcar)<1)
-            <div class="cata-card" style="width: 15rem; display: inline-block;">
-                <div>NO MATCHES IN OUR DATABASE</div>
+            <br>
+            <br>
+            <div class="d-flex justify-content-center my-10">
+                <h4>NO MATCHES IN OUR DATABASE</h4>
             </div>
         @else
 
@@ -135,14 +136,14 @@
                                 <div class="card cat-card m-auto">
                                     <div>
                                         <a href='/catalogue/usedcardetails/{{$usedcars->id}}'>
-                                            <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200">
+                                            <img class="card-img" src="{{$usedcars->usedCarImages->get(0)->image}}" alt="Card image cap" width="100%" height="170px">
                                         </a>
                                     </div>
                                     <div class="card-body">
 
                                         <div class="row">
-                                            <div class="card-title-year-brand col-10">{{$usedcars->car->year}} {{$usedcars->car->carModel->carBrand->brand}}</div>
-                                            <div class="card-title-model-variant col-10">{{$usedcars->car->carModel->model}} {{$usedcars->car->carVariant->variant}} </div>
+                                            <div class="card-title-year-brand col-10">{{$usedcars->year}} {{$usedcars->brand}}</div>
+                                            <div class="card-title-model-variant col-10">{{$usedcars->model}} {{$usedcars->variant}} </div>
                                             <div class="col-2">
                                                 @php
                                                     $exist_in_collection = false;
@@ -174,7 +175,7 @@
                                         </div>
 
                                         <div class="card-car-details">
-                                            <span>{{$usedcars->car->carGeneralSpec->fuel}} | {{$usedcars->car->carGeneralSpec->transmission}} | {{$usedcars->car->carBodyType->body_type}} </span>
+                                            <span>{{$usedcars->fuel}} | {{$usedcars->transmission}} | {{$usedcars->body_type}} </span>
                                         </div>
                                         <div class="card-car-price">
                                             <span style="font-size: 12px">min:</span>
@@ -261,7 +262,8 @@
         });
 
         var route = "{{ url('autocompleteSearch') }}";
-        $('#search').typeahead({
+        $('#search').typeahead(
+        {
             source: function (query, process) {
                 return $.get(route, {
                     query: query
@@ -270,7 +272,8 @@
                     return process(data);
                 });
             }
-        });
+        }
+        );
     });
 </script>
 

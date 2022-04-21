@@ -22,7 +22,20 @@ class CatalogueController extends Controller
 {
     public function viewPage(){
 
-        $usedcar = UsedCar::where('status','1')->paginate(20);
+        $usedcar = UsedCar::
+        join('cars','cars.id','=','used_cars.car_id')
+        ->select('*','used_cars.id AS id')
+        ->join('car_variants','cars.car_variant_id','=','car_variants.id')
+        ->select('*','used_cars.id AS id')
+        ->join('car_models','car_variants.car_model_id','=','car_models.id')
+        ->select('*','used_cars.id AS id')
+        ->join('car_brands','car_models.car_brand_id','=','car_brands.id')
+        ->select('*','used_cars.id AS id')
+        ->join('car_body_types','cars.car_body_type_id','=','car_body_types.id')
+        ->select('*','used_cars.id AS id')
+        ->join('car_general_specs','cars.car_general_spec_id','=','car_general_specs.id')
+        ->select('*','used_cars.id AS id')
+        ->where('status','=','1')->paginate(10);
         $carbrand = CarBrand::orderBy('brand','ASC')->get();
         $carmodel = CarModel::orderBy('model','ASC')->get();
         $carvariant= CarVariant::orderBy('variant','ASC')->get();
@@ -42,16 +55,22 @@ class CatalogueController extends Controller
     }
 
     public function search(){
-        $usedcar = UsedCar::
-        select('used_cars.*')
-        ->join('cars','cars.id','=','used_cars.car_id')
+        $usedcar= UsedCar::
+        join('cars','cars.id','=','used_cars.car_id')
         ->select('*','used_cars.id AS id')
-        ->join('car_models','cars.car_model_id','=','car_models.id')
+        ->join('car_variants','cars.car_variant_id','=','car_variants.id')
+        ->select('*','used_cars.id AS id')
+        ->join('car_models','car_variants.car_model_id','=','car_models.id')
+        ->select('*','used_cars.id AS id')
         ->join('car_brands','car_models.car_brand_id','=','car_brands.id')
-        ->where('car_models.model','LIKE', '%'.request('query').'%')
-        ->orwhere('car_brands.brand','LIKE', '%'.request('query').'%')
-        ->where('status','1')
-        ->paginate(20);    
+        ->select('*','used_cars.id AS id')
+        ->join('car_body_types','cars.car_body_type_id','=','car_body_types.id')
+        ->select('*','used_cars.id AS id')
+        ->join('car_general_specs','cars.car_general_spec_id','=','car_general_specs.id')
+        ->select('*','used_cars.id AS id')
+        ->where('car_models.model','LIKE', '%'.request('query').'%')->where('status','=',1)  
+        ->orwhere('car_brands.brand','LIKE', '%'.request('query').'%')->where('status','=',1)   
+        ->paginate(10);
 
         $carbrand = CarBrand::orderBy('brand','ASC')->get();
         $carmodel = CarModel::orderBy('model','ASC')->get();
@@ -88,10 +107,14 @@ class CatalogueController extends Controller
         select('used_cars.*')
         ->join('cars','cars.id','=','used_cars.car_id')
         ->select('*','used_cars.id AS id')
-        ->join('car_models','cars.car_model_id','=','car_models.id')
-        ->join('car_brands','car_models.car_brand_id','=','car_brands.id')
         ->join('car_variants','cars.car_variant_id','=','car_variants.id')
+        ->select('*','used_cars.id AS id')
+        ->join('car_models','car_variants.car_model_id','=','car_models.id')
+        ->select('*','used_cars.id AS id')
+        ->join('car_brands','car_models.car_brand_id','=','car_brands.id')
+        ->select('*','used_cars.id AS id')
         ->join('car_body_types','cars.car_body_type_id','=','car_body_types.id')
+        ->select('*','used_cars.id AS id')
         ->join('car_general_specs','cars.car_general_spec_id','=','car_general_specs.id')
         ->select('*','used_cars.id AS id')
         ->where('car_models.id','LIKE', '%'.request('model').'%')
@@ -103,7 +126,7 @@ class CatalogueController extends Controller
         ->where('used_cars.min_price','>=',$minPrice)
         ->where('used_cars.max_price','<=',$maxPrice)
         ->where('status','1')
-        ->paginate(20); 
+        ->paginate(10); 
          
         $carbrand = CarBrand::orderBy('brand','ASC')->get();
         $carmodel = CarModel::orderBy('model','ASC')->get();
@@ -146,8 +169,8 @@ class CatalogueController extends Controller
     {
         
         $query = $request->get('query');
-        $filterBrand = CarBrand::select('brand')->where('brand', 'LIKE', '%'.$query.'%')->get()->pluck('brand');
-        $filterModel = CarModel::select('model')->where('model','LIKE','%'.$query.'%')->get()->pluck("model");
+        $filterBrand = CarBrand::select('brand')->where('brand', 'LIKE', $query.'%')->get()->pluck('brand');
+        $filterModel = CarModel::select('model')->where('model','LIKE', $query.'%')->get()->pluck("model");
         $filter = $filterBrand->merge($filterModel);
         
         return response()->json($filter);
