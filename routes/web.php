@@ -65,6 +65,7 @@ Route::get('/admin/inspection','App\Http\Controllers\InspectionController@viewAd
 Route::post('/admin/inspection/carDropBox','App\Http\Controllers\InspectionController@carOptions')->name('carOption');
 Route::get('/admin/inspection/file/view/{inspectionID}','App\Http\Controllers\InspectionController@viewInspectionFile');
 Route::post('/admin/inspection/add','App\Http\Controllers\InspectionController@newInspection');
+Route::post('/admin/inspection/exist/add','App\Http\Controllers\InspectionController@newExistingCarInspection');
 Route::get('/admin/inspection/delete/{inspectionID}','App\Http\Controllers\InspectionController@delete');
 Route::get('/admin/inspection/details/{inspectionID}','App\Http\Controllers\InspectionController@viewDetailsPage');
 
