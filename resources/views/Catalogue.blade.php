@@ -36,7 +36,7 @@
                     </div>
                 </form>
                 <div class="col-md-2 mx-2">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#advancedSearch" class="row">Advanced Search</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#advancedSearch" style="white-space: nowrap; overflow: hidden;">Advanced Search</button>
                 </div>
             </div>
         </div>
@@ -262,7 +262,8 @@
         });
 
         var route = "{{ url('autocompleteSearch') }}";
-        $('#search').typeahead({
+        $('#search').typeahead(
+        {
             source: function (query, process) {
                 return $.get(route, {
                     query: query
@@ -271,7 +272,8 @@
                     return process(data);
                 });
             }
-        });
+        }
+        );
     });
 </script>
 
