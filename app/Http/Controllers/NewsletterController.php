@@ -6,6 +6,7 @@ use App\Models\Newsletter;
 use Hamcrest\Collection\IsEmptyTraversable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -37,7 +38,11 @@ class NewsletterController extends Controller
             'status' => ['required']
         ]);
 
-        $ImageName = request()->file('image')->getClientOriginalName();
+        $current_timestamp = Carbon::now()->timestamp;
+
+        $OriginalImageName = request()->file('image')->getClientOriginalName();
+
+        $ImageName = $current_timestamp.'_'.$OriginalImageName;
 
         $ImagePath = $data['image']->move('storage/image/newsletter',$ImageName);
 

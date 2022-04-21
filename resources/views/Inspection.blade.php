@@ -34,6 +34,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
+                        <p class="required">*Required</p>
                         <div class="form-check form-switch">
                             <label class="form-check-label">Existing Used Car</label>
                             <input id = "ExistOption" name = "exist_option" class="form-check-input" type="checkbox" {{(old('exist_option') == "1") ? 'checked': ''}}>
@@ -42,7 +43,7 @@
                         <form id = "inspectionForm" action="/admin/inspection/add" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class = "newInspection">
-                                <label>Car Brand:</label>
+                                <label>Car Brand<span class="required"> *</span></label>
                                 <select id = "carBrand" name = "car_brand" class = "form-control @error('car_brand') is-invalid @enderror">
                                     <option value="0" disabled selected>-- Please Select Car Brand --</option>
                                     @foreach ($CarBrand as $CarBrand)
@@ -55,7 +56,7 @@
                                         </span>
                                     @enderror
                                 <br>
-                                <label>Car:</label>
+                                <label>Car<span class="required"> *</span></label>
                                 <select id = "Car" name = "car" class = "form-control @error('car') is-invalid @enderror" disabled>
                                 </select>
                                     @error('car')
@@ -64,7 +65,7 @@
                                         </span>
                                     @enderror
                                 <br>
-                                <label>Registration Number:</label>
+                                <label>Registration Number<span class="required"> *</span></label>
                                 <input type="text" id = "registration" name="registration_number" class="form-control @error('registration_number') is-invalid @enderror" value="{{ old('registration_number') }}" >
                                 @error('registration_number')
                                     <span class="invalid-feedback" role="alert">
@@ -72,7 +73,7 @@
                                     </span>
                                 @enderror
                                 <br>
-                                <label>Data File:</label>
+                                <label>Data File<span class="required"> *</span></label>
                                 <input type = "file" name = "data_file" class = "form-control @error('data_file') is-invalid @enderror" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                                     @error('data_file')
                                         <span class="invalid-feedback" role="alert">
@@ -80,7 +81,7 @@
                                         </span>
                                     @enderror
                                 <br>
-                                <label>Ownership File:</label>
+                                <label>Ownership File<span class="required"> *</span></label>
                                 <input type = "file" name = "ownership_file" class = "form-control @error('ownership_file') is-invalid @enderror" accept = "application/JSON,application/xml,text/plain,text/xml,image/png,image/jpeg">
                                     @error('ownership_file')
                                         <span class="invalid-feedback" role="alert">
@@ -90,7 +91,7 @@
                                 <br>
                             </div>
                             <div class = "newExistInspection">
-                                <label>Registration Number:</label>
+                                <label>Registration Number<span class="required"> *</span></label>
                                 <select id = "registration" name = "registration_option" class = "form-control @error('registration_option') is-invalid @enderror">
                                     <option value="0" disabled selected>-- Please Select Registration Number --</option>
                                     @foreach ($UsedCars as $UsedCar)
@@ -103,7 +104,7 @@
                                         </span>
                                     @enderror
                                 <br>
-                                <label>Data File:</label>
+                                <label>Data File<span class="required"> *</span></label>
                                 <input type = "file" name = "data_file" class = "form-control @error('data_file') is-invalid @enderror" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                                     @error('data_file')
                                         <span class="invalid-feedback" role="alert">
@@ -111,7 +112,7 @@
                                         </span>
                                     @enderror
                                 <br>
-                                <label>Ownership File:</label>
+                                <label>Ownership File</label>
                                 <input type = "file" name = "ownership_file" class = "form-control @error('ownership_file') is-invalid @enderror" accept = "application/JSON,application/xml,text/plain,text/xml,image/png,image/jpeg">
                                     @error('ownership_file')
                                         <span class="invalid-feedback" role="alert">
@@ -121,8 +122,8 @@
                                 <br>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                                <input type="submit" class="btn btn-outline-primary" value = "Add"></button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value = "Add"></button>
                             </div>
                         </form>
                     </div>
@@ -130,6 +131,7 @@
             </div>
         </div>
     </div>
+</div>
 </main>
 @endsection
 

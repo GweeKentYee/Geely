@@ -110,12 +110,14 @@ Route::get('/admin/carvariant/delete/{carvariantID}','App\Http\Controllers\CarVa
 Route::get('/admin/carvariant/edit/{carvariantID}','App\Http\Controllers\CarVariantController@viewEditPage');
 Route::patch('/admin/carvariant/editfunction/{carvariantID}','App\Http\Controllers\CarVariantController@edit');
 
-Route::get('/usedcar/delete/{id}','App\Http\Controllers\UsedCarController@delete');
-Route::get('/usedcar/fetch/{id}','App\Http\Controllers\UsedCarController@fetch');
-Route::get('/usedcar/edit/{id}','App\Http\Controllers\UsedCarController@edit');
-Route::put('/usedcar/update/{id}','App\Http\Controllers\UsedCarController@update');
-Route::get('/usedcar/details/{id}','App\Http\Controllers\UsedCarImageController@viewAdminPage');
+Route::get('/admin/usedcar/delete/{id}','App\Http\Controllers\UsedCarController@delete');
+Route::get('/admin/usedcar/fetch/{id}','App\Http\Controllers\UsedCarController@fetch');
+Route::get('/admin/usedcar/edit/{id}','App\Http\Controllers\UsedCarController@edit');
+Route::patch('/admin/usedcar/edit/{id}','App\Http\Controllers\UsedCarController@update');
+Route::get('/admin/usedcar/images/{id}','App\Http\Controllers\UsedCarImageController@viewAdminPage');
 Route::get('/admin/usedcar','App\Http\Controllers\UsedCarController@viewAdminPage');
+Route::get('/admin/usedcar/file/viewdata/{id}','App\Http\Controllers\UsedCarController@viewDataFile');
+Route::get('/admin/usedcar/file/viewownership/{id}','App\Http\Controllers\UsedCarController@viewOwnershipFile');
 
 Route::post('/admin/usedcarImage/store','App\Http\Controllers\UsedCarImageController@store');
 Route::get('/usedcarImage/delete/{id}','App\Http\Controllers\UsedCarImageController@delete');
