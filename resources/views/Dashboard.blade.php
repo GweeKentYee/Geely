@@ -46,19 +46,19 @@
                     <div class="card dash-card m-auto">
                         <div>   
                             <a href='/catalogue/usedcardetails/{{$usedcars->id}}'>
-                                <img class="card-img" src="{{$usedcars->usedCarImages->get(0)->image}}" alt="Card image cap" width="200" height="200">
+                                <img class="card-img" src="{{$usedcars->usedCarImages->get(0)->image}}" alt="Card image cap" width="100%" height="170px">
                             </a>
                         </div>
                         <div class="dash-card-body">
                         
                             <div class="row">
-                                <div class="card-title-year-brand col-10">{{$usedcars->car->year}} {{$usedcars->car->carVariant->carModel->carBrand->brand}}</div>
-                                <div class="card-title-model-variant col-10">{{$usedcars->car->carVariant->carModel->model}} {{$usedcars->car->carVariant->variant}} </div>
+                                <div class="card-title-year-brand col-10">{{$usedcars->year}} {{$usedcars->brand}}</div>
+                                <div class="card-title-model-variant col-10">{{$usedcars->model}} {{$usedcars->variant}} </div>
                                 
                             </div> 
                             
                             <div class="card-car-details">
-                                <span>{{$usedcars->car->carGeneralSpec->fuel}} | {{$usedcars->car->carGeneralSpec->transmission}} | {{$usedcars->car->carBodyType->body_type}} </span>
+                                <span>{{$usedcars->fuel}} | {{$usedcars->transmission}} | {{$usedcars->car->carBodyType->body_type}} </span>
                             </div>
                             <div class="card-car-price">
                                 <span style="font-size: 12px">min:</span>
@@ -82,6 +82,7 @@
                 <p>
                     The Geely car scanner is an advanced car scanning system developed by our client, Geely Global. 
                     The scanner is capable of scanning 19 different sections of a car and producing accurate quality ratings.
+                    
                     
                 </p>
             </div>

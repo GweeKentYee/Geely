@@ -142,8 +142,8 @@
                                     <div class="card-body">
 
                                         <div class="row">
-                                            <div class="card-title-year-brand col-10">{{$usedcars->car->year}} {{$usedcars->car->carVariant->carModel->carBrand->brand}}</div>
-                                            <div class="card-title-model-variant col-10">{{$usedcars->car->carVariant->carModel->model}} {{$usedcars->car->carVariant->variant}} </div>
+                                            <div class="card-title-year-brand col-10">{{$usedcars->year}} {{$usedcars->brand}}</div>
+                                            <div class="card-title-model-variant col-10">{{$usedcars->model}} {{$usedcars->variant}} </div>
                                             <div class="col-2">
                                                 @php
                                                     $exist_in_collection = false;
@@ -175,7 +175,7 @@
                                         </div>
 
                                         <div class="card-car-details">
-                                            <span>{{$usedcars->car->carGeneralSpec->fuel}} | {{$usedcars->car->carGeneralSpec->transmission}} | {{$usedcars->car->carBodyType->body_type}} </span>
+                                            <span>{{$usedcars->fuel}} | {{$usedcars->transmission}} | {{$usedcars->body_type}} </span>
                                         </div>
                                         <div class="card-car-price">
                                             <span style="font-size: 12px">min:</span>

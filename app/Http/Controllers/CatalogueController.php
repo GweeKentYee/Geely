@@ -22,7 +22,20 @@ class CatalogueController extends Controller
 {
     public function viewPage(){
 
-        $usedcar = UsedCar::where('status','=','1')->paginate(20);
+        $usedcar = UsedCar::
+        join('cars','cars.id','=','used_cars.car_id')
+        ->select('*','used_cars.id AS id')
+        ->join('car_variants','cars.car_variant_id','=','car_variants.id')
+        ->select('*','used_cars.id AS id')
+        ->join('car_models','car_variants.car_model_id','=','car_models.id')
+        ->select('*','used_cars.id AS id')
+        ->join('car_brands','car_models.car_brand_id','=','car_brands.id')
+        ->select('*','used_cars.id AS id')
+        ->join('car_body_types','cars.car_body_type_id','=','car_body_types.id')
+        ->select('*','used_cars.id AS id')
+        ->join('car_general_specs','cars.car_general_spec_id','=','car_general_specs.id')
+        ->select('*','used_cars.id AS id')
+        ->where('status','=','1')->paginate(20);
         $carbrand = CarBrand::orderBy('brand','ASC')->get();
         $carmodel = CarModel::orderBy('model','ASC')->get();
         $carvariant= CarVariant::orderBy('variant','ASC')->get();
@@ -47,9 +60,13 @@ class CatalogueController extends Controller
         ->select('*','used_cars.id AS id')
         ->join('car_variants','cars.car_variant_id','=','car_variants.id')
         ->select('*','used_cars.id AS id')
-        ->join('car_models','cars.car_variant_id','=','car_models.id')
+        ->join('car_models','car_variants.car_model_id','=','car_models.id')
         ->select('*','used_cars.id AS id')
         ->join('car_brands','car_models.car_brand_id','=','car_brands.id')
+        ->select('*','used_cars.id AS id')
+        ->join('car_body_types','cars.car_body_type_id','=','car_body_types.id')
+        ->select('*','used_cars.id AS id')
+        ->join('car_general_specs','cars.car_general_spec_id','=','car_general_specs.id')
         ->select('*','used_cars.id AS id')
         ->where('car_models.model','LIKE', '%'.request('query').'%')->where('status','=',1)  
         ->orwhere('car_brands.brand','LIKE', '%'.request('query').'%')->where('status','=',1)   
