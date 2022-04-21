@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Newsletter;
+use Hamcrest\Collection\IsEmptyTraversable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+
+use function PHPUnit\Framework\isEmpty;
 
 class NewsletterController extends Controller
 {
@@ -28,9 +31,10 @@ class NewsletterController extends Controller
     public function add(Request $request){
 
         $data = $request->validate([
+            'remarks' => ['required'],
             'link' => ['required', 'url'],
-            'sequence' => ['required','unique:newsletters,sequence'],
-            'image' => ['required', 'mimes:jpg,bmp,png,tiff']
+            'image' => ['required', 'mimes:jpg,bmp,png,tiff'],
+            'status' => ['required']
         ]);
 
         $ImageName = request()->file('image')->getClientOriginalName();
@@ -38,9 +42,10 @@ class NewsletterController extends Controller
         $ImagePath = $data['image']->move('storage/image/newsletter',$ImageName);
 
         Newsletter::create([
+            'remarks' => $data['remarks'],
             'link' => $data['link'],
             'image' => str_replace('\\','/',$ImagePath),
-            'sequence' => $data['sequence'],
+            'status' => $data['status']
         ]);
 
         return redirect('admin/newsletter');
@@ -62,8 +67,9 @@ class NewsletterController extends Controller
         $Newsletter = Newsletter::find($newsletterID);
 
         $data = $request->validate([
+            'remarks' => ['nullable'],
             'link' => ['nullable','url'],
-            'sequence' => ['unique:newsletters,sequence,'.$newsletterID],
+            'status' => ['nullable'],
         ]);
 
         $input = collect($data)->whereNotNull()->all();
@@ -76,13 +82,9 @@ class NewsletterController extends Controller
 
         } else {
 
-            Session::flash('field_empty', 'Please fill in the field.');
-
-            return redirect('admin/newsletter/edit/'.$newsletterID);
+            return redirect('admin/newsletter');
 
         }
-
-
 
     }
 

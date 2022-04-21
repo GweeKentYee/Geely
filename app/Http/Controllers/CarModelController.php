@@ -42,7 +42,7 @@ class CarModelController extends Controller
         // validate inputed records according to columns of the database table
         $validator = Validator::make($request->all(), [
             'car_brand' => ['required', Rule::notIn('0')],
-            'model' => ['required', 
+            'model' => ['required',
             Rule::unique('car_models','model')->where(function ($query){
                 return $query->where('car_brand_id', request('car_brand'));
             })]
@@ -88,7 +88,7 @@ class CarModelController extends Controller
 
         // validate edited records according to columns of the database table
         $data = $request->validate([
-            'model' => [ 
+            'model' => [
             Rule::unique('car_models','model')->ignore($carmodelID)->where(function ($query) use($CarModel){
                 return $query->where('car_brand_id', $CarModel->car_brand_id);
             })]
@@ -103,7 +103,7 @@ class CarModelController extends Controller
             return redirect('admin/brand_model_variant')->withInput(['tab'=>'carmodeltab']);
 
         } else {
-            
+
             Session::flash('field_empty', 'Please fill in at least one field.');
 
             return redirect('admin/carmodel/edit/'.$carmodelID);

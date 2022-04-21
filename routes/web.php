@@ -3,7 +3,7 @@
 use App\Http\Controllers\CollectionController; //new added for resource controller
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request; 
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,41 +28,49 @@ Route::get('/','App\Http\Controllers\DashboardController@viewPage');
 Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage')->name('catalogue.viewpage');
 Route::get('/catalogue/search','App\Http\Controllers\CatalogueController@search');
 Route::get('/catalogue/advanced','App\Http\Controllers\CatalogueController@advanced');
+Route::post('/catalogue/advanced/modelDropBox','App\Http\Controllers\CatalogueController@modelOptions')->name('modelOption');
+Route::post('/catalogue/advanced/variantDropBox','App\Http\Controllers\CatalogueController@variantOptions')->name('variantOption');
+Route::get('autocompleteSearch','App\Http\Controllers\CatalogueController@autocompleteSearch')->name('autocompleteSearch');
 
-Route::get('/collection/comparison','App\Http\Controllers\ComparisonController@viewPage');
-Route::get('/collection/compare', function(){
+
+Route::post('/collection/comparison','App\Http\Controllers\ComparisonController@viewPage');
+// Route::get('/collection/compare', function(){
 
 
-    dd(request()->all());
-    
-})->name('collection.compare1');
-Route::post('/collection/compare', function(Request $request){
+//     //  dd(request()->all());
 
-    $collectionSelected = $request->except('_token');
+// })->name('collection.compare1');
+// Route::post('/collection/compare', function(Request $request){
 
-    $i  = 1;
-    foreach ($collectionSelected as $key => $value) {
-        
-        ${'collectionID' . $i} = $value; 
-        $i = $i + 1;
-    }
+//     $collectionSelected = $request->except('_token');
 
-    return redirect()->route('collection.compare1', ['collectionID1' => $collectionID1, 'collectionID2' => $collectionID2]);
-})->name('collection.compare');
+//     $i  = 1;
+//     foreach ($collectionSelected as $key => $value) {
+
+//         ${'collectionID' . $i} = $value;
+//         $i = $i + 1;
+//     }
+
+//     return redirect()->route('collection.compare1', ['collectionID1' => $collectionID1, 'collectionID2' => $collectionID2]);
+// })->name('collection.compare');
 Route::resource('collection', CollectionController::class);
 
+Route::get('/collection/usedcardetails/{used_car_id}','App\Http\Controllers\UsedCarController@viewDetailsPage')->name('UsedCarDetails');
 
-Route::get('/catalogue/usedcardetails','App\Http\Controllers\UsedCarController@viewPage')->name('UsedCarDetails');
 
+Route::get('/catalogue/usedcardetails/{used_car_id}','App\Http\Controllers\UsedCarController@viewDetailsPage')->name('UsedCarDetails');
+// Route::get('/catalogue/usedcardetails','App\Http\Controllers\UsedCarController@viewPage')->name('UsedCarDetails');
 
 Route::get('/admin/inspection','App\Http\Controllers\InspectionController@viewAdminPage');
 Route::post('/admin/inspection/carDropBox','App\Http\Controllers\InspectionController@carOptions')->name('carOption');
 Route::get('/admin/inspection/file/view/{inspectionID}','App\Http\Controllers\InspectionController@viewInspectionFile');
 Route::post('/admin/inspection/add','App\Http\Controllers\InspectionController@newInspection');
+Route::post('/admin/inspection/exist/add','App\Http\Controllers\InspectionController@newExistingCarInspection');
 Route::get('/admin/inspection/delete/{inspectionID}','App\Http\Controllers\InspectionController@delete');
 Route::get('/admin/inspection/details/{inspectionID}','App\Http\Controllers\InspectionController@viewDetailsPage');
 
 Route::get('/admin/catalogue','App\Http\Controllers\CatalogueController@viewAdminPage');
+
 
 Route::get('/admin/newsletter','App\Http\Controllers\NewsletterController@viewAdminPage');
 Route::get('/admin/newsletter/view/{newsletterID}','App\Http\Controllers\NewsletterController@viewImage');
@@ -101,3 +109,14 @@ Route::post('/admin/carvariant/add','App\Http\Controllers\CarVariantController@a
 Route::get('/admin/carvariant/delete/{carvariantID}','App\Http\Controllers\CarVariantController@delete');
 Route::get('/admin/carvariant/edit/{carvariantID}','App\Http\Controllers\CarVariantController@viewEditPage');
 Route::patch('/admin/carvariant/editfunction/{carvariantID}','App\Http\Controllers\CarVariantController@edit');
+
+Route::get('/usedcar/delete/{id}','App\Http\Controllers\UsedCarController@delete');
+Route::get('/usedcar/fetch/{id}','App\Http\Controllers\UsedCarController@fetch');
+Route::get('/usedcar/edit/{id}','App\Http\Controllers\UsedCarController@edit');
+Route::put('/usedcar/update/{id}','App\Http\Controllers\UsedCarController@update');
+Route::get('/usedcar/details/{id}','App\Http\Controllers\UsedCarImageController@viewAdminPage');
+
+Route::post('/admin/usedcarImage/store','App\Http\Controllers\UsedCarImageController@store');
+Route::get('/usedcarImage/delete/{id}','App\Http\Controllers\UsedCarImageController@delete');
+Route::get('/usedCarImage/delete/selected','App\Http\Controllers\UsedCarImageController@deleteSelected');
+Route::put('/usedcarImage/update/{id}','App\Http\Controllers\UsedCarImageController@update');

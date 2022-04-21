@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <h3><a href = "/admin/newsletter">Manage Newsletter</a></h3>
+<main class="py-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <h3><a href = "/admin/newsletter">Manage Newsletter</a></h3>
             <form action="/admin/newsletter/editfunction/{{ $newsletter->id }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
@@ -20,6 +21,14 @@
                     <label>ID</label>
                     <input type="text" name="brand_id" class="form-control" value="{{ $newsletter->id }}" readonly>
                     <br>
+                    <label>Remarks:</label>
+                    <input type="text" name="remarks" class="form-control @error('remarks') is-invalid @enderror" value="{{ old('remarks') }}" placeholder="{{$newsletter->remarks}}">
+                    @error('remarks')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <br>
                     <label>Link:</label>
                     <input type="text" name="link" class="form-control @error('link') is-invalid @enderror" value="{{ old('link') }}" placeholder="{{$newsletter->link}}">
                     @error('link')
@@ -28,9 +37,12 @@
                         </span>
                     @enderror
                     <br>
-                    <label>Sequence:</label>
-                    <input type="number" name="sequence" class="form-control @error('sequence') is-invalid @enderror" value="{{ old('sequence') }}" min = "0" max = "" placeholder="{{$newsletter->sequence}}">
-                    @error('sequence')
+                    <label>Status: {{ $newsletter->status }}</label>
+                    <select id = "status" name = "status" class = "form-select" placeholder="status" @error('status') is-invalid @enderror>
+                        <option value="Hidden">Hidden</option>
+                        <option value="Show">Show</option>
+                    </select>
+                    @error('status')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -42,11 +54,22 @@
                     <button type="submit" class="btn btn-primary">Edit</button>
                 </div>
             </form>
+        </div>
     </div>
-</div>
+</main>
 @endsection
 
 @section('footer-scripts')
+<script>
+    $(document).ready(function () {
+        $('#sequence').on('change', function (e) {
+            $value = e.target.value;
 
+            if($value==0){
+                $('#sequence').value='Do Not Display';
+            }
+        });
+    });
+</script>
 
 @endsection

@@ -5,34 +5,37 @@
 @endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
+
+<main class="py-4">
+    <div class="container">
+        <div class="row justify-content-center">
             <h3 class="pagename">Car</h3>
-            <div style="text-align:right" class="pb-1">
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcar"><i class="bi bi-plus-lg"></i> Add Car</button>
+            <div class="col-md-12">
+                <div style="text-align:right" class="pb-1">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcar"><i class="bi bi-plus-lg"></i> Add Car</button>
+                </div>
+                <table class="table" id="datatable" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Variant</th>
+                            <th>Year</th>
+                            <th>Body_Type</th>
+                            <th>Transmission</th>
+                            <th>Fuel</th>
+                            <th>Spec_File</th>
+                            <th>Data_File</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    <thead>
+                </table>
             </div>
-            <table class="table" id="datatable" style="width: 100%">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Brand</th>
-                        <th>Model</th>
-                        <th>Variant</th>
-                        <th>Year</th>
-                        <th>Body_Type</th>
-                        <th>Transmission</th>
-                        <th>Fuel</th>
-                        <th>Spec_File</th>
-                        <th>Data_File</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                <thead>
-            </table>
         </div>
     </div>
-    
+
     <div class="modal fade" id="newcar" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -129,7 +132,7 @@
             </div>
         </div>
     </div>
-</div>
+</main>
 @endsection
 
 @section('footer-scripts')
@@ -146,7 +149,7 @@
                 "defaultContent": "-",
                 "targets": "_all"
             }],
-            "scrollX": true, 
+            "scrollX": true,
             "processing": true,
             "serverSide": true,
             "ajax": "{{ route('api.car')}}",
@@ -194,7 +197,7 @@
                     $.each(data.CarModels, function(index, CarModel) {
                         $('#carModel').append('<option value="'+CarModel.id+'">'+CarModel.model+'</option>');
                     })
-                    
+
                 }
             })
         });

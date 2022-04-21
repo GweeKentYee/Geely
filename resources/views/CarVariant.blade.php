@@ -1,26 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <h3><u>Car Variant</u></h3>
-        <div class="col-md-9">
-            <div style="text-align:right" class="pb-1">
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcarvariant"><i class="bi bi-plus-lg"></i> Add Car Variant</button>
+<main class="py-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <h3><u>Car Variant</u></h3>
+            <div class="col-md-9">
+                <div style="text-align:right" class="pb-1">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcarvariant"><i class="bi bi-plus-lg"></i> Add Car Variant</button>
+                </div>
+                <table class="table" id="datatable" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Model</th>
+                            <th>Variant</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    <thead>
+                </table>
             </div>
-            <table class="table" id="datatable" style="width: 100%">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Model</th>
-                        <th>Variant</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                <thead>
-            </table>
         </div>
-    </div>
 
     <div class="modal fade" id="newcarvariant" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
@@ -71,7 +72,7 @@
             </div>
         </div>
     </div>
-</div>
+</main>
 @endsection
 
 @section('footer-scripts')

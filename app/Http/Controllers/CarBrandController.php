@@ -95,7 +95,7 @@ class CarBrandController extends Controller
             return redirect('admin/brand_model_variant');
 
         } else {
-            
+
             Session::flash('field_empty', 'Please fill in the field.');
 
             return redirect('admin/carbrand/edit/'.$carbrandID);
