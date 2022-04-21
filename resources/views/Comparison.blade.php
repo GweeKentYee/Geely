@@ -5,126 +5,84 @@
 @endsection
 
 @section('content')
-<main class="py-4">
-  <div class="container">
-      <div class="row justify-content-center">
-          <div class="col-md-12">
-            <h2 class="headline"><u>Car Details</u></h2>
-          </div>
-      </div>
-      <table class="table table-borderless" style="width: 100%">
-          <colgroup>
-              <col span="1" style="width: 40%;">
-              <col span="1" style="width: 20%;">
-              <col span="1" style="width: 40%;">
-          </colgroup>
-          <thead>
-            <tr>
-              <th scope="col">
-                <div class="centerBlock">
-                  <img src="https://source.unsplash.com/random/200×200" alt="Responsive image" width="200" height="200">
-                  </div>
-                <div class="details-title">CarA</div>
-                </th>
-              <th></th>
-              <th scope="col">
-                <div class="centerBlock">
-                  <img src="https://source.unsplash.com/random/200×200" alt="Responsive image" width="200" height="200">
-                  </div>
-                  <div class="details-title">CarB</div>
-                </th>
-            </tr>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+          <h2 class="headline">Car Details</h2>
+        </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+    <table class="table table-borderless" style="width: 100%">
+        <colgroup>
+            <col span="1" style="width: 35%;">
+            <col span="1" style="width: 25%;">
+            <col span="1" style="width: 35%;">
+         </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">
 
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                  <div class="progress">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-              </td>
-              <td class="content-title">Body</td>
-              <td>
-                  <div class="progress">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-              </td>
-            </tr>
+              <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200"><br>
 
-            <tr>
-              <td>
-                  <div class="progress">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-              </td>
-              <td class="content-title">Wheels</td>
-              <td>
-                  <div class="progress">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-              </td>
-            </tr>
+              <div class="details-title">
+                <div class="card-header">
+                  Model: {{$usedcar1->car->carVariant->carModel->model}}
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Year: {{$usedcar1->car->year}}</li>
+                  <li class="list-group-item">Price: RM {{$usedcar1->min_price}} to RM {{$usedcar1->max_price}}</li>
+                  <li class="list-group-item">{{$Data1[0][19]}}: {{$Data1[1][19]}}</li>
+                </ul>
+              </div>
+              </th>
+            <th></th>
+            <th scope="col">
 
-            <tr>
-              <td>
-                  <div class="progress">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-              </td>
-              <td class="content-title">Tire</td>
-              <td>
-                  <div class="progress">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-              </td>
-            </tr>
+              <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200"><br>
 
-            <tr>
-              <td>
-                  <div class="progress">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="details-title">
+                    <div class="card-header">
+                      Model: {{$usedcar1->car->carVariant->carModel->model}}
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Year: {{$usedcar2->car->year}}</li>
+                      <li class="list-group-item">Price: RM {{$usedcar2->min_price}} to RM {{$usedcar2->max_price}}</li>
+                      <li class="list-group-item">{{$Data2[0][19]}}: {{$Data2[1][19]}}</li>
+                    </ul>
                   </div>
-              </td>
-              <td class="content-title">Paint</td>
-              <td>
-                  <div class="progress">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-              </td>
-            </tr>
+                  <br>
+                </div>
+              </th>
+          </tr>
+        </thead>
 
-            <tr>
-              <td>
-                  <div class="progress">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-              </td>
-              <td class="content-title">Engine & Transmission</td>
-              <td>
-                  <div class="progress">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-              </td>
-            </tr>
+        <tbody>
+          @for($j = 0; $j <=18 ;$j++)
+              @if($Data1[0][$j] == $Data2[0][$j])
+                <tr>
+                  <td>
+                      <div class="progress" style="height:20px">
+                      <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: {{$Data1[1][$j]}}; font-size: large" aria-valuenow="{{$Data1[1][$j]}}" aria-valuemin="0" aria-valuemax="100">{{$Data1[1][$j]}}</div>
+                      </div>
+                  </td>
+                  <td class="content-title">
+                    <span class="badge bg-primary rounded-pill" style="margin-left:10px">{{$j+1}}</span>
+                    {{$Data1[0][$j]}}</td>
+                  <td>
+                      <div class="progress" style="height:20px">
+                        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: {{$Data2[1][$j]}}; font-size: large" aria-valuenow="{{$Data2[1][$j]}}" aria-valuemin="0" aria-valuemax="100">{{$Data2[1][$j]}}</div>
+                      </div>
+                  </td>
+                </tr>
+              @endif
+            @endfor
+        </tbody>
+      </table>
 
-            <tr>
-              <td>
-                  <div class="progress">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 5%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-              </td>
-              <td class="content-title">Battery</td>
-              <td>
-                  <div class="progress">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-              </td>
-            </tr>
-
-
-          </tbody>
-        </table>
-      
+    </div>
   </div>
-</main>
+
+
+</div>
 @endsection

@@ -25,7 +25,7 @@
     </div>
 
 
-    <div class="row" style="margin-left:0.7rem ">
+    <div class="row" style="margin-left:0.7rem">
         <div class="col-1"></div>
         <div class="col-10 row cards-container">
             @foreach ($collections as $collection)
@@ -38,7 +38,7 @@
                                 <span><input class="check" type="checkbox" form="my_form" id={{ $collection->id }} name="checkedbox[]" value={{ $collection->id }}></span>
                                 <span style="margin-left: 0.4rem;">Compare</span>
                             </div>
-                            <a href='/collection/usedcardetails/{{$collection->used_car_id}}'>
+                            <a href='/catalogue/usedcardetails/{{$collection->used_car_id}}'>
                                 {{-- <div class="car-img" style="background-image: url({{ $collection->image }});">
                                     {{ $collection->image }}
                                 </div> --}}

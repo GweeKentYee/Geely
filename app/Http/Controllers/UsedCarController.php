@@ -4,21 +4,33 @@ namespace App\Http\Controllers;
 use App\Models\UsedCar;
 use App\Models\Car;
 use Illuminate\Http\Request;
+use App\Models\Inspection;
+use NunoMaduro\Collision\Adapters\Laravel\Inspector;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx as ReaderXlsx;
 use App\Models\Collection;
 use Illuminate\Support\Facades\File;
 
 class UsedCarController extends Controller
 {
 
-    public function viewDetailsPage($used_car_id){
+    public function viewdetailpage($used_car_id){
 
         $usedcar = UsedCar::find($used_car_id);
-
         $collections = Collection::all()->where('user_id',auth()->id());
 
-        return view('UsedCarDetails',
-        ['usedcar' => $usedcar,  'collections'=> $collections]);
+        $Inspection = Inspection::select('result_file')->where('used_car_id', $used_car_id)->latest()->first();
+        $File = public_path($Inspection->result_file);
 
+        $reader = new ReaderXlsx();
+        $spreadsheet = $reader->load($File);
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $worksheetInfo = $reader->listWorksheetInfo($File);
+        $Data = $sheet->toArray();
+
+
+        return view('UsedCarDetails',
+        ['usedcar' => $usedcar,  'collections'=> $collections, 'Data' => $Data]);
     }
 
     public function viewAdminPage(){
