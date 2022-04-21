@@ -25,7 +25,7 @@
     </div>
     
 
-    <div class="row" style="margin-left:0.7rem ">
+    <div class="row" style="margin-left:0.7rem">
         <div class="col-1"></div>
         <div class="col-10 row cards-container">
             @foreach ($collections as $collection)

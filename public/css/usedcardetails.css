@@ -3,70 +3,59 @@
     padding-left: 2rem;
     font-family: 'Roboto';
     font-weight: 700;
-    margin-left: 30px
+    margin-left: 5px
   }
 
   .details-title {
-    margin-left: 0px;
+    margin-left: 20px;
     font-family: 'Roboto';
     font-weight: 700;
-    font-size: x-large;
+    font-size: 20px;
     color: #022a49;
   }
 
   .details-content {
-    margin-left: 0px;
+    margin-left: 20px;
     font-family: 'Roboto';
-    font-weight: 700;
-    font-size: large;
     color: #3279af;
+    font-weight: 500;
+    font-size: 16px;
   }
+  .card-img{
+    display: block;
+    margin-bottom: 0.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 100%;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    }
 
-  .cata-card-button {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #3279af;
-    background-clip: border-box;
-    border-radius: 0.25rem;
-  }
-
-  .cata-card-button:hover {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #96cae0;
-    background-clip: border-box;
-    border-radius: 0.25rem;
-  }
-
-  .cata-card-button-content { 
-    text-align: center;
-    color: #ffffff; 
-    font-family: 'Roboto';
-    font-weight: 700;
-    font-size: large;
-  }
-
-  .centerBlock{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    /* min-width: 0; */
-    width: 200px;
-    height: 200px;
-    display: table;
-    margin: auto;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border-radius: 0.5rem;
-    box-shadow: 5px 5px 25px -5px rgba(0,0,0,0.5); 
-  }
+  .card-add-collection-btn{
+    color: rgb(250, 86, 86);
+    padding: 0;
+    border: none;
+    background: none;
+    }
+    
+  .card-add-collection-btn:hover{
+    color: red;
+    font-weight: 500;
+    padding: 0;
+    border: none;
+    background: none;
+    }
+  
+  .card{
+      width:100%;
+      border-radius: 0.5rem;
+      }
+      
+  .cat-card{
+      box-shadow: 5px 5px 25px -5px rgba(50,121,175,0.25);
+      }
+    
 
   .list-group-item{
     margin-left: 20px;
@@ -89,7 +78,7 @@
   
   #mypopup::before {
     content: "";
-    width: 12px;
+    width: 512px;
     height: 12px;
     transform: rotate(45deg);
     background-color: white;
@@ -98,11 +87,55 @@
     top: 68px;
   }
 
+  /* example */
+  /* svg{
+  max-width: 100%!important;
+  height: auto;
+  display: block;}
+
+.heyo:hover{
+  fill: #CC2929;
+  /* +transition(0.3s); */
+/* }
+.enabled{
+  fill: #21669E;
+  cursor: pointer;
+}
+.description{
+  pointer-events: none;
+  position: absolute;
+  font-size: 18px;
+  text-align: center;
+  background: white;
+  padding: 10px 15px;
+  z-index: 5;
+  height: 30px;
+  line-height: 30px;
+  margin: 0 auto;
+  color: #21669e;
+  border-radius: 5px;
+  box-shadow: 0 0 0 1px #eee;
+  /* +transform(translateX(-50%)); */
+  /* display: none;}
+  .active{
+    display: block;}
+  :after{
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 0;
+    height: 0;
+    margin-left: -10px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid white; 
+  }  */
+
 /* Styling for SVG */
 #Bonnet:hover path{ 
     fill:red;
 }
-
 
 #Front_Right_Door:hover path{
     fill:aquamarine;
