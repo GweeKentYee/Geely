@@ -9,11 +9,12 @@ use App\Models\CarVariant;
 use App\Models\Catalogue;
 use App\Models\Inspection;
 use App\Models\UsedCar;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Hash;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -24,6 +25,32 @@ class InspectionController extends Controller
     {
         $this->middleware('auth');
     }
+
+    protected function adminRegisterPage(){
+
+        return view('auth/registerAdmin');
+
+    }
+
+    protected function registerAdmin(Request $request)
+    {
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'status' => "Admin",
+            'password' => Hash::make($data['password']),
+
+        ]);
+
+        return redirect('/admin/inspection');
+    }
+
 
     public function viewAdminPage(){
 

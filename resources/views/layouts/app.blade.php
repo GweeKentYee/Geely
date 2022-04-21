@@ -227,6 +227,9 @@
                                 <a href = "/admin/carvariant">Car Variant</a>
                             </li>
                             <li>
+                                <a href = "/admin/register">Register New Admin</a>
+                            </li>
+                            <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">

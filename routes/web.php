@@ -24,6 +24,10 @@ Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/','App\Http\Controllers\DashboardController@viewPage');
+Route::post('/registration/customer','App\Http\Controllers\Auth\RegisterController@registerUser');
+
+Route::get('/admin/register','App\Http\Controllers\InspectionController@adminRegisterPage');
+Route::post('/registration/admin','App\Http\Controllers\InspectionController@registerAdmin');
 
 Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage')->name('catalogue.viewpage');
 Route::get('/catalogue/search','App\Http\Controllers\CatalogueController@search');
