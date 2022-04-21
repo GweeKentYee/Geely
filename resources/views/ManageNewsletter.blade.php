@@ -64,7 +64,7 @@
                                     @enderror
                                 <br>
                                 <label>Image:</label>
-                                <input type = "file" name = "image" class = "form-control @error('image') is-invalid @enderror" accept = "image/*">
+                                <input type = "file" name = "image" class = "form-control @error('image') is-invalid @enderror" accept = "image/png,image/jpeg,image/bmp,image/tiff">
                                     @error('image')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
