@@ -64,7 +64,7 @@
                                 @enderror
                                 <br>
                                 <label>Data File:</label>
-                                <input type = "file" name = "data_file" class = "form-control @error('data_file') is-invalid @enderror" accept = "application/JSON,application/xml,text/plain,text/xml,image/png,image/jpeg">
+                                <input type = "file" name = "data_file" class = "form-control @error('data_file') is-invalid @enderror" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                                     @error('data_file')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -145,7 +145,7 @@
                     $('#Car').empty();
                     $('#Car').append('<option value="0" disabled selected>-- Please Select Available Car --</option>');
                     $.each(data.Cars, function(index, Car) {
-                        $('#Car').append('<option value="'+Car.id+'">'+Car.car_model.model+' - '+Car.car_variant.variant+' - '+Car.year+' - '+Car.car_body_type.body_type+' - '+Car.car_general_spec.transmission+' - '+Car.car_general_spec.fuel+'</option>');
+                        $('#Car').append('<option value="'+Car.id+'">'+Car.car_variant.car_model.model+' - '+Car.car_variant.variant+' - '+Car.year+' - '+Car.car_body_type.body_type+' - '+Car.car_general_spec.transmission+' - '+Car.car_general_spec.fuel+'</option>');
                     })
                 }
             })

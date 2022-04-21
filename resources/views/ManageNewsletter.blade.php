@@ -13,10 +13,10 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Remark</th>
+                            <th>Remarks</th>
                             <th>Link</th>
                             <th>Image</th>
-                            <th>Sequence</th>
+                            <th>Status</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -36,6 +36,14 @@
                         @csrf
                         <div class="modal-body">
                             <div class = "newsletter">
+                                <label>Remarks:</label>
+                                <input type="text" name="remarks" class="form-control @error('remarks') is-invalid @enderror" value="{{ old('remarks') }}" >
+                                @error('remarks')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <br>
                                 <label>Link:</label>
                                 <input type="text" name="link" class="form-control @error('link') is-invalid @enderror" value="{{ old('link') }}" >
                                 @error('link')
@@ -44,19 +52,16 @@
                                     </span>
                                 @enderror
                                 <br>
-                                <label>Sequence:</label>
-                                <select id = "sequence" name = "sequence" class = "form-select" placeholder="Sequence" @error('sequence') is-invalid @enderror>
-                                    <option value="0" selected >Do Not Display</option>
-                                    @for($i=1;$i<=5;$i++)
-                                        <option value={{$i}}>{{$i}}</option>
-                                    @endfor
+                                <label>Status:</label>
+                                <select id = "status" name = "status" class = "form-control @error('status') is-invalid @enderror">
+                                    <option value="Hidden">Hidden</option>
+                                    <option value="Show">Show</option>
                                 </select>
-                                {{-- <input type="number" value="0" name="sequence" class="form-control " value="{{ old('sequence') }}" min = "0" max = "5"> --}}
-                                @error('sequence')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                    @error('status')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 <br>
                                 <label>Image:</label>
                                 <input type = "file" name = "image" class = "form-control @error('image') is-invalid @enderror" accept = "image/*">
@@ -95,10 +100,10 @@
             "ajax": "{{ route('api.newsletter')}}",
             "columns": [
                 {"data": "id"},
-                {"data": "Remark"},
+                {"data": "remarks"},
                 {"data": "Link"},
                 {"data": "Image"},
-                {"data": "Sequence"},
+                {"data": "status"},
                 {"data": "Edit", orderable: false, searchable: false},
                 {"data": "Delete", orderable: false, searchable: false}
             ]

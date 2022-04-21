@@ -259,25 +259,6 @@ class DataTableController extends Controller
 
             })
 
-            ->addColumn('Remark', function($query){
-
-                $Remark = '<p>temp</p>';
-
-                return $Remark;
-
-            })
-
-            ->addColumn('Sequence', function($query){
-                if($query->sequence==0){
-                    $Sequence = 'Do Not Display';
-                }else{
-                    $Sequence = $query->sequence;
-                }
-
-                return $Sequence;
-
-            })
-
             ->addColumn('Image', function($query){
 
                 $Image = '<a href = "/admin/newsletter/view/'.$query->id.'" style="color: black" target="_blank"><i class="bi bi-eye-fill"></i></a>';
@@ -303,7 +284,7 @@ class DataTableController extends Controller
 
             })
 
-            ->rawColumns(['Remark','Image','Link','Edit','Delete'])
+            ->rawColumns(['Image','Link','Edit','Delete'])
             ->make(true);
 
     }

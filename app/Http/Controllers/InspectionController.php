@@ -12,6 +12,11 @@ use App\Models\UsedCar;
 use Illuminate\Http\Request;
 
 use Illuminate\Validation\Rule;
+use Carbon\Carbon;
+
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class InspectionController extends Controller
 {
@@ -31,9 +36,11 @@ class InspectionController extends Controller
 
     public function carOptions(Request $request){
 
-        $CarModels = CarModel::select('id')->where('car_brand_id',$request->CarBrand_id)->get();
+        $CarModels = CarModel::find($request->CarBrand_id);
 
-        $Cars = Car::whereIn('car_model_id',$CarModels->pluck('id'))->with('carModel','carVariant','carBodyType','carGeneralSpec')->get();
+        $CarVariantsID = collect($CarModels->CarVariants->pluck('id'));
+
+        $Cars = Car::whereIn('car_variant_id',$CarVariantsID)->with('carVariant.carModel','carBodyType','carGeneralSpec')->get();
 
         return response()->json([
             'Cars' => $Cars
@@ -50,19 +57,25 @@ class InspectionController extends Controller
             'ownership_file' => ['required'],
         ]);
 
-        $usedFileName = request()->file('data_file')->getClientOriginalName();
+        $current_timestamp = Carbon::now()->timestamp;
 
-        $usedFilePath = $data['data_file']->move('storage/data/usedcar',$usedFileName);
+        $dataFileExtension = request()->file('data_file')->getClientOriginalExtension();
 
-        $ownershipFileName = request()->file('ownership_file')->getClientOriginalName();
+        $dataFileName = $current_timestamp.'_usedcar_data.'.$dataFileExtension;
 
-        $ownershipFilePath = $data['ownership_file']->move('storage/data/usedcar',$ownershipFileName);
+        $dataFilePath = $data['data_file']->move('storage/data/usedcar/'.$data['reg_num'].'/',$dataFileName);
+
+        $ownershipFileExtension = request()->file('ownership_file')->getClientOriginalExtension();
+
+        $ownershipFileName = $current_timestamp.'_usedcar_ownership.'.$ownershipFileExtension;
+
+        $ownershipFilePath = $data['ownership_file']->move('storage/data/usedcar/'.$data['reg_num'].'/',$ownershipFileName);
 
         $UsedCar = UsedCar::create([
             'min_price' => 0,
             'max_price' => 0,
             'registration' => $data['reg_num'],
-            'data_file' => str_replace('\\','/',$usedFilePath),
+            'data_file' => str_replace('\\','/',$dataFilePath),
             'ownership_file' => str_replace('\\','/',$ownershipFilePath),
             'status' => "0",
             'car_id' => $data['car'],
@@ -71,11 +84,92 @@ class InspectionController extends Controller
         //Inspection happen here
         //after inspection happen, a file will be generated
 
-        $InspectionFilePath = $usedFilePath;
+        $Car = Car::find($data['car']);
+
+        $NewDataFile = public_path($Car->data_file);
+
+        $reader = new Xlsx();
+        $spreadsheet = $reader->load($NewDataFile);
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $RetrievedNewData = $sheet->toArray();
+
+        $NewCarObject = [];
+
+        $count = count($RetrievedNewData[0]);
+
+        for($i = 0; $i < $count; $i++){
+
+            $NewCarColumn = [
+                $RetrievedNewData[0][$i] => $RetrievedNewData[1][$i]
+            ];
+
+            $NewCarObject[] = $NewCarColumn;
+
+        }
+
+        $UsedDataFile = public_path($UsedCar->data_file);
+
+        $reader = new Xlsx();
+        $spreadsheet = $reader->load($UsedDataFile);
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $RetrievedUsedData = $sheet->toArray();
+
+        $UsedCarObject = [];
+
+        for($i = 0; $i < count($RetrievedUsedData[0]); $i++){
+
+            $UsedCarColumn = [
+                $RetrievedUsedData[0][$i] => $RetrievedUsedData[1][$i]
+            ];
+
+            $UsedCarObject[] = $UsedCarColumn;
+
+        }
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $calculate = 0;
+
+        $alphabet = 65;
+
+        for($i = 0; $i < $count ; $i++){
+
+            if(array_keys($NewCarObject[$i]) == array_keys($NewCarObject[$i])){
+
+                $ResultRows = (int) round(( $UsedCarObject[$i][key($UsedCarObject[$i])] / $NewCarObject[$i][key($NewCarObject[$i])] ) * 100);
+
+                $calculate += $ResultRows;
+
+                $CellPos = chr($alphabet);
+
+                $sheet->setCellValue($CellPos.'1', key($UsedCarObject[$i]));
+                $sheet->setCellValue($CellPos.'2', $ResultRows.'%');
+
+                $alphabet++;
+
+            }
+
+        }
+
+        $rating = $calculate / count($RetrievedUsedData[0]);
+
+        $sheet->setCellValue($CellPos.'1', "Rating");
+        $sheet->setCellValue($CellPos.'2', $rating.'%');
+
+        $writer = new Xlsx($spreadsheet);
+
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+
+        $resultpath = 'storage/data/usedcar/'.$UsedCar->registration.'/'.$current_timestamp.'_'.$UsedCar->registration.'_result.xlsx';
+
+        $writer->save($resultpath);
 
         Inspection::create([
             'inspection_date' => now(),
-            'result_file' => str_replace('\\','/',$InspectionFilePath),
+            'result_file' => str_replace('\\','/',$resultpath),
             'used_car_id' => $UsedCar->id
         ]);
 

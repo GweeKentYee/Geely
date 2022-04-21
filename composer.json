@@ -12,6 +12,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.10",
+        "phpoffice/phpspreadsheet": "^1.22",
         "yajra/laravel-datatables": "^1.5"
     },
     "require-dev": {
