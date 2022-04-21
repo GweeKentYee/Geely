@@ -121,8 +121,10 @@
     <div>
         {{-- displays a "NO MATCHES IN OUR DATABASE" if there are no cars to display --}}
         @if(count($usedcar)<1)
-            <div class="cata-card" style="width: 15rem; display: inline-block;">
-                <div>NO MATCHES IN OUR DATABASE</div>
+            <br>
+            <br>
+            <div class="d-flex justify-content-center my-10">
+                <h4>NO MATCHES IN OUR DATABASE</h4>
             </div>
         @else
 
