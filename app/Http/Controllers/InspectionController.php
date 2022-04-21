@@ -66,11 +66,11 @@ class InspectionController extends Controller
 
     public function carOptions(Request $request){
 
-        $CarModels = CarModel::find($request->CarBrand_id);
+        $CarModelID = CarModel::select('id')->where('car_brand_id',$request->CarBrand_id)->get();
 
-        $CarVariantsID = collect($CarModels->CarVariants->pluck('id'));
+        $CarVariantsID = CarVariant::select('id')->whereIn('car_model_id',$CarModelID->pluck('id'))->get();
 
-        $Cars = Car::whereIn('car_variant_id',$CarVariantsID)->with('carVariant.carModel','carBodyType','carGeneralSpec')->get();
+        $Cars = Car::whereIn('car_variant_id',$CarVariantsID->pluck('id'))->with('carVariant.carModel','carBodyType','carGeneralSpec')->get();
 
         return response()->json([
             'Cars' => $Cars

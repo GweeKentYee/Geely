@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+<main class="py-4">
 <div class="container">
     <div class="row justify-content-center">
         <h3 class="pagename">Brand/Model/Variant</h3>
@@ -203,6 +204,7 @@
         </div>
     </div>
 </div>
+</main>
 @endsection
 
 @section('footer-scripts')

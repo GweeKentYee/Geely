@@ -5,6 +5,7 @@
 
 .required{
     color: red;
+    font-weight: bold;
 }
 
 #brandtab, #modeltab, #varianttab{
