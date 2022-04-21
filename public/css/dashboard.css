@@ -1,18 +1,20 @@
-.headline{
-color: #3279af;
-padding-left: 2rem;
-font-family: 'Roboto';
-font-weight: 700;
+.dashImg{
+    max-width: 100%;
 }
 
 
-.cat-card{
+a{
+    text-decoration: none;
+}
+    
+    
+.dash-card{
 box-shadow: 5px 5px 25px -5px rgba(50,121,175,0.25);
 width:100%;
 border-radius: 0.5rem;
 }
 
-.cat-card:hover{
+.dash-card:hover{
 width: 102%;
 }
 
@@ -27,8 +29,8 @@ border-bottom-right-radius: 0;
 border-bottom-left-radius: 0;
 }
 
-.card-body{
-padding: 0 1rem 1rem 1rem;
+.dash-card-body{
+padding: 0rem 1rem 1rem 1rem;
 }
 
 .card-title{
@@ -89,7 +91,7 @@ color: #00468e;
         
         }
     
-  }
+    }
 
 .card-subtitle {
 font-family: 'Roboto';

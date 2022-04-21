@@ -16,13 +16,14 @@ p {
     color: #999;
 }
 
-a,
-a:hover,
-a:focus {
-    color: inherit;
+.sidebar-link,
+.sidebar-link:hover,
+.sidebar-link:focus {
+    color: white;
     text-decoration: none;
     transition: all 0.3s;
 }
+
 
 .navbar {
     padding: 15px 10px;
@@ -59,7 +60,7 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
+    background: #3279af;
     color: #fff;
     transition: all 0.3s;
 }
@@ -70,12 +71,12 @@ a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: #1e669c;
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    border-bottom: 1px solid #f9fbfb;
 }
 
 #sidebar ul p {
@@ -167,3 +168,17 @@ a.article:hover {
         display: none;
     }
 }
+
+/* Self added css */
+#login-register-ul{
+    flex-direction: row;
+}
+
+#login{
+    margin-right: 1rem;
+}
+
+#user-name{
+    margin-right: 1rem;
+}
+

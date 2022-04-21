@@ -119,6 +119,7 @@ Route::get('/usedcar/fetch/{id}','App\Http\Controllers\UsedCarController@fetch')
 Route::get('/usedcar/edit/{id}','App\Http\Controllers\UsedCarController@edit');
 Route::put('/usedcar/update/{id}','App\Http\Controllers\UsedCarController@update');
 Route::get('/usedcar/details/{id}','App\Http\Controllers\UsedCarImageController@viewAdminPage');
+Route::get('/admin/usedcar','App\Http\Controllers\UsedCarController@viewAdminPage');
 
 Route::post('/admin/usedcarImage/store','App\Http\Controllers\UsedCarImageController@store');
 Route::get('/usedcarImage/delete/{id}','App\Http\Controllers\UsedCarImageController@delete');

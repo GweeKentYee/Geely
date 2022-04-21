@@ -39,25 +39,29 @@
                                 <span style="margin-left: 0.4rem;">Compare</span>
                             </div>
                             <a href='/collection/usedcardetails/{{$collection->used_car_id}}'>
-                                <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200">
+                                {{-- <div class="car-img" style="background-image: url({{ $collection->image }});">
+                                    {{ $collection->image }}
+                                </div> --}}
+                                {{-- <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200"> --}}
+                                <img class="card-img" src="{{ $collection->usedCar->usedCarImages->get(0)->image }}" alt="Card image cap" style="width:100%;height:190px">
                             </a>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="card-title-year-brand col-10">{{ $collection->year }} {{ $collection->brand }}</div>
-                                <div class="card-title-model-variant col-10">{{ $collection->model }} {{ $collection->variant }} </div>
+                                <div class="card-title-year-brand col-10">{{ $collection->usedCar->car->year}}  {{ $collection->usedCar->car->carVariant->carModel->model}} </div>
+                                <div class="card-title-model-variant col-10">{{ $collection->usedCar->car->carVariant->carModel->carBrand->brand}}  {{ $collection->usedCar->car->carVariant->variant}}</div>
                                 <div class="col-2"><button class="card-delete-button" data-toggle="modal" data-target="#exampleModal{{ $collection->id }}"><i class="fa fa-trash-o" style="font-size:20px;margin-left:0.2rem;"></i></button></div>
                             </div>
 
                             <div class="card-car-details">
-                                <span>{{ $collection->fuel }} | {{ $collection->transmission }} | {{ $collection->body_type }} </span>
+                                <span>{{ $collection->usedCar->car->carGeneralSpec->fuel}} | {{ $collection->usedCar->car->carGeneralSpec->transmission}} | {{ $collection->usedCar->car->carBodyType->body_type}} </span>
                             </div>
                             <div class="card-car-price">
                                 <span style="font-size: 12px">min:</span>
-                                <strong>RM{{ $collection->min_price }}</strong>
+                                <strong>RM{{ $collection->usedCar->min_price}}</strong>
                                 <span>       </span>
                                 <span style="font-size: 12px">max:</span>
-                                <strong>RM{{ $collection->max_price }}</strong>
+                                <strong>RM{{ $collection->usedCar->max_price}}</strong>
                             </div>
                             <div class="modal fade" id="exampleModal{{ $collection->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
