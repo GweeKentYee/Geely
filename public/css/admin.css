@@ -1,0 +1,12 @@
+.pagename{
+    color: #00468e;
+    font-weight: bold;
+  }
+
+.required{
+    color: red;
+}
+
+#brandtab, #modeltab, #varianttab{
+    font-weight: bold;
+}

@@ -89,7 +89,7 @@ Route::get('/admin/car/file/viewdata/{carID}','App\Http\Controllers\CarControlle
 Route::get('/admin/car/edit/{carID}','App\Http\Controllers\CarController@viewEditPage');
 Route::patch('/admin/car/editfunction/{carID}','App\Http\Controllers\CarController@edit');
 
-Route::get('/admin/brand_model_variant','App\Http\Controllers\BrandModelVariantController@viewAdminPage');
+Route::get('/admin/brand_model_variant','App\Http\Controllers\CarBrandController@viewTabPage');
 
 Route::get('/admin/carbrand','App\Http\Controllers\CarBrandController@viewAdminPage');
 Route::post('/admin/carbrand/add','App\Http\Controllers\CarBrandController@addCarBrand');

@@ -1,11 +1,15 @@
 @extends('layouts.app')
 
+@section('css')
+<link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 <main class="py-4">
 <div class="container">
     <div class="row justify-content-center">
-        <h3><u>Inspection</u></h3>
-        <div class="col-md-9">
+        <div class="col-md-12">
+            <h3 class="pagename">Inspection</h3>
             <div style = "text-align:right" class = "pb-1">
                 <button class = "btn btn-primary" data-bs-toggle="modal" data-bs-target="#newinspection"><i class="bi bi-plus-lg"></i> New Inspection</button>
             </div>
