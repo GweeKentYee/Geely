@@ -261,7 +261,7 @@ class DataTableController extends Controller
 
             ->addColumn('Link', function($query){
 
-                $Link = '<a href = '.$query->link.' style="color: black" target="_blank"><i class="bi bi-eye-fill"></i></a>';
+                $Link = '<a href = '.$query->link.' style="font-size: 18px" target="_blank"><i class="bi bi-link-45deg"></i></a>';
 
                 return $Link;
 
@@ -269,7 +269,7 @@ class DataTableController extends Controller
 
             ->addColumn('Image', function($query){
 
-                $Image = '<a href = "/admin/newsletter/view/'.$query->id.'" style="color: black" target="_blank"><i class="bi bi-eye-fill"></i></a>';
+                $Image = '<a href = "/admin/newsletter/view/'.$query->id.'" style="color: black; font-size: 16px" target="_blank"><i class="bi bi-image"></i></a>';
 
                 return $Image;
 
@@ -278,7 +278,7 @@ class DataTableController extends Controller
 
             ->addColumn('Edit', function($query){
 
-                $actionBtn = '<a href= "/admin/newsletter/edit/'.$query->id.'" style="color: blue"><i class="bi bi-pencil-square"></i></a>';
+                $actionBtn = '<a href= "/admin/newsletter/edit/'.$query->id.'" style="color: blue; font-size: 16px"><i class="bi bi-pencil-square"></i></a>';
 
                 return $actionBtn;
 
@@ -303,15 +303,43 @@ class DataTableController extends Controller
 
         return datatables($query)
             ->addIndexColumn()
-                ->addColumn('Action', function($query){
+                ->addColumn('Data_File', function($query){
 
-                    $actionBtn = '<a class = "btn btn-primary btn-sm detail" href = "/usedcar/details/'.$query->id.'" ">Image</a>
-                                    <a class = "btn btn-success btn-sm edit" href = "/usedcar/edit/'.$query->id.'" >Edit</a>
-                                    <a class= "btn btn-danger btn-sm delete" href = "/usedcar/delete/'.$query->id.' ">Delete</a>'
-                                    ;
+                    $dataFile = '<a href = "/admin/usedcar/file/viewdata/'.$query->id.'" style="color: black; font-size: 16px"><i class="bi bi-eye-fill"></i></a>';
+
+                    return $dataFile;
+
+                })
+
+                ->addColumn('Ownership_File', function($query){
+
+                    $ownershipFile = '<a href = "/admin/usedcar/file/viewownership/'.$query->id.'" style="color: black; font-size: 16px"><i class="bi bi-eye-fill"></i></a>';
+    
+                    return $ownershipFile;
+    
+                })
+
+                ->addColumn('Images', function($query){
+
+                    $actionBtn = '<a href = "/admin/usedcar/images/'.$query->id.'" style="color: black; font-size: 16px" target="_blank"><i class="bi bi-image"></i></a>';
+
+                    return $actionBtn;
+                })
+
+                ->addColumn('Edit', function($query){
+
+                    $actionBtn = '<a href = "/admin/usedcar/edit/'.$query->id.'" style="color: blue; font-size: 16px"><i class="bi bi-pencil-square"></i></a>';
+
+                    return $actionBtn;
+                })
+
+                ->addColumn('Delete', function($query){
+
+                    $actionBtn = '<a class= "btn btn-danger btn-sm delete" href = "/admin/usedcar/delete/'.$query->id.'"><i class="bi bi-trash"></i> Delete</a>';
+
                     return $actionBtn;
 
-                })->rawColumns(['Action'])
+                })->rawColumns(['Data_File', 'Ownership_File', 'Images', 'Edit', 'Delete'])
                 ->make(true);
 
     }

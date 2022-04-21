@@ -25,44 +25,14 @@
                             <label>Car</label>
                             <input type="text" name="car" class="form-control" value="{{ $Car->carVariant->carModel->carBrand->brand }} {{ $Car->carVariant->carModel->model }} {{ $Car->carVariant->variant }}" readonly>
                             <br>
-                            <label>Manufacture Year: {{ $Car->year }}</label>
-                            <select id="year" name="year" class="form-control @error('year') is-invalid @enderror">
-                                <option value="0" disabled selected>-- Please Select Year --</option>
-                                @for ($year=1920; $year<=2022; $year++)
-                                <option value="{{ $year }}">{{ $year }}</option>
-                                @endfor
-                            </select>
-                            @error('year')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <label>Manufacture Year</label>
+                            <input type="text" name="year" class="form-control" value="{{ $Car->year }}" readonly>
                             <br>
                             <label>Body Type: {{ $Car->carBodyType->body_type }}</label>
-                            <select id="bodyType" name="car_body_type_id" class="form-control @error('car_body_type_id') is-invalid @enderror">
-                                <option value="0" disabled selected>-- Please Select Car Body Type --</option>
-                                @foreach ($CarBodyType as $CarBodyType)
-                                    <option value="{{$CarBodyType->id}}">{{$CarBodyType->body_type}}</option>
-                                @endforeach
-                            </select>
-                            @error('car_body_type_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <input type="text" name="car_body_type_id" class="form-control" value="{{ $Car->carBodyType->body_type }}" readonly>
                             <br>
-                            <label>General Spec: {{ $Car->carGeneralSpec->transmission }}-{{ $Car->carGeneralSpec->fuel }}</label>
-                            <select id="generalSpec" name="car_general_spec_id" class="form-control @error('car_general_spec_id') is-invalid @enderror">
-                                <option value="0" disabled selected>-- Please Select Transmission-Fuel --</option>
-                                @foreach ($CarGeneralSpec as $CarGeneralSpec)
-                                    <option value="{{$CarGeneralSpec->id}}">{{$CarGeneralSpec->transmission}}-{{$CarGeneralSpec->fuel}}</option>
-                                @endforeach
-                            </select>
-                            @error('car_general_spec_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <label>General Spec</label>
+                            <input type="text" name="car_general_spec_id" class="form-control" value="{{ $Car->carGeneralSpec->transmission }}-{{ $Car->carGeneralSpec->fuel }}" readonly>
                             <hr>
                             <label>Spec File: <a href="/admin/car/file/viewspec/{{ $Car->id }}">{{ $Car->spec_file }}</a></label>
                             <input type="file" name="spec_file" class="form-control @error('spec_file') is-invalid @enderror" accept="application/JSON,application/xml,text/plain,text/xml,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">

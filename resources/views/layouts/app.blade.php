@@ -132,19 +132,29 @@
                         @else
                             @if (Auth::user()->status == 'Admin')
                                 <li>
-                                    <a class="sidebar-link" href = "/admin/inspection">Inspection</a>
+                                    <a class="sidebar-link" href = "/admin/newsletter">Manage Newsletter</a>
                                 </li>
                                 <li>
-                                    <a class="sidebar-link" href = "/admin/newsletter">Manage Newsletter</a>
+                                    <a class = "sidebar-link" href = "/admin/brand_model_variant">Brand/Model/Variant</a>
                                 </li>
                                 <li>
                                     <a class="sidebar-link" href = "/admin/car">Car</a>
                                 </li>
                                 <li>
+                                    <a class="sidebar-link" href = "/admin/inspection">Inspection</a>
+                                </li>
+                                <li>
                                     <a class="sidebar-link" href = "/admin/usedcar">Used Car</a>
                                 </li>
                                 <li>
-                                    <a class = "sidebar-link" href = "/admin/brand_model_variant">Brand/Model/Variant</a>
+                                    <a class="sidebar-link" href = "#">Register New Admin</a>
+                                </li>
+                                <hr>
+                                <li>
+                                    <a class="sidebar-link" href="/">Dashboard</a>
+                                </li>
+                                <li>
+                                    <a class="sidebar-link" href="/catalogue">Catalogue</a>
                                 </li>
 
 
