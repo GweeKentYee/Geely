@@ -21,6 +21,14 @@
                     <label>ID</label>
                     <input type="text" name="brand_id" class="form-control" value="{{ $newsletter->id }}" readonly>
                     <br>
+                    <label>Remarks:</label>
+                    <input type="text" name="remarks" class="form-control @error('remarks') is-invalid @enderror" value="{{ old('remarks') }}" placeholder="{{$newsletter->remarks}}">
+                    @error('remarks')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <br>
                     <label>Link:</label>
                     <input type="text" name="link" class="form-control @error('link') is-invalid @enderror" value="{{ old('link') }}" placeholder="{{$newsletter->link}}">
                     @error('link')
@@ -29,22 +37,12 @@
                         </span>
                     @enderror
                     <br>
-                    <label>Sequence:</label>
-                    <select id = "sequence" name = "sequence" class = "form-select" placeholder="Sequence" @error('sequence') is-invalid @enderror>
-                        @if ($newsletter->sequence==0)
-                                <option value={{$newsletter->sequence}} selected hidden>Do Not Display</option>
-                            @else
-                                <option value={{$newsletter->sequence}} selected hidden>{{$newsletter->sequence}}</option>
-                            @endif
-                        @for($i=0;$i<=5;$i++)
-                            @if ($i==0)
-                                <option value={{$i}}>Do Not Display</option>
-                            @else
-                                <option value={{$i}}>{{$i}}</option>
-                            @endif
-                        @endfor
+                    <label>Status: {{ $newsletter->status }}</label>
+                    <select id = "status" name = "status" class = "form-select" placeholder="status" @error('status') is-invalid @enderror>
+                        <option value="Hidden">Hidden</option>
+                        <option value="Show">Show</option>
                     </select>
-                    @error('sequence')
+                    @error('status')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

@@ -28,11 +28,6 @@ class Car extends Model
         return $this->belongsTo('App\Models\CarVariant', 'car_variant_id');
     }
 
-    public function carModel()
-    {
-        return $this->belongsTo('App\Models\CarModel', 'car_model_id');
-    }
-
     public function carBodyType()
     {
         return $this->belongsTo('App\Models\CarBodyType', 'car_body_type_id');

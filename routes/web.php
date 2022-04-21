@@ -24,6 +24,10 @@ Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/','App\Http\Controllers\DashboardController@viewPage');
+Route::post('/registration/customer','App\Http\Controllers\Auth\RegisterController@registerUser');
+
+Route::get('/admin/register','App\Http\Controllers\InspectionController@adminRegisterPage');
+Route::post('/registration/admin','App\Http\Controllers\InspectionController@registerAdmin');
 
 Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage')->name('catalogue.viewpage');
 Route::get('/catalogue/search','App\Http\Controllers\CatalogueController@search');
@@ -65,6 +69,7 @@ Route::get('/admin/inspection','App\Http\Controllers\InspectionController@viewAd
 Route::post('/admin/inspection/carDropBox','App\Http\Controllers\InspectionController@carOptions')->name('carOption');
 Route::get('/admin/inspection/file/view/{inspectionID}','App\Http\Controllers\InspectionController@viewInspectionFile');
 Route::post('/admin/inspection/add','App\Http\Controllers\InspectionController@newInspection');
+Route::post('/admin/inspection/exist/add','App\Http\Controllers\InspectionController@newExistingCarInspection');
 Route::get('/admin/inspection/delete/{inspectionID}','App\Http\Controllers\InspectionController@delete');
 Route::get('/admin/inspection/details/{inspectionID}','App\Http\Controllers\InspectionController@viewDetailsPage');
 
@@ -88,7 +93,7 @@ Route::get('/admin/car/file/viewdata/{carID}','App\Http\Controllers\CarControlle
 Route::get('/admin/car/edit/{carID}','App\Http\Controllers\CarController@viewEditPage');
 Route::patch('/admin/car/editfunction/{carID}','App\Http\Controllers\CarController@edit');
 
-Route::get('/admin/brand_model_variant','App\Http\Controllers\BrandModelVariantController@viewAdminPage');
+Route::get('/admin/brand_model_variant','App\Http\Controllers\CarBrandController@viewTabPage');
 
 Route::get('/admin/carbrand','App\Http\Controllers\CarBrandController@viewAdminPage');
 Route::post('/admin/carbrand/add','App\Http\Controllers\CarBrandController@addCarBrand');

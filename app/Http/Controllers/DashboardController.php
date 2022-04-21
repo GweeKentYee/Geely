@@ -14,7 +14,7 @@ class DashboardController extends Controller
     //
     public function viewPage(){
 
-        $Dash = Newsletter::orderby('ID','DESC')->get();
+        $Dash = Newsletter::orderby('ID','DESC')->where('status', 'Show')->get();
 
         $usedcar = UsedCar::all()->where('status','1')->take(3);
 

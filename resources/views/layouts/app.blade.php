@@ -186,6 +186,7 @@
                             <li>
                                 <a class="sidebar-link" href="/catalogue">Catalogue</a>
                             </li>         
+
                         @else
                             @if (Auth::user()->status == 'Admin')
                                 <li>

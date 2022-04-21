@@ -6,12 +6,23 @@ use App\Models\CarBrand;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class CarBrandController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
+    }
+    
+    public function viewTabPage(){
+
+        $CarBrand = CarBrand::all();
+
+        return view('BrandModelVariant', [
+            'CarBrand' => $CarBrand,
+            'CarBrand2' => $CarBrand
+        ]);
     }
 
     public function viewAdminPage(){
@@ -24,24 +35,33 @@ class CarBrandController extends Controller
 
         CarBrand::where('id', $carbrandID)->delete();
 
-        return redirect('admin/carbrand');
+        return redirect('admin/brand_model_variant');
 
     }
 
     public function addCarBrand(Request $request){
 
-        $data = $request->validate([
-            'brand' => ['required',
+        $validator = Validator::make($request->all(), [
+            'brand' => ['required', 
             Rule::unique('car_brands','brand')->where(function ($query){
                 return $query;
             })]
         ]);
+ 
+        if ($validator->fails()) {
+            return redirect('admin/brand_model_variant')
+                        ->withErrors($validator)
+                        ->withInput()
+                        ->with('error_code', 1);
+        }
+
+        $data = $validator->validated();
 
         CarBrand::create([
             'brand' => $data['brand']
         ]);
 
-        return redirect('admin/carbrand');
+        return redirect('admin/brand_model_variant');
 
     }
 
@@ -72,7 +92,7 @@ class CarBrandController extends Controller
 
             $CarBrand->update($input);
 
-            return redirect('admin/carbrand');
+            return redirect('admin/brand_model_variant');
 
         } else {
 
