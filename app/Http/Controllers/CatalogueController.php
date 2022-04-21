@@ -169,8 +169,8 @@ class CatalogueController extends Controller
     {
         
         $query = $request->get('query');
-        $filterBrand = CarBrand::select('brand')->where('brand', 'LIKE', '%'.$query.'%')->get()->pluck('brand');
-        $filterModel = CarModel::select('model')->where('model','LIKE','%'.$query.'%')->get()->pluck("model");
+        $filterBrand = CarBrand::select('brand')->where('brand', 'LIKE', $query.'%')->get()->pluck('brand');
+        $filterModel = CarModel::select('model')->where('model','LIKE', $query.'%')->get()->pluck("model");
         $filter = $filterBrand->merge($filterModel);
         
         return response()->json($filter);
