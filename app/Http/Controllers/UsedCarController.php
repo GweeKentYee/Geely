@@ -8,7 +8,11 @@ use Illuminate\Support\Facades\File;
 
 class UsedCarController extends Controller
 {
-    //
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function viewAdminPage(){
 
         $car_id = Car::all();

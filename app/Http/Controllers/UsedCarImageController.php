@@ -9,9 +9,14 @@ use Illuminate\Support\Facades\File;
 
 class UsedCarImageController extends Controller
 {
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
   public function viewAdminPage($id){
 
-    $usedCarImage = UsedCarImage::where('used_car_id',$id)->simplePaginate(9);
+    $usedCarImage = UsedCarImage::where('used_car_id',$id)->simplePaginate(8);
     $usedCar = UsedCar::find($id);
     return view('UsedCarImages',compact('usedCarImage','usedCar'));
 
@@ -42,16 +47,6 @@ class UsedCarImageController extends Controller
 
     }
     
-    public function delete($id){
-      $usedCarImage = UsedCarImage::findorfail($id);
-      $usedCar = UsedCar::find($usedCarImage->used_car_id);
-      $filename = $usedCarImage->image;
-      $path= public_path('storage/image/used_car/'.$usedCar->registration.'/'.$filename);
-      File::delete($path);
-      $usedCarImage->delete();
-      return redirect()->back()->with('status','Used Car Image Deleted Successfully');
-  }
-
     public function deleteSelected(Request $request){
      
       $ids = $request->selected;
