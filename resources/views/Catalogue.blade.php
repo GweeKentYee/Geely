@@ -136,7 +136,7 @@
                                 <div class="card cat-card m-auto">
                                     <div>
                                         <a href='/catalogue/usedcardetails/{{$usedcars->id}}'>
-                                            <img class="card-img" src="{{$usedcars->usedCarImages->get(0)->image}}" alt="Card image cap" width="200" height="200">
+                                            <img class="card-img" src="{{$usedcars->usedCarImages->get(0)->image}}" alt="Card image cap" width="100%" height="170px">
                                         </a>
                                     </div>
                                     <div class="card-body">
