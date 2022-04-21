@@ -45,7 +45,7 @@
                             
                     <div class="card dash-card m-auto">
                         <div>   
-                            <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200">
+                            <img class="card-img" src="{{$usedcars->usedCarImages->get(0)->image}}" alt="Card image cap" width="200" height="200">
                         </div>
                         <div class="dash-card-body">
                         
@@ -73,16 +73,18 @@
                 @endforeach
             </div>
 
-            <div class="col-md-8 py-4">
+            <div class="col-md-10 py-4">
                 <h1>
                     About our system
                 </h1>
                 <p>
-                    The Geely car scanner is an advanced car scanning system developed by our client Geely Global. It is fast , efficient and reliable. The scanner is capable of scanning 19 different points on the car and produce accurate quality ratings.
+                    The Geely car scanner is an advanced car scanning system developed by our client, Geely Global. 
+                    The scanner is capable of scanning 19 different sections of a car and producing accurate quality ratings.
+                    
                 </p>
             </div>
 
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px" viewBox="0 0 800 600" overflow="visible" xml:space="preserve">
                 <g id="Layer_2_1_">

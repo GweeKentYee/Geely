@@ -10,12 +10,14 @@
 @section('content')
 <main class="py-4">
     {{-- display the headline of the page --}}
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <h3 class="headline"><u>Catalogue</u></h3>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="row col-10">
+            <div class="col-lg-10 col-md-9 col-sm-12" style="padding-left: 0;">
+                <h3 class="headline">CATALOGUE</h3>
             </div>
         </div>
+        <div class="col-1"></div>
     </div>
 
     {{-- content of the page --}}
