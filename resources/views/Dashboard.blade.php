@@ -45,7 +45,9 @@
                             
                     <div class="card dash-card m-auto">
                         <div>   
-                            <img class="card-img" src="{{$usedcars->usedCarImages->get(0)->image}}" alt="Card image cap" width="200" height="200">
+                            <a href='/catalogue/usedcardetails/{{$usedcars->id}}'>
+                                <img class="card-img" src="{{$usedcars->usedCarImages->get(0)->image}}" alt="Card image cap" width="200" height="200">
+                            </a>
                         </div>
                         <div class="dash-card-body">
                         
