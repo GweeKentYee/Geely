@@ -161,9 +161,11 @@
                                                     <form action="{{ route('collection.store') }}" method="POST">
                                                         @csrf
                                                         <input type="hidden" name="usedcar_id" value={{ $usedcars->id }} />
-                                                        <button type="submit" class="card-add-collection-btn"><i class="bi bi-star" style="font-size:20px;margin-left:0.2rem;"></i></button>
-                                                    </form>
+                                                        <button type="submit" class="card-add-collection-btn"><i class="bi bi-star" style="font-size:20px;margin-left:0.2rem;"></i></button>  
+                                                    </form>                     
                                                 @endif
+
+                                            
 
                                             </div>
                                         </div>

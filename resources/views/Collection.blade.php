@@ -39,7 +39,8 @@
                                 <span style="margin-left: 0.4rem;">Compare</span>
                             </div>
                             <a href='/collection/usedcardetails/{{$collection->used_car_id}}'>
-                                <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200">
+                                {{-- <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200"> --}}
+                                <img class="card-img" src="{{ $collection->image }}" alt="Card image cap" width="200" height="200">
                             </a>
                         </div>
                         <div class="card-body">

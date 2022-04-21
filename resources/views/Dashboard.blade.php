@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+<link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+
+
 @section('content')
 <main>
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -18,48 +22,53 @@
                 @endfor
             </div>
 
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </a>
-        @endif
-    </div>
-    <div class="container py-4">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <h1>
-                    Cars of the day
-                </h1>
-            </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </a>
+    @endif
+</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <h1>
+                Cars of the day
+            </h1>
+        </div>
 
-            <div class="col-md-8" style="display:flex; justify-content: center;">
-                @php($i=0)
-                @foreach ($usedcar as  $usedcars)
-                    @php($i++)
-                    <a href="/catalogue" class="cata-card" style="width: 15rem; display: inline-block;">
-                        <div style="display:flex; justify-content: center; margin:5px;">
-                            <div class="cata-card-image" style="width: 12.5rem;height: 12.5rem;justify-content:center;">
-                                @if (!empty($usedcars->usedCarImages->get(0)->image))
-                                    <img src="{{$usedcars->usedCarImages->get(0)->image}}" alt="" width="200" height="200">
-                                @else
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="black" class="bi bi-images" viewBox="0 0 16 16">
-                                        <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
-                                        <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z"/>
-                                    </svg>
-                                    <span class="overlay-text">Image Unavailable</span>
-                                @endif  
-                            </div>
+        <div class="col-md-10 row" style="display:flex; justify-content: center; margin-bottom: 3.5rem;">   
+            @foreach ($usedcar as  $usedcars)
+                
+                <div class="col-lg-4 col-md-12 col-sm-12 mt-5" >
+                            
+                    <div class="card dash-card m-auto">
+                        <div>   
+                            <img class="card-img" src="https://prod-carsome-my.imgix.net/B2C/dd1b1fe1-0e98-4126-aeab-2777c8e82746.jpg?q=20&w=2400&auto=format" alt="Card image cap" width="200" height="200">
                         </div>
-                        <div class="cata-card-title">CAR MODEL : </div>
-                        <div class="cata-card-subtitle">{{$usedcars->car->carVariant->carModel->model}}</div>
-                        <div class="cata-card-title">PRICE : </div>
-                        <div class="cata-card-subtitle">RM {{$usedcars->min_price}} to RM {{$usedcars->max_price}}</div>
-                    </a>
-                    @if ($i ==3)
-                        @break
-                    @endif
+                        <div class="dash-card-body">
+                        
+                            <div class="row">
+                                <div class="card-title-year-brand col-10">{{$usedcars->car->year}} {{$usedcars->car->carVariant->carModel->carBrand->brand}}</div>
+                                <div class="card-title-model-variant col-10">{{$usedcars->car->carVariant->carModel->model}} {{$usedcars->car->carVariant->variant}} </div>
+                                
+                            </div> 
+                            
+                            <div class="card-car-details">
+                                <span>{{$usedcars->car->carGeneralSpec->fuel}} | {{$usedcars->car->carGeneralSpec->transmission}} | {{$usedcars->car->carBodyType->body_type}} </span>
+                            </div>
+                            <div class="card-car-price">
+                                <span style="font-size: 12px">min:</span>
+                                <strong>RM{{ $usedcars->min_price }}</strong>
+                                <span>       </span>
+                                <span style="font-size: 12px">max:</span>
+                                <strong>RM{{ $usedcars->max_price }}</strong>
+                            </div>
+                           
+                        </div>
+                      </div>
+                </div>
 
                 @endforeach
             </div>
