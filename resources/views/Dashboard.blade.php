@@ -11,12 +11,12 @@
             <div class="carousel-inner">
                 @for ($i=0;$i<$Dash->count();$i++)
                     @if ($i==0)
-                            <a class="carousel-item active" height="1080p" href="{{$Dash->get($i)->link}}" target="_blank">
-                                <img class="d-block w-100" src="{{$Dash->get($i)->image}}" alt="First slide">
+                            <a class="carousel-item active ratio ratio-16x9" href="{{$Dash->get($i)->link}}" target="_blank">
+                                <img class="d-block" style="width:100%; object-fit: contain;" src="{{$Dash->get($i)->image}}" alt="First slide">
                             </a>
                         @else
-                            <a class="carousel-item" height="1080p" href="{{$Dash->get($i)->link}}" target="_blank">
-                                <img class="d-block w-100" src="{{$Dash->get($i)->image}}" alt="Second slide">
+                            <a class="carousel-item ratio ratio-16x9"  href="{{$Dash->get($i)->link}}" target="_blank">
+                                <img class="d-block " style="width:100%; object-fit: contain;" src="{{$Dash->get($i)->image}}" alt="Second slide">
                             </a>
                     @endif
                 @endfor
