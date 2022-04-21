@@ -68,6 +68,7 @@
                                 </span>
                             @enderror
                             <br>
+                            <hr>
                             <label>Data File<span class="required"> *</span></label>
                             <input type = "file" name = "data_file" class = "form-control @error('data_file') is-invalid @enderror" accept = "application/JSON,application/xml,text/plain,text/xml,image/png,image/jpeg">
                                 @error('data_file')
