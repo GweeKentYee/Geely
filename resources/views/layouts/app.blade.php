@@ -195,20 +195,14 @@
                                     <a class="sidebar-link" href = "/admin/newsletter">Manage Newsletter</a>
                                 </li>
                                 <li>
-                                    <a class="sidebar-link" href = "/admin/carmodel">Car Model</a>
-                                </li>
-                                <li>
                                     <a class="sidebar-link" href = "/admin/car">Car</a>
                                 </li>
                                 <li>
-                                    <a class="sidebar-link" href = "/admin/carbrand">Car Brand</a>
-                                </li>
-                                <li>
-                                    <a class="sidebar-link" href = "/admin/carvariant">Car Variant</a>
-                                </li>  
-                                <li>
                                     <a class="sidebar-link" href = "/admin/usedcar">Used Car</a>
                                 </li> 
+                                <li>
+                                    <a class = "sidebar-link" href = "/admin/brand_model_variant">Brand/Model/Variant</a>
+                                </li>
 
                                 
                             @else
@@ -241,7 +235,6 @@
                             <button class="btn d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
-                            
                             
                             <ul id="login-register-ul" class="navbar-nav ms-auto d-lg-none d-xl-none">
                                 @guest
@@ -282,16 +275,14 @@
                                                 <a class="nav-link" href = "/admin/newsletter">Manage Newsletter</a>
                                             </li>
                                             <li class="nav-item active">
-                                                <a class="nav-link" href = "/admin/carmodel">Car Model</a>
-                                            </li>
-                                            <li class="nav-item active">
                                                 <a class="nav-link" href = "/admin/car">Car</a>
                                             </li>
                                             <li class="nav-item active">
-                                                <a class="nav-link" href = "/admin/carbrand">Car Brand</a>
+                                                <a class="nav-link" href = "/admin/usedcar">Used Car</a>
                                             </li>
+                                        
                                             <li class="nav-item active">
-                                                <a class="nav-link" href = "/admin/carvariant">Car Variant</a>
+                                                <a class="nav-link" href = "/admin/brand_model_variant">Brand/Model/Variant</a>
                                             </li> 
                                             <li class="nav-item">
                                                 <a class="nav-link" href="{{ route('logout') }}"
