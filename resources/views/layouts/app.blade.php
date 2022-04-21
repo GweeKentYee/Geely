@@ -7,29 +7,42 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Geely') }}</title>
+    <title>{{ config('app.name','Geely') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/usedcarimage.css') }}" rel="stylesheet">
     <link href="{{ asset('css/UsedCar.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app2.css') }}" rel="stylesheet">
+    @yield('css')
+
     <link rel="stylesheet" type = "text/css" href = "//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    @livewireStyles
 </head>
+
 <body>
+    @if (session('status'))
+        <div style="background: red;color: white">{{ session('status') }}</div>
+    @endif
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        {{-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Geely') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -70,8 +83,11 @@
                                     <a class = "dropdown-item" href = "/admin/catalogue">Manage Catalogue</a>
                                     <a class = "dropdown-item" href = "/admin/newsletter">Manage Newsletter</a>
                                     <a class = "dropdown-item" href = "/admin/carmodel">Car Model</a>
-                                    <a class = "dropdown-item" href = "/admin/usedcar">Used Car</a>
-
+                                    <a class = "dropdown-item" href = "/admin/car">Car</a>
+                                    <a class = "dropdown-item" href = "/admin/brand_model_variant">Brand/Model/Variant</a>
+                                    <a class = "dropdown-item" href = "/admin/carbrand">Car Brand</a>
+                                    <a class = "dropdown-item" href = "/admin/carmodel">Car Model</a>
+                                    <a class = "dropdown-item" href = "/admin/carvariant">Car Variant</a>
 
                                     @else
 
@@ -96,12 +112,250 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
+
+        {{-- sidebar --}}
+        <div class="wrapper">
+            <!-- Sidebar  -->
+                <nav id="sidebar" class="d-none d-lg-block d-xl-block">
+
+                    <div class="sidebar-header">
+                        <h3><a class="sidebar-link" href="/">Geely</a></h3>
+                    </div>
+
+                    <ul class="list-unstyled components">
+                        @guest
+                            <li>
+                                <a class="sidebar-link" href="/">Dashboard</a>
+                            </li>
+                            <li>
+                                <a class="sidebar-link" href="/catalogue">Catalogue</a>
+                            </li>
+
+                        @else
+                            @if (Auth::user()->status == 'Admin')
+                                <li>
+                                    <a class="sidebar-link" href = "/admin/newsletter">Manage Newsletter</a>
+                                </li>
+                                <li>
+                                    <a class = "sidebar-link" href = "/admin/brand_model_variant">Brand/Model/Variant</a>
+                                </li>
+                                <li>
+                                    <a class="sidebar-link" href = "/admin/car">Car</a>
+                                </li>
+                                <li>
+                                    <a class="sidebar-link" href = "/admin/inspection">Inspection</a>
+                                </li>
+                                <li>
+                                    <a class="sidebar-link" href = "/admin/usedcar">Used Car</a>
+                                </li>
+                                <li>
+                                    <a class="sidebar-link" href = "#">Register New Admin</a>
+                                </li>
+                                <hr>
+                                <li>
+                                    <a class="sidebar-link" href="/">Dashboard</a>
+                                </li>
+                                <li>
+                                    <a class="sidebar-link" href="/catalogue">Catalogue</a>
+                                </li>
+
+
+                            @else
+                                <li>
+                                    <a class="sidebar-link" href="/">Dashboard</a>
+                                </li>
+                                <li>
+                                    <a class="sidebar-link" href="/catalogue">Catalogue</a>
+                                </li>
+                                <li>
+                                    <a class="sidebar-link" href="/collection">Collection</a>
+                                </li>
+
+                            @endif
+
+                        @endguest
+
+                    </ul>
+
+                </nav>
+                <!-- Page Content  -->
+                <div id="content">
+
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <div class="container-fluid">
+
+                            <button type="button" id="sidebarCollapse" class="btn d-none d-lg-block d-xl-block">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <button class="btn d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+
+                            <ul id="login-register-ul" class="navbar-nav ms-auto d-lg-none d-xl-none">
+                                @guest
+                                    @if (Route::has('login'))
+                                        <li class="nav-item" id="login">
+                                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                        </li>
+                                    @endif
+
+                                    @if (Route::has('register'))
+                                        <li class="nav-item" id="register">
+                                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                        </li>
+                                    @endif
+                                @else
+                                    <li class="nav-item" id="register">
+                                        {{ Auth::user()->name }}
+                                    </li>
+                                @endguest
+                            </ul>
+
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="nav navbar-nav ml-auto d-lg-none d-xl-none">
+                                    @guest
+                                        <li class="nav-item active">
+                                            <a class="nav-link dashboard" href="/">Dashboard</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/catalogue">Catalogue</a>
+                                        </li>
+                                    @else
+                                        @if (Auth::user()->status == 'Admin')
+                                            <li class="nav-item active">
+                                                <a class="nav-link" href = "/admin/inspection">Inspection</a>
+                                            </li>
+                                            <li class="nav-item active">
+                                                <a class="nav-link" href = "/admin/newsletter">Manage Newsletter</a>
+                                            </li>
+                                            <li class="nav-item active">
+                                                <a class="nav-link" href = "/admin/car">Car</a>
+                                            </li>
+                                            <li class="nav-item active">
+                                                <a class="nav-link" href = "/admin/usedcar">Used Car</a>
+                                            </li>
+
+                                            <li class="nav-item active">
+                                                <a class="nav-link" href = "/admin/brand_model_variant">Brand/Model/Variant</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault();
+                                                                    document.getElementById('logout-form').submit();">
+                                                    {{ __('Logout') }}
+                                                </a>
+
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                    @csrf
+                                                </form>
+                                            </li>
+                                        @else
+                                            <li class="nav-item active">
+                                                <a class="nav-link" href="/">Dashboard</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="/catalogue">Catalogue</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="/collection">Collection</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault();
+                                                                    document.getElementById('logout-form').submit();">
+                                                    {{ __('Logout') }}
+                                                </a>
+
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                    @csrf
+                                                </form>
+                                            </li>
+                                        @endif
+
+                                    @endguest
+
+                                </ul>
+
+
+                            </div>
+
+
+                        </div>
+
+                        <ul id="login-register-ul" class="navbar-nav ms-auto">
+                            @guest
+                                @if (Route::has('login'))
+                                    <li class="nav-item  d-none d-lg-block d-xl-block" id="login">
+                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    </li>
+                                @endif
+
+                                @if (Route::has('register'))
+                                    <li class="nav-item  d-none d-lg-block d-xl-block" id="register">
+                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    </li>
+                                @endif
+                            @else
+                                {{-- <li class="nav-item d-none d-lg-block d-xl-block" id="user-name">
+                                    {{ Auth::user()->name }}
+                                </li> --}}
+                                <li class="nav-item dropdown d-none d-lg-block d-xl-block">
+                                    <a id="navbarDropdown" class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }}
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+
+                            @endguest
+                        </ul>
+
+                    </nav>
+
+                    @yield('content')
+                </div>
+
+
+        </div>
+
+
+
+        <!--Container Main start-->
+        {{-- <div class="height-100 bg-light">
+            <h4>Main Components</h4>
+        </div>
 
         <main class="py-4">
             @yield('content')
-        </main>
+        </main> --}}
     </div>
+@livewireScripts
 </body>
+
+{{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+
+</script>
 @yield('footer-scripts')
 </html>

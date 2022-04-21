@@ -1,0 +1,178 @@
+.headline{
+  color: #3279af;
+  padding-left: 2rem;
+  font-family: 'Roboto';
+  font-weight: 700;
+}
+
+.compare-selection-btn{
+  background-color: #838384;
+  color: #272424;
+  font-family: 'Roboto';
+  font-weight: 600;
+  font-size: medium;
+  margin-left: 0; 
+  border: 0px solid transparent;
+}
+
+@media (max-width:1000px) {
+  .compare-selection-btn{
+    background-color: #838384;
+    color: #272424;
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: medium;
+    margin-left: 0;
+    border: 0px solid transparent;
+  }
+}
+
+@media (max-width: 700px) {
+  .compare-selection-btn{
+    background-color: #838384;
+    color: #272424;
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: medium;
+    margin-top: 1.5rem;
+    margin-left: 2rem;
+    border: 0px solid transparent;
+  }
+  
+}
+
+
+
+.compare-selection-btn:hover{
+  box-shadow: 5px 5px 25px -5px rgba(50,121,175,0.25); 
+  background-color: rgb(2, 58, 2);
+  color: violet;
+}
+
+.checkbox-container{
+  position: absolute;
+  background: rgb(214 245 255);
+  border-radius: 5px 0px 0px;
+  padding: 8.5px 12px 8.5px 9.5px;
+  color: #3279af;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 140%;
+  cursor: pointer;
+}
+
+/* .check{
+  
+} */
+
+.card{
+  width:100%;
+  border-radius: 0.5rem;
+}
+
+.card:hover{
+  width: 102%;
+  /* box-shadow: 5px 5px 25px -5px rgba(50,121,175,1.0);   */
+}
+
+.card-checked{
+  box-shadow: 5px 5px 30px -5px rgba(50,121,175,1.0); 
+}
+
+
+.card-img{
+  display: block;
+  margin-bottom: 0.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 100%;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.card-body{
+  padding: 0 1rem 1rem 1rem;
+}
+
+.card-title{
+  font-family: 'Roboto';
+  font-weight: 700;
+}
+
+.card-title-year-brand{
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.card-title-model-variant{
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.card-delete-button{
+  color: rgb(250, 86, 86);
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.card-delete-button:hover{
+  color: red;
+  font-weight: 500;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.card-car-details{
+  margin-top: 1rem;
+  font-size: 12px;
+  color: #3279af;
+}
+
+.card-car-price{
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: black;
+  font-family: 'Roboto';
+  color: #00468e; 
+  
+}
+
+@media (max-width: 500px) {
+  .card-car-price{
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: black;
+      font-family: 'Roboto';
+      color: #00468e; 
+      
+      }
+  
+}
+
+.card-subtitle {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: large;
+  color: #3279af;
+  text-align: center;
+  margin-bottom: 0.6rem;
+}
+
+.card-button{
+  font-family: 'Roboto';
+  font-weight: 600;
+  font-size: medium;
+}
+
+.car-img{
+  height:200px;
+  width:100%;
+  background-size: cover;
+  background-position: 50%;
+}
+

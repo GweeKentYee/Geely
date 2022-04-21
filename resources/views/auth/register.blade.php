@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="/registration/customer">
                         @csrf
 
                         <div class="row mb-3">
@@ -58,24 +58,6 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="status" class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
-
-                            <div class="col-md-6">
-                                <select id="status" name = "role" class = "form-control @error('role') is-invalid @enderror" onchange="DisableFileCheckBox(this)">
-                                    <option value="0" disabled selected>-- Please Select Role --</option>
-                                    <option value="Admin">Admin</option>
-                                    <option value="Customer">Customer</option>
-                                </select>
-                                    @error('role')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                <br>
                             </div>
                         </div>
 

@@ -24,7 +24,7 @@ class UsedCarImageController extends Controller
 
     public function store(Request $request)
     {
-      
+
          $request->validate([
            'Used_Car_Image'=>['required']
 
@@ -41,22 +41,22 @@ class UsedCarImageController extends Controller
             $usedCarImage->image = $filename;
             $usedCarImage->save();
             }
-        
-        
+
+
         return redirect()->back()->with('status','Used Car Image Added Succesfully');
 
     }
-    
+
     public function deleteSelected(Request $request){
-     
+
       $ids = $request->selected;
-      foreach ($ids as $id) {  
+      foreach ($ids as $id) {
         $usedCarImage = UsedCarImage::findorfail($id);
-        $usedCar = UsedCar::find($usedCarImage->used_car_id);     
+        $usedCar = UsedCar::find($usedCarImage->used_car_id);
         $filename = $usedCarImage->image;
         $userPhoto = public_path('storage/image/used_car/'.$usedCar->registration.'/'.$filename);
         File::delete($userPhoto);
-        $usedCarImage->delete();  
+        $usedCarImage->delete();
      }
       return redirect()->back()->with('status','Used Car Image Deleted Successfully');
   }

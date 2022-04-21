@@ -15,8 +15,9 @@ class Newsletter extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'title',
+        'remarks',
+        'link',
         'image',
-        'sequence'
+        'status'
     ];
 }

@@ -2,47 +2,46 @@
 
 @section('content')
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Edit & Update carmodel
-                        <a href="/admin/carmodel" class="btn btn-danger float-end">BACK</a>
-                    </h4>
-                </div>
-                <div class="card-body">
-
-                    <form action="{{ url('carmodel/update/'.$carmodel->id) }}" method="POST">
+<main class="py-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <span style="font-size: 20px"><a href="/admin/carmodel">Car Model</a> / {{ $CarModel->model }}</span>
+                    </div>
+                    <div class="card-body">
+                    <form action="/admin/carmodel/editfunction/{{ $CarModel->id }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
-
-                        <div class="form-group mb-3">
-                            <label for="">ID:</label>
-                            <input type="integer" name="carmodel-ID" placeholder="{{$carmodel->id}}" class="form-control"readonly>
+                        @method('PATCH')
+                        @if (Session::has('field_empty'))
+                            <div class="alert alert-danger">
+                                <p>{{ Session::get('field_empty') }}</p>
+                            </div>
+                        @endif
+                        <div class="modal-body">
+                            <label>ID</label>
+                            <input type="text" name="car_model_id" class="form-control" value="{{ $CarModel->id }}" readonly>
+                            <br>
+                            <label>Car Brand</label>
+                            <input type="text" name="car_brand" class="form-control" value="{{ $CarModel->carBrand->brand }}" readonly>
+                            <br>
+                            <label>Car Model</label>
+                            <input type="text" name="model" class="form-control @error('model') is-invalid @enderror" value="{{ old('model') }}" placeholder="{{ $CarModel->model }}">
+                            @error('model')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
-                        <div class="form-group mb-3">
-                            <label for="">Car Model:</label>
-                            <input type="text" name="carmodel-carmodel" placeholder="{{$carmodel->car_model}}" class="form-control">
+                        <div class="modal-footer">
+                            <a class="btn btn-secondary" href="/admin/carmodel">Back</a>
+                            <button type="submit" class="btn btn-primary">Edit</button>
                         </div>
-                        <div class="form-group mb-3">
-                            <label for="">Updated At:</label>
-                            <input type="timestamp" name="carmodel-updatedAt" placeholder="{{$carmodel->updated_at}}" class="form-control"readonly>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="">Creatd At:</label>
-                            <input type="timestamp" name="carmodel-createdAt" placeholder="{{$carmodel->created_at}}" class="form-control"readonly>
-                        </div>
-                        <div class="form-group mb-3">
-                            <button type="submit" class="btn btn-primary">Update carmodel</button>
-                        </div>
-
                     </form>
-
                 </div>
             </div>
         </div>
     </div>
-</div>
-
+</main>
 @endsection
