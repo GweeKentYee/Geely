@@ -39,9 +39,9 @@
                             <label for="message-text" class="col-form-label">Car Registration Number</label>
                             <input type="varchar" value="{{$UsedCar->registration}}" placeholder="{{$UsedCar->registration}}" class="form-control @error('registration') is-invalid @enderror" id="registration" name="registration" readonly>
                             @error('registration')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>                              
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
                           </div>
         
@@ -51,7 +51,7 @@
                             @elseif($UsedCar->status == 1)
                             <label for="message-text" class="col-form-label">Status: Catalogue</label>
                             @elseif($UsedCar->status == 2)
-                            <label for="message-text" class="col-form-label">Status: Whole Sale</label>
+                                <label for="message-text" class="col-form-label">Status: Whole Sale</label>
                             @endif
                             <select type="integer" value="{{$UsedCar->status}}" class="form-control @error('status_') is-invalid @enderror" id="status_" name="status_">
                                 <option value="{{$UsedCar->status}}">-- Please Select a Status --</option>
@@ -59,7 +59,7 @@
                                 <option value="1">Catalogue</option>
                                 <option value="2">Whole Sale</option>
                             </select>
-                                @error('status_')
+                            @error('status_')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>                          
@@ -69,12 +69,11 @@
                             <label for="message-text" class="col-form-label">Car ID</label>
                             <input type= "bigint" placeholder="{{$UsedCar->car_id}}" class="form-control @error('car_id') is-invalid @enderror" name="car_id" id="car_id" readonly>
                             @error('car_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>     
-                            @enderror  
-                          </div>
-
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                           <hr>
 
                           <div class="form-group mb-3">
@@ -95,8 +94,6 @@
                             <a class="btn btn-secondary" href="/admin/usedcar">Back</a>
                             <button type="submit" class="btn btn-primary">Edit</button>
                           </div>
-                    
-                      
 
                     </form>
 
@@ -107,4 +104,4 @@
 </div>
 </main>
 
-@endsection 
+@endsection
