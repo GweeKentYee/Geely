@@ -222,8 +222,10 @@ class InspectionController extends Controller
         $data = $request->validate([
             'registration_option' => ['required',Rule::notIn('0')],
             'data_file' => ['required'],
-            'ownership_file' => ['required'],
+            'ownership_file' => ['nullable'],
         ]);
+
+        $UsedCar = UsedCar::find($data['registration_option']);
 
         $current_timestamp = Carbon::now()->timestamp;
 
@@ -233,28 +235,36 @@ class InspectionController extends Controller
 
         $dataFilePath = $data['data_file']->move('storage/data/usedcar/'.$data['registration_option'].'/',$dataFileName);
 
-        $ownershipFileExtension = request()->file('ownership_file')->getClientOriginalExtension();
+        if (request('ownership_file')){
 
-        $ownershipFileName = $current_timestamp.'_usedcar_ownership.'.$ownershipFileExtension;
+            $ownershipOldFilePath = str_replace('\\','/',public_path($UsedCar->ownership_file));
 
-        $ownershipFilePath = $data['ownership_file']->move('storage/data/usedcar/'.$data['registration_option'].'/',$ownershipFileName);
+            if(file_exists($ownershipOldFilePath)){
 
-        $UsedCar = UsedCar::create([
-            'min_price' => 0,
-            'max_price' => 0,
-            'registration' => $data['registration_option'],
-            'data_file' => str_replace('\\','/',$dataFilePath),
-            'ownership_file' => str_replace('\\','/',$ownershipFilePath),
-            'status' => "0",
-            'car_id' => $data['car'],
-        ]);
+                unlink($ownershipOldFilePath);
 
-        //Inspection happen here
-        //after inspection happen, a file will be generated
+            }
 
-        $Car = Car::find($data['car']);
+            $ownershipFileExtension = request()->file('ownership_file')->getClientOriginalExtension();
 
-        $NewDataFile = public_path($Car->data_file);
+            $ownershipFileName = $current_timestamp.'_usedcar_ownership.'.$ownershipFileExtension;
+
+            $ownershipFilePath = $data['ownership_file']->move('storage/data/usedcar/'.$data['registration_option'].'/',$ownershipFileName);
+
+            $UsedCar->update([
+                'data_file' => str_replace('\\','/',$dataFilePath),
+                'ownership_file' => str_replace('\\','/',$ownershipFilePath)
+            ]);
+
+        } else {
+
+            $UsedCar->update([
+                'data_file' => str_replace('\\','/',$dataFilePath)
+            ]);
+
+        }
+
+        $NewDataFile = public_path($UsedCar->car->data_file);
 
         $reader = new Xlsx();
         $spreadsheet = $reader->load($NewDataFile);
