@@ -168,3 +168,11 @@
   font-weight: 600;
   font-size: medium;
 }
+
+.car-img{
+  height:200px;
+  width:100%;
+  background-size: cover;
+  background-position: 50%;
+}
+

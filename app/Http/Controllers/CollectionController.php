@@ -33,18 +33,20 @@ class CollectionController extends Controller
         //         ->join('collections', 'collections.used_car_id', '=', 'used_cars.id')
         //         ->where('collections.user_id', '=', auth()->id())
         //         ->get();
+        // $collections= UsedCar::where('status','=','1');
+        // $collections = DB::table('used_cars')
+        //         ->join('used_car_images','used_car_images.used_car_id','=','used_cars.id')
+        //         ->join('cars', 'used_cars.car_id', '=', 'cars.id')
+        //         ->join('car_body_types','cars.car_body_type_id','=','car_body_types.id')
+        //         ->join('car_general_specs','cars.car_general_spec_id','=','car_general_specs.id')
+        //         ->join('car_variants', 'cars.car_variant_id', '=', 'car_variants.id')
+        //         ->join('car_models', 'car_variants.car_model_id', '=', 'car_models.id')
+        //         ->join('car_brands', 'car_models.car_brand_id',"=","car_brands.id")
+        //         ->join('collections', 'collections.used_car_id', '=', 'used_cars.id')
+        //         ->where('collections.user_id', '=', auth()->id())
+        //         ->get();
 
-        $collections = DB::table('used_cars')
-                ->join('used_car_images','used_car_images.used_car_id','=','used_cars.id')
-                ->join('cars', 'used_cars.car_id', '=', 'cars.id')
-                ->join('car_body_types','cars.car_body_type_id','=','car_body_types.id')
-                ->join('car_general_specs','cars.car_general_spec_id','=','car_general_specs.id')
-                ->join('car_variants', 'cars.car_variant_id', '=', 'car_variants.id')
-                ->join('car_models', 'car_variants.car_model_id', '=', 'car_models.id')
-                ->join('car_brands', 'car_models.car_brand_id',"=","car_brands.id")
-                ->join('collections', 'collections.used_car_id', '=', 'used_cars.id')
-                ->where('collections.user_id', '=', auth()->id())
-                ->get();
+        $collections= Collection::where('user_id','=',auth()->id())->get();
         
 
         return view('Collection', ['collections' => $collections]);
