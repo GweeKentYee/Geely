@@ -11,7 +11,7 @@
         <div class="col-1"></div>
         <div class="row col-10">
             <div class="col-lg-10 col-md-9 col-sm-12" style="padding-left: 0;">
-                <h3 class="headline">COLLECTION</h3>
+                <h3 class="headline">Collection</h3>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-12" style="padding-left: 0;">
                 <form id="my_form" action="/collection/comparison" method="POST">
