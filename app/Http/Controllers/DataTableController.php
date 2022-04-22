@@ -321,7 +321,7 @@ class DataTableController extends Controller
 
                 ->addColumn('Images', function($query){
 
-                    $actionBtn = '<a href = "/admin/usedcar/images/'.$query->id.'" style="color: black; font-size: 16px" target="_blank"><i class="bi bi-image"></i></a>';
+                    $actionBtn = '<a href = "/admin/usedcar/images/'.$query->id.'" style="color: black; font-size: 16px"><i class="bi bi-image"></i></a>';
 
                     return $actionBtn;
                 })
