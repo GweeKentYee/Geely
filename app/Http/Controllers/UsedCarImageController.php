@@ -27,7 +27,7 @@ class UsedCarImageController extends Controller
     {
 
          $request->validate([
-           'Used_Car_Image'=>['required']
+           'Used_Car_Image'=>['required','mimes:jpg,bmp,png,tiff']
         ]);
 
         $usedCarId = $request->input('add-usedcarid');

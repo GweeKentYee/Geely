@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('css')
+<link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 
 @section('content')
 <main class="py-4">
@@ -18,14 +20,15 @@
                                         data-bs-target="#newusedcar"><i class="bi bi-plus-lg"></i> Add Used Car Image</button>
                                 </h4>
                             </div>
-                           
+
                             <form id="delsel" action="{{ url('/usedCarImage/delete/selected') }}"
                                 method="get">
                                 <div class="delbtn">
                                     <h4>
-                                        <button type="submit" class="btn btn-danger">Delete Selected</button>
+                                        <button type="submit" id = "DeleteSubmit" class="btn btn-danger">Delete Selected</button>
                                     </h4>
                                 </div>
+                            </form>
                         </div>
                         <br>
                         <br>
@@ -40,7 +43,7 @@
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
-                                    <img src="{{ asset('storage/image/used_car/'.$usedCar->registration.'/'.$usedCarImages->image) }}"
+                                    <img src="/{{ $usedCarImages->image }}"
                                         class="card-img-top" alt="Broken" />
                                 </div>
                             </div>
@@ -75,17 +78,20 @@
                         @csrf
                         <div class="modal-body">
 
+                            <p class="required">*Required</p>
+
                             <div class="form-group mb-3">
                                 <label for="message-text" class="col-form-label">Used Car ID:</label>
                                 <input type="bigint" class="form-control" value="{{ $usedCar->id }}"
                                     name="add-usedcarid" id="add-usedcarid" readonly>
                             </div>
                             <div class="form-group mb-3">
-                                <label class="col-form-label">Used Car Image:</label>
-                                <input type="file" name="Used_Car_Image[]" class="inputfile" id="Used_Car_Image" data-multiple-caption="{count} files selected" multiple>
-                                <label for="Used_Car_Image">Choose a file</label>
+                                <label class="col-form-label">Used Car Image<span class="required"> *</span></label>
+                                <input type="file" name="Used_Car_Image[]" class="form-control @error('Used_Car_Image') is-invalid @enderror" id="Used_Car_Image" data-multiple-caption="{count} files selected" multiple accept = "image/png,image/jpeg,image/bmp,image/tiff">
                                 @error('Used_Car_Image')
-                                    <div class="alert-danger">{{ $message }}</div>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
                         </div>
@@ -103,6 +109,7 @@
 <main class="py-4">
 @endsection
 @section('footer-scripts')
+
 @if($errors->count() > 0)
     <script>
         $(function () {
@@ -111,27 +118,51 @@
 
     </script>
 @endif
+
 <script>
-var inputs = document.querySelectorAll( '.inputfile' );
+    $(document).ready(function () {
 
-Array.prototype.forEach.call( inputs, function( input )
-{
-	var label	 = input.nextElementSibling,
-		labelVal = label.innerHTML;
+        document.getElementById('DeleteSubmit').disabled = true;
 
-	input.addEventListener( 'change', function( e )
-	{
-		var fileName = '';
-		if( this.files && this.files.length > 1 )
-			fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
-		else
-			fileName = e.target.value.split( ' \ ').pop();
+        $('input[type=checkbox]').on('change', function (e)
+        {
 
-		if( fileName )
-			label.querySelector( 'span' ).innerHTML = fileName;
-		else
-			label.innerHTML = labelVal;
-	});
-});
+            if ($('input[type=checkbox]:checked').length == 0) {
+
+                document.getElementById('DeleteSubmit').disabled = true;
+            } else {
+
+                document.getElementById('DeleteSubmit').disabled = false;
+            }
+
+        });
+
+    });
+</script>
+
+<script>
+
+    var inputs = document.querySelectorAll( '.inputfile' );
+
+    Array.prototype.forEach.call( inputs, function( input )
+    {
+        var label	 = input.nextElementSibling,
+            labelVal = label.innerHTML;
+
+        input.addEventListener( 'change', function( e )
+        {
+            var fileName = '';
+            if( this.files && this.files.length > 1 )
+                fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+            else
+                fileName = e.target.value.split( ' \ ').pop();
+
+            if( fileName )
+                label.querySelector( 'span' ).innerHTML = fileName;
+            else
+                label.innerHTML = labelVal;
+        });
+    });
+
 </script>
 @endsection
