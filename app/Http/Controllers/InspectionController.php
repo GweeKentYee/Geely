@@ -26,32 +26,6 @@ class InspectionController extends Controller
         $this->middleware('auth');
     }
 
-    protected function adminRegisterPage(){
-
-        return view('auth/registerAdmin');
-
-    }
-
-    protected function registerAdmin(Request $request)
-    {
-        $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-
-        User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'status' => "Admin",
-            'password' => Hash::make($data['password']),
-
-        ]);
-
-        return redirect('/admin/inspection');
-    }
-
-
     public function viewAdminPage(){
 
         $CarBrand = CarBrand::all();
@@ -397,8 +371,17 @@ class InspectionController extends Controller
 
         $Inspection = Inspection::find($inspectionID);
 
+        $File = public_path($Inspection->result_file);
+
+        $reader = new Xlsx();
+        $spreadsheet = $reader->load($File);
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $Data = $sheet->toArray();
+
         return view('InspectionDetails', [
-            'inspection' => $Inspection
+            'inspection' => $Inspection,
+            'Data' => $Data
         ]);
 
     }
