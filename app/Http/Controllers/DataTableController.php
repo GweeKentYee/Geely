@@ -303,6 +303,25 @@ class DataTableController extends Controller
 
         return datatables($query)
             ->addIndexColumn()
+                ->addColumn('Status', function($query){
+
+                    if ($query->status == 0){
+
+                        $status = "Hidden";
+
+                    } else if ($query->status == 1){
+
+                        $status = "Catalogue";
+
+                    } else {
+
+                        $status = "Wholesale";
+
+                    }
+
+                    return $status;
+
+                })
                 ->addColumn('Data_File', function($query){
 
                     $dataFile = '<a href = "/admin/usedcar/file/viewdata/'.$query->id.'" style="color: black; font-size: 16px"><i class="bi bi-eye-fill"></i></a>';
@@ -314,14 +333,14 @@ class DataTableController extends Controller
                 ->addColumn('Ownership_File', function($query){
 
                     $ownershipFile = '<a href = "/admin/usedcar/file/viewownership/'.$query->id.'" style="color: black; font-size: 16px"><i class="bi bi-eye-fill"></i></a>';
-    
+
                     return $ownershipFile;
-    
+
                 })
 
                 ->addColumn('Images', function($query){
 
-                    $actionBtn = '<a href = "/admin/usedcar/images/'.$query->id.'" style="color: black; font-size: 16px" target="_blank"><i class="bi bi-image"></i></a>';
+                    $actionBtn = '<a href = "/admin/usedcar/images/'.$query->id.'" style="color: black; font-size: 16px"><i class="bi bi-image"></i></a>';
 
                     return $actionBtn;
                 })

@@ -18,6 +18,7 @@ class UsedCarImageController extends Controller
 
     $usedCarImage = UsedCarImage::where('used_car_id',$id)->simplePaginate(8);
     $usedCar = UsedCar::find($id);
+
     return view('UsedCarImages',compact('usedCarImage','usedCar'));
 
 }
@@ -27,19 +28,27 @@ class UsedCarImageController extends Controller
 
          $request->validate([
            'Used_Car_Image'=>['required']
+        ]);
 
-           ]);
-           $usedCarId = $request->input('add-usedcarid');
-           $usedCar = UsedCar::find($usedCarId);
-            $files = $request->Used_Car_Image;
+        $usedCarId = $request->input('add-usedcarid');
+
+        $usedCar = UsedCar::find($usedCarId);
+
+        $files = $request->Used_Car_Image;
+
             foreach($files as $file){
-            $extension = $file->getClientOriginalName();
-            $filename = time().'.'.$extension;
-            $file->move('storage/image/used_car/'.$usedCar->registration,$filename);
-            $usedCarImage = new UsedCarImage;
-            $usedCarImage->used_car_id = $request->input('add-usedcarid');
-            $usedCarImage->image = $filename;
-            $usedCarImage->save();
+
+                $extension = $file->getClientOriginalName();
+
+                $filename = time().'.'.$extension;
+
+                $filepath = $file->move('storage/image/used_car/'.$usedCar->registration,$filename);
+
+                UsedCarImage::create([
+                    'image' => str_replace('\\','/',$filepath),
+                    'used_car_id' => $usedCarId
+                ]);
+
             }
 
 

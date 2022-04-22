@@ -26,8 +26,8 @@ Auth::routes();
 Route::get('/','App\Http\Controllers\DashboardController@viewPage');
 Route::post('/registration/customer','App\Http\Controllers\Auth\RegisterController@registerUser');
 
-Route::get('/admin/register','App\Http\Controllers\InspectionController@adminRegisterPage');
-Route::post('/registration/admin','App\Http\Controllers\InspectionController@registerAdmin');
+Route::get('/admin/register','App\Http\Controllers\AdminController@adminRegisterPage');
+Route::post('/registration/admin','App\Http\Controllers\AdminController@registerAdmin');
 
 Route::get('/catalogue','App\Http\Controllers\CatalogueController@viewPage')->name('catalogue.viewpage');
 Route::get('/catalogue/search','App\Http\Controllers\CatalogueController@search');
@@ -38,25 +38,7 @@ Route::get('autocompleteSearch','App\Http\Controllers\CatalogueController@autoco
 
 
 Route::post('/collection/comparison','App\Http\Controllers\ComparisonController@viewPage');
-// Route::get('/collection/compare', function(){
 
-
-//     //  dd(request()->all());
-
-// })->name('collection.compare1');
-// Route::post('/collection/compare', function(Request $request){
-
-//     $collectionSelected = $request->except('_token');
-
-//     $i  = 1;
-//     foreach ($collectionSelected as $key => $value) {
-
-//         ${'collectionID' . $i} = $value;
-//         $i = $i + 1;
-//     }
-
-//     return redirect()->route('collection.compare1', ['collectionID1' => $collectionID1, 'collectionID2' => $collectionID2]);
-// })->name('collection.compare');
 Route::resource('collection', CollectionController::class);
 
 Route::get('/catalogue/usedcardetails/{used_car_id}','App\Http\Controllers\UsedCarController@viewdetailpage')->name('UsedCarDetails');

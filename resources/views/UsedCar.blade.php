@@ -49,7 +49,7 @@ $(document).ready(function () {
                 {"data": "min_price"},
                 {"data": "max_price"},
                 {"data": "registration"},
-                {"data": "status"},
+                {"data": "Status"},
                 {"data": "car_id"},
                 {"data": "Data_File", className: "text-center"},
                 {"data": "Ownership_File", className: "text-center"},
@@ -58,7 +58,7 @@ $(document).ready(function () {
                 {"data": "Delete", orderable: false, searchable: false}
             ]
         });
-        
+
         $('#datatable').on('click', '.delete', function () {
 
             var confirmation = confirm('Delete the record?');

@@ -84,9 +84,9 @@ class UsedCarController extends Controller
 
         $data =request()->validate([
 
-            'minimum_price'=>['numeric','lt:maximum_price'],
-            'maximum_price'=>['numeric','gt:minimum_price'],
-            'status_'=>['numeric','between:0,2'],
+            'min_price'=>['nullable','numeric','lt:max_price'],
+            'max_price'=>['nullable','numeric','gt:min_price'],
+            'status'=>['numeric','between:0,2'],
             'ownership_file'=>['file']
 
         ]);

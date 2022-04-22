@@ -14,7 +14,7 @@
         <div class="col-1"></div>
         <div class="row col-10">
             <div class="col-lg-10 col-md-9 col-sm-12" style="padding-left: 0;">
-                <h3 class="headline">CATALOGUE</h3>
+                <h3 class="headline">Catalogue</h3>
             </div>
         </div>
         <div class="col-1"></div>
@@ -136,7 +136,14 @@
                                 <div class="card cat-card m-auto">
                                     <div>
                                         <a href='/catalogue/usedcardetails/{{$usedcars->id}}'>
-                                            <img class="card-img" src="{{$usedcars->usedCarImages->get(0)->image}}" alt="Card image cap" width="100%" height="170px">
+                                            @if (!empty($usedcars->usedCarImages->get(0)->image))
+                                                <img class="card-img" src="{{$usedcars->usedCarImages->get(0)->image}}" alt="Card image cap" width="100%" height="170px">
+                                            @else
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="black" class="bi bi-images" viewBox="0 0 16 16">
+                                                    <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                                                    <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z"/>
+                                                </svg>
+                                            @endif
                                         </a>
                                     </div>
                                     <div class="card-body">
@@ -165,11 +172,11 @@
                                                     <form action="{{ route('collection.store') }}" method="POST">
                                                         @csrf
                                                         <input type="hidden" name="usedcar_id" value={{ $usedcars->id }} />
-                                                        <button type="submit" class="card-add-collection-btn"><i class="bi bi-star" style="font-size:20px;margin-left:0.2rem;"></i></button>  
-                                                    </form>                     
+                                                        <button type="submit" class="card-add-collection-btn"><i class="bi bi-star" style="font-size:20px;margin-left:0.2rem;"></i></button>
+                                                    </form>
                                                 @endif
 
-                                            
+
 
                                             </div>
                                         </div>

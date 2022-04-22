@@ -24,7 +24,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/usedcarimage.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/UsedCar.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/usedcardetails.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app2.css') }}" rel="stylesheet">
     @yield('css')
 
@@ -39,80 +39,6 @@
         <div style="background: red;color: white">{{ session('status') }}</div>
     @endif
     <div id="app">
-        {{-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Geely') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-
-                                    @if (Auth::user()->status == 'Admin')
-
-                                    <a class = "dropdown-item" href = "/admin/inspection">Inspection</a>
-                                    <a class = "dropdown-item" href = "/admin/catalogue">Manage Catalogue</a>
-                                    <a class = "dropdown-item" href = "/admin/newsletter">Manage Newsletter</a>
-                                    <a class = "dropdown-item" href = "/admin/carmodel">Car Model</a>
-                                    <a class = "dropdown-item" href = "/admin/car">Car</a>
-                                    <a class = "dropdown-item" href = "/admin/brand_model_variant">Brand/Model/Variant</a>
-                                    <a class = "dropdown-item" href = "/admin/carbrand">Car Brand</a>
-                                    <a class = "dropdown-item" href = "/admin/carmodel">Car Model</a>
-                                    <a class = "dropdown-item" href = "/admin/carvariant">Car Variant</a>
-
-                                    @else
-
-                                    <a class = "dropdown-item" href = "/">Dashboard</a>
-                                    <a class = "dropdown-item" href = "/catalogue">Catalogue</a>
-                                    <a class = "dropdown-item" href = "/collection">Collection</a>
-
-                                    @endif
-
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav> --}}
 
         {{-- sidebar --}}
         <div class="wrapper">
@@ -150,7 +76,7 @@
                                     <a class="sidebar-link" href = "/admin/usedcar">Used Car</a>
                                 </li>
                                 <li>
-                                    <a class="sidebar-link" href = "#">Register New Admin</a>
+                                    <a class="sidebar-link" href = "/admin/register">Register New Admin</a>
                                 </li>
                                 <hr>
                                 <li>
