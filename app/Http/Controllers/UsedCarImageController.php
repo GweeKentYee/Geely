@@ -52,7 +52,7 @@ class UsedCarImageController extends Controller
             }
 
 
-        return redirect()->back()->with('status','Used Car Image Added Succesfully');
+        return redirect()->back();
 
     }
 
@@ -67,6 +67,6 @@ class UsedCarImageController extends Controller
         File::delete($userPhoto);
         $usedCarImage->delete();
      }
-      return redirect()->back()->with('status','Used Car Image Deleted Successfully');
+      return redirect()->back();
   }
     }
