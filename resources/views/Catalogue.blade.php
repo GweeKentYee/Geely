@@ -200,7 +200,6 @@
             </div>
         @endif
         {{$usedcar->links()}}
-        <br>
     </div>
 </main>
 @endsection
