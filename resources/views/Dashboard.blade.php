@@ -21,13 +21,13 @@
                 @endfor
             </div>
 
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </a>
-    @endif
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </a>
+        @endif
     </div>
 <div class="container">
     <div class="row justify-content-center">
@@ -38,15 +38,15 @@
             </h1>
         </div>
             <div class="col-md-10 row" style="display:flex; justify-content: center; margin-bottom: 3.5rem;">
-                @foreach ($usedcar as  $usedcars)
+                @foreach ($usedcar as $usedcars)
 
                     <div class="col-lg-4 col-md-12 col-sm-12 mt-5" >
 
                         <div class="card dash-card m-auto">
                             <div>
-                                <a href='/catalogue/usedcardetails/{{$usedcars->id}}'>
+                                <a href='/cardetails/{{$usedcars->id}}'>
                                     @if (!empty($usedcars->usedCarImages->get(0)->image))
-                                        <img class="card-img" src="{{$usedcars->usedCarImages->get(0)->image}}" alt="Card image cap" width="100%" height="170px">
+                                        <img class="card-img" src="/{{$usedcars->usedCarImages->get(0)->image}}" alt="Card image cap" width="100%" height="170px">
                                     @else
                                         <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="black" class="bi bi-images" viewBox="0 0 16 16">
                                             <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
@@ -58,13 +58,13 @@
                             <div class="dash-card-body">
 
                                 <div class="row">
-                                    <div class="card-title-year-brand col-10">{{$usedcars->year}} {{$usedcars->brand}}</div>
-                                    <div class="card-title-model-variant col-10">{{$usedcars->model}} {{$usedcars->variant}} </div>
+                                    <div class="card-title-year-brand col-10">{{$usedcars->car->year}} {{$usedcars->car->carVariant->carModel->carBrand->brand}}</div>
+                                    <div class="card-title-model-variant col-10">{{$usedcars->car->carVariant->carModel->model}} {{$usedcars->car->carVariant->variant}} </div>
 
                                 </div>
 
                                 <div class="card-car-details">
-                                    <span>{{$usedcars->fuel}} | {{$usedcars->transmission}} | {{$usedcars->car->carBodyType->body_type}} </span>
+                                    <span>{{$usedcars->car->carGeneralSpec->fuel}} | {{$usedcars->car->carGeneralSpec->transmission}} | {{$usedcars->car->carBodyType->body_type}} </span>
                                 </div>
                                 <div class="card-car-price">
                                     <span style="font-size: 12px">min:</span>

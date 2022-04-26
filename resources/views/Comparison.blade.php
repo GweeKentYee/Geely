@@ -24,7 +24,7 @@
             <th scope="col">
 
               @if (!empty($usedcar1->usedCarImages->get(0)->image))
-                <img class="card-img" src="{{$usedcar1->usedCarImages->get(0)->image}}" alt="Card image cap" width="100%" height="170px">
+                <img class="card-img" src="/{{$usedcar1->usedCarImages->get(0)->image}}" alt="Card image cap" width="100%" height="170px">
               @else
                 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="black" class="bi bi-images" viewBox="0 0 16 16">
                   <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
@@ -48,7 +48,7 @@
             <th scope="col">
 
               @if (!empty($usedcar2->usedCarImages->get(0)->image))
-                <img class="card-img" src="{{$usedcar2->usedCarImages->get(0)->image}}" alt="Card image cap" width="100%" height="170px">
+                <img class="card-img" src="/{{$usedcar2->usedCarImages->get(0)->image}}" alt="Card image cap" width="100%" height="170px">
               @else
                 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="black" class="bi bi-images" viewBox="0 0 16 16">
                   <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>

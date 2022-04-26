@@ -35,10 +35,9 @@ class ComparisonController extends Controller
         $spreadsheet1 = $reader->load($File2);
         $sheet1 = $spreadsheet1->getActiveSheet();
 
-        $worksheetInfo = $reader->listWorksheetInfo($File2);
         $Data1 = $sheet1->toArray();
 
-        // Data1
+        // Data2
         $Inspection2 = Inspection::select('result_file')->where('used_car_id',$usedcar2->id)->latest()->first();
         $File2 = public_path($Inspection2->result_file);
 
@@ -46,10 +45,7 @@ class ComparisonController extends Controller
         $spreadsheet2 = $reader->load($File2);
         $sheet2 = $spreadsheet2->getActiveSheet();
 
-        $worksheetInfo = $reader->listWorksheetInfo($File2);
         $Data2 = $sheet2->toArray();
-
-        // dd($usedcar2);
 
         return view('Comparison',
         ['collections'=> $collection,'usedcar1' => $usedcar1,'usedcar2' => $usedcar2, 'Data1' =>$Data1, 'Data2' => $Data2]);

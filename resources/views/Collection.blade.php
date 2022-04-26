@@ -16,7 +16,7 @@
             <div class="col-lg-2 col-md-3 col-sm-12" style="padding-left: 0;">
                 <form id="my_form" action="/collection/comparison" method="POST">
                     @csrf
-                    <input class="btn compare-selection-btn" id="CompareButton" type="submit" value="COMPARE SELECTION"><br>
+                    <input class="btn compare-selection-btn" id="CompareButton" type="submit" value="Compare Selection"><br>
                     {{-- <a class="btn btn-success compare-selection-btn" href="/collection/comparison">Temporary Button to comparison page</a> --}}
                 </form>
             </div>
@@ -38,7 +38,7 @@
                                 <span><input class="check" type="checkbox" form="my_form" id={{ $collection->id }} name="checkedbox[]" value={{ $collection->id }}></span>
                                 <span style="margin-left: 0.4rem;">Compare</span>
                             </div>
-                            <a href='/catalogue/usedcardetails/{{$collection->used_car_id}}'>
+                            <a href='/cardetails/{{$collection->used_car_id}}'>
                                 @if (!empty($collection->usedCar->usedCarImages->get(0)->image))
                                     <img class="card-img" src="{{ $collection->usedCar->usedCarImages->get(0)->image }}" alt="Card image cap" style="width:100%;height:190px">
                                 @else

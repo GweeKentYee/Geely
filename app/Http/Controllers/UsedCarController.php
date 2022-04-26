@@ -15,11 +15,6 @@ use Illuminate\Support\Facades\Session;
 class UsedCarController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function viewdetailpage($used_car_id){
 
         $usedcar = UsedCar::find($used_car_id);
@@ -85,8 +80,8 @@ class UsedCarController extends Controller
 
         $data =request()->validate([
 
-            'min_price'=>['nullable','numeric','lt:max_price'],
-            'max_price'=>['nullable','numeric','gt:min_price'],
+            'min_price'=>['nullable', 'required_with:max_price', 'numeric','lt:max_price'],
+            'max_price'=>['nullable', 'required_with:min_price','numeric','gt:min_price'],
             'status'=>['numeric','between:0,2'],
             'ownership_file'=>['file']
 

@@ -135,9 +135,9 @@
                             <div class="col-lg-4 col-md-6 col-sm-12 mt-5" >
                                 <div class="card cat-card m-auto">
                                     <div>
-                                        <a href='/catalogue/usedcardetails/{{$usedcars->id}}'>
+                                        <a href='/cardetails/{{$usedcars->id}}'>
                                             @if (!empty($usedcars->usedCarImages->get(0)->image))
-                                                <img class="card-img" src="{{$usedcars->usedCarImages->get(0)->image}}" alt="Card image cap" width="100%" height="170px">
+                                                <img class="card-img" src="/{{$usedcars->usedCarImages->get(0)->image}}" alt="Card image cap" width="100%" height="170px">
                                             @else
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="black" class="bi bi-images" viewBox="0 0 16 16">
                                                     <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
@@ -150,35 +150,34 @@
 
                                         <div class="row">
                                             <div class="card-title-year-brand col-10">{{$usedcars->year}} {{$usedcars->brand}}</div>
-                                            <div class="card-title-model-variant col-10">{{$usedcars->model}} {{$usedcars->variant}} </div>
-                                            <div class="col-2">
-                                                @php
-                                                    $exist_in_collection = false;
-                                                    $used_car_id =  $usedcars->id ;
-                                                    $collection_id_remove = 0;
+                                            <div class="card-title-model-variant col-10">{{$usedcars->model}} {{$usedcars->variant}}</div>
+                                            @if (Auth::guest() or Auth::user()->status != 'Admin')
+                                                <div class="col-2">
+                                                    @php
+                                                        $exist_in_collection = false;
+                                                        $used_car_id =  $usedcars->id ;
+                                                        $collection_id_remove = 0;
 
-                                                    foreach($collections as $collection){
-                                                        if( $collection->used_car_id == $used_car_id){
-                                                            $exist_in_collection = true;
-                                                            $collection_id_remove = $collection->id;
+                                                        foreach($collections as $collection){
+                                                            if( $collection->used_car_id == $used_car_id){
+                                                                $exist_in_collection = true;
+                                                                $collection_id_remove = $collection->id;
+                                                            }
                                                         }
-                                                    }
-                                                @endphp
+                                                    @endphp
 
-                                                @if ($exist_in_collection)
-                                                <button disabled class="card-add-collection-btn"><i class="bi bi-star-fill" style="font-size:20px;margin-left:0.2rem;"></i></button>
+                                                    @if ($exist_in_collection)
+                                                    <button disabled class="card-add-collection-btn"><i class="bi bi-star-fill" style="font-size:20px;margin-left:0.2rem;"></i></button>
 
-                                                @else
-                                                    <form action="{{ route('collection.store') }}" method="POST">
-                                                        @csrf
-                                                        <input type="hidden" name="usedcar_id" value={{ $usedcars->id }} />
-                                                        <button type="submit" class="card-add-collection-btn"><i class="bi bi-star" style="font-size:20px;margin-left:0.2rem;"></i></button>
-                                                    </form>
-                                                @endif
-
-
-
-                                            </div>
+                                                    @else
+                                                        <form action="{{ route('collection.store') }}" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="usedcar_id" value={{ $usedcars->id }} />
+                                                            <button type="submit" class="card-add-collection-btn"><i class="bi bi-star" style="font-size:20px;margin-left:0.2rem;"></i></button>
+                                                        </form>
+                                                    @endif
+                                                </div>
+                                            @endif
                                         </div>
 
                                         <div class="card-car-details">

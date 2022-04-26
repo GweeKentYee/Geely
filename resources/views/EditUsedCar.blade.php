@@ -21,7 +21,7 @@
                             @endif
                                 <div class="form-group mb-3">
                                 <label for="message-text" class="col-form-label">Minimum Price</label>
-                                <input type="integer" placeholder="{{$UsedCar->min_price}}" class="form-control @error('min_price') is-invalid @enderror" id="min_price" name="min_price">
+                                <input type="integer" placeholder="{{$UsedCar->min_price}}" class="form-control @error('min_price') is-invalid @enderror" id="min_price" name="min_price" value="{{ old('min_price') }}">
                                 @error('min_price')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -31,7 +31,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="message-text" class="col-form-label">Maximum Price</label>
-                                <input type="integer"  placeholder="{{$UsedCar->max_price}}" class="form-control @error('max_price') is-invalid @enderror" id="max_price" name="max_price">
+                                <input type="integer"  placeholder="{{$UsedCar->max_price}}" class="form-control @error('max_price') is-invalid @enderror" id="max_price" name="max_price" value="{{ old('max_price') }}">
                                 @error('max_price')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

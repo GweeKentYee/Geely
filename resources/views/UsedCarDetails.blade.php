@@ -60,28 +60,30 @@
                                                 <div class="details-title">Fuel:</div>
                                                 <div class="details-content">{{$usedcar->car->carGeneralSpec->fuel}}</div>
                                             </li>
-                                            @php
-                                            $exist_in_collection = false;
-                                            $used_car_id =  $usedcar->id ;
-                                            $collection_id_remove = 0;
-                                            foreach($collections as $collection){
-                                                if( $collection->used_car_id == $used_car_id){
-                                                    $exist_in_collection = true;
-                                                    $collection_id_remove = $collection->id;
-                                                }
-                                            }
-                                            @endphp
-                                            <li class="list-group-item">
-                                                @if ($exist_in_collection)
-                                                    <button disabled class="card-add-collection-btn"><i class="bi bi-star-fill" style="font-size:20px;margin-left:0.2rem;"></i></button>
-                                                @else
-                                                    <form action="{{ route('collection.store') }}" method="POST">
-                                                        @csrf
-                                                        <input type="hidden" name="usedcar_id" value={{ $usedcar->id }} />
-                                                        <button type="submit" class="card-add-collection-btn"><i class="bi bi-star" style="font-size:20px;margin-right:0.2rem;"></i></button>
-                                                    </form>
-                                                @endif
-                                            </li>
+                                            @if (Auth::guest() or Auth::user()->status != 'Admin')
+                                                @php
+                                                    $exist_in_collection = false;
+                                                    $used_car_id =  $usedcar->id ;
+                                                    $collection_id_remove = 0;
+                                                    foreach($collections as $collection){
+                                                        if( $collection->used_car_id == $used_car_id){
+                                                            $exist_in_collection = true;
+                                                            $collection_id_remove = $collection->id;
+                                                        }
+                                                    }
+                                                @endphp
+                                                <li class="list-group-item">
+                                                    @if ($exist_in_collection)
+                                                        <button disabled class="card-add-collection-btn"><i class="bi bi-star-fill" style="font-size:20px;margin-left:0.2rem;"></i></button>
+                                                    @else
+                                                        <form action="/cardetails/collection/store" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="usedcar_id" value={{ $usedcar->id }} />
+                                                            <button type="submit" class="card-add-collection-btn"><i class="bi bi-star" style="font-size:20px;margin-right:0.2rem;"></i></button>
+                                                        </form>
+                                                    @endif
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                     <div class="col">
