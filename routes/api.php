@@ -18,6 +18,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/admin/register','App\Http\Controllers\Auth\RegisterController@registerAdminApi');
+
 Route::get('/inspection','App\Http\Controllers\DataTableController@inspection')->name('api.inspection');
 Route::get('/car','App\Http\Controllers\DataTableController@car')->name('api.car');
 Route::get('/carbrand','App\Http\Controllers\DataTableController@carbrand')->name('api.carbrand');
