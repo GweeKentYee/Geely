@@ -1102,6 +1102,12 @@
                     {{-- End of SVG Codes --}}
                     <div class = "d-flex justify-content-center">
                         <div class = "w-100">
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
                             <h3 class="headline">Inspection Details</h3>
                             <div id="mypopup">
                             </div>
@@ -1116,6 +1122,7 @@
                                     </div>
                                 </li>
                             @endfor
+                            <br>
                         </div>
                     </div>
                 </div>

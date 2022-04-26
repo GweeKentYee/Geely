@@ -180,6 +180,58 @@
 
 
                 });
+
+                if ($('input[type=checkbox]:checked').length > 2) {
+
+                    $(this).prop('checked', false);
+                    $('#exampleModal').modal('show')
+                }
+
+                if ($('input[type=checkbox]:checked').length == 2) {
+                    document.getElementById('CompareButton').disabled = false;
+
+                    document.getElementById('CompareButton').style.backgroundColor = "#09c702";
+                    document.getElementById('CompareButton').style.color = "white";
+
+                    var menus = document.getElementsByClassName("check");
+                    for (var i = menus.length - 1; i >= 0; i--)
+                    {
+
+                        if (menus[i].checked == true){
+                            continue;
+                        }else{
+                            var value = menus[i].value;
+                            document.getElementById('card'+value).style.opacity ="0.5";
+                        }
+
+                    }
+
+
+                }
+
+                if ($('input[type=checkbox]:checked').length < 2) {
+                    document.getElementById('CompareButton').disabled = true;
+
+                    document.getElementById('CompareButton').style.backgroundColor = "#838384";
+                    document.getElementById('CompareButton').style.color = "#272424";
+
+
+                    var menus = document.getElementsByClassName("check");
+                    for (var i = menus.length - 1; i >= 0; i--)
+                    {
+
+                            console.log(menus[i].value);
+                            var value = menus[i].value;
+                            document.getElementById('card'+value).style.opacity ="1";
+
+                    }
+                }
+
+                if($(this).is(":checked")){
+                    $(this).parent().parent().parent().parent().addClass("card-checked");
+                }else{
+                    $(this).parent().parent().parent().parent().removeClass("card-checked");
+                }
             });
 
         </script>
