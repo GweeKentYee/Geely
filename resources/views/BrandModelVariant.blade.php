@@ -228,7 +228,7 @@
             ]}
         );
 
-        $('#brandtab').on("show.bs.tab", function(e){
+        $('#brandtab').on("shown.bs.tab", function(e){
             $('#carbrandtab-dt').DataTable().ajax.reload().columns.adjust();
         });
 
@@ -241,7 +241,7 @@
             }
         });
 
-        $('#modeltab').on("show.bs.tab", function(e){
+        $('#modeltab').on("shown.bs.tab", function(e){
             $('#carmodeltab-dt').DataTable({
             "columnDefs": [{
                 "defaultContent": "-",
@@ -276,7 +276,7 @@
             }
         });
 
-        $('#varianttab').on("show.bs.tab", function(e){
+        $('#varianttab').on("shown.bs.tab", function(e){
             $('#carvarianttab-dt').DataTable({
             "columnDefs": [{
                 "defaultContent": "-",
