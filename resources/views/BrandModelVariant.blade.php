@@ -92,7 +92,7 @@
                         </table>
                     </div>
                 </div>
-            
+
                 <div class="modal fade" id="newcarmodel" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -155,7 +155,7 @@
                         </table>
                     </div>
                 </div>
-            
+
                 <div class="modal fade" id="newcarvariant" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -215,7 +215,7 @@
                 "defaultContent": "-",
                 "targets": "_all"
             }],
-            "scrollX": true, 
+            "scrollX": true,
             "destroy": true,
             "processing": true,
             "serverSide": true,
@@ -229,9 +229,9 @@
         );
 
         $('#brandtab').on("show.bs.tab", function(e){
-            $('#carbrandtab-dt').DataTable().ajax.reload();
+            $('#carbrandtab-dt').DataTable().ajax.reload().columns.adjust();
         });
-        
+
         $('#carbrandtab-dt').on('click', '.delete', function () {
 
             var confirmation = confirm('Delete the record?');
@@ -258,7 +258,7 @@
                 {"data": "model"},
                 {"data": "Edit", orderable: false, searchable: false},
                 {"data": "Delete", orderable: false, searchable: false}
-            ]});
+            ]}).columns.adjust();
         });
 
         $('#carmodeltab-dt').on('click', '.delete', function () {
@@ -294,7 +294,7 @@
                 {"data": "variant"},
                 {"data": "Edit", orderable: false, searchable: false},
                 {"data": "Delete", orderable: false, searchable: false}
-            ]});
+            ]}).columns.adjust();
         });
 
         $('#carvarianttab-dt').on('click', '.delete', function () {
@@ -325,7 +325,7 @@
                     $.each(data.CarModels, function(index, CarModel) {
                         $('#carModel').append('<option value="'+CarModel.id+'">'+CarModel.model+'</option>');
                     })
-                    
+
                 }
             })
         });
