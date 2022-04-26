@@ -21,7 +21,7 @@
                             @endif
                             <div class="modal-body">
                                 <br>
-                                <h5>Image: <a href="/admin/newsletter/view/{{ $newsletter->id }}">{{ $newsletter->image }}</a></h5>
+                                <h5>Image: <a href="/admin/newsletter/view/{{ $newsletter->id }}" target="_blank">{{ $newsletter->image }}</a></h5>
                                 <br>
                                 <label>ID</label>
                                 <input type="text" name="brand_id" class="form-control" value="{{ $newsletter->id }}" readonly>

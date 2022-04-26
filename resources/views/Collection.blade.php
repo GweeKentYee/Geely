@@ -39,7 +39,7 @@
                                 <span style="margin-left: 0.4rem;">Compare</span>
                             </div>
                             <a href='/catalogue/usedcardetails/{{$collection->used_car_id}}'>
-                                @if (!empty($usedcars->usedCarImages->get(0)->image))
+                                @if (!empty($collection->usedCar->usedCarImages->get(0)->image))
                                     <img class="card-img" src="{{ $collection->usedCar->usedCarImages->get(0)->image }}" alt="Card image cap" style="width:100%;height:190px">
                                 @else
                                     <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="black" class="bi bi-images" viewBox="0 0 16 16">

@@ -71,7 +71,7 @@ class DataTableController extends Controller
 
                 } else {
 
-                    $specFile = '<a href = "/admin/car/file/viewspec/'.$query->id.'" style="color: black; font-size: 16px"><i class="bi bi-eye-fill"></i></a>';
+                    $specFile = '<a href = "/admin/car/file/viewspec/'.$query->id.'" style="color: black; font-size: 16px" target="_blank"><i class="bi bi-eye-fill"></i></a>';
                 }
 
                 return $specFile;
@@ -324,7 +324,7 @@ class DataTableController extends Controller
                 })
                 ->addColumn('Data_File', function($query){
 
-                    $dataFile = '<a href = "/admin/usedcar/file/viewdata/'.$query->id.'" style="color: black; font-size: 16px"><i class="bi bi-eye-fill"></i></a>';
+                    $dataFile = '<a href = "/admin/usedcar/file/viewdata/'.$query->id.'" style="color: blue; font-size: 18px"><i class="bi bi-download"></i></a>';
 
                     return $dataFile;
 
@@ -332,7 +332,7 @@ class DataTableController extends Controller
 
                 ->addColumn('Ownership_File', function($query){
 
-                    $ownershipFile = '<a href = "/admin/usedcar/file/viewownership/'.$query->id.'" style="color: black; font-size: 16px"><i class="bi bi-eye-fill"></i></a>';
+                    $ownershipFile = '<a href = "/admin/usedcar/file/viewownership/'.$query->id.'" style="color: black; font-size: 16px" target="_blank"><i class="bi bi-eye-fill"></i></a>';
 
                     return $ownershipFile;
 

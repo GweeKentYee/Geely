@@ -11,6 +11,7 @@ use App\Models\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
+
 class UsedCarController extends Controller
 {
 
@@ -133,7 +134,7 @@ class UsedCarController extends Controller
 
         } else {
 
-            Session::flash('field_empty', 'Please fill in the field.');
+            Session::flash('field_empty', 'Please fill in at least one field.');
 
             return redirect('admin/usedcar/edit/'.$id);
 

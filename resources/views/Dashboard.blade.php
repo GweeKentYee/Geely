@@ -34,7 +34,7 @@
         <div class="col-md-10">
             <br>
             <h1>
-                Cars of the day
+               
             </h1>
         </div>
             <div class="col-md-10 row" style="display:flex; justify-content: center; margin-bottom: 3.5rem;">

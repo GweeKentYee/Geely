@@ -57,7 +57,7 @@ class InspectionController extends Controller
         $data = $request->validate([
             'car' => ['required', Rule::notIn('0')],
             'registration_number' => ['required','unique:used_cars,registration'],
-            'data_file' => ['required'],
+            'data_file' => ['required', 'mimes:xls,xlsx'],
             'ownership_file' => ['required'],
         ]);
 
@@ -195,7 +195,7 @@ class InspectionController extends Controller
 
         $data = $request->validate([
             'registration_option' => ['required',Rule::notIn('0')],
-            'data_file' => ['required'],
+            'data_file' => ['required', 'mimes:xls,xlsx'],
             'ownership_file' => ['nullable'],
         ]);
 

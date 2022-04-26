@@ -14,7 +14,11 @@
                     <form action="{{ url('/admin/usedcar/edit/'.$UsedCar->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
-
+                            @if (Session::has('field_empty'))
+                                <div class="alert alert-danger">
+                                    <p>{{ Session::get('field_empty') }}</p>
+                                </div>
+                            @endif
                                 <div class="form-group mb-3">
                                 <label for="message-text" class="col-form-label">Minimum Price</label>
                                 <input type="integer" placeholder="{{$UsedCar->min_price}}" class="form-control @error('min_price') is-invalid @enderror" id="min_price" name="min_price">
@@ -77,11 +81,11 @@
                             <hr>
 
                             <div class="form-group mb-3">
-                                <label for="" class="col-form-label">Data File: <a href = "/admin/usedcar/file/viewdata/{{ $UsedCar->car_id }}">{{ $UsedCar->data_file }}</a></label>
+                                <label for="" class="col-form-label">Data File: <a href = "/admin/usedcar/file/viewdata/{{ $UsedCar->id }}">{{ $UsedCar->data_file }}</a></label>
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="" class="col-form-label">Ownership File: <a href = "/admin/usedcar/file/viewownership/{{ $UsedCar->car_id }}">{{ $UsedCar->ownership_file }}</a></label>
+                                <label for="" class="col-form-label">Ownership File: <a href = "/admin/usedcar/file/viewownership/{{ $UsedCar->id }}" target="_blank">{{ $UsedCar->ownership_file }}</a></label>
                                 <input type="file" value="{{$UsedCar->ownership_file}}" class="form-control @error('ownership_file') is-invalid @enderror" id="ownership_file" name="ownership_file">
                                 @error('ownership_file')
                                 <span class="invalid-feedback" role="alert">

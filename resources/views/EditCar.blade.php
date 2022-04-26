@@ -34,7 +34,7 @@
                             <label>General Spec</label>
                             <input type="text" name="car_general_spec_id" class="form-control" value="{{ $Car->carGeneralSpec->transmission }}-{{ $Car->carGeneralSpec->fuel }}" readonly>
                             <hr>
-                            <label>Spec File: <a href="/admin/car/file/viewspec/{{ $Car->id }}">{{ $Car->spec_file }}</a></label>
+                            <label>Spec File: <a href="/admin/car/file/viewspec/{{ $Car->id }}" target="_blank">{{ $Car->spec_file }}</a></label>
                             <input type="file" name="spec_file" class="form-control @error('spec_file') is-invalid @enderror" accept="application/JSON,application/xml,text/plain,text/xml,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                             @error('spec_file')
                                 <span class="invalid-feedback" role="alert">
