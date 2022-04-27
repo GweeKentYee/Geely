@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4">
 
-                            @if (empty($usedcars->usedCarImages[0]->image))
+                            @if (empty($usedcar->usedCarImages[0]->image))
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="black" class="bi bi-images" viewBox="0 0 16 16">
                                     <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
