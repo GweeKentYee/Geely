@@ -44,6 +44,7 @@
                                 <br>
                                 <label>Status: {{ $newsletter->status }}</label>
                                 <select id = "status" name = "status" class = "form-select" placeholder="status" @error('status') is-invalid @enderror>
+                                    <option value="0" disabled selected>-- Please Select Status --</option>
                                     <option value="Hidden">Hidden</option>
                                     <option value="Show">Show</option>
                                 </select>
