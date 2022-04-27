@@ -35,7 +35,7 @@ class CatalogueController extends Controller
         ->select('*','used_cars.id AS id')
         ->join('car_general_specs','cars.car_general_spec_id','=','car_general_specs.id')
         ->select('*','used_cars.id AS id')
-        ->where('status','=','1')->paginate(10);
+        ->where('status','=','1')->paginate(9);
         $carbrand = CarBrand::orderBy('brand','ASC')->get();
         $carmodel = CarModel::orderBy('model','ASC')->get();
         $carvariant= CarVariant::orderBy('variant','ASC')->get();
@@ -70,7 +70,7 @@ class CatalogueController extends Controller
         ->select('*','used_cars.id AS id')
         ->where('car_models.model','LIKE', '%'.request('query').'%')->where('status','=',1)
         ->orwhere('car_brands.brand','LIKE', '%'.request('query').'%')->where('status','=',1)
-        ->paginate(10);
+        ->paginate(9);
 
         $carbrand = CarBrand::orderBy('brand','ASC')->get();
         $carmodel = CarModel::orderBy('model','ASC')->get();
