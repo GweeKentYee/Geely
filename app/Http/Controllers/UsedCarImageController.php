@@ -9,22 +9,21 @@ use Illuminate\Support\Facades\File;
 
 class UsedCarImageController extends Controller
 {
-  public function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
     }
 
-  public function viewAdminPage($id){
+    public function viewAdminPage($id){
 
-    $usedCarImage = UsedCarImage::where('used_car_id',$id)->simplePaginate(8);
-    $usedCar = UsedCar::find($id);
+        $usedCarImage = UsedCarImage::where('used_car_id',$id)->Paginate(8);
+        $usedCar = UsedCar::find($id);
 
-    return view('UsedCarImages',compact('usedCarImage','usedCar'));
+        return view('UsedCarImages',compact('usedCarImage','usedCar'));
 
-}
+    }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
 
          $request->validate([
            'Used_Car_Image'=>['required']
@@ -52,21 +51,31 @@ class UsedCarImageController extends Controller
             }
 
 
-        return redirect()->back();
+        return redirect('admin/usedcar/images/'.$usedCarId);
 
     }
 
-    public function deleteSelected(Request $request){
+    public function deleteSelected(Request $request, $usedcarID){
 
-      $ids = $request->selected;
-      foreach ($ids as $id) {
-        $usedCarImage = UsedCarImage::findorfail($id);
-        $usedCar = UsedCar::find($usedCarImage->used_car_id);
-        $filename = $usedCarImage->image;
-        $userPhoto = public_path('storage/image/used_car/'.$usedCar->registration.'/'.$filename);
-        File::delete($userPhoto);
-        $usedCarImage->delete();
-     }
-      return redirect()->back();
-  }
+        $ids = $request->selected;
+
+        foreach ($ids as $id) {
+
+            $usedCarImage = UsedCarImage::findorfail($id);
+
+            $ImageFilePath = str_replace('\\','/',public_path($usedCarImage->image));
+
+            if(file_exists($ImageFilePath)){
+
+                unlink($ImageFilePath);
+
+            }
+
+            $usedCarImage->delete();
+
+        }
+
+         return redirect('admin/usedcar/images/'.$usedcarID);
+
     }
+}

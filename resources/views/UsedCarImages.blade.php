@@ -9,56 +9,49 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <span style="font-size: 20px"><a href="/admin/usedcar">Used Car</a> / Images / {{ $usedCar->registration }}</span>
+                    <div class = "row">
+                        <div class="col-md-10">
+                            <span style="font-size: 20px"><a href="/admin/usedcar">Used Car</a> / Images / {{ $usedCar->registration }}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newusedcar"><i class="bi bi-plus-lg"></i> Add Used Car Image</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-offset-3">
-                            <div class="newbtn">
-                                <h4>
-                                    <button class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#newusedcar"><i class="bi bi-plus-lg"></i> Add Used Car Image</button>
-                                </h4>
-                            </div>
-
-                            <form id="delsel" action="{{ url('/usedCarImage/delete/selected') }}"
-                                method="get">
+                        <div class="col-md-offset-3 pb-5">
+                            <form id="delsel" action="/usedCarImage/delete/selected/{{$usedCar->id}}" method="get">
                                 <div class="delbtn">
-                                    <h4>
-                                        <button type="submit" id = "DeleteSubmit" class="btn btn-danger">Delete Selected</button>
-                                    </h4>
+                                    <button type="submit" id = "DeleteSubmit" class="btn btn-danger">Delete Selected</button>
                                 </div>
                             </form>
                         </div>
-                        <br>
-                        <br>
                         <div class="row justify-content-center">
-                        @forelse( $usedCarImage as  $usedCarImages )
-                            <div class="col-xl-3 col-lg-5 col-md-6 col-xs-12 gallery">
-                                <div class="card cat-card m-auto ">
-                                    <div>
-                                        <label class="checkbox">
-                                            <input form="delsel" type="checkbox" name="selected[]"
-                                                value="{{ $usedCarImages->id }}">
-                                            <span class="checkmark"></span>
-                                        </label>
+                            @forelse( $usedCarImage as  $usedCarImages )
+                                <div class="col-xl-3 col-lg-5 col-md-6 col-xs-12 gallery">
+                                    <div class="card cat-card m-auto ">
+                                        <div>
+                                            <label class="checkbox">
+                                                <input form="delsel" type="checkbox" name="selected[]"
+                                                    value="{{ $usedCarImages->id }}">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <img src="/{{ $usedCarImages->image }}"
+                                            class="card-img-top" alt="Broken" />
                                     </div>
-                                    <img src="/{{ $usedCarImages->image }}"
-                                        class="card-img-top" alt="Broken" />
                                 </div>
-                            </div>
-                        @empty
-                            <h3 style="text-align: center">There are no uploads</h3>
-                        @endforelse
+                            @empty
+                                <h3 style="text-align: center">There are no images available</h3>
+                            @endforelse
                         </div>
-
                     </div>
-
                 </div>
-                    {{ $usedCarImage->links() }}
-                </form>
             </div>
-
+            <div class = "d-flex justify-content-end">
+                {{$usedCarImage->links()}}
+            </div>
         </div>
         <div class="modal fade" id="newusedcar" tabindex="-1">
 

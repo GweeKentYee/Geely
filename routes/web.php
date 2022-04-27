@@ -77,7 +77,7 @@ Route::group(['middleware' => ['auth', 'is_admin']], function () {
 
     Route::post('/admin/usedcarImage/store','App\Http\Controllers\UsedCarImageController@store');
     Route::get('/usedcarImage/delete/{id}','App\Http\Controllers\UsedCarImageController@delete');
-    Route::get('/usedCarImage/delete/selected','App\Http\Controllers\UsedCarImageController@deleteSelected');
+    Route::get('/usedCarImage/delete/selected/{usedcarID}','App\Http\Controllers\UsedCarImageController@deleteSelected');
     Route::put('/usedcarImage/update/{id}','App\Http\Controllers\UsedCarImageController@update');
 
     Route::get('/admin/inspection','App\Http\Controllers\InspectionController@viewAdminPage');
