@@ -17,14 +17,6 @@ class CarModelController extends Controller
         $this->middleware('auth');
     }
 
-    public function delete($carmodelID){
-
-        CarModel::where('id', $carmodelID)->delete();
-
-        return redirect('admin/brand_model_variant')->withInput(['tab'=>'carmodeltab']);
-
-    }
-
     // add new records into Car Model
     public function addCarModel(Request $request){
 
@@ -98,6 +90,14 @@ class CarModelController extends Controller
             return redirect('admin/carmodel/edit/'.$carmodelID);
 
         }
+
+    }
+
+    public function delete($carmodelID){
+
+        CarModel::where('id', $carmodelID)->delete();
+
+        return redirect('admin/brand_model_variant')->withInput(['tab'=>'carmodeltab']);
 
     }
 

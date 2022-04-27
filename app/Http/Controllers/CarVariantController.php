@@ -17,14 +17,6 @@ class CarVariantController extends Controller
         $this->middleware('auth');
     }
 
-    public function delete($carvariantID){
-
-        CarVariant::where('id', $carvariantID)->delete();
-
-        return redirect('admin/brand_model_variant')->withInput(['tab'=>'carvarianttab']);
-
-    }
-
     public function subOptions(Request $request){
 
         $CarModels = CarModel::where('car_brand_id', $request->CarBrand_id)->get();
@@ -102,6 +94,14 @@ class CarVariantController extends Controller
             return redirect('admin/carvariant/edit/'.$carvariantID);
 
         }
+
+    }
+
+    public function delete($carvariantID){
+
+        CarVariant::where('id', $carvariantID)->delete();
+
+        return redirect('admin/brand_model_variant')->withInput(['tab'=>'carvarianttab']);
 
     }
 

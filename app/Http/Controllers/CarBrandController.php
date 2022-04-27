@@ -25,14 +25,6 @@ class CarBrandController extends Controller
         ]);
     }
 
-    public function delete($carbrandID){
-
-        CarBrand::where('id', $carbrandID)->delete();
-
-        return redirect('admin/brand_model_variant');
-
-    }
-
     public function addCarBrand(Request $request){
 
         $validator = Validator::make($request->all(), [
@@ -95,6 +87,14 @@ class CarBrandController extends Controller
             return redirect('admin/carbrand/edit/'.$carbrandID);
 
         }
+
+    }
+
+    public function delete($carbrandID){
+
+        CarBrand::where('id', $carbrandID)->delete();
+
+        return redirect('admin/brand_model_variant');
 
     }
 

@@ -36,28 +36,6 @@ class CarController extends Controller
 
     }
 
-    public function delete($carID){
-
-        $Car = Car::find($carID);
-
-        if ($Car->spec_file == null) {
-
-            unlink($Car->data_file);
-
-        } else {
-
-            unlink($Car->spec_file);
-
-            unlink($Car->data_file);
-
-        }
-
-        Car::where('id', $carID)->delete();
-
-        return redirect('admin/car');
-
-    }
-
     public function subModels(Request $request){
 
         $CarModels = CarModel::where('car_brand_id', $request->CarBrand_id)->get();
@@ -279,8 +257,30 @@ class CarController extends Controller
 
             return redirect('admin/car/edit/'.$carID);
 
-        } 
-        
+        }
+
+
+    }
+
+    public function delete($carID){
+
+        $Car = Car::find($carID);
+
+        if ($Car->spec_file == null) {
+
+            unlink($Car->data_file);
+
+        } else {
+
+            unlink($Car->spec_file);
+
+            unlink($Car->data_file);
+
+        }
+
+        Car::where('id', $carID)->delete();
+
+        return redirect('admin/car');
 
     }
 
