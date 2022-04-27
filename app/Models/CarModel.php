@@ -19,11 +19,6 @@ class CarModel extends Model
         'car_brand_id'
     ];
 
-    public function cars()
-    {
-        return $this->hasMany(Car::class);
-    }
-
     public function carBrand()
     {
         return $this->belongsTo('App\Models\CarBrand', 'car_brand_id');

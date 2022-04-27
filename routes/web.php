@@ -64,8 +64,7 @@ Route::group(['middleware' => ['auth', 'is_admin']], function () {
     Route::patch('/admin/car/editfunction/{carID}','App\Http\Controllers\CarController@edit');
 
     Route::get('/admin/usedcar/delete/{id}','App\Http\Controllers\UsedCarController@delete');
-    Route::get('/admin/usedcar/fetch/{id}','App\Http\Controllers\UsedCarController@fetch');
-    Route::get('/admin/usedcar/edit/{id}','App\Http\Controllers\UsedCarController@edit');
+    Route::get('/admin/usedcar/edit/{id}','App\Http\Controllers\UsedCarController@viewEditPage');
     Route::patch('/admin/usedcar/edit/{id}','App\Http\Controllers\UsedCarController@update');
     Route::get('/admin/usedcar/images/{id}','App\Http\Controllers\UsedCarImageController@viewAdminPage');
     Route::get('/admin/usedcar','App\Http\Controllers\UsedCarController@viewAdminPage');

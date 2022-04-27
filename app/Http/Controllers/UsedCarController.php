@@ -40,33 +40,11 @@ class UsedCarController extends Controller
 
     public function viewAdminPage(){
 
-        $car_id = Car::all();
-
-        return view('UsedCar')->with('car_id',$car_id);
+        return view('UsedCar');
 
     }
 
-    public function delete($id){
-
-        $usedCar = UsedCar::findorfail($id);
-
-        $usedCarFolder = public_path('storage/data/usedcar/'.$usedCar->registration);
-
-        File::deleteDirectory($usedCarFolder);
-
-        $usedCar->delete();
-
-        return redirect("/admin/usedcar");
-
-    }
-
-    public function fetch($id){
-
-        return UsedCar::findOrFail($id);
-
-    }
-
-    public function edit($id){
+    public function viewEditPage($id){
 
         $car_id = Car::all();
 
@@ -156,6 +134,20 @@ class UsedCarController extends Controller
         $file = public_path($UsedCar->ownership_file);
 
         return response()->download($file,'',[],'inline');
+
+    }
+
+    public function delete($id){
+
+        $usedCar = UsedCar::findorfail($id);
+
+        $usedCarFolder = public_path('storage/data/usedcar/'.$usedCar->registration);
+
+        File::deleteDirectory($usedCarFolder);
+
+        $usedCar->delete();
+
+        return redirect("/admin/usedcar");
 
     }
 }
