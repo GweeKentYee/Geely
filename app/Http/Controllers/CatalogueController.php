@@ -68,8 +68,8 @@ class CatalogueController extends Controller
         ->select('*','used_cars.id AS id')
         ->join('car_general_specs','cars.car_general_spec_id','=','car_general_specs.id')
         ->select('*','used_cars.id AS id')
-        ->where('car_models.model','LIKE', '%'.request('query').'%')->where('status','=',1)  
-        ->orwhere('car_brands.brand','LIKE', '%'.request('query').'%')->where('status','=',1)   
+        ->where('car_models.model','LIKE', '%'.request('query').'%')->where('status','=',1)
+        ->orwhere('car_brands.brand','LIKE', '%'.request('query').'%')->where('status','=',1)
         ->paginate(10);
 
         $carbrand = CarBrand::orderBy('brand','ASC')->get();
@@ -80,7 +80,7 @@ class CatalogueController extends Controller
         $collections = Collection::all()->where('user_id',auth()->id());
 
         return view('Catalogue',
-        ['usedcar' => $usedcar,'carbrand'=>$carbrand,'carmodel'=>$carmodel,'carvariant'=>$carvariant,'carbodytype'=>$carbodytype,'generalspec'=>$generalspec,'collections'=> $collections]        
+        ['usedcar' => $usedcar,'carbrand'=>$carbrand,'carmodel'=>$carmodel,'carvariant'=>$carvariant,'carbodytype'=>$carbodytype,'generalspec'=>$generalspec,'collections'=> $collections]
         );
 
     }
@@ -102,7 +102,7 @@ class CatalogueController extends Controller
         if($maxPrice==null || !is_numeric($maxPrice)){
             $maxPrice=UsedCar::max('max_price');
         }
-        
+
         $usedcar = UsedCar::
         select('used_cars.*')
         ->join('cars','cars.id','=','used_cars.car_id')
@@ -126,8 +126,8 @@ class CatalogueController extends Controller
         ->where('used_cars.min_price','>=',$minPrice)
         ->where('used_cars.max_price','<=',$maxPrice)
         ->where('status','1')
-        ->paginate(10); 
-         
+        ->paginate(9);
+
         $carbrand = CarBrand::orderBy('brand','ASC')->get();
         $carmodel = CarModel::orderBy('model','ASC')->get();
         $carvariant= CarVariant::orderBy('variant','ASC')->get();
@@ -139,7 +139,7 @@ class CatalogueController extends Controller
         ['usedcar' => $usedcar,'carbrand'=>$carbrand,'carmodel'=>$carmodel,'carvariant'=>$carvariant,'carbodytype'=>$carbodytype,'generalspec'=>$generalspec,'collections'=> $collections]
         );
     }
-    
+
     public function modelOptions(Request $request){
 
         if($request->CarBrand_id==0){
@@ -155,9 +155,9 @@ class CatalogueController extends Controller
     }
 
     public function variantOptions(Request $request){
-        
+
         $CarVariants = CarVariant::where('car_model_id',$request->CarModel_id)->get();
-        
+
 
         return response()->json([
             'CarVariants' => $CarVariants
@@ -167,12 +167,12 @@ class CatalogueController extends Controller
 
     public function autocompleteSearch(Request $request)
     {
-        
+
         $query = $request->get('query');
         $filterBrand = CarBrand::select('brand')->where('brand', 'LIKE', $query.'%')->get()->pluck('brand');
         $filterModel = CarModel::select('model')->where('model','LIKE', $query.'%')->get()->pluck("model");
         $filter = $filterBrand->merge($filterModel);
-        
+
         return response()->json($filter);
     }
 
