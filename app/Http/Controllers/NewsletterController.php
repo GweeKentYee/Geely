@@ -87,7 +87,7 @@ class NewsletterController extends Controller
 
         } else {
 
-            return redirect('admin/newsletter');
+            return redirect('admin/newsletter/edit/'.$newsletterID);
 
         }
 
