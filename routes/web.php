@@ -37,19 +37,16 @@ Route::group(['middleware' => ['auth', 'is_admin']], function () {
 
     Route::get('/admin/brand_model_variant','App\Http\Controllers\CarBrandController@viewTabPage');
 
-    Route::get('/admin/carbrand','App\Http\Controllers\CarBrandController@viewAdminPage');
     Route::post('/admin/carbrand/add','App\Http\Controllers\CarBrandController@addCarBrand');
     Route::get('/admin/carbrand/delete/{carbrandID}','App\Http\Controllers\CarBrandController@delete');
     Route::get('/admin/carbrand/edit/{carbrandID}','App\Http\Controllers\CarBrandController@viewEditPage');
     Route::patch('/admin/carbrand/editfunction/{carbrandID}','App\Http\Controllers\CarBrandController@edit');
 
-    Route::get('/admin/carmodel','App\Http\Controllers\CarModelController@viewAdminPage');
     Route::post('/admin/carmodel/add','App\Http\Controllers\CarModelController@addCarModel');
     Route::get('/admin/carmodel/delete/{carmodelID}','App\Http\Controllers\CarModelController@delete');
     Route::get('/admin/carmodel/edit/{carmodelID}','App\Http\Controllers\CarModelController@viewEditPage');
     Route::patch('/admin/carmodel/editfunction/{carmodelID}','App\Http\Controllers\CarModelController@edit');
 
-    Route::get('/admin/carvariant','App\Http\Controllers\CarVariantController@viewAdminPage');
     Route::post('/admin/carvariant/optionDropBox','App\Http\Controllers\CarVariantController@subOptions')->name('subOptions');
     Route::post('/admin/carvariant/add','App\Http\Controllers\CarVariantController@addCarVariant');
     Route::get('/admin/carvariant/delete/{carvariantID}','App\Http\Controllers\CarVariantController@delete');

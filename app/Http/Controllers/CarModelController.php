@@ -17,17 +17,6 @@ class CarModelController extends Controller
         $this->middleware('auth');
     }
 
-    // views Car Model page and passes all Car Brands for usage in dropbox of Car Model page
-    public function viewAdminPage(){
-
-        $CarBrand = CarBrand::all();  // use CarBrand model to retrieve all records
-
-        return view('CarModel', [
-            'CarBrand' => $CarBrand
-        ]);
-
-    }
-
     public function delete($carmodelID){
 
         CarModel::where('id', $carmodelID)->delete();
@@ -47,7 +36,7 @@ class CarModelController extends Controller
                 return $query->where('car_brand_id', request('car_brand'));
             })]
         ]);
- 
+
         if ($validator->fails()) {
             return redirect('admin/brand_model_variant')
                         ->withErrors($validator)
@@ -56,7 +45,7 @@ class CarModelController extends Controller
         }
 
         $data = $validator->validated();
-        
+
         // create new records
         CarModel::create([
             'car_brand_id' => $data['car_brand'],

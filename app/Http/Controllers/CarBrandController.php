@@ -14,7 +14,7 @@ class CarBrandController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function viewTabPage(){
 
         $CarBrand = CarBrand::all();
@@ -23,12 +23,6 @@ class CarBrandController extends Controller
             'CarBrand' => $CarBrand,
             'CarBrand2' => $CarBrand
         ]);
-    }
-
-    public function viewAdminPage(){
-
-        return view('CarBrand');
-
     }
 
     public function delete($carbrandID){
@@ -42,12 +36,12 @@ class CarBrandController extends Controller
     public function addCarBrand(Request $request){
 
         $validator = Validator::make($request->all(), [
-            'brand' => ['required', 
+            'brand' => ['required',
             Rule::unique('car_brands','brand')->where(function ($query){
                 return $query;
             })]
         ]);
- 
+
         if ($validator->fails()) {
             return redirect('admin/brand_model_variant')
                         ->withErrors($validator)

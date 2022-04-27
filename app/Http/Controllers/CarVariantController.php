@@ -17,16 +17,6 @@ class CarVariantController extends Controller
         $this->middleware('auth');
     }
 
-    public function viewAdminPage(){
-
-        $CarBrand = CarBrand::all();
-
-        return view('CarVariant', [
-            'CarBrand' => $CarBrand
-        ]);
-
-    }
-
     public function delete($carvariantID){
 
         CarVariant::where('id', $carvariantID)->delete();
@@ -54,7 +44,7 @@ class CarVariantController extends Controller
                 return $query->where('car_model_id', request('car_model'));
             })]
         ]);
- 
+
         if ($validator->fails()) {
             return redirect('admin/brand_model_variant')
                         ->withErrors($validator)
