@@ -16,7 +16,7 @@ class DashboardController extends Controller
 
         $Dash = Newsletter::orderby('ID','DESC')->where('status', 'Show')->get();
 
-        $usedcar = UsedCar::orderBy('created_at', 'DESC')->with('Car.carBodyType','Car.carGeneralSpec','Car.carVariant.carModel')->take(3)->get();
+        $usedcar = UsedCar::orderBy('id', 'DESC')->with('Car.carBodyType','Car.carGeneralSpec','Car.carVariant.carModel')->take(3)->get();
 
         $collections = Collection::all()->where('user_id',auth()->id());
 
