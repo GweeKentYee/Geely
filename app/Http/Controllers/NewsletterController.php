@@ -87,6 +87,8 @@ class NewsletterController extends Controller
 
         } else {
 
+            Session::flash('field_empty', 'Please fill in the field.');
+
             return redirect('admin/newsletter/edit/'.$newsletterID);
 
         }
