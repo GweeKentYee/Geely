@@ -23,16 +23,6 @@ class CollectionController extends Controller
         return view('Collection', ['collections' => $collections]);
     }
 
-    public function viewdetailpage($used_car_id){
-
-        $usedcar = UsedCar::find($used_car_id);
-
-        $collections = Collection::all()->where('user_id',auth()->id());
-
-        return view('UsedCarDetails',
-        ['usedcar' => $usedcar, 'collections'=> $collections]);
-    }
-
     public function store(Request $request)
     {
         $collection = new Collection();
