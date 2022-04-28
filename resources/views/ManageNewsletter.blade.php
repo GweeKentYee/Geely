@@ -123,10 +123,6 @@
             }
         });
 
-        $("[type='number']").keypress(function (evt) {
-            evt.preventDefault();
-        });
-
         @if (Session::has('errors'))
             $('#newnewsletter').modal("show");
         @endif

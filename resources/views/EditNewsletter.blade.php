@@ -67,18 +67,3 @@
     </div>
 </main>
 @endsection
-
-@section('footer-scripts')
-<script>
-    $(document).ready(function () {
-        $('#sequence').on('change', function (e) {
-            $value = e.target.value;
-
-            if($value==0){
-                $('#sequence').value='Do Not Display';
-            }
-        });
-    });
-</script>
-
-@endsection
