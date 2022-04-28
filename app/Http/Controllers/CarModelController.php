@@ -1,5 +1,8 @@
 <?php
 
+// This controller was created for handling Car Model actions
+// No special package used
+
 namespace App\Http\Controllers;
 
 use App\Models\CarBrand;
@@ -11,13 +14,13 @@ use Illuminate\Support\Facades\Validator;
 
 class CarModelController extends Controller
 {
-    //
+    // This function is used to ensure the users are authenticated to use this controller's function
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    // add new records into Car Model
+    // This function is used for adding new car model
     public function addCarModel(Request $request){
 
         // validate inputed records according to columns of the database table
@@ -48,7 +51,7 @@ class CarModelController extends Controller
 
     }
 
-    // views Edit Car Model page and passes a specific Car Model's ID and all Car Brands for editing
+    // This function is used to view the Edit CarModel page
     public function viewEditPage($carmodelID){
 
         $CarModel = CarModel::find($carmodelID);  // use CarModel model to find records of a specific Car Model ID
@@ -62,7 +65,7 @@ class CarModelController extends Controller
 
     }
 
-    // edit existing records of Car Model
+    // This function is used to edit an existing car model record
     public function edit($carmodelID, Request $request){
 
         $CarModel = CarModel::find($carmodelID);  // use CarModel model to find records of a specific Car Model ID
@@ -93,6 +96,7 @@ class CarModelController extends Controller
 
     }
 
+    // This function is used to delete an existing car model record
     public function delete($carmodelID){
 
         CarModel::where('id', $carmodelID)->delete();

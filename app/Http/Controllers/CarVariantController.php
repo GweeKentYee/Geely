@@ -1,8 +1,10 @@
 <?php
 
+// This controller was created for handling Car Variant actions
+// No special package used
+
 namespace App\Http\Controllers;
 
-use App\Models\CarBrand;
 use App\Models\CarModel;
 use App\Models\CarVariant;
 use Illuminate\Http\Request;
@@ -12,11 +14,13 @@ use Illuminate\Validation\Rule;
 
 class CarVariantController extends Controller
 {
+    // This function is used to ensure the users are authenticated to use this controller's function
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    // This function is used to generate the Car Model dropdown depending on the Car Brand chosen
     public function subOptions(Request $request){
 
         $CarModels = CarModel::where('car_brand_id', $request->CarBrand_id)->get();
@@ -27,6 +31,7 @@ class CarVariantController extends Controller
 
     }
 
+    // This function is used for adding new car variant
     public function addCarVariant(Request $request){
 
         $validator = Validator::make($request->all(), [
@@ -55,6 +60,7 @@ class CarVariantController extends Controller
 
     }
 
+    // This function is used to view the Edit CarVariant page
     public function viewEditPage($carvariantID){
 
         $CarVariant = CarVariant::find($carvariantID);
@@ -68,6 +74,7 @@ class CarVariantController extends Controller
 
     }
 
+    // This function is used to edit an existing car variant record
     public function edit($carvariantID, Request $request){
 
         $CarVariant = CarVariant::find($carvariantID);
@@ -97,6 +104,7 @@ class CarVariantController extends Controller
 
     }
 
+    // This function is used to delete an existing car variant record
     public function delete($carvariantID){
 
         CarVariant::where('id', $carvariantID)->delete();

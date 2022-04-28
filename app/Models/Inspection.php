@@ -1,5 +1,7 @@
 <?php
 
+// This model file is used for interacting with the inspections table
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,6 +22,7 @@ class Inspection extends Model
         'used_car_id'
     ];
 
+    // This model belongs to the UsedCar model
     public function usedCar()
     {
         return $this->belongsTo('App\Models\UsedCar', 'used_car_id');

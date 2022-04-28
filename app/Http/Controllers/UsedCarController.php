@@ -1,11 +1,16 @@
 <?php
+
+// This controller was created for handling Used Car actions
+// Package: composer require phpoffice/phpspreadsheet
+
+// Function that uses the package include viewdetailpage()
+
 namespace App\Http\Controllers;
 
 use App\Models\UsedCar;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use App\Models\Inspection;
-use NunoMaduro\Collision\Adapters\Laravel\Inspector;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as ReaderXlsx;
 use App\Models\Collection;
 use Illuminate\Support\Facades\File;
@@ -15,6 +20,7 @@ use Illuminate\Support\Facades\Session;
 class UsedCarController extends Controller
 {
 
+    // This function is used to view the Car Details page (customer)
     public function viewdetailpage($used_car_id){
 
         $usedcar = UsedCar::find($used_car_id);
@@ -47,12 +53,14 @@ class UsedCarController extends Controller
         ]);
     }
 
+    // This function is used to view the UsedCar page
     public function viewAdminPage(){
 
         return view('UsedCar');
 
     }
 
+    // This function is used to view the Edit UsedCar page
     public function viewEditPage($id){
 
         $car_id = Car::all();
@@ -63,6 +71,7 @@ class UsedCarController extends Controller
 
     }
 
+    // This function is used to edit an existing used car record
     public function update($id,Request $request){
 
         $data =request()->validate([
@@ -126,6 +135,7 @@ class UsedCarController extends Controller
 
     }
 
+    // This function is used for viewing data file (Used Car)
     public function viewDataFile($id){
 
         $UsedCar = UsedCar::find($id);
@@ -136,6 +146,7 @@ class UsedCarController extends Controller
 
     }
 
+    // This function is used for viewing ownership file
     public function viewOwnershipFile($id){
 
         $UsedCar = UsedCar::find($id);
@@ -146,6 +157,7 @@ class UsedCarController extends Controller
 
     }
 
+    // This function is used to delete an existing used car record along with the folders related
     public function delete($id){
 
         $usedCar = UsedCar::findorfail($id);

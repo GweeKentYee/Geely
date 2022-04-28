@@ -1,31 +1,35 @@
 <?php
 
+// This controller was created for handling Inspection actions
+// Package: composer require phpoffice/phpspreadsheet
+
+// Function that uses the package include newInspection(), newExistingCarInspection() and viewDetailsPage()
+
 namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\CarBrand;
 use App\Models\CarModel;
 use App\Models\CarVariant;
-use App\Models\Catalogue;
 use App\Models\Inspection;
 use App\Models\UsedCar;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Hash;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class InspectionController extends Controller
 {
+    // This function is used to ensure the users are authenticated to use this controller's function
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    // This function is used to view the Inspection page
     public function viewAdminPage(){
 
         $CarBrand = CarBrand::all();
@@ -38,6 +42,7 @@ class InspectionController extends Controller
         ]);
     }
 
+    // This function is used to generate the Car dropdown depending on the Car Brand chosen
     public function carOptions(Request $request){
 
         $CarModelID = CarModel::select('id')->where('car_brand_id',$request->CarBrand_id)->get();
@@ -52,6 +57,7 @@ class InspectionController extends Controller
 
     }
 
+    // This function is used to create new Inspection for new used car
     public function newInspection(Request $request){
 
         $data = $request->validate([
@@ -191,6 +197,7 @@ class InspectionController extends Controller
 
     }
 
+    // This function is used to create new Inspection for existing used car
     public function newExistingCarInspection(Request $request){
 
         $data = $request->validate([
@@ -339,6 +346,7 @@ class InspectionController extends Controller
 
     }
 
+    // This function is used for viewing inspection result file
     public function viewInspectionFile($inspectionID){
 
         $Inspection = Inspection::find($inspectionID);
@@ -349,6 +357,7 @@ class InspectionController extends Controller
 
     }
 
+    // This function is used to view the InspectionDetails page
     public function viewDetailsPage($inspectionID){
 
         $Inspection = Inspection::find($inspectionID);

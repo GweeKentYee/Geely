@@ -1,5 +1,8 @@
 <?php
 
+// This controller was created for handling Dashboard actions
+// No special package used
+
 namespace App\Http\Controllers;
 
 use App\Models\Catalogue;
@@ -11,7 +14,7 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
 
-    //
+    // This function is used to view the Dashboard page
     public function viewPage(){
 
         $Dash = Newsletter::orderby('ID','DESC')->where('status', 'Show')->get();

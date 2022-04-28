@@ -1,19 +1,23 @@
 <?php
 
+// This controller was created for handling Used Car Image actions
+// No special package used
+
 namespace App\Http\Controllers;
 
 use App\Models\UsedCarImage;
 use App\Models\UsedCar;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 
 class UsedCarImageController extends Controller
 {
+    // This function is used to ensure the users are authenticated to use this controller's function
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    // This function is used to view the UsedCarImage page
     public function viewAdminPage($id){
 
         $usedCarImage = UsedCarImage::where('used_car_id',$id)->Paginate(8);
@@ -23,6 +27,7 @@ class UsedCarImageController extends Controller
 
     }
 
+    // This function is used to add a new used car image
     public function store(Request $request){
 
          $request->validate([
@@ -55,6 +60,7 @@ class UsedCarImageController extends Controller
 
     }
 
+    // This function is used to delete selected used car image
     public function deleteSelected(Request $request, $usedcarID){
 
         $ids = $request->selected;

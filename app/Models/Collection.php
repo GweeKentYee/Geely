@@ -1,5 +1,7 @@
 <?php
 
+// This model file is used for interacting with the collections table
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,11 +21,13 @@ class Collection extends Model
         'user_id',
     ];
 
+    // This model belongs to the UsedCar model
     public function usedCar()
     {
         return $this->belongsTo('App\Models\UsedCar', 'used_car_id');
     }
 
+    // This model belongs to the User model
     public function user()
     {
         return $this->belongsTo('App\Models\User', 'user_id');

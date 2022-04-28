@@ -1,5 +1,11 @@
 <?php
 
+// This controller was created for handling DataTable actions
+// Package: composer require yajra/laravel-datatables:^1.5
+// https://github.com/yajra/laravel-datatables
+
+// All the functions created in this controller use the package
+
 namespace App\Http\Controllers;
 
 use App\Models\Inspection;
@@ -14,7 +20,7 @@ use Illuminate\Http\Request;
 
 class DataTableController extends Controller
 {
-    //
+    // This function is used to generate the Inspection DataTable
     public function inspection(){
 
         $query = Inspection::select('*')->with('usedCar');
@@ -56,6 +62,7 @@ class DataTableController extends Controller
             ->make(true);
     }
 
+    // This function is used to generate the Car DataTable
     public function car(){
 
         $query = Car::select('*');
@@ -153,6 +160,7 @@ class DataTableController extends Controller
             ->make(true);
     }
 
+    // This function is used to generate the Car Brand DataTable
     public function carbrand(){
 
         $query = CarBrand::select('*');
@@ -178,6 +186,7 @@ class DataTableController extends Controller
             ->make(true);
     }
 
+    // This function is used to generate the Car Model DataTable
     public function carmodel(){
 
         $query = CarModel::select('*');
@@ -211,6 +220,7 @@ class DataTableController extends Controller
             ->make(true);
     }
 
+    // This function is used to generate the Car Variant DataTable
     public function carvariant(){
 
         $query = CarVariant::select('*');
@@ -252,6 +262,7 @@ class DataTableController extends Controller
             ->make(true);
     }
 
+    // This function is used to generate the Newsletter DataTable
     public function newsletter(){
 
             $query = Newsletter::select('*');
@@ -297,6 +308,7 @@ class DataTableController extends Controller
 
     }
 
+    // This function is used to generate the Used Car DataTable
     public function usedcar(){
 
         $query = usedcar::select('*');

@@ -1,16 +1,19 @@
 <?php
 
+// This controller was generated when we use the authentication generation command that came in the Laravel/UI package
+// Package: composer require laravel/ui
+// Command: php artisan ui vue --auth
+
+// There were changes made to this controller's function to fulfill our system requirements
+// We have removed the original functions and replaced it with our own (registerUser, registerAdminApi)
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx\Rels;
 
 class RegisterController extends Controller
 {
@@ -25,6 +28,7 @@ class RegisterController extends Controller
     |
     */
 
+    // This trait contains the function to view the Register page
     use RegistersUsers;
 
     /**
@@ -37,6 +41,7 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    // This function registers customer account
     protected function registerUser(Request $request)
     {
         $data = $request->validate([
@@ -58,6 +63,7 @@ class RegisterController extends Controller
         return redirect('/');
     }
 
+    // This function registers admin account through API
     protected function registerAdminApi(Request $request)
     {
         $data = $request->validate([

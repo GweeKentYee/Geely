@@ -1,8 +1,10 @@
 <?php
 
+// This controller was created for handling Catalogue actions
+// No special package used
+
 namespace App\Http\Controllers;
 
-use App\Models\Catalogue;
 use Illuminate\Http\Request;
 
 use App\Models\UsedCar;
@@ -13,13 +15,10 @@ use App\Models\CarModel;
 use App\Models\CarVariant;
 use App\Models\CarBodyType;
 use App\Models\CarGeneralSpec;
-use Illuminate\Support\Facades\DB;
-
-use function PHPUnit\Framework\isEmpty;
-use function PHPUnit\Framework\isInfinite;
 
 class CatalogueController extends Controller
 {
+    // This function is used to view the Catalogue page
     public function viewPage(){
 
         $usedcar = UsedCar::
@@ -36,6 +35,7 @@ class CatalogueController extends Controller
         ->join('car_general_specs','cars.car_general_spec_id','=','car_general_specs.id')
         ->select('*','used_cars.id AS id')
         ->where('status','=','1')->paginate(9);
+
         $carbrand = CarBrand::orderBy('brand','ASC')->get();
         $carmodel = CarModel::orderBy('model','ASC')->get();
         $carvariant= CarVariant::orderBy('variant','ASC')->get();
@@ -49,11 +49,7 @@ class CatalogueController extends Controller
 
     }
 
-    public function viewAdminPage(){
-
-        return view('ManageCatalogue');
-    }
-
+    // This function is used to search the existing used cars based on user's input of car brand or car model
     public function search(){
         $usedcar= UsedCar::
         join('cars','cars.id','=','used_cars.car_id')
@@ -85,6 +81,7 @@ class CatalogueController extends Controller
 
     }
 
+    // This function is used to search the existing used cars based on user's input (Brand, model, variant, body type, general spec, year, min price, max price)
     public function advanced(){
         $brand = request('brand');
         $year = request('year');
@@ -140,6 +137,7 @@ class CatalogueController extends Controller
         );
     }
 
+    // This function is used to generate the Car Model dropdown depending on the Car Brand chosen
     public function modelOptions(Request $request){
 
         if($request->CarBrand_id==0){
@@ -154,6 +152,7 @@ class CatalogueController extends Controller
 
     }
 
+    // This function is used to generate the Car Variant dropdown depending on the Car Model chosen
     public function variantOptions(Request $request){
 
         $CarVariants = CarVariant::where('car_model_id',$request->CarModel_id)->get();
@@ -165,6 +164,7 @@ class CatalogueController extends Controller
 
     }
 
+    // This function is used to generate the autocomplete list of search bar based on user's input
     public function autocompleteSearch(Request $request)
     {
 

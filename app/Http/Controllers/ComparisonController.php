@@ -1,4 +1,8 @@
 <?php
+
+// This controller was created for handling Comparison actions
+// No special package used
+
 namespace App\Http\Controllers;
 use App\Models\Collection;
 use App\Models\UsedCar;
@@ -10,11 +14,13 @@ use Illuminate\Http\Request;
 
 class ComparisonController extends Controller
 {
+    // This function is used to ensure the users are authenticated to use this controller's function
     public function __construct()
     {
     $this->middleware('auth');
     }
-    //
+
+    // This function is used to view the Comparison page
     public function viewPage(Request $Request){
 
 

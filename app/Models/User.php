@@ -1,5 +1,7 @@
 <?php
 
+// This model file is used for interacting with the users table
+
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -43,6 +45,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // This model has a one-to-many relationship with the Collection model
     public function collections()
     {
         return $this->hasMany(Collection::class);

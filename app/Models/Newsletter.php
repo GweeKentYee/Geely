@@ -1,5 +1,7 @@
 <?php
 
+// This model file is used for interacting with the newsletters table
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

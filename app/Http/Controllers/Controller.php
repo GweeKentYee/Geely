@@ -1,5 +1,7 @@
 <?php
 
+// It is required to have this controller in order for all the controllers to work
+
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;

@@ -1,11 +1,12 @@
 <?php
 
+// This controller was created for handling Collection actions
+// No special package used
+
 namespace App\Http\Controllers;
 
 use App\Models\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\UsedCar;
 
 class CollectionController extends Controller
 {

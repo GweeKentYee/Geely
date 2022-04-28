@@ -1,5 +1,8 @@
 <?php
 
+// This controller was created for handling Car actions
+// No special package used
+
 namespace App\Http\Controllers;
 
 use App\Models\Car;
@@ -15,11 +18,13 @@ use Carbon\Carbon;
 
 class CarController extends Controller
 {
+    // This function is used to ensure the users are authenticated to use this controller's function
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    // This function is used for viewing the Car page
     public function viewAdminPage(){
 
         $CarBrand = CarBrand::all();
@@ -36,6 +41,7 @@ class CarController extends Controller
 
     }
 
+    // This function is used to generate the Car Model dropdown depending on the Car Brand chosen
     public function subModels(Request $request){
 
         $CarModels = CarModel::where('car_brand_id', $request->CarBrand_id)->get();
@@ -46,6 +52,7 @@ class CarController extends Controller
 
     }
 
+    // This function is used to generate the Car Variant dropdown depending on the Car Model chosen
     public function subVariants(Request $request){
 
         $CarVariants = CarVariant::where('car_model_id', $request->CarModel_id)->get();
@@ -56,6 +63,7 @@ class CarController extends Controller
 
     }
 
+    // This function is used for adding new car
     public function addCar(Request $request){
 
         $data = $request->validate([
@@ -126,6 +134,7 @@ class CarController extends Controller
 
     }
 
+    // This function is used for viewing spec file
     public function viewSpecFile($carID){
 
         $Car = Car::find($carID);
@@ -136,6 +145,7 @@ class CarController extends Controller
 
     }
 
+    // This function is used for viewing data file (New)
     public function viewDataFile($carID){
 
         $Car = Car::find($carID);
@@ -146,6 +156,7 @@ class CarController extends Controller
 
     }
 
+    // This function is used to view the Edit Car page
     public function viewEditPage($carID){
 
         $Car = Car::find($carID);
@@ -165,6 +176,7 @@ class CarController extends Controller
 
     }
 
+    // This function is used to edit an exisiting car record
     public function edit($carID, Request $request){
 
         $Car = Car::find($carID);
@@ -235,7 +247,7 @@ class CarController extends Controller
 
         } else if(request('data_file')) {
 
-            unlink($Car->data_file); // call database column name
+            unlink($Car->data_file);
 
             $dataFileExtension = request()->file('data_file')->getClientOriginalExtension();
 
@@ -262,6 +274,7 @@ class CarController extends Controller
 
     }
 
+    // This function is used to delete an exisiting car record
     public function delete($carID){
 
         $Car = Car::find($carID);

@@ -1,5 +1,8 @@
 <?php
 
+// This controller was created for handling Car Brand actions
+// No special package used
+
 namespace App\Http\Controllers;
 
 use App\Models\CarBrand;
@@ -10,11 +13,14 @@ use Illuminate\Support\Facades\Validator;
 
 class CarBrandController extends Controller
 {
+
+    // This function is used to ensure the users are authenticated to use this controller's function
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    // This function is used for viewing the Brand/Model/Variant page
     public function viewTabPage(){
 
         $CarBrand = CarBrand::all();
@@ -25,6 +31,7 @@ class CarBrandController extends Controller
         ]);
     }
 
+    // This function is used for adding new car brand
     public function addCarBrand(Request $request){
 
         $validator = Validator::make($request->all(), [
@@ -51,6 +58,7 @@ class CarBrandController extends Controller
 
     }
 
+    // This function is used for viewing the Edit CarBrand page
     public function viewEditPage($carbrandID){
 
         $CarBrand = CarBrand::find($carbrandID);
@@ -61,6 +69,7 @@ class CarBrandController extends Controller
 
     }
 
+    // This function is used for editing an existing car brand record
     public function edit($carbrandID, Request $request){
 
         $CarBrand = CarBrand::find($carbrandID);
@@ -90,6 +99,7 @@ class CarBrandController extends Controller
 
     }
 
+    // This function is used for deleting an existing car brand record
     public function delete($carbrandID){
 
         CarBrand::where('id', $carbrandID)->delete();

@@ -1,5 +1,7 @@
 <?php
 
+// This model file is used for interacting with the cars table
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,16 +25,19 @@ class Car extends Model
         'data_file'
     ];
 
+    // This model belongs to the CarVariant model
     public function carVariant()
     {
         return $this->belongsTo('App\Models\CarVariant', 'car_variant_id');
     }
 
+    // This model belongs to the CarBodyType model
     public function carBodyType()
     {
         return $this->belongsTo('App\Models\CarBodyType', 'car_body_type_id');
     }
 
+    // This model belongs to the CarGeneralSpec model
     public function carGeneralSpec()
     {
         return $this->belongsTo('App\Models\CarGeneralSpec', 'car_general_spec_id');

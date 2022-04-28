@@ -1,9 +1,14 @@
 <?php
 
+// This controller was generated when we use the authentication generation command that came in the Laravel/UI package
+// Package: composer require laravel/ui
+// Command: php artisan ui vue --auth
+
+// There were changes made to this controller's function to fulfill our system requirements, namely redirectTo()
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -19,14 +24,11 @@ class LoginController extends Controller
     |
     */
 
+    // This trait contains the function to view the Login page
     use AuthenticatesUsers;
 
-    // /**
     //  * Where to redirect users after login.
-    //  *
-    //  * @var string
-    //  */
-    // protected $redirectTo = RouteServiceProvider::HOME;
+    // The location after user logins are determined based on their roles
 
     protected function redirectTo(){
 
@@ -42,11 +44,6 @@ class LoginController extends Controller
 
     }
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');

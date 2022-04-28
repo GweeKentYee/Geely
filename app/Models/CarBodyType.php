@@ -1,5 +1,7 @@
 <?php
 
+// This model file is used for interacting with the car_body_types table
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,6 +20,7 @@ class CarBodyType extends Model
         'body_type'
     ];
 
+    // This model has a one-to-many relationship with Car model
     public function cars()
     {
         return $this->hasMany(Car::class);
