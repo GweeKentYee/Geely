@@ -195,11 +195,13 @@
                                 </div>
                             </div>
                         @endforeach
+                        <div class = "d-flex justify-content-end">
+                            {{$usedcar->links()}}
+                        </div>
                     </div>
                 <div class="col-1"></div>
             </div>
         @endif
-        {{$usedcar->links()}}
     </div>
 </main>
 @endsection
