@@ -339,24 +339,6 @@ class InspectionController extends Controller
 
     }
 
-    public function delete($inspectionID){
-
-        $Inspection = Inspection::find($inspectionID);
-
-        $InspectionFilePath = str_replace('\\','/',public_path($Inspection->result_file));
-
-        if(file_exists($InspectionFilePath)){
-
-            unlink($InspectionFilePath);
-
-        }
-
-        Inspection::where('id',$inspectionID)->delete();
-
-        return redirect('admin/inspection');
-
-    }
-
     public function viewInspectionFile($inspectionID){
 
         $Inspection = Inspection::find($inspectionID);
@@ -383,6 +365,24 @@ class InspectionController extends Controller
             'inspection' => $Inspection,
             'Data' => $Data
         ]);
+
+    }
+
+    public function delete($inspectionID){
+
+        $Inspection = Inspection::find($inspectionID);
+
+        $InspectionFilePath = str_replace('\\','/',public_path($Inspection->result_file));
+
+        if(file_exists($InspectionFilePath)){
+
+            unlink($InspectionFilePath);
+
+        }
+
+        Inspection::where('id',$inspectionID)->delete();
+
+        return redirect('admin/inspection');
 
     }
 }
