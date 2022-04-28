@@ -150,9 +150,13 @@ class UsedCarController extends Controller
 
         $usedCar = UsedCar::findorfail($id);
 
-        $usedCarFolder = public_path('storage/data/usedcar/'.$usedCar->registration);
+        $usedCarDataFolder = public_path('storage/data/usedcar/'.$usedCar->registration);
 
-        File::deleteDirectory($usedCarFolder);
+        File::deleteDirectory($usedCarDataFolder);
+
+        $usedCarImageFolder = public_path('storage/image/usedcar/'.$usedCar->registration);
+
+        File::deleteDirectory($usedCarImageFolder);
 
         $usedCar->delete();
 

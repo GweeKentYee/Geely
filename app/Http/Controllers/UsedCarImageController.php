@@ -41,7 +41,7 @@ class UsedCarImageController extends Controller
 
                 $filename = time().'.'.$extension;
 
-                $filepath = $file->move('storage/image/used_car/'.$usedCar->registration,$filename);
+                $filepath = $file->move('storage/image/usedcar/'.$usedCar->registration,$filename);
 
                 UsedCarImage::create([
                     'image' => str_replace('\\','/',$filepath),
