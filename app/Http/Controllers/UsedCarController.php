@@ -23,13 +23,22 @@ class UsedCarController extends Controller
 
         $Inspection = Inspection::select('result_file')->where('used_car_id', $used_car_id)->latest()->first();
 
-        $File = public_path($Inspection->result_file);
 
-        $reader = new ReaderXlsx();
-        $spreadsheet = $reader->load($File);
-        $sheet = $spreadsheet->getActiveSheet();
+        if ($Inspection == null){
 
-        $Data = $sheet->toArray();
+            $Data = [];
+
+        } else {
+
+            $File = public_path($Inspection->result_file);
+
+            $reader = new ReaderXlsx();
+            $spreadsheet = $reader->load($File);
+            $sheet = $spreadsheet->getActiveSheet();
+
+            $Data = $sheet->toArray();
+
+        }
 
         return view('UsedCarDetails',[
             'usedcar' => $usedcar,
