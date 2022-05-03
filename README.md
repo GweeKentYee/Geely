@@ -14,4 +14,5 @@
 - To ensure that accurate, transparent and quality data are generated in the form of an inspection report for the used car customers.
 - To allow customers to compare and filter to search for their desired used car.
 5. Operating Environment: The website should be accessible and operable via any device that has a web browser application and has access to the internet. No matter the device, operating system or even the web browser application used, the website will be able to function similarly without the need of installing additional softwares or applications.
+
 6. Link to the Website: http://128.199.74.103/
